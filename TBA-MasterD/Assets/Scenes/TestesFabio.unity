@@ -500,6 +500,7 @@ MonoBehaviour:
   weaponsPossessed:
   - {fileID: 968609721}
   - {fileID: 834999081}
+  timeBetweenMouseWheelMovement: 1
 --- !u!4 &2100128262
 Transform:
   m_ObjectHideFlags: 0

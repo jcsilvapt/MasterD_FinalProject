@@ -16,6 +16,12 @@ public class WeaponController : MonoBehaviour
     //Current Weapon Equipped
     private Weapon currentWeaponEquipped;
 
+    //Time Between Mouse Wheel Movements
+    [SerializeField] private float timeBetweenMouseWheelMovement;
+
+    //Timer Keeping the Mouse Wheel Movements in Check
+    private float timeCheckBetweenMouseWheelMovements;
+
     private void Start()
     {
         currentWeaponIndex = 0;
@@ -24,20 +30,20 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
-
         //Change Mouse Scroll Wheel (Add a Timer that locks the movement)
         ChangeCurrentWeapon(Input.GetAxis("Mouse ScrollWheel"));
-
-        /*
-         * Ou seja, quando mexer a roda do rato, um timer começa a contar e, até esse timer chegar ao fim, todo o movimento
-         * feito pela roda do rato é descartado (meio segundo ou algo do género).
-         * Quando esse timer chegar ao fim, todo o movimento é novamente registado e repete.
-         */
+        Debug.Log(currentWeaponEquipped.name);
     }
 
     private void ChangeCurrentWeapon(float indexIndicator)
     {
+        //If TimeCheck still isn't 0, Decrement Time Check Mouse Wheel Movements and return.
+        if(timeCheckBetweenMouseWheelMovements > 0)
+        {
+            timeCheckBetweenMouseWheelMovements -= Time.deltaTime;
+            return;
+        }
+
         //If Mouse Wheel didn't move or Weapons Possessed only has one weapon, return.
         if(indexIndicator == 0 || weaponsPossessed.Length <= 1)
         {
@@ -75,6 +81,9 @@ public class WeaponController : MonoBehaviour
 
         //Change Current Weapon Equipped based on the changes made to the Current Weapon Index
         currentWeaponEquipped = weaponsPossessed[currentWeaponIndex];
+
+        //Set Time Check Mouse Wheel Movements
+        timeCheckBetweenMouseWheelMovements = timeBetweenMouseWheelMovement;
     }
 
     //TODO:
