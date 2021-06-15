@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class BACKUP_Weapon : MonoBehaviour
 {
     //Reference SO_Weapon
     [SerializeField] private WeaponInformation SO_WeaponInformation;

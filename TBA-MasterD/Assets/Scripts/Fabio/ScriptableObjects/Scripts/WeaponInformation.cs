@@ -8,6 +8,9 @@ public class WeaponInformation : ScriptableObject
     //Shooting Types
     public ShootingType[] shootingType;
 
+    //Shooting Type Index
+    public int shootingTypeIndex;
+
     //Maximum Bullets the Player can Carry
     public int maximumBullets;
     

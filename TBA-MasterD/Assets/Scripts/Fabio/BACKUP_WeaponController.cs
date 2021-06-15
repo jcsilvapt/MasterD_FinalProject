@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponController : MonoBehaviour
+public class BACKUP_WeaponController : MonoBehaviour
 {
     /* SO Save System
      * - SO_Jogador
@@ -124,12 +124,10 @@ public class WeaponController : MonoBehaviour
 
         //Set Current Weapon Stats
         currentWeaponEquipped.SetAllStats(shootingTypeIndex, maximumBullets, bulletsInClip);
-        //currentWeaponEquipped.gameObject.SetActive(false);
-        
+
         //Change Current Weapon Equipped based on the changes made to the Current Weapon Index
         currentWeaponEquipped = weaponsPossessed[currentWeaponIndex];
-        //currentWeaponEquipped.gameObject.SetActive(true);
-        
+
         //Update Weapon Stats
         SetWeaponStats();
 
