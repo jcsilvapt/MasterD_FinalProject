@@ -8,20 +8,17 @@ using UnityEngine.AI;
 /// </summary>
 public class AIUtils {
 
-
     public static bool HasVisionOfPlayer(Transform self, Transform target) {
 
         Vector3 direction = target.position - self.position;
         float distance = direction.magnitude;
 
-        if (distance < 5) {
+        if (distance < 2) {
             return true;
         }
 
         return false;
-
     }
-
 }
 
 /*

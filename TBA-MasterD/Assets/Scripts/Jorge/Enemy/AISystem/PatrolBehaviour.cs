@@ -11,11 +11,14 @@ public class PatrolBehaviour : AIBehaviour {
     private NavMeshAgent agent;
     private Transform target;
 
+    // Patrol Logic
+    private Transform[] waypoints;
+    private int currentWayPoint = -1;
 
-    public PatrolBehaviour(MonoBehaviour self, AIStateMachine stateMachine) : base(self, stateMachine, "Patrol") {
 
+    public PatrolBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform[] waypoints) : base(self, stateMachine, "Patrol") {
+        this.waypoints = waypoints;
     }
-
 
     public override void Init() {
         anim = self.GetComponent<Animator>();
@@ -23,32 +26,40 @@ public class PatrolBehaviour : AIBehaviour {
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
-        InitBehaviour();
-    }
-
-    public override void InitBehaviour() {
-        isActive = true;
-    }
-    public override void DisableBehaviour() {
-        isActive = false;
     }
 
     public override void OnBehaviourEnd() {
-        //TODO:
+        Debug.Log("Patrol Behaviour Ended");
+        isActive = false;
+
     }
 
     public override void OnBehaviourStart() {
-        Debug.Log("Patrol Activated");
+        Debug.Log("Patrol Behaviour Started");
+        isActive = true;
+        NextWayPoint();
+
     }
 
     public override void OnUpdate() {
-        if(isActive) {
-            if(AIUtils.HasVisionOfPlayer(self.transform, target)) {
-                stateMachine.HandleEvent(AIEvents.SeePlayer);
+        if (isActive) {
+            if (AIUtils.HasVisionOfPlayer(self.transform, target)) {
+                //stateMachine.HandleEvent(AIEvents.SeePlayer);
+                Debug.Log("I SAW THE FUCKING PLAYER");
                 return;
+            } else {
+                if (!agent.pathPending && agent.remainingDistance < 0.1f) {
+                    stateMachine.HandleEvent(AIEvents.ReachedDestination);
+                    return;
+                }
             }
-            stateMachine.HandleEvent(AIEvents.ReachedDestination);
-            return;
+        }
+    }
+
+    private void NextWayPoint() {
+        if (waypoints != null && waypoints.Length > 0) {
+            currentWayPoint = (currentWayPoint + 1) % waypoints.Length;
+            agent.SetDestination(waypoints[currentWayPoint].position);
         }
     }
 }

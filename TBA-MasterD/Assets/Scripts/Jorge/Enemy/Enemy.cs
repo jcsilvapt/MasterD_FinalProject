@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, AIStateMachine {
 
@@ -8,6 +9,7 @@ public class Enemy : MonoBehaviour, AIStateMachine {
     private Animator animator;
     private Rigidbody rb;
     private GameObject character;
+    private NavMeshAgent agent;
 
     [Header("Enemy Settings")]
 
@@ -19,14 +21,21 @@ public class Enemy : MonoBehaviour, AIStateMachine {
 
     [Tooltip("Usually needs to be enable...")]
     [SerializeField] bool enableAISystem = true;
+    [SerializeField] Transform target;
     [Tooltip("Set how long the character will stay in IdleMode")]
     [Range(1.0f, 10.0f)]
     [SerializeField] float idleTime = 1.0f;
+    [Tooltip("Define here the patrol points of this AI System")]
+    [SerializeField] Transform[] patrolWayPoints;
 
 
     private AIStates currentState;
     private AIBehaviour currentBehaviour;
     private AIBehaviour[] behaviours;
+
+    [Header("Developer Settings")]
+    [Tooltip("Enable this for movement test only.")]
+    [SerializeField] bool enableTestMovement = false;
 
 
     Dictionary<AIEvents, AIStates> nextEvent = new Dictionary<AIEvents, AIStates> {
@@ -43,6 +52,7 @@ public class Enemy : MonoBehaviour, AIStateMachine {
     private void Start() {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
 
         BehaviourRegistration();
     }
@@ -64,7 +74,7 @@ public class Enemy : MonoBehaviour, AIStateMachine {
         if (isAlive && enableAISystem) {
             behaviours = new AIBehaviour[] {
                 new IdleBehaviour(this, this, idleTime),
-                new PatrolBehaviour(this, this),
+                new PatrolBehaviour(this, this, patrolWayPoints),
                 //New Behaviours here
             };
 

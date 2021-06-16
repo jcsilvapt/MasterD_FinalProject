@@ -24,7 +24,7 @@ public abstract class AIBehaviour {
     /// Function that returns the name of this Behaviour.
     /// </summary>
     /// <returns>Name of the behaviour</returns>
-    protected string GetName() {
+    public string GetName() {
         return behaviourName;
     }
 
@@ -47,14 +47,4 @@ public abstract class AIBehaviour {
     /// Function that disable this Behaviour;
     /// </summary>
     public abstract void OnBehaviourEnd();
-
-    /// <summary>
-    /// Initialize Behaviour
-    /// </summary>
-    public abstract void InitBehaviour();
-
-    /// <summary>
-    /// Disables Behaviour
-    /// </summary>
-    public abstract void DisableBehaviour();
 }

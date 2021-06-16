@@ -14,6 +14,7 @@ public class IdleBehaviour : AIBehaviour {
     private Transform target;
 
     private float idleTime;
+    private float elapsedTime;
 
     public IdleBehaviour(MonoBehaviour self, AIStateMachine stateMachine, float idleTime) : base(self, stateMachine, "Idle") {
         this.idleTime = idleTime;
@@ -26,39 +27,30 @@ public class IdleBehaviour : AIBehaviour {
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    public override void InitBehaviour() {
-        isActive = true;
-    }
-
-
-    public override void DisableBehaviour() {
+    public override void OnBehaviourEnd() {
+        Debug.Log("Idle Behaviour Ended");
+        elapsedTime = 0.0f;
         isActive = false;
     }
 
-    public override void OnBehaviourEnd() {
-        self.StopAllCoroutines();
-    }
-
     public override void OnBehaviourStart() {
-        Debug.Log("Idle Behaviour OnGoing...");
-
-        self.StartCoroutine(IdleCooldown());
+        Debug.Log("Idle Behaviour Started");
+        isActive = true;
 
         //TODO: Falta controlar o animador.... anim.setbool("Idle", true);
     }
 
     public override void OnUpdate() {
         if(isActive) {
-            if(AIUtils.HasVisionOfPlayer(self.transform, target)) {
+            /*if(AIUtils.HasVisionOfPlayer(self.transform, target)) {
                 stateMachine.HandleEvent(AIEvents.SeePlayer);
                 return;
+            }*/
+            if(elapsedTime >= idleTime) {
+                stateMachine.HandleEvent(AIEvents.NoLongerIdle);
+            } else {
+                elapsedTime += Time.deltaTime;
             }
         }
-    }
-
-    private IEnumerator IdleCooldown() {
-        yield return new WaitForSeconds(idleTime);
-
-        stateMachine.HandleEvent(AIEvents.NoLongerIdle);
     }
 }
