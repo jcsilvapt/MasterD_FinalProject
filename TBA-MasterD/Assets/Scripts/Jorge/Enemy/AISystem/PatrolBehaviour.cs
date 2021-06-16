@@ -43,7 +43,7 @@ public class PatrolBehaviour : AIBehaviour {
 
     public override void OnUpdate() {
         if (isActive) {
-            if (AIUtils.HasVisionOfPlayer(self.transform, target)) {
+            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, 5)) {
                 //stateMachine.HandleEvent(AIEvents.SeePlayer);
                 Debug.Log("I SAW THE FUCKING PLAYER");
                 return;

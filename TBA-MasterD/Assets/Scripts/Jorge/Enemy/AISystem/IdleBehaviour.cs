@@ -41,12 +41,12 @@ public class IdleBehaviour : AIBehaviour {
     }
 
     public override void OnUpdate() {
-        if(isActive) {
-            /*if(AIUtils.HasVisionOfPlayer(self.transform, target)) {
+        if (isActive) {
+            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, 5)) {
                 stateMachine.HandleEvent(AIEvents.SeePlayer);
                 return;
-            }*/
-            if(elapsedTime >= idleTime) {
+            }
+            if (elapsedTime >= idleTime) {
                 stateMachine.HandleEvent(AIEvents.NoLongerIdle);
             } else {
                 elapsedTime += Time.deltaTime;

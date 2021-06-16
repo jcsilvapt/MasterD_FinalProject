@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class AIUtils_Fabio {
 
     //Detects if Self has vision on the Target
-    public static bool HasVisionOfPlayer(Transform self, Transform target, float maxDistance, int layerMask) {
+    public static bool HasVisionOfPlayer(Transform self, Transform target, float maxDistance, int layerMask = 8) {
 
         //Vector Direction from Self to Target
         Vector3 direction = target.position - self.position;
