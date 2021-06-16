@@ -8,6 +8,7 @@ public class playerController : MonoBehaviour
     public int moveSpeed;
     public int sprintSpeed;
     public int crouchSpeed;
+    public float crouchHeight;
     Vector3 velocity;
     public float gravity;
     public bool isRunning = false;
@@ -16,7 +17,7 @@ public class playerController : MonoBehaviour
     //extras
     public CharacterController controller;
     public Camera cam;
-    public float crouchHeight;
+        
 
     //Info Sobre Player
     public int vida = 100;
@@ -64,7 +65,7 @@ public class playerController : MonoBehaviour
         }
         IEnumerator jumpingCoolDown()
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.7f);
             isGrounded = true;
         }
 

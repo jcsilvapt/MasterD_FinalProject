@@ -7,17 +7,17 @@ public class cameraRotation : MonoBehaviour
     //movimentos do Rato
     private float mouseX;
     private float mouseY;
-   [SerializeField] public float mouseSensitivy = 100f;
+    public float mouseSensitivy = 100f;
 
     //corpo do jogador
-   [SerializeField] public Transform playerBody;
+    public Transform playerBody;
     private float xRotation = 0f;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
     }
 
-   
+
     void Update()
     {
         mouseX = Input.GetAxis("Mouse X") * mouseSensitivy * Time.deltaTime;
@@ -28,6 +28,6 @@ public class cameraRotation : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         playerBody.Rotate(Vector3.up * mouseX);
-        
+
     }
 }
