@@ -8,20 +8,39 @@ using UnityEngine.AI;
 /// </summary>
 public class AIUtils_Fabio {
 
+    //Detects if Self has vision on the Target
+    public static bool HasVisionOfPlayer(Transform self, Transform target, float maxDistance, int layerMask) {
 
-    public static bool HasVisionOfPlayer(Transform self, Transform target) {
-
+        //Vector Direction from Self to Target
         Vector3 direction = target.position - self.position;
-        float distance = direction.magnitude;
 
-        if (distance < 5) {
-            return true;
+        //If the Target is too far away, Self can't detect it, return.
+        if (direction.magnitude > maxDistance)
+        {
+            return false;
         }
 
-        return false;
+        //If Target isn't within Self's Vision Range, return.
+        if(Vector3.Angle(self.transform.forward, direction) > 60)
+        {
+            return false;
+        }
 
+        //Create RayCast to ensure that Self doesn't have "Vision" objects in front of the Target
+        Ray palpatine = new Ray(self.position, direction);
+        RaycastHit hitInfo;
+
+        //If Target can be seen by the RayCast and HitInfo GameObject name is the same as the Target's, return true. Else, return false.
+        if(Physics.Raycast(palpatine, out hitInfo, maxDistance, layerMask))
+        {
+            if(hitInfo.transform.name != target.name)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
-
 }
 
 /*

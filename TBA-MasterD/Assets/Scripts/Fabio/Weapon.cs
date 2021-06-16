@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    //Reference SO_Weapon
+    #region Reference SO_Weapon
+    
     [SerializeField] private WeaponInformation SO_WeaponInformation;
+    
+    #endregion
 
-    //Local Weapon Stats
-    private ShootingType[] shootingType;
-    private int shootingTypeIndex;
-    private int maximumBullets;
-    private int clipSize;
-    private int bulletsInClip;
-    private float timeBetweenShots;
-    private float timeReload;
+    #region Local Weapon Stats
+    [SerializeField] private ShootingType[] shootingType;
+    [SerializeField] private int shootingTypeIndex;
+    [SerializeField] private int maximumBullets;
+    [SerializeField] private int clipSize;
+    [SerializeField] private int bulletsInClip;
+    [SerializeField] private float timeBetweenShots;
+    [SerializeField] private float timeReload;
+
+    [SerializeField] private bool isWeaponActive;
+
+    #endregion
 
     private void Awake()
     {
@@ -25,7 +32,82 @@ public class Weapon : MonoBehaviour
         bulletsInClip = SO_WeaponInformation.bulletsInClip;
         timeBetweenShots = SO_WeaponInformation.timeBetweenShots;
         timeReload = SO_WeaponInformation.timeReload;
+
+        isWeaponActive = false;
     }
+
+    public void WeaponUpdate()
+    {
+        Shooting();
+
+        Reload();
+    }
+
+    #region Weapon Methods
+
+    private void Shooting()
+    {
+        //If the Player's Changing Weapon, Cannot shoot, return.
+        if (!isWeaponActive)
+        {
+            return;
+        }
+
+        //If the player doesn't have Bullets in Clip, return.
+        if (bulletsInClip <= 0)
+        {
+            return;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            bulletsInClip--;
+        }
+    }
+
+    private void Reload()
+    {
+        if (!isWeaponActive)
+        {
+            return;
+        }
+
+        //If Player didn't Press the Reload Key, return.
+        if (!Input.GetKeyDown(KeyCode.R))
+        {
+            return;
+        }
+
+        //If the Weapon's Clip is full, return.
+        if (bulletsInClip == clipSize)
+        {
+            return;
+        }
+
+        //If the Weapon doesn't have any Bullets Available, return.
+        if (maximumBullets <= 0)
+        {
+            return;
+        }
+
+        //IF -> The Number of Bullets to be placed in Bullets In Clip is less than the Number of Maximum Bullets,
+        //removing that number from Maximum Bullets and Place it in Bullets In Clip 
+        //ELSE -> The Number of Bullets to be placed in Bullets In Clip is more than the Number of Maximum Bullets,
+        //Setting Maximum Bullets to 0, and Place them all in Bullets In Clip 
+        if (maximumBullets >= clipSize - bulletsInClip)
+        {
+            maximumBullets -= (clipSize - bulletsInClip);
+            bulletsInClip = clipSize;
+        }
+        else
+        {
+            bulletsInClip += maximumBullets;
+            maximumBullets = 0;
+        }
+
+    }
+
+    #endregion
 
     #region Get's
 
@@ -91,13 +173,10 @@ public class Weapon : MonoBehaviour
 
     #region Set's
 
-    public void SetAllStats(int shootingTypeIndex, int maximumBullets, int bulletsInClip)
+    public void SetActiveWeapon(bool isChangingWeapon)
     {
-        this.shootingTypeIndex = shootingTypeIndex;
-        this.maximumBullets = maximumBullets;
-        this.bulletsInClip = bulletsInClip;
+        isWeaponActive = isChangingWeapon;
     }
 
     #endregion
-
 }

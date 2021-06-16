@@ -18,10 +18,10 @@ public class BACKUP_WeaponController : MonoBehaviour
     #region References
 
     //Weapons that Can Be Utilized
-    [SerializeField] private Weapon[] weaponsAll;
+    [SerializeField] private BACKUP_Weapon[] weaponsAll;
 
     //Weapons the Player has With it
-    [SerializeField] private Weapon[] weaponsPossessed;
+    [SerializeField] private BACKUP_Weapon[] weaponsPossessed;
 
     #endregion
 
@@ -29,7 +29,7 @@ public class BACKUP_WeaponController : MonoBehaviour
     private int currentWeaponIndex;
 
     //Current Weapon Equipped
-    private Weapon currentWeaponEquipped;
+    private BACKUP_Weapon currentWeaponEquipped;
 
     //Time Between Mouse Wheel Movements
     [SerializeField] private float timeBetweenMouseWheelMovement;
