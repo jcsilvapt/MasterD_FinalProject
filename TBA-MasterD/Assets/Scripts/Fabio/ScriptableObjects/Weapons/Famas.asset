@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Famas
   m_EditorClassIdentifier: 
   shootingType: 0100000002000000
+  shootingTypeIndex: 0
   maximumBullets: 100
   clipSize: 25
   bulletsInClip: 25
-  timeBetweenShots: 0.15
+  timeBetweenShots: 0.08
   timeReload: 2

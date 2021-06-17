@@ -19,7 +19,11 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float timeBetweenShots;
     [SerializeField] private float timeReload;
 
+    [SerializeField] private float timeElapsedSinceShot;
     [SerializeField] private bool isWeaponActive;
+    private bool isBursting;
+    private bool canShoot;
+    private int numberOfBurstShots;
 
     #endregion
 
@@ -34,13 +38,53 @@ public class Weapon : MonoBehaviour
         timeReload = SO_WeaponInformation.timeReload;
 
         isWeaponActive = false;
+        canShoot = true;
     }
 
     public void WeaponUpdate()
     {
+        FireRate();
+
         Shooting();
 
         Reload();
+
+        BurstShot();
+    }
+
+    private void BurstShot()
+    {
+        //If the Player isn't Bursting, return.
+        if (!isBursting)
+        {
+            return;
+        }
+
+        //If the Player can't Shot, return.
+        if (!canShoot)
+        {
+            return;
+        }
+
+        //If there are no bullets in the Clip, Player stops Bursting, the Number of BurstShots resets and returns.
+        if(bulletsInClip <= 0)
+        {
+            numberOfBurstShots = 0;
+            isBursting = false;
+            return;
+        }
+
+        //Increments the number of shots and removes one bullet from the clip, Time Since the Last Shot is Updated and, consequently, CanShoot as well.
+        numberOfBurstShots++;
+        bulletsInClip--;
+        timeElapsedSinceShot = timeBetweenShots;
+
+        //If the Player has Bursted three shots, The Number of Burst Shots resets and is no longer Bursting.
+        if(numberOfBurstShots == 3)
+        {
+            numberOfBurstShots = 0;
+            isBursting = false;
+        }
     }
 
     #region Weapon Methods
@@ -58,15 +102,50 @@ public class Weapon : MonoBehaviour
         {
             return;
         }
-
-        if (Input.GetMouseButtonDown(0))
+        
+        //If the Player is Bursting, return.
+        if (isBursting)
         {
-            bulletsInClip--;
+            return;
+        }
+
+        //If the player Can't shoot, return.
+        if (!canShoot)
+        {
+            return;
+        }
+
+
+        //Depending on the current Shooting Type, different Effects and Input's will take place
+        switch (shootingType[shootingTypeIndex])
+        {
+            case ShootingType.Automatic:
+                if (Input.GetMouseButton(0))
+                {
+                    bulletsInClip--;
+                    timeElapsedSinceShot = timeBetweenShots;
+                }
+                break;
+
+            case ShootingType.Burst:
+                if (Input.GetMouseButtonDown(0))
+                {
+                    isBursting = true;
+                }
+                break;
+
+            case ShootingType.Single:
+                if (Input.GetMouseButtonDown(0))
+                {
+                    bulletsInClip--;
+                }
+                break;
         }
     }
 
     private void Reload()
     {
+        //If that Weapon isn't active, return.
         if (!isWeaponActive)
         {
             return;
@@ -107,66 +186,18 @@ public class Weapon : MonoBehaviour
 
     }
 
-    #endregion
-
-    #region Get's
-
-    public List<string> GetAllStats()
+    private void FireRate()
     {
-        List<string> allStats = new List<string>();
-
-        allStats.Add(shootingType.Length.ToString());
-
-        for(int index = 0; index < shootingType.Length; index++)
+        //If the Time Since the Last Shot isn't enough, decrement it, update flag so it can't shoot and return.
+        if (timeElapsedSinceShot > 0)
         {
-            allStats.Add(shootingType[index].ToString());
+            timeElapsedSinceShot -= Time.deltaTime;
+            canShoot = false;
+            return;
         }
 
-        allStats.Add(shootingTypeIndex.ToString());
-        allStats.Add(maximumBullets.ToString());
-        allStats.Add(clipSize.ToString());
-        allStats.Add(bulletsInClip.ToString());
-        allStats.Add(timeBetweenShots.ToString());
-        allStats.Add(timeReload.ToString());
-
-        return allStats;
-    }
-
-    public string[] GetShootingTypes()
-    {
-        string[] shootingTypes = new string[SO_WeaponInformation.shootingType.Length];
-
-        for (int index = 0; index < SO_WeaponInformation.shootingType.Length; index++)
-        {
-            shootingTypes[index] = SO_WeaponInformation.shootingType[index].ToString();
-        }
-
-        return shootingTypes;
-    }
-
-    public int GetMaximumBullets()
-    {
-        return SO_WeaponInformation.maximumBullets;
-    }
-
-    public int GetClipSize()
-    {
-        return SO_WeaponInformation.clipSize;
-    }
-
-    public int GetBulletsInClip() 
-    {
-        return SO_WeaponInformation.bulletsInClip;
-    }
-
-    public float GetTimeBetweenShots()
-    {
-        return SO_WeaponInformation.timeBetweenShots;
-    }
-
-    public float GetTimeReload()
-    {
-        return SO_WeaponInformation.timeReload;
+        //Enough Time has passed since the Last Shot, update Flag.
+        canShoot = true;
     }
 
     #endregion

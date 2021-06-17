@@ -4,8 +4,8 @@
 public enum AIStates {
     Idle,           // Jorge
     Patrol,         // Jorge
-    Chase,          // Tiago
-    Attack,         // Tiago
+    //Chase,          // Tiago
+    //Attack,         // Tiago
     GotHit,         // Fábio
     RandomSearch,   // Fábio
 }
