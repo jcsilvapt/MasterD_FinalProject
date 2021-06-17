@@ -49,9 +49,6 @@ public class charController : MonoBehaviour
         Jump();
 
         StepClimb();
-
-
-
     }
     /* bool IsGrounded()
       {
@@ -96,13 +93,14 @@ public class charController : MonoBehaviour
         }
     }
 
-    void StepClimb()
+    void StepClimb() // 
     {
+
         RaycastHit hitLower;
         if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.1f))
         {
             RaycastHit hitHigher;
-            if (Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(Vector3.forward), out hitHigher, 0.2f)) // so é chamado caso o primeiro atinga algo
+            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(Vector3.forward), out hitHigher, 0.2f)) // so é chamado caso o primeiro atinga algo
             {
                 rb.position -= new Vector3(0f, -stepSmooth, 0f); //quanto maior os stepsmooth, mais a personagem salta
             }
@@ -112,7 +110,7 @@ public class charController : MonoBehaviour
         if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitLower45, 0.1f))
         {
             RaycastHit hitHigher45;
-            if (Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitHigher45, 0.2f))
+            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitHigher45, 0.2f))
             {
                 rb.position -= new Vector3(0f, -stepSmooth, 0f);
             }
@@ -122,7 +120,7 @@ public class charController : MonoBehaviour
         if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitLower90, 0.1f))
         {
             RaycastHit hitHigher90;
-            if (Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitHigher90, 0.2f))
+            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitHigher90, 0.2f))
             {
                 rb.position -= new Vector3(0f, -stepSmooth, 0f);
             }
