@@ -7,7 +7,8 @@ public class ChaseBehaviour : AIBehaviour
 {
 
     public bool isActive;
-
+    public Vector3 lastPlayerSeen;
+    public bool playerIsVisible = false;
     public Transform target;
     public NavMeshAgent navAgent;
 
@@ -42,11 +43,12 @@ public class ChaseBehaviour : AIBehaviour
     {
         if (isActive)
         {
-            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, 25)) //checks if player is visible
+            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, 500)) //checks if player is visible
             {
                 Debug.Log("I saw the runner");
-                if (AIUtils_Tiago.IsChasingPlayer(self.transform, target, 10)) //checks his distance 
+                if (AIUtils_Tiago.IsChasingPlayer(self.transform, target, 5)) //checks his distance 
                 {
+
                     //stateMachine.HandleEvent(AIEvents.InRange);
                     Debug.Log("Im Chasing the player");
                 }
@@ -60,14 +62,16 @@ public class ChaseBehaviour : AIBehaviour
                 stateMachine.HandleEvent(AIEvents.LostPlayer);
                 return;
             }
+
         }
     }
 
     private void ChasePlayer()
     {
-        // float distance = Vector3.Distance(target.position, self.transform.position);
-
         navAgent.SetDestination(target.position);
+    }
+    private void CheckLastLocation()
+    {
 
     }
 }
