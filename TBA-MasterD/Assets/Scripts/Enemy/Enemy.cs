@@ -62,6 +62,10 @@ public class Enemy : MonoBehaviour, AIStateMachine {
     private void Update() {
         if (isAlive && enableAISystem) {
             currentBehaviour.OnUpdate();
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                HandleEvent(AIEvents.GotAttacked);
+            }
         } else {
             //TODO: 
         }

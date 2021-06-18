@@ -13,6 +13,9 @@ public class GotHitBehaviour : AIBehaviour
     //Initial Enemy Rotation
     private Vector3 enemyRotation;
 
+    //Target's Position when Self Got Hit
+    private Vector3 currentTargetPosition;
+
     //Flag Indicating if the Enemy Started to Rotate Towards Target
     private bool hasStartedToRotate;
 
@@ -23,7 +26,7 @@ public class GotHitBehaviour : AIBehaviour
     private float angleBetweenEnemyAndTarget;
 
     //Time it Takes to Rotate Towards Target
-    private float timeToRotate = 1;
+    private float timeToRotate;
 
     //Time the Rotation Started
     private float timeTheRotationStarted;
@@ -80,16 +83,20 @@ public class GotHitBehaviour : AIBehaviour
         }
 
         //If the Enemy hasn't Started to Rotate yet, Take his current Rotation,
-        //Get the Direction between the Enemy and the Target and, from this, the Angle between Enemy's forward and Target's Position,
+        //Get the Direction between the Enemy and the Target's current position and, from this, 
+        //the Angle between Enemy's forward and Target's Position,
         //Set the Time it started to Rotate (now), and set the flag Has Started To Rotate to true.
         if (!hasStartedToRotate)
         {
             enemyRotation = self.transform.eulerAngles;
 
-            Vector3 direction = target.position - self.transform.position;
+            currentTargetPosition = target.position;
+            Vector3 direction = currentTargetPosition - self.transform.position;
+
             angleBetweenEnemyAndTarget = Vector3.Angle(self.transform.forward, direction);
 
             timeTheRotationStarted = Time.time;
+            timeToRotate = (0.6f / 180) * angleBetweenEnemyAndTarget + 0.1f;
 
             hasStartedToRotate = true;
         }
@@ -98,7 +105,7 @@ public class GotHitBehaviour : AIBehaviour
         float rotationCompletion = (Time.time - timeTheRotationStarted) / timeToRotate;
 
         //Rotates the Enemy towards the Target
-        self.transform.eulerAngles = new Vector3(0, Mathf.Lerp(enemyRotation.y, Mathf.Atan2(target.transform.position.x, target.transform.position.z) * Mathf.Rad2Deg, rotationCompletion), 0);
+        self.transform.eulerAngles = new Vector3(0, Mathf.Lerp(enemyRotation.y, Mathf.Atan2(currentTargetPosition.x, currentTargetPosition.z) * Mathf.Rad2Deg, rotationCompletion), 0);
 
         //Rotation Completion Reached 1, the rotation is done, set the flag to True
         if (rotationCompletion >= 1)
