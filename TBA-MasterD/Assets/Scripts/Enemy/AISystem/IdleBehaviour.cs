@@ -42,8 +42,8 @@ public class IdleBehaviour : AIBehaviour {
 
     public override void OnUpdate() {
         if (isActive) {
-            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, 5)) {
-                //stateMachine.HandleEvent(AIEvents.SeePlayer);
+            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) {
+                stateMachine.HandleEvent(AIEvents.SeePlayer);
                 return;
             }
             if (elapsedTime >= idleTime) {

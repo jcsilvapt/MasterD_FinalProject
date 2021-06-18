@@ -25,6 +25,8 @@ public class Enemy : MonoBehaviour, AIStateMachine {
     [Tooltip("Set how long the character will stay in IdleMode")]
     [Range(1.0f, 10.0f)]
     [SerializeField] float idleTime = 1.0f;
+    [Range(10.0f, 200.0f)]
+    [SerializeField] float distanceToViewTarget = 10.0f;
     [Tooltip("Define here the patrol points of this AI System")]
     [SerializeField] Transform[] patrolWayPoints;
 
@@ -64,6 +66,11 @@ public class Enemy : MonoBehaviour, AIStateMachine {
             //TODO: 
         }
     }
+
+    public float GetDistanceToView() {
+        return distanceToViewTarget;
+    }
+
 
     #region AI System
 

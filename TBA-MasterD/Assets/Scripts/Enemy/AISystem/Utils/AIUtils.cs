@@ -8,16 +8,45 @@ using UnityEngine.AI;
 /// </summary>
 public class AIUtils {
 
-    public static bool HasVisionOfPlayer(Transform self, Transform target) {
+    public static bool HasVisionOfPlayer(Transform self, Transform target, float maxDistance) {
 
-        Vector3 direction = target.position - self.position;
-        float distance = direction.magnitude;
+        LayerMask playerLayer = LayerMask.GetMask("Player");
+        NavMeshAgent agent = self.GetComponent<NavMeshAgent>();
+        float allowedDistance = maxDistance;
 
-        if (distance < 2) {
-            return true;
+        if (target != null) {
+
+            Vector3 direction = target.transform.position - self.transform.position;
+            float distance = direction.magnitude;
+            Vector3 fw = new Vector3(0, 0, 0.5f);
+
+            float angle = Vector3.Angle(self.transform.forward, direction);
+            float enemyFieldOfView = 60f;
+
+            NavMeshHit hit;
+            RaycastHit hitInfo;
+
+
+            if (angle < enemyFieldOfView && distance <= allowedDistance) {
+
+                Debug.Log("Agent Raycast");
+                // Checks in the navmesh if there's a Clear Path to the Target (but ignores line of sight directly)
+                if (!agent.Raycast(target.transform.position, out hit)) {
+                    return true;
+                }
+                Debug.Log("Physics Raycast");
+                if (Physics.Raycast(self.transform.position + self.transform.up, target.transform.position + target.transform.up, out hitInfo)) {
+
+                    if (hitInfo.transform.name == target.name) {
+                        return true;
+                    }
+                }
+            }
         }
 
         return false;
+
+
     }
 }
 

@@ -43,14 +43,14 @@ public class ChaseBehaviour : AIBehaviour
     {
         if (isActive)
         {
-            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, 500)) //checks if player is visible
+            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player is visible
             {
-                Debug.Log("I saw the runner");
+              //  Debug.Log("I saw the runner");
                 if (AIUtils_Tiago.IsChasingPlayer(self.transform, target, 5)) //checks his distance 
                 {
 
                     //stateMachine.HandleEvent(AIEvents.InRange);
-                    Debug.Log("Im Chasing the player");
+                  //  Debug.Log("Im Chasing the player");
                 }
                 else
                 {

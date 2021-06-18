@@ -10,18 +10,18 @@ public class AttackBehaviour : AIBehaviour {
     }
 
     public override void Init() {
-        throw new System.NotImplementedException();
+
     }
 
     public override void OnBehaviourEnd() {
-        throw new System.NotImplementedException();
+
     }
 
     public override void OnBehaviourStart() {
-        throw new System.NotImplementedException();
+        stateMachine.HandleEvent(AIEvents.ReachedDestination);
     }
 
     public override void OnUpdate() {
-        throw new System.NotImplementedException();
+
     }
 }

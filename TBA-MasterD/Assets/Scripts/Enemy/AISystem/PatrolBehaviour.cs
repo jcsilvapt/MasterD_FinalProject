@@ -50,10 +50,9 @@ public class PatrolBehaviour : AIBehaviour
     {
         if (isActive)
         {
-            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, 5))
+            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView()))
             {
                 stateMachine.HandleEvent(AIEvents.SeePlayer);
-                Debug.Log("I SAW THE FUCKING PLAYER");
                 return;
             }
             else

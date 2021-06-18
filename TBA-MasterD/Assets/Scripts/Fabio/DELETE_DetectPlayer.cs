@@ -16,9 +16,10 @@ public class DELETE_DetectPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (AIUtils_Fabio.HasVisionOfPlayer(transform, bich, 4f, LayerMask.NameToLayer("Window")))
-        {
+        if (AIUtils_Fabio.HasVisionOfPlayer(transform, bich, 4f, LayerMask.NameToLayer("Window"))) {
             hasDetected = true;
+        } else {
+            hasDetected = false;
         }
 
         if (hasDetected)

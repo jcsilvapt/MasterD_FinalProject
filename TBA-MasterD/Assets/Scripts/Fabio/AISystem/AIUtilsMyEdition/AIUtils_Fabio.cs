@@ -11,35 +11,40 @@ public class AIUtils_Fabio {
     //Detects if Self has vision on the Target
     public static bool HasVisionOfPlayer(Transform self, Transform target, float maxDistance, int layerMask = 8) {
 
+        // Bit shift the index of the layer (8) to get a bit mask
+        layerMask = 1 << layerMask;
+        // This would cast rays only against colliders in layer 8.
+        // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask
+        layerMask = ~layerMask;
+
         //Vector Direction from Self to Target
         Vector3 direction = target.position - self.position;
 
+
         //If the Target is too far away, Self can't detect it, return.
-        if (direction.magnitude > maxDistance)
-        {
+        if (direction.magnitude > maxDistance) {
             return false;
         }
 
+
         //If Target isn't within Self's Vision Range, return.
-        if(Vector3.Angle(self.transform.forward, direction) > 60)
-        {
+        if (Vector3.Angle(self.transform.forward, direction) > 60) {
             return false;
         }
 
         //Create RayCast to ensure that Self doesn't have "Vision" objects in front of the Target
         Ray palpatine = new Ray(self.position, direction);
         RaycastHit hitInfo;
-
+        
         //If Target can be seen by the RayCast and HitInfo GameObject name is the same as the Target's, return true. Else, return false.
-        if(Physics.Raycast(palpatine, out hitInfo, maxDistance, layerMask))
-        {
-            if(hitInfo.transform.name != target.name)
-            {
-                return false;
+        if (Physics.Raycast(palpatine, out hitInfo, maxDistance, layerMask)) {
+            Debug.Log("I'm seeing: " + hitInfo.transform.name);
+            if (hitInfo.transform.tag == target.tag) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 }
 
