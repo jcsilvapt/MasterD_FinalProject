@@ -93,12 +93,26 @@ public class GotHitBehaviour : AIBehaviour
             currentTargetPosition = target.position;
             Vector3 direction = currentTargetPosition - self.transform.position;
 
+            //if(angle)
+            
             angleBetweenEnemyAndTarget = Vector3.Angle(self.transform.forward, direction);
+
 
             timeTheRotationStarted = Time.time;
             timeToRotate = (0.6f / 180) * angleBetweenEnemyAndTarget + 0.1f;
 
             hasStartedToRotate = true;
+
+            Debug.Log("Enemy EulerAngles Y: " + self.transform.eulerAngles.y + 
+                      " | Player Position: " + Mathf.Atan2(target.transform.position.x, target.transform.position.z) * Mathf.Rad2Deg + 
+                      " | Angle Between Both: " + angleBetweenEnemyAndTarget + 
+                      " | Direction: " + Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg);
+
+            if(Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg < 0)
+            {
+                self.transform.eulerAngles = new Vector3(self.transform.eulerAngles.x, self.transform.eulerAngles.y - 360, self.transform.eulerAngles.z);
+                Debug.Log("Entered " + Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + " | " + self.transform);
+            }
         }
 
         //Rotation Complete will take the Value of 1 when the Rotation is Done.
