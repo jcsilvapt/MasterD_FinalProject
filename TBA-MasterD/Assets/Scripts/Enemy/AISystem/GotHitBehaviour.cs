@@ -10,11 +10,14 @@ public class GotHitBehaviour : AIBehaviour
     //Player Reference
     private Transform target;
 
-    //Initial Enemy Rotation
-    private Vector3 enemyRotation;
+    //Enemy's Position when Got Hit
+    private Vector3 currentSelfPosition;
 
     //Target's Position when Self Got Hit
     private Vector3 currentTargetPosition;
+
+    //Enemy's EulerAngle's Rotation when Got Hit
+    private Vector3 currentSelfRotation;
 
     //Flag Indicating if the Enemy Started to Rotate Towards Target
     private bool hasStartedToRotate;
@@ -82,50 +85,53 @@ public class GotHitBehaviour : AIBehaviour
             return;
         }
 
-        //If the Enemy hasn't Started to Rotate yet, Take his current Rotation,
+        //If the Enemy hasn't Started to Rotate yet, Take his current position and current Rotation,
         //Get the Direction between the Enemy and the Target's current position and, from this, 
-        //the Angle between Enemy's forward and Target's Position,
+        //the Angle between Enemy's position and Target's Position,
+        //If the Angle is negative, add 360 degrees to it.
         //Set the Time it started to Rotate (now), and set the flag Has Started To Rotate to true.
         if (!hasStartedToRotate)
         {
-            enemyRotation = self.transform.eulerAngles;
+            currentSelfPosition = self.transform.localPosition;
+            currentTargetPosition = target.transform.localPosition;
 
-            currentTargetPosition = target.position;
-            Vector3 direction = currentTargetPosition - self.transform.position;
+            currentSelfRotation = self.transform.localEulerAngles;
 
-            //if(angle)
-            
-            angleBetweenEnemyAndTarget = Vector3.Angle(self.transform.forward, direction);
+            Vector3 direction = currentTargetPosition - currentSelfPosition;
 
+            angleBetweenEnemyAndTarget = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+
+            if(angleBetweenEnemyAndTarget < 0)
+            {
+                angleBetweenEnemyAndTarget += 360f;
+            }
 
             timeTheRotationStarted = Time.time;
             timeToRotate = (0.6f / 180) * angleBetweenEnemyAndTarget + 0.1f;
 
             hasStartedToRotate = true;
-
-            Debug.Log("Enemy EulerAngles Y: " + self.transform.eulerAngles.y + 
-                      " | Player Position: " + Mathf.Atan2(target.transform.position.x, target.transform.position.z) * Mathf.Rad2Deg + 
-                      " | Angle Between Both: " + angleBetweenEnemyAndTarget + 
-                      " | Direction: " + Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg);
-
-            if(Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg < 0)
-            {
-                self.transform.eulerAngles = new Vector3(self.transform.eulerAngles.x, self.transform.eulerAngles.y - 360, self.transform.eulerAngles.z);
-                Debug.Log("Entered " + Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + " | " + self.transform);
-            }
         }
 
         //Rotation Complete will take the Value of 1 when the Rotation is Done.
         float rotationCompletion = (Time.time - timeTheRotationStarted) / timeToRotate;
 
         //Rotates the Enemy towards the Target
-        self.transform.eulerAngles = new Vector3(0, Mathf.Lerp(enemyRotation.y, Mathf.Atan2(currentTargetPosition.x, currentTargetPosition.z) * Mathf.Rad2Deg, rotationCompletion), 0);
+        self.transform.localEulerAngles = new Vector3(0, Mathf.Lerp(currentSelfRotation.y, angleBetweenEnemyAndTarget, rotationCompletion), 0);
+
+        //If in the process, the Enemy sees the Player, Call the HandleEvent and return.
+        if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView()))
+        {
+            stateMachine.HandleEvent(AIEvents.SeePlayer);
+            return;
+        }
 
         //Rotation Completion Reached 1, the rotation is done, set the flag to True
         if (rotationCompletion >= 1)
         {
             hasRotated = true;
-            //TODO: Call EventHandler
+
+            //The Enemy doesn't see the Player, call the HandleEvent and end this Behaviour.
+            //stateMachine.HandleEvent(AIEvents.PlayerNotFound);
         }
     }
 }

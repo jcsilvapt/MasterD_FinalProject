@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour, AIStateMachine {
             currentBehaviour.OnUpdate();
             if (Input.GetKeyDown(KeyCode.E))
             {
-                HandleEvent(AIEvents.GotAttacked);
+                HandleEvent(AIEvents.GotAttacked); //Mudar para o Random Search.
             }
         } else {
             //TODO: 
