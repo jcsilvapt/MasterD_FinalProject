@@ -33,14 +33,12 @@ public class PatrolBehaviour : AIBehaviour
 
     public override void OnBehaviourEnd()
     {
-        Debug.Log("Patrol Behaviour Ended");
         isActive = false;
 
     }
 
     public override void OnBehaviourStart()
     {
-        Debug.Log("Patrol Behaviour Started");
         isActive = true;
         NextWayPoint();
 

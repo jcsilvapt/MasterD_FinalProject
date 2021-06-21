@@ -131,7 +131,7 @@ public class GotHitBehaviour : AIBehaviour
             hasRotated = true;
 
             //The Enemy doesn't see the Player, call the HandleEvent and end this Behaviour.
-            //stateMachine.HandleEvent(AIEvents.PlayerNotFound);
+            stateMachine.HandleEvent(AIEvents.LostPlayer);
         }
     }
 }

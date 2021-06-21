@@ -28,13 +28,11 @@ public class IdleBehaviour : AIBehaviour {
     }
 
     public override void OnBehaviourEnd() {
-        Debug.Log("Idle Behaviour Ended");
         elapsedTime = 0.0f;
         isActive = false;
     }
 
     public override void OnBehaviourStart() {
-        Debug.Log("Idle Behaviour Started");
         isActive = true;
 
         //TODO: Falta controlar o animador.... anim.setbool("Idle", true);

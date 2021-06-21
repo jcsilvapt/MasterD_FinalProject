@@ -30,7 +30,6 @@ public class Enemy : MonoBehaviour, AIStateMachine {
     [Tooltip("Define here the patrol points of this AI System")]
     [SerializeField] Transform[] patrolWayPoints;
 
-
     private AIStates currentState;
     private AIBehaviour currentBehaviour;
     private AIBehaviour[] behaviours;
@@ -46,7 +45,7 @@ public class Enemy : MonoBehaviour, AIStateMachine {
         [AIEvents.ReachedDestination] = AIStates.Idle,
         [AIEvents.InRange] = AIStates.Attack,
         [AIEvents.RangeToFar] = AIStates.Chase,
-        [AIEvents.LostPlayer] = AIStates.Idle,
+        [AIEvents.LostPlayer] = AIStates.RandomSearch,
         [AIEvents.GotAttacked] = AIStates.GotHit,
     };
 
@@ -57,6 +56,8 @@ public class Enemy : MonoBehaviour, AIStateMachine {
         agent = GetComponent<NavMeshAgent>();
 
         BehaviourRegistration();
+
+
     }
 
     private void Update() {
