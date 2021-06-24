@@ -2,32 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cameraRotation : MonoBehaviour
-{
+public class cameraRotation : MonoBehaviour {
     //movimentos do Rato
     private float mouseX;
     private float mouseY;
     public float mouseSensitivy = 100f;
 
+    public bool showCursor = true;
+
     //corpo do jogador
     public Transform playerBody;
     private float xRotation = 0f;
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Confined;
+    void Start() {
+        Debug.LogWarning("To Hide the mouse cursor just press 'K'");
     }
 
 
-    void  Update()
-    {
-        mouseX = Input.GetAxis("Mouse X") * mouseSensitivy * Time.deltaTime;
-        mouseY = Input.GetAxis("Mouse Y") * mouseSensitivy * Time.deltaTime;
+    void Update() {
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90, 90);
+        if (Input.GetKeyDown(KeyCode.K)) {
+            ToggleCursorVisibility();
+        }
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-        playerBody.Rotate(Vector3.up * mouseX);
+        if (!showCursor) {
+            mouseX = Input.GetAxis("Mouse X") * mouseSensitivy * Time.deltaTime;
+            mouseY = Input.GetAxis("Mouse Y") * mouseSensitivy * Time.deltaTime;
+
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90, 90);
+
+            transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+            playerBody.Rotate(Vector3.up * mouseX);
+        }
+
     }
-   
+
+    private void ToggleCursorVisibility() {
+        showCursor = !showCursor;
+        Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Confined;
+        Cursor.visible = showCursor ? true : false;
+    }
 }
