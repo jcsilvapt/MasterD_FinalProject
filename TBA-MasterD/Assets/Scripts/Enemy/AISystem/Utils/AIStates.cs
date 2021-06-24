@@ -7,5 +7,5 @@ public enum AIStates {
     Chase,          // Tiago
     Attack,         // Tiago
     GotHit,         // Fábio
-    RandomSearch,   // Fábio
+    //RandomSearch,   // Fábio
 }

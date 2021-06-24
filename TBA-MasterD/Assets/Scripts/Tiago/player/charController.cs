@@ -15,7 +15,6 @@ public class charController : MonoBehaviour
     Rigidbody rb;
     public Camera fpsCam;
     public GameObject armaAtual;
-    public Collider col;
     public float radius;
 
 
@@ -35,6 +34,9 @@ public class charController : MonoBehaviour
     [Range(0.0f, 5.0f)]
     public float distance;
 
+    [Header("Vida e Extras")]
+    public int Health = 100;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -50,6 +52,9 @@ public class charController : MonoBehaviour
 
         StepClimb();
     }
+
+    #region Movement
+
     /* bool IsGrounded()
       {
           return Physics.Raycast(transform.position, Vector3.down, distance);
@@ -129,6 +134,9 @@ public class charController : MonoBehaviour
 
     } // subir degraus
 
+    #endregion
+
+    #region isGrounded
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "cenario")
@@ -141,4 +149,5 @@ public class charController : MonoBehaviour
     {
         isGrounded = false;
     }
+    #endregion
 }

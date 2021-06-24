@@ -3,13 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour, AIStateMachine {
+public class Enemy : MonoBehaviour, AIStateMachine
+{
 
     // References
     private Animator animator;
     private Rigidbody rb;
     private GameObject character;
     private NavMeshAgent agent;
+
+    [Header("Shooting Settings")]
+    //objects for shooting
+    public GameObject bullet;
+    public GameObject bulletSpawn;
+    public GameObject casing;
+    public GameObject casingSpawn;
+    public ParticleSystem muzzleFlash;
+    public float timeToShoot = 0.5f;
+    public float elapsedTime;
+
 
     [Header("Enemy Settings")]
 
@@ -39,40 +51,48 @@ public class Enemy : MonoBehaviour, AIStateMachine {
     [SerializeField] bool enableTestMovement = false;
 
 
-    Dictionary<AIEvents, AIStates> nextEvent = new Dictionary<AIEvents, AIStates> {
+    Dictionary<AIEvents, AIStates> nextEvent = new Dictionary<AIEvents, AIStates>
+    {
         [AIEvents.NoLongerIdle] = AIStates.Patrol,
         [AIEvents.SeePlayer] = AIStates.Chase,
         [AIEvents.ReachedDestination] = AIStates.Idle,
         [AIEvents.InRange] = AIStates.Attack,
         [AIEvents.RangeToFar] = AIStates.Chase,
-        [AIEvents.LostPlayer] = AIStates.RandomSearch,
+        [AIEvents.LostPlayer] = AIStates.Idle,
         [AIEvents.GotAttacked] = AIStates.GotHit,
     };
 
 
-    private void Start() {
+    private void Start()
+    {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
 
         BehaviourRegistration();
 
 
     }
 
-    private void Update() {
-        if (isAlive && enableAISystem) {
+    private void Update()
+    {
+        if (isAlive && enableAISystem)
+        {
             currentBehaviour.OnUpdate();
             if (Input.GetKeyDown(KeyCode.E))
             {
                 HandleEvent(AIEvents.GotAttacked); //Mudar para o Random Search.
             }
-        } else {
-            //TODO: 
+        }
+        else
+        {
+            //TODO: º+p
         }
     }
 
-    public float GetDistanceToView() {
+    public float GetDistanceToView()
+    {
         return distanceToViewTarget;
     }
 
@@ -82,19 +102,22 @@ public class Enemy : MonoBehaviour, AIStateMachine {
     /// <summary>
     /// Register All Behaviours (expand when new behaviours is created...)
     /// </summary>
-    private void BehaviourRegistration() {
-        if (isAlive && enableAISystem) {
+    private void BehaviourRegistration()
+    {
+        if (isAlive && enableAISystem)
+        {
             behaviours = new AIBehaviour[] {
                 new IdleBehaviour(this, this, idleTime),
                 new PatrolBehaviour(this, this, patrolWayPoints),
                 new ChaseBehaviour(this,this),
                 new AttackBehaviour(this, this),
                 new GotHitBehaviour(this, this),
-                new RandomSearchBehaviour(this, this)
+               // new RandomSearchBehaviour(this, this)
                 // New Behaviours GOES HERE
             };
 
-            foreach (AIBehaviour b in behaviours) {
+            foreach (AIBehaviour b in behaviours)
+            {
                 b.Init();
             }
 
@@ -107,7 +130,8 @@ public class Enemy : MonoBehaviour, AIStateMachine {
     /// Function that Enables the next State to be Active
     /// </summary>
     /// <param name="newState"></param>
-    private void EnableNextBehaviour(AIStates newState) {
+    private void EnableNextBehaviour(AIStates newState)
+    {
         currentState = newState;
         currentBehaviour = behaviours[(int)currentState];
         currentBehaviour.OnBehaviourStart();
@@ -117,13 +141,15 @@ public class Enemy : MonoBehaviour, AIStateMachine {
     /// State Machine
     /// </summary>
     /// <param name="aiEvent"></param>
-    public void HandleEvent(AIEvents aiEvent) {
+    public void HandleEvent(AIEvents aiEvent)
+    {
         // Disables Current Behaviour
         currentBehaviour.OnBehaviourEnd();
 
         AIStates nextState = AIStates.Idle;
 
-        switch (currentState) {
+        switch (currentState)
+        {
             case AIStates.Idle:
                 nextState = nextEvent[aiEvent];
                 break;
@@ -139,9 +165,9 @@ public class Enemy : MonoBehaviour, AIStateMachine {
             case AIStates.GotHit:
                 nextState = nextEvent[aiEvent];
                 break;
-            case AIStates.RandomSearch:
-                nextState = nextEvent[aiEvent];
-                break;
+            /* case AIStates.RandomSearch:
+                 nextState = nextEvent[aiEvent];
+                 break;*/
             default:
                 break;
         }
@@ -151,5 +177,25 @@ public class Enemy : MonoBehaviour, AIStateMachine {
     }
 
 
+    #endregion
+
+    #region Shooting
+
+    public void Shoot() //shooting and timer
+    {
+        if (elapsedTime >= timeToShoot)
+        {
+            bulletSpawn.transform.LookAt(target.transform.position);
+            Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation); // instantiate bullet
+            Instantiate(casing, casingSpawn.transform.position, casingSpawn.transform.rotation); // instantiate bullet casing
+            muzzleFlash.Play();
+            Debug.Log("Just Shoot");
+            elapsedTime = 0f;
+        }
+        else
+        {
+            elapsedTime += Time.deltaTime;
+        }
+    }
     #endregion
 }

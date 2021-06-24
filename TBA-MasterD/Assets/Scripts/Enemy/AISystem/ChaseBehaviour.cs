@@ -45,12 +45,11 @@ public class ChaseBehaviour : AIBehaviour
         {
             if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player is visible
             {
-              //  Debug.Log("I saw the runner");
-                if (AIUtils_Tiago.IsChasingPlayer(self.transform, target, 5)) //checks his distance 
-                {
 
-                    //stateMachine.HandleEvent(AIEvents.InRange);
-                  //  Debug.Log("Im Chasing the player");
+                if (AIUtils_Tiago.IsChasingPlayer(self.transform, target, 15)) //checks his distance 
+                {
+                    stateMachine.HandleEvent(AIEvents.InRange);
+                    return;
                 }
                 else
                 {
@@ -62,16 +61,11 @@ public class ChaseBehaviour : AIBehaviour
                 stateMachine.HandleEvent(AIEvents.LostPlayer);
                 return;
             }
-
         }
     }
-
     private void ChasePlayer()
     {
         navAgent.SetDestination(target.position);
     }
-    private void CheckLastLocation()
-    {
 
-    }
 }
