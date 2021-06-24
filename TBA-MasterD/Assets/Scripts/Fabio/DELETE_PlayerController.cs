@@ -4,10 +4,25 @@ using UnityEngine;
 
 public class DELETE_PlayerController : MonoBehaviour
 {
-    public float speed;
+    [SerializeField] private Transform enemy;
+
+    public float walkSpeed;
+    public float runSpeed;
 
     void Update()
     {
-        transform.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * Time.deltaTime * speed;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            transform.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * Time.deltaTime * runSpeed;
+            return;
+        }
+
+        transform.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * Time.deltaTime * walkSpeed;
+
+        if(enemy != null)
+        {
+            Vector3 distance = enemy.localPosition - transform.localPosition;
+            Debug.Log(distance.magnitude);
+        }
     }
 }

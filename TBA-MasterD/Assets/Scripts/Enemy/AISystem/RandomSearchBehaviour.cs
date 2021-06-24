@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RandomSearchBehaviour : AIBehaviour {
+public class RandomSearchBehaviour : AIBehaviour 
+{
     //Flag Indicating if this Behaviour is Active
     private bool isActive;
 
@@ -13,26 +14,17 @@ public class RandomSearchBehaviour : AIBehaviour {
     //Nav Mesh Agente Reference
     private NavMeshAgent agent;
 
-    //Random Search Points Reference
-    private Transform selfRandomSearchPoints;
-
-    //Points where the Enemy Can Search
-    private Transform[] randomSearchPoints;
-
-    //Points Previously Chosen
-    private Transform[] chosenPoints;
-
-    //Chosen Points Array Index
-    private int chosenPointsIndex;
-
-    //Random Point Chosen
-    private Transform randomPoint;
-
     //Flag Indicating if Enemy Choose the Random Point
     private bool randomPointChosen;
 
     //Flag Indicating if Enemy Reached the Point
     private bool reachedPoint;
+
+    //Time Duration for the Enemy to Wait In Point
+    private float waitInPointTimeDuration;
+
+    //Timer for Wait In Point
+    private float timerWaitInPoint;
 
     public RandomSearchBehaviour(MonoBehaviour self, AIStateMachine stateMachine) : base(self, stateMachine, "RandomSearch") {
 
@@ -45,29 +37,8 @@ public class RandomSearchBehaviour : AIBehaviour {
         //Get Nav Mesh Agent Component
         agent = self.GetComponent<NavMeshAgent>();
 
-        //Get Self Random Search Points Reference
-        selfRandomSearchPoints = self.transform.Find("RandomSearchPoints");
-
-        //Initialize Random Search Points Array
-        randomSearchPoints = new Transform[selfRandomSearchPoints.childCount];
-
-        //Array Index Auxiliar
-        int index = 0;
-
-        //Fill the Array
-        foreach (Transform child in selfRandomSearchPoints) {
-            randomSearchPoints[index] = child;
-            index++;
-        }
-
-        //Initialize Chosen Points Array
-        chosenPoints = new Transform[randomSearchPoints.Length];
-
-        //Set Chosen Points Index to 0
-        chosenPointsIndex = 0;
-
-        //Remove Random Search Points from Enemy's Children
-        selfRandomSearchPoints.parent = null;
+        //Set Time Duration for Wait In Point
+        waitInPointTimeDuration = 3f;
     }
 
     public override void OnBehaviourEnd() {
@@ -77,14 +48,6 @@ public class RandomSearchBehaviour : AIBehaviour {
         isActive = false;
         randomPointChosen = false;
         reachedPoint = false;
-
-        //Clean Chosen Points Array and Reset Index
-        //chosenPoints = null;
-        //chosenPointsIndex = 0;
-
-        //Make Self Random Search Points a child of Enemy again and Reset it's position
-        selfRandomSearchPoints.parent = self.transform;
-        selfRandomSearchPoints.localPosition = Vector3.zero;
     }
 
     public override void OnBehaviourStart() {
@@ -94,12 +57,6 @@ public class RandomSearchBehaviour : AIBehaviour {
         isActive = true;
         randomPointChosen = false;
         reachedPoint = false;
-
-        //Clean Chosen Points Array and Reset Index
-        for (int i = 0; i < chosenPoints.Length; i++) {
-            chosenPoints[i] = null;
-        }
-        chosenPointsIndex = 0;
     }
 
     public override void OnUpdate() {
@@ -108,45 +65,44 @@ public class RandomSearchBehaviour : AIBehaviour {
             return;
         }
 
+        //Check if the Enemy sees the Player and act accordingly.
+        if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView()))
+        {
+            stateMachine.HandleEvent(AIEvents.SeePlayer);
+            return;
+        }
+
         ChoosePoint();
         SearchPoint();
-        ContinueOrEndRandomSearch();
+        WaitInPoint();
     }
 
     private void ChoosePoint() {
+
         //If point is chosen, return.
         if (randomPointChosen) {
             return;
         }
 
-        //Select a random point
-        randomPoint = randomSearchPoints[Random.Range(0, randomSearchPoints.Length - 1)];
+        //Create Unit Sphere with Radius 5 (Not sure why Add the Self.transform.position)
+        Vector3 randomPoint = Random.insideUnitSphere * 10;
+        randomPoint += self.transform.position;
 
-        //Verify if Search Point has been Chosen Before.
-        //If it was, return.
-        foreach (Transform chosenPoint in chosenPoints) {
-            if (chosenPoint == randomPoint) {
-                return;
-            }
-        }
+        //Create NavMeshHit, this will take information of the point on the NavMesh
+        NavMeshHit navMeshHit;
 
+        //Verify if the Random Point is Valid in the NavMesh
+        if(NavMesh.SamplePosition(randomPoint, out navMeshHit, 10, NavMesh.AllAreas))
+        {
+            agent.SetDestination(navMeshHit.position);
 
-        //If the Path is not Achievable, Add the point to the Chosen Points Array, Increment Chosen Points Index and return
-        if (!agent.CalculatePath(randomPoint.position, agent.path)) {
-            chosenPoints[chosenPointsIndex] = randomPoint;
-            chosenPointsIndex++;
-
+            randomPointChosen = true;
             return;
         }
-
-        //Set Enemy Destination
-        agent.SetDestination(randomPoint.position);
-
-        //Set Flag Random Point Chosen to True
-        randomPointChosen = true;
     }
 
     private void SearchPoint() {
+
         //If Random Point is not yet chosen, return
         if (!randomPointChosen) {
             return;
@@ -157,13 +113,38 @@ public class RandomSearchBehaviour : AIBehaviour {
             return;
         }
 
-        //If the Enemy reached the Random Point, Set Reached Point Flag to true
+        //If the Enemy reached the Random Point, Set Reached Point Flag to true and Set Wait In Point Timer
         if (!agent.pathPending && agent.remainingDistance < 0.1f) {
             reachedPoint = true;
+            timerWaitInPoint = waitInPointTimeDuration;
         }
     }
 
+    private void WaitInPoint()
+    {
+        //If Random Point is not yet chosen, return
+        if (!randomPointChosen)
+        {
+            return;
+        }
+
+        //If the Enemy reached to point, return
+        if (!reachedPoint)
+        {
+            return;
+        }
+
+        if (timerWaitInPoint > 0)
+        {
+            timerWaitInPoint -= Time.deltaTime;
+            return;
+        }
+
+        ContinueOrEndRandomSearch();
+    }
+
     private void ContinueOrEndRandomSearch() {
+
         //If Random Point is not yet chosen, return
         if (!randomPointChosen) {
             return;
@@ -176,7 +157,7 @@ public class RandomSearchBehaviour : AIBehaviour {
 
         //This will determine if the Enemy Continues or Ends the Random Search
         int continueOrEndVariable = Random.Range(0, 2);
-        Debug.Log(continueOrEndVariable);
+
         //IF 0 -> Continue Search (Reset Everything)
         //ELSE 1 -> End Search (Call HandleEvent)
         if (continueOrEndVariable == 0) {
