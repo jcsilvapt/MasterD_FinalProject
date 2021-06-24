@@ -155,8 +155,6 @@ public class charController : MonoBehaviour {
 
     } // subir degraus
 
-    #endregion
-
     #region isGrounded
     private void OnCollisionStay(Collision collision)
     {
