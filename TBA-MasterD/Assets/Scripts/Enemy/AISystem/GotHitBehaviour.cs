@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Linq;
 
 public class GotHitBehaviour : AIBehaviour
 {
@@ -50,6 +51,9 @@ public class GotHitBehaviour : AIBehaviour
     //Flag Indicating if the Enemy has approached the place where the Shot took Place
     private bool isInShotPlace;
 
+    //Flag Indicating if the Enemy has approached the place where it will take Cover.
+    private bool isInCoverPlace;
+
     /* Objectives:
      *  - Short Distance Hit:
      *    The Enemy will rotate towards the Player and Shoot.
@@ -88,6 +92,7 @@ public class GotHitBehaviour : AIBehaviour
         hasRotated = false;
         isDestinationSet = false;
         isInShotPlace = false;
+        isInCoverPlace = false;
 
         distance = 0;
     }
@@ -104,6 +109,7 @@ public class GotHitBehaviour : AIBehaviour
         hasRotated = false;
         isDestinationSet = false;
         isInShotPlace = false;
+        isInCoverPlace = false;
 
         distance = 0;
     }
@@ -162,7 +168,6 @@ public class GotHitBehaviour : AIBehaviour
         {
             return;
         }
-        Debug.Log("It Was Called!");
 
         //If the Player already reached the Destination, return.
         if (isInShotPlace)
@@ -203,21 +208,71 @@ public class GotHitBehaviour : AIBehaviour
             return;
         }
 
-        /*
-         * The NavMesh class also exposes the FindClosestEdge function, which will return the nearest boundary on the NavMesh. This is typically an un-walkable surface, such as a wall or cliff. Perform some random samples around your character, and find the nearest edges to each. Then, determine the best candidate for cover from this sample set.
+        //If the Player already reached the Destination, return.
+        if (isInCoverPlace)
+        {
+            return;
+        }
 
-A neat way of doing this, is using the "normal" field of the returned NavMeshHit structures. This is a vector pointing away from the edge, or in this case, the wall! Sort candidate samples by their "distance" value, and then eliminate all those samples who's normal points towards the enemy...
+        //If the Enemy Destination isn't Set, set it.
+        if (!isDestinationSet)
+        {
+            List<NavMeshHit> hitList = new List<NavMeshHit>();
+            NavMeshHit navHit;
 
-Vector3.Dot(navMeshHit.normal, (enemy.position - transform.position)) < 0
+            // Create Random Points around the player so we can find the Nearest Point
+            for (int i = 0; i < 15; i++)
+            {
+                //Spawn Point of Random Hits
+                Vector3 spawnPoint = self.transform.position;
 
-If the normal points towards the enemy, then the position is on the wrong side of cover, and your character will be vulnerable. Then, just pick the first point in the queue, and navigate there! This will be the nearest, viable cover point, which puts a wall between the character, and the enemy.
+                //Offset to the Random Hits, created with a unit circle in which the radius will be the iteration number
+                Vector2 offset = Random.insideUnitCircle * i;
 
-This approach works on the fly without you having to annotate cover points, works for dynamic nav-mesh carving (enemies will take cover behind physically simulated objects, vehicles, etc.), and allows them to use off-mesh links like jumps and vaulting over cover to get behind it!
+                //Adding them, updating it each iteration
+                spawnPoint.x += offset.x;
+                spawnPoint.z += offset.y;
 
-Lastly, if you want to tweak the difficulty, change the comparison in the normal dot-product. -0.5 means that enemies will seek out extremely good cover. 0.5 means that the enemies are easier to flank.
-        
-         https://forum.unity.com/threads/navmesh-agent-take-cover.403292/
-         */
+                //Finding Closest Edge from the Enemy
+                NavMesh.FindClosestEdge(spawnPoint, out navHit, NavMesh.AllAreas);
+
+                //Add that to the list.
+                hitList.Add(navHit);
+            }
+
+            // Sort the list by distance using Linq
+            var sortedList = hitList.OrderBy(x => x.distance);
+
+            // Loop through the Sorted List and Check if the hit Normal doesn't point towards the enemy.
+            // If it doesn't point towards the enemy, navigate the agent to that position and break the loop as this is the closest cover for the agent. (Because the list is sorted on distance)
+            foreach (NavMeshHit hit in sortedList)
+            {
+                if (Vector3.Dot(hit.normal, (target.transform.position - self.transform.position)) < Random.Range(-0.5f, 0f))
+                {
+                    agent.SetDestination(hit.position);
+
+                    isDestinationSet = true;
+
+                    break;
+                }
+            }
+        }
+
+        //If Enemy has Vision of Player, Call HandleEvent SeePlayer
+        if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView()))
+        {
+            stateMachine.HandleEvent(AIEvents.SeePlayer);
+            return;
+        }
+
+        //If Enemy Reached Shot Position, Set flag to true.
+        //If Enemy does not have Vision of Player, Call HandleEvent PlayerNotFound
+        if (!agent.pathPending && agent.remainingDistance < 1f)
+        {
+            isInCoverPlace = true;
+
+            stateMachine.HandleEvent(AIEvents.ReachedDestination);
+        }
     }
 
     private void RotateTowardsTarget()

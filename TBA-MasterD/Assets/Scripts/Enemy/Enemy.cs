@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour, AIStateMachine
         [AIEvents.ReachedDestination] = AIStates.Idle,
         [AIEvents.InRange] = AIStates.Attack,
         [AIEvents.RangeToFar] = AIStates.Chase,
-        [AIEvents.LostPlayer] = AIStates.Idle,
+        [AIEvents.LostPlayer] = AIStates.RandomSearch,
         [AIEvents.GotAttacked] = AIStates.GotHit,
     };
 
@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour, AIStateMachine
                 new ChaseBehaviour(this,this),
                 new AttackBehaviour(this, this),
                 new GotHitBehaviour(this, this),
-               // new RandomSearchBehaviour(this, this)
+                new RandomSearchBehaviour(this, this)
                 // New Behaviours GOES HERE
             };
 
