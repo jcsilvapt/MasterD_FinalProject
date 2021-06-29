@@ -1529,6 +1529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba7c138d249773418a786ac212f898b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableStairsWalk: 0
   stepHigh: {fileID: 494351221}
   stepLow: {fileID: 148472661}
   stepHeight: 0.3
@@ -1540,6 +1541,7 @@ MonoBehaviour:
   runSpeed: 12
   crouchSpeed: 4
   jumpHeight: 4
+  defaultCameraHeight: 0
   crouchHeight: 0.2
   isRunning: 0
   isCrouched: 0
@@ -2348,7 +2350,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -12207,6 +12209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivy: 100
+  showCursor: 1
   playerBody: {fileID: 447076652}
 --- !u!81 &1389101796
 AudioListener:
@@ -12592,6 +12595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivy: 100
+  showCursor: 1
   playerBody: {fileID: 146267834}
 --- !u!1 &1653842643
 GameObject:
