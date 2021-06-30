@@ -1,16 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+
 using System.Linq;
 
 public class DoorController : MonoBehaviour {
 
     [Header("Door Settings")]
-    [Tooltip("Enable if you wish the door to stay Lock.")]
-    [SerializeField] bool locked;
-    [SerializeField] bool openSideWays = false;
     [Tooltip("Enter Tag names to allow objects to pass through the door.")]
-    [SerializeField] List<string> tags = new List<string> { "Player", "Enemy" };
+    [SerializeField] List<string> tagsAllowed = new List<string> { "Player", "Enemy" };
+
+    [Tooltip("Enable if you wish the door to stay Lock.")]
+    [SerializeField] bool lockDoor;
+
+    [HideInInspector] public bool interactable;
+    [HideInInspector] public KeyCode inputKey = KeyCode.E;
+    [HideInInspector] public bool isDoubleDoor;
+    [HideInInspector] public bool openSideWays;
 
     private List<GameObject> inside = new List<GameObject>();
 
@@ -22,19 +29,24 @@ public class DoorController : MonoBehaviour {
     }
 
     private void OnTriggerStay(Collider other) {
-        if (!locked) {
+        if (!lockDoor) {
             if (!isDoorOpen) {
-                if (tags.Contains(other.gameObject.tag)) {
-                    isDoorOpen = true;
-                    anim.SetBool("side", openSideWays);
-                    anim.SetBool("Open", isDoorOpen);
-                    inside.Add(other.gameObject);
-                    return;
+                if (tagsAllowed.Contains(other.gameObject.tag)) {
+                    if (interactable) {
+                        if (Input.GetKey(KeyCode.E)) {
+                            isDoorOpen = true;
+                            inside.Add(other.gameObject);
+                            return;
+                        }
+                    } else {
+                        isDoorOpen = true;
+                        inside.Add(other.gameObject);
+                        return;
+                    }
                 }
             } else {
-                if (tags.Contains(other.gameObject.tag)) {
+                if (tagsAllowed.Contains(other.gameObject.tag)) {
                     if (!inside.Contains(other.gameObject)) {
-                        anim.SetBool("Open", isDoorOpen);
                         inside.Add(other.gameObject);
                         return;
                     }
@@ -42,13 +54,17 @@ public class DoorController : MonoBehaviour {
                 }
 
             }
+            if (isDoubleDoor) {
+                anim.SetBool("side", openSideWays);
+            }
+            anim.SetBool("Open", isDoorOpen);
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        if (!locked) {
+        if (!lockDoor) {
             if (inside.Count > 0 && isDoorOpen) {
-                if (tags.Contains(other.gameObject.tag)) {
+                if (tagsAllowed.Contains(other.gameObject.tag)) {
                     inside.Remove(other.gameObject);
                 }
 
@@ -66,7 +82,7 @@ public class DoorController : MonoBehaviour {
     /// </summary>
     /// <param name="value">True, The door will stay lock. | False, the door is unlocked.</param>
     public void LockMode(bool value) {
-        locked = value;
+        lockDoor = value;
     }
 
 }
