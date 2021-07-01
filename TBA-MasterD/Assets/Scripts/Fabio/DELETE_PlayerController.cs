@@ -18,11 +18,5 @@ public class DELETE_PlayerController : MonoBehaviour
         }
 
         transform.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * Time.deltaTime * walkSpeed;
-
-        if(enemy != null)
-        {
-            Vector3 distance = enemy.localPosition - transform.localPosition;
-            Debug.Log(distance.magnitude);
-        }
     }
 }
