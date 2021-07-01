@@ -80,10 +80,6 @@ public class Enemy : MonoBehaviour, AIStateMachine
         if (isAlive && enableAISystem)
         {
             currentBehaviour.OnUpdate();
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                HandleEvent(AIEvents.GotAttacked); //Mudar para o Random Search.
-            }
         }
         else
         {

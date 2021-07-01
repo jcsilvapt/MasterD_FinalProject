@@ -6,6 +6,7 @@ TagManager:
   tags:
   - cenario
   - BulletSpawn
+  - Enemy
   layers:
   - Default
   - TransparentFX
