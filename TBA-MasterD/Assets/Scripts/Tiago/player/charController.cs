@@ -38,21 +38,34 @@ public class charController : MonoBehaviour {
     [Header("Vida e Extras")]
     public int Health = 100;
 
+    //MEGA TESTES
+    private bool isActive;
+    [SerializeField] private Transform droneSpawn;
+    [SerializeField] private Transform drone;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         defaultCameraHeight = fpsCam.GetComponent<Transform>().localPosition.y;
+
+        //MEGA TESTES
+        isActive = true;
     }
 
 
     void Update() {
-        Movement();
+        if (isActive)
+        {
+            Movement();
 
-        Jump();
+            Jump();
 
-        if (enableStairsWalk) {
-            StepClimb();
+            if (enableStairsWalk) {
+                StepClimb();
+            }
         }
+
+        DroneControl();
     }
     /* bool IsGrounded()
       {
@@ -168,4 +181,31 @@ public class charController : MonoBehaviour {
         isGrounded = false;
     }
     #endregion
+
+    //MEGA TESTES
+    private void DroneControl()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (isActive)
+            {
+                fpsCam.gameObject.SetActive(false);
+                
+                drone.gameObject.SetActive(true);
+
+                isActive = false;
+            }
+            else
+            {
+                fpsCam.gameObject.SetActive(true);
+
+
+                drone.GetComponent<DroneController>().ResetTransform();
+
+                drone.gameObject.SetActive(false);
+
+                isActive = true;
+            }
+        }
+    }
 }

@@ -62,12 +62,11 @@ public class DroneController : MonoBehaviour
 
         //Set Shoot Timer
         shootTimer = 0;
-
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
+
         Movement();
 
         Look();
@@ -127,5 +126,15 @@ public class DroneController : MonoBehaviour
 
             shootTimer = timeBetweenShots;
         }
+    }
+
+    public void ResetTransform()
+    {
+        //Reset Rotation
+        xRotation = 0;
+        yRotation = 0;
+
+        //Reset Position
+        transform.localPosition = Vector3.zero;
     }
 }
