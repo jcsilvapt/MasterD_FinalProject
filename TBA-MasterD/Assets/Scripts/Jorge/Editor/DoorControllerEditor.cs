@@ -25,6 +25,10 @@ public class DoorControllerEditor : Editor {
             window.openSideWays = EditorGUILayout.Toggle(new GUIContent("Open Side Ways", "When Enable the door will open to the sides"), window.openSideWays);
         }
 
+
+        if(GUI.changed) {
+            EditorUtility.SetDirty(window);
+        }
     }
 
 }

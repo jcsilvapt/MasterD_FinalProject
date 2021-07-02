@@ -10,14 +10,13 @@ public class DoorController : MonoBehaviour {
     [Header("Door Settings")]
     [Tooltip("Enter Tag names to allow objects to pass through the door.")]
     [SerializeField] List<string> tagsAllowed = new List<string> { "Player", "Enemy" };
-
     [Tooltip("Enable if you wish the door to stay Lock.")]
-    [SerializeField] bool lockDoor;
+    [SerializeField] bool lockDoor = false;
 
     [HideInInspector] public bool interactable;
     [HideInInspector] public KeyCode inputKey = KeyCode.E;
-    [HideInInspector] public bool isDoubleDoor;
-    [HideInInspector] public bool openSideWays;
+    [HideInInspector] public bool isDoubleDoor = false;
+    [HideInInspector] public bool openSideWays = false;
 
     private List<GameObject> inside = new List<GameObject>();
 
@@ -27,6 +26,7 @@ public class DoorController : MonoBehaviour {
     private void Start() {
         anim = GetComponent<Animator>();
     }
+
 
     private void OnTriggerStay(Collider other) {
         if (!lockDoor) {
