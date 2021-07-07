@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class CraneScript : MonoBehaviour {
 
+    public Transform player = null;
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "Player") {
-            Debug.Log("Tenho o jogador em cima de mim");
-            other.gameObject.transform.parent = transform;
+            player = GameObject.Find("Player").transform;
+            player.parent = transform;
         }
     }
 
 
     private void OnTriggerExit(Collider other) {
         if (other.gameObject.tag == "Player") {
-            other.gameObject.transform.parent = null;
+            player.parent = null;
+            player = null;
         }
     }
 }
