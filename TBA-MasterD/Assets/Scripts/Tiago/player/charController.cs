@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,9 +24,16 @@ public class charController : MonoBehaviour {
     public float runSpeed;
     public float crouchSpeed;
     public float jumpHeight;
-    public float defaultCameraHeight;
-    public float crouchHeight;
 
+
+    [Header("Crouch Settings")]
+    public Transform character;
+    public float minDistanceToStandUp = 0.5f;
+    public float characterCrouchHeight;
+    public float cameraCrouchHeight;
+    public float cameraCrouchLerpSpeed = 0.5f;
+    private float cameraDefaultHeight;
+    private float characterDefaultHeight;
 
     [Header("Estados")]
     public bool isRunning;
@@ -38,15 +46,16 @@ public class charController : MonoBehaviour {
     [Header("Vida e Extras")]
     public int Health = 100;
 
+
     //MEGA TESTES
     private bool isActive;
     [SerializeField] private Transform droneSpawn;
     [SerializeField] private Transform drone;
 
-    void Start()
-    {
+    void Start() {
         rb = GetComponent<Rigidbody>();
-        defaultCameraHeight = fpsCam.GetComponent<Transform>().localPosition.y;
+        cameraDefaultHeight = fpsCam.GetComponent<Transform>().localPosition.y;
+        characterDefaultHeight = character.localScale.y;
 
         //MEGA TESTES
         isActive = true;
@@ -54,9 +63,11 @@ public class charController : MonoBehaviour {
 
 
     void Update() {
-        if (isActive)
-        {
+
+        if (isActive) {
             Movement();
+
+            Chrouch();
 
             Jump();
 
@@ -67,27 +78,43 @@ public class charController : MonoBehaviour {
 
         DroneControl();
     }
-    /* bool IsGrounded()
-      {
-          return Physics.Raycast(transform.position, Vector3.down, distance);
-      }*/
+
+    private void Chrouch() {
+
+        if (Physics.Raycast(character.transform.position + Vector3.up, Vector3.up, minDistanceToStandUp)) {
+            isCrouched = true;
+        } else {
+            isCrouched = Input.GetKey(KeyCode.LeftControl);
+        }
+
+        float cameraTempCrouchHeight = isCrouched ? cameraCrouchHeight : cameraDefaultHeight;
+        float charTempCrouchHeight = isCrouched ? characterCrouchHeight : characterDefaultHeight;
+
+        float cameraNewY = Mathf.Lerp(fpsCam.transform.localPosition.y, cameraTempCrouchHeight, cameraCrouchLerpSpeed);
+        float charNewY = Mathf.Lerp(character.transform.localScale.y, charTempCrouchHeight, cameraCrouchLerpSpeed);
+
+        fpsCam.transform.localPosition = new Vector3(fpsCam.transform.localPosition.x, cameraNewY, fpsCam.transform.localPosition.z);
+        character.transform.localScale = new Vector3(character.transform.localScale.x, charNewY, character.transform.localScale.z);
+
+
+
+
+    }
+
+
 
     void Movement() {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
         isRunning = Input.GetKey(KeyCode.LeftShift);
-        isCrouched = Input.GetKey(KeyCode.LeftControl);
 
         float tempMoveSpeed = isCrouched ? crouchSpeed : isRunning ? runSpeed : moveSpeed;
-
-        float tempCrouch = isCrouched ? crouchHeight : -defaultCameraHeight;
 
         Vector3 movePos = transform.right * x + transform.forward * z;
 
         movePos = movePos.normalized;
 
-        fpsCam.transform.position = new Vector3(transform.position.x, transform.position.y - tempCrouch, transform.position.z);
 
         if (movePos != Vector3.zero && isGrounded) {
             Vector3 rbVelocity = new Vector3(movePos.x, rb.velocity.y, movePos.z);
@@ -126,6 +153,8 @@ public class charController : MonoBehaviour {
         }
 
     } // andar correr e crouch
+
+
 
     void Jump() {
         //salta
@@ -169,10 +198,8 @@ public class charController : MonoBehaviour {
     } // subir degraus
 
     #region isGrounded
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.tag == "cenario")
-        {
+    private void OnCollisionStay(Collision collision) {
+        if (collision.gameObject.tag == "cenario") {
             isGrounded = true;
         }
     }
@@ -183,20 +210,15 @@ public class charController : MonoBehaviour {
     #endregion
 
     //MEGA TESTES
-    private void DroneControl()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (isActive)
-            {
+    private void DroneControl() {
+        if (Input.GetKeyDown(KeyCode.F)) {
+            if (isActive) {
                 fpsCam.gameObject.SetActive(false);
-                
+
                 drone.gameObject.SetActive(true);
 
                 isActive = false;
-            }
-            else
-            {
+            } else {
                 fpsCam.gameObject.SetActive(true);
 
 
