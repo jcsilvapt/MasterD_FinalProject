@@ -81,7 +81,10 @@ public class charController : MonoBehaviour {
 
     private void Chrouch() {
 
-        if (Physics.Raycast(character.transform.position + Vector3.up, Vector3.up, minDistanceToStandUp)) {
+        RaycastHit hitInfo;
+        //character.transform.position + Vector3.up, Vector3.up, hitInfo, minDistanceToStandUp, 0)
+        if (Physics.Raycast(character.transform.position + Vector3.up, Vector3.up, out hitInfo, minDistanceToStandUp)) {
+            Debug.Log(hitInfo.transform.name);
             isCrouched = true;
         } else {
             isCrouched = Input.GetKey(KeyCode.LeftControl);

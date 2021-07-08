@@ -188,7 +188,7 @@ QualitySettings:
     excludedTargetPlatforms: []
   - serializedVersion: 2
     name: Ultra
-    pixelLightCount: 1048
+    pixelLightCount: 5000000
     shadows: 2
     shadowResolution: 2
     shadowProjection: 1
