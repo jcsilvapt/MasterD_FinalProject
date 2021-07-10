@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CraneController : MonoBehaviour {
 
-    [Tooltip("Add Here all the moving parts objects in the scene")]
+    [Tooltip("Add Here all the moving parts objects in the scene.")]
     [SerializeField] GameObject[] movingParts;
+    [Tooltip("Add the GameObjects Tag that are allowed to use this.")]
+    [SerializeField] List<string> allowedTagsToInteract = new List<string> { "Player" };
 
     [SerializeField] bool isActive = false;
 
@@ -13,7 +15,7 @@ public class CraneController : MonoBehaviour {
 
 
     private void Start() {
-        if(!isActive) {
+        if (!isActive) {
             ShutDownCrane();
         } else {
             ActivateCrane();
@@ -22,28 +24,29 @@ public class CraneController : MonoBehaviour {
 
 
     private void ActivateCrane() {
-        foreach(GameObject g in movingParts) {
+        foreach (GameObject g in movingParts) {
             Animator b = g.GetComponent<Animator>();
             b.enabled = true;
         }
-        isActive = !isActive;
-    }    
-    
+        isActive = true;
+    }
+
     private void ShutDownCrane() {
-        foreach(GameObject g in movingParts) {
+        foreach (GameObject g in movingParts) {
             Animator b = g.GetComponent<Animator>();
             b.enabled = false;
         }
+        isActive = false;
     }
 
     private void OnTriggerStay(Collider other) {
-        if(other.gameObject.tag == "Player") {
-            if(Input.GetKeyDown(keyToInteract)) {
-                if (!isActive) {
+        if (!isActive) {
+            if (allowedTagsToInteract.Contains(other.gameObject.tag)) {
+                if (Input.GetKeyDown(keyToInteract)) {
                     ActivateCrane();
                 }
             }
         }
-    }
 
+    }
 }
