@@ -12,6 +12,8 @@ public class DoorController : MonoBehaviour {
     [SerializeField] List<string> tagsAllowed = new List<string> { "Player", "Enemy" };
     [Tooltip("Enable if you wish the door to stay Lock.")]
     [SerializeField] bool lockDoor = false;
+    [Tooltip("Set False so there will be no Signs on the door")]
+    [SerializeField] bool hasSigns = true;
     [SerializeField] List<GameObject> openSign = new List<GameObject>();
     [SerializeField] List<GameObject> closeSign = new List<GameObject>();
 
@@ -29,10 +31,17 @@ public class DoorController : MonoBehaviour {
 
     private void Start() {
         anim = GetComponent<Animator>();
-        ChangeDoorStatusSign();
+        if (hasSigns) {
+            ChangeDoorStatusSign();
+        } else {
+            HideSignOnDoors();
+        }
     }
 
     private void Update() {
+        if(!hasSigns) {
+            return;
+        }
         if(lockDoor == lastDoorStatus) {
             return;
         }
@@ -105,6 +114,13 @@ public class DoorController : MonoBehaviour {
             closeSign[i].SetActive(lockDoor);
         }
         lastDoorStatus = lockDoor;
+    }
+
+    private void HideSignOnDoors() {
+        for (int i = 0; i < openSign.Count; i++) {
+            openSign[i].SetActive(false);
+            closeSign[i].SetActive(false);
+        }
     }
 
 }
