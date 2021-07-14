@@ -414,8 +414,8 @@ MonoBehaviour:
   isGrounded: 0
   distance: 1.3
   Health: 100
-  droneSpawn: {fileID: 0}
-  drone: {fileID: 0}
+  droneSpawn: {fileID: 4702196572423654736}
+  drone: {fileID: 3264108297519291463}
 --- !u!54 &3260187440575748915
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 3260187440771779915}
   - component: {fileID: 3260187440771779914}
   - component: {fileID: 3260187440771779913}
-  - component: {fileID: 999903001}
+  - component: {fileID: 1307788698}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -534,7 +534,7 @@ MonoBehaviour:
   mouseSensitivy: 100
   showCursor: 1
   playerBody: {fileID: 3260187440575748914}
---- !u!114 &999903001
+--- !u!114 &1307788698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -546,7 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 3260187440771779912}
+  volumeTrigger: {fileID: 0}
   volumeLayer:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -743,7 +743,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4533598970149388238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.125, z: 0.15}
+  m_LocalPosition: {x: 0, y: -0.125, z: 0.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3349151960514484626}
@@ -956,7 +956,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3264108297519291463
 Transform:
   m_ObjectHideFlags: 0
