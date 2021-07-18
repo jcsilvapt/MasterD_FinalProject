@@ -29,6 +29,13 @@ public class DoorController : MonoBehaviour {
     private bool lastDoorStatus = false;
 
 
+    #region Fabio Changes
+
+    [SerializeField] private bool startsOpen;
+
+    #endregion
+
+
     private void Start() {
         anim = GetComponent<Animator>();
         if (hasSigns) {
@@ -39,7 +46,19 @@ public class DoorController : MonoBehaviour {
     }
 
     private void Update() {
-        if(!hasSigns) {
+        #region Fabio Changes
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (startsOpen)
+            {
+                CloseDoor();
+            }
+        }
+
+        #endregion
+
+        if (!hasSigns) {
             return;
         }
         if(lockDoor == lastDoorStatus) {
@@ -52,6 +71,11 @@ public class DoorController : MonoBehaviour {
 
 
     private void OnTriggerStay(Collider other) {
+        if (startsOpen)
+        {
+            return;
+        }
+
         if (!lockDoor) {
             if (!isDoorOpen) {
                 if (tagsAllowed.Contains(other.gameObject.tag)) {
@@ -85,6 +109,11 @@ public class DoorController : MonoBehaviour {
     }
 
     private void OnTriggerExit(Collider other) {
+        if (startsOpen)
+        {
+            return;
+        }
+
         if (!lockDoor) {
             if (inside.Count > 0 && isDoorOpen) {
                 if (tagsAllowed.Contains(other.gameObject.tag)) {
@@ -123,4 +152,15 @@ public class DoorController : MonoBehaviour {
         }
     }
 
+    #region Fabio Changes
+
+    public void CloseDoor()
+    {
+        anim.SetBool("CloseDoor", true);
+
+        //anim.runtimeAnimatorController = ;
+        startsOpen = false;
+    }
+
+    #endregion
 }
