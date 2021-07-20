@@ -1,5 +1,92 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1190081845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1190081846}
+  - component: {fileID: 1190081847}
+  m_Layer: 0
+  m_Name: P200
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1190081846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190081845}
+  m_LocalRotation: {x: -0.70710576, y: -0, z: -0, w: 0.7071079}
+  m_LocalPosition: {x: -0.017988453, y: 0.12149363, z: -0.059960466}
+  m_LocalScale: {x: 5.9961686, y: 5.996168, z: 2.094731}
+  m_Children:
+  - {fileID: 2094457613}
+  m_Father: {fileID: 3260187441175988190}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1190081847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190081845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15d3e132b2ff454a9a21413cbd61ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SO_WeaponInformation: {fileID: 11400000, guid: 0158efc7a7777874f8367afc97461687,
+    type: 2}
+  shootingType: 
+  shootingTypeIndex: 0
+  maximumBullets: 0
+  clipSize: 0
+  bulletsInClip: 0
+  timeBetweenShots: 0
+  timeReload: 0
+  timeElapsedSinceShot: 0
+  isWeaponActive: 0
+  bullet: {fileID: 8078174116620158006, guid: 85ad3b7f0bff2e14182c4390d1197150, type: 3}
+  shootingFrom: {fileID: 2094457613}
+--- !u!1 &2094457612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2094457613}
+  m_Layer: 0
+  m_Name: BulletSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2094457613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094457612}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.486}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1190081846}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1673665435072558185
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,6 +535,7 @@ GameObject:
   - component: {fileID: 3260187440575748914}
   - component: {fileID: 3260187440575748913}
   - component: {fileID: 3260187440575748915}
+  - component: {fileID: 2036044100}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -524,6 +612,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &2036044100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3260187440575748912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be05633d5b3a2c842b72c84d464deea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponsAll: []
+  weaponsPossessed:
+  - {fileID: 1190081847}
+  timeBetweenMouseWheelMovement: 0
 --- !u!1 &3260187440771779911
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,7 +819,8 @@ Transform:
   m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.7071079}
   m_LocalPosition: {x: 0.292, y: -0.289, z: 0.289}
   m_LocalScale: {x: 0.16677316, y: 0.47738814, z: 0.16677316}
-  m_Children: []
+  m_Children:
+  - {fileID: 1190081846}
   m_Father: {fileID: 3260187440771779912}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: 0}

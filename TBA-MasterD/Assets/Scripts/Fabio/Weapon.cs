@@ -27,6 +27,9 @@ public class Weapon : MonoBehaviour
 
     #endregion
 
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform shootingFrom;
+
     private void Awake()
     {
         shootingType = SO_WeaponInformation.shootingType;
@@ -124,6 +127,7 @@ public class Weapon : MonoBehaviour
                 {
                     bulletsInClip--;
                     timeElapsedSinceShot = timeBetweenShots;
+
                 }
                 break;
 
@@ -138,9 +142,12 @@ public class Weapon : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     bulletsInClip--;
+                    GameObject tempBullet = Instantiate(bullet, shootingFrom);
+                    tempBullet.transform.localPosition = new Vector3(0, 0, 0);
                 }
                 break;
         }
+
     }
 
     private void Reload()

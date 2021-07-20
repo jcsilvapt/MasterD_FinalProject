@@ -48,7 +48,7 @@ public class WeaponController : MonoBehaviour
             weapon.gameObject.SetActive(false);
         }
 
-        currentWeaponIndex = 1;
+        currentWeaponIndex = 0;
         currentWeaponEquipped = weaponsPossessed[currentWeaponIndex];
 
         currentWeaponEquipped.gameObject.SetActive(true);
