@@ -144,6 +144,7 @@ public class Weapon : MonoBehaviour
                     bulletsInClip--;
                     GameObject tempBullet = Instantiate(bullet, shootingFrom);
                     tempBullet.transform.localPosition = new Vector3(0, 0, 0);
+                    tempBullet.transform.parent = null;
                 }
                 break;
         }
