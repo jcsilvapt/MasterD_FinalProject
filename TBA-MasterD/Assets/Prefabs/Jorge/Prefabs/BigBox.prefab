@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8904931724498718687}
   - component: {fileID: 605068258583930951}
   - component: {fileID: 7220125527850737078}
-  - component: {fileID: 7695643692578308254}
   m_Layer: 0
   m_Name: Big Box
   m_TagString: cenario
@@ -28,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2523881949238277612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1.14}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 7185968833285853040}
@@ -92,21 +91,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.05014402, y: 0.02, z: 0.021551773}
-  m_Center: {x: -0.00000001490136, y: -4.656613e-10, z: 0.00001332164}
---- !u!65 &7695643692578308254
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2523881949238277612}
-  m_Material: {fileID: 13400000, guid: fbff2237a834211418b7fa6f9edfd0ed, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.051, y: 0.019, z: 0.022}
-  m_Center: {x: 0, y: -4.656613e-10, z: 0.000013321638}
+  m_Size: {x: 0.050144013, y: 0.02, z: 0.021147527}
+  m_Center: {x: 0, y: 0, z: 0.011621905}
 --- !u!1 &7562212518508647882
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,6 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7185968833285853040}
+  - component: {fileID: 4210703312075532319}
   m_Layer: 0
   m_Name: BigBox
   m_TagString: Untagged
@@ -139,6 +126,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4210703312075532319
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7562212518508647882}
+  m_Material: {fileID: 13400000, guid: fbff2237a834211418b7fa6f9edfd0ed, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.117069, y: 2.1772776, z: 2.2998233}
+  m_Center: {x: -0.010207891, y: -0.11228371, z: 0.0033755302}
 --- !u!1 &7895283691310374338
 GameObject:
   m_ObjectHideFlags: 0

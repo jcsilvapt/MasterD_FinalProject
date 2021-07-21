@@ -14,7 +14,7 @@ public class VentController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (!hasBeenDestroyed)
-            if (other.tag == "Bullet") {
+            if (other.tag == "DroneDart" || other.tag == "Bullet") {
                 unbrokenVent.SetActive(false);
                 brokenVent.SetActive(true);
                 SetDelayToDestroy(brokenVent);

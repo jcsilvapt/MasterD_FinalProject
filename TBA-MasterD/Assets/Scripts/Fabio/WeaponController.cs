@@ -43,6 +43,9 @@ public class WeaponController : MonoBehaviour
 
     private void Start()
     {
+        //Jorge
+        DisableAllWeapons();
+
         foreach(Weapon weapon in weaponsPossessed)
         {
             weapon.gameObject.SetActive(false);
@@ -57,6 +60,9 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
+
+        if (currentWeaponEquipped == null) return;
+
         currentWeaponEquipped.WeaponUpdate();
 
         ChangeCurrentWeapon(Input.GetAxis("Mouse ScrollWheel"));
@@ -129,4 +135,14 @@ public class WeaponController : MonoBehaviour
      * Disparo
      */
 
+
+    #region JORGE
+
+    private void DisableAllWeapons() {
+        foreach(Weapon weapon in weaponsAll) {
+            weapon.gameObject.SetActive(false);
+        }
+    }
+
+    #endregion
 }

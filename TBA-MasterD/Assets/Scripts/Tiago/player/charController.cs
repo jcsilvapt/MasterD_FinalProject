@@ -46,9 +46,9 @@ public class charController : MonoBehaviour {
     [Header("Vida e Extras")]
     public int Health = 100;
 
-
     //MEGA TESTES
     private bool isActive;
+    [SerializeField] private bool canUseDrone = false;
     [SerializeField] private Transform droneSpawn;
     [SerializeField] private Transform drone;
 
@@ -75,8 +75,8 @@ public class charController : MonoBehaviour {
                 StepClimb();
             }
         }
-
-        DroneControl();
+        if(canUseDrone)
+            DroneControl();
     }
 
     private void Chrouch() {
@@ -232,4 +232,15 @@ public class charController : MonoBehaviour {
             }
         }
     }
+
+    #region PUBLIC ACESS
+    /// <summary>
+    /// Public function that can enable or disable when the player has acess to the drone.
+    /// </summary>
+    /// <param name="value">True enables drone control | False disables drone control</param>
+    public void SetDroneControl(bool value) {
+        canUseDrone = value;
+    }
+
+    #endregion
 }
