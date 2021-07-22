@@ -9,6 +9,7 @@ public class CraneController : MonoBehaviour {
     [Tooltip("Add the GameObjects Tag that are allowed to use this.")]
     [SerializeField] List<string> allowedTagsToInteract = new List<string> { "Player" };
 
+    [SerializeField] bool interactionWithBullet = false;
     [SerializeField] bool isActive = false;
 
     [SerializeField] KeyCode keyToInteract;
@@ -48,5 +49,17 @@ public class CraneController : MonoBehaviour {
             }
         }
 
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        if (interactionWithBullet) {
+            if (!isActive) {
+                foreach (string tag in allowedTagsToInteract) {
+                    if (other.gameObject.tag == tag) {
+                        ActivateCrane();
+                    }
+                }
+            }
+        }
     }
 }

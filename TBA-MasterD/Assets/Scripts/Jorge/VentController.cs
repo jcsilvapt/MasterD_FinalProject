@@ -19,6 +19,7 @@ public class VentController : MonoBehaviour {
                 brokenVent.SetActive(true);
                 SetDelayToDestroy(brokenVent);
                 hasBeenDestroyed = !hasBeenDestroyed;
+                Destroy(other.gameObject);
             }
     }
 

@@ -8,6 +8,8 @@ TagManager:
   - BulletSpawn
   - Enemy
   - Bullet
+  - DroneDart
+  - Armory
   layers:
   - Default
   - TransparentFX

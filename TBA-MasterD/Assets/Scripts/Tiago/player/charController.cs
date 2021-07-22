@@ -84,7 +84,8 @@ public class charController : MonoBehaviour {
         RaycastHit hitInfo;
         //character.transform.position + Vector3.up, Vector3.up, hitInfo, minDistanceToStandUp, 0)
         if (Physics.Raycast(character.transform.position + Vector3.up, Vector3.up, out hitInfo, minDistanceToStandUp)) {
-            isCrouched = true;
+            if(hitInfo.transform.tag != "Armory")
+                isCrouched = true;
         } else {
             isCrouched = Input.GetKey(KeyCode.LeftControl);
         }
