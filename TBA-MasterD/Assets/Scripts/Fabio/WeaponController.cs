@@ -67,7 +67,7 @@ public class WeaponController : MonoBehaviour
 
         ChangeCurrentWeapon(Input.GetAxis("Mouse ScrollWheel"));
 
-        Debug.Log(currentWeaponEquipped.name);
+        //Debug.Log(currentWeaponEquipped.name);
     }
 
     private void ChangeCurrentWeapon(float indexIndicator)

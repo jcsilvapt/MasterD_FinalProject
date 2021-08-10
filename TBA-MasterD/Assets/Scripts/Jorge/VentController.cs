@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VentController : MonoBehaviour {
+public class VentController : MonoBehaviour, IDamage {
 
     [SerializeField] GameObject unbrokenVent;
     [SerializeField] GameObject brokenVent;
@@ -11,9 +11,17 @@ public class VentController : MonoBehaviour {
 
     private bool hasBeenDestroyed = false;
 
+    public void TakeDamage() {
+        if (!hasBeenDestroyed) {
+            unbrokenVent.SetActive(false);
+            brokenVent.SetActive(true);
+            SetDelayToDestroy(brokenVent);
+            hasBeenDestroyed = !hasBeenDestroyed;
+        }
+    }
 
     private void OnTriggerEnter(Collider other) {
-        if (!hasBeenDestroyed)
+        if (!hasBeenDestroyed) {
             if (other.tag == "DroneDart" || other.tag == "Bullet") {
                 unbrokenVent.SetActive(false);
                 brokenVent.SetActive(true);
@@ -21,7 +29,9 @@ public class VentController : MonoBehaviour {
                 hasBeenDestroyed = !hasBeenDestroyed;
                 Destroy(other.gameObject);
             }
+        }
     }
+
 
 
     private void SetDelayToDestroy(GameObject obj) {

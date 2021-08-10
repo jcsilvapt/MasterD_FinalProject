@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cea864baafa82d4eb24a23c6420668c, type: 3}
   m_Name: P200
   m_EditorClassIdentifier: 
-  shootingType: 00000000
+  shootingType: 01000000
+  shootingTypeIndex: 0
   maximumBullets: 48
   clipSize: 12
   bulletsInClip: 12
