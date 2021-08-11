@@ -181,4 +181,12 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage {
     public void TakeDamage() {
         HandleEvent(AIEvents.GotAttacked);
     }
+
+    private void OnAnimatorMove()
+    {
+        if(Time.deltaTime != 0)
+        {
+            agent.speed = (animator.deltaPosition / Time.deltaTime).magnitude;
+        }
+    }
 }
