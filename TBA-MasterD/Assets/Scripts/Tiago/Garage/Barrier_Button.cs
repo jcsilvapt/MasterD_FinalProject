@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Barrier_Button : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Garage_Manager gm;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+       // gm = GetComponent<Garage_Manager>();
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "DroneDart")
+        {
+            Debug.Log("Got Hit");
+            gm.RotateBarrier();
+        }
     }
 }
