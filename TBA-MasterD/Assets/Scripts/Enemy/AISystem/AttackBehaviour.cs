@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public class AttackBehaviour : AIBehaviour
-{
+public class AttackBehaviour : AIBehaviour {
 
     public Transform target;
     public NavMeshAgent navAgent;
@@ -19,37 +18,31 @@ public class AttackBehaviour : AIBehaviour
     public Enemy enemy;
 
 
-    public AttackBehaviour(MonoBehaviour self, AIStateMachine stateMachine) : base(self, stateMachine, "Attack")
-    {
+    public AttackBehaviour(MonoBehaviour self, AIStateMachine stateMachine) : base(self, stateMachine, "Attack") {
 
     }
 
-    public override void Init()
-    {
+    public override void Init() {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         navAgent = self.GetComponent<NavMeshAgent>();
         enemy = self.GetComponent<Enemy>();
 
     }
-    public override void OnBehaviourEnd()
-    {
+    public override void OnBehaviourEnd() {
         Debug.Log("Player is gone");
         isActive = false;
     }
 
-    public override void OnBehaviourStart()
-    {
+    public override void OnBehaviourStart() {
         isActive = true;
         Debug.Log("I'm Attacking the enemy");
         enemy.Shoot();
 
     }
 
-    public override void OnUpdate()
-    {
-        if (isActive)
-        {
+    public override void OnUpdate() {
 
+        if (isActive) {
             if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player is in view
             {
 
@@ -59,13 +52,14 @@ public class AttackBehaviour : AIBehaviour
                 {
                     self.transform.LookAt(target.position);
                     enemy.Shoot();
-                }
-                else
-                {
+                } else {
                     Debug.Log("Lost the Player");
                     stateMachine.HandleEvent(AIEvents.RangeToFar);
                     return;
                 }
+            } else {
+                stateMachine.HandleEvent(AIEvents.LostPlayer);
+                return;
             }
         }
     }

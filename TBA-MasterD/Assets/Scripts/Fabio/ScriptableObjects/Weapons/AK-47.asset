@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AK-47
   m_EditorClassIdentifier: 
   shootingType: 01000000
+  shootingTypeIndex: 0
   maximumBullets: 120
   clipSize: 30
   bulletsInClip: 30

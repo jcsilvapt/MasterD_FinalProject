@@ -29,6 +29,11 @@ public class Weapon : MonoBehaviour {
     [SerializeField] GameObject bulletParticleSystem;
     [SerializeField] GameObject hitEffect;
     [SerializeField] Transform shootingFrom;
+    [SerializeField] Animator anim;
+    [Header("Decals")]
+    [SerializeField] GameObject[] defaultBulletHoles;
+    [SerializeField] GameObject[] glassBulletHoles;
+    [SerializeField] GameObject[] woodBulletHoles;
 
     private void Awake() {
         shootingType = SO_WeaponInformation.shootingType;
@@ -38,6 +43,8 @@ public class Weapon : MonoBehaviour {
         bulletsInClip = SO_WeaponInformation.bulletsInClip;
         timeBetweenShots = SO_WeaponInformation.timeBetweenShots;
         timeReload = SO_WeaponInformation.timeReload;
+
+        anim = GetComponent<Animator>();
 
         isWeaponActive = false;
         canShoot = true;
@@ -103,19 +110,46 @@ public class Weapon : MonoBehaviour {
     }
 
     private void JShoot() {
-        bulletParticleSystem.SetActive(true);
-        RaycastHit hit;
+        bulletParticleSystem.SetActive(true); // Enable Particle System
 
+        anim.SetBool("isShooting", true);
+        //anim.SetTrigger("Shoot");
+
+        RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit)) {
-            Debug.Log(hit.transform.name);
+
+            // On Hit instantiate Particle Effects 'On Hit' and Destroys after 1 second or so...
             GameObject tempHit = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(tempHit, 1f);
-            if (hit.rigidbody != null) {
-                hit.rigidbody.AddForce(-hit.normal);
-            }
+
+            // Calculate in which direction the bullet has hit and then recalculate a fix value so the decal won't appear "flickering" with other textures
+            // Probably use something around 0.001f to fix the flickering
+            Vector3 decalNewPosition = new Vector3((hit.point.x + hit.normal.x / 1000), (hit.point.y + hit.normal.y / 1000), (hit.point.z + hit.normal.z / 1000));
+
+            // Now checks if the thing that we hit is a destructable or not (doesn't make sense creating a decal on a object that will be changed...)
             if (hit.transform.GetComponent<IDamage>() != null) {
                 hit.transform.GetComponent<IDamage>().TakeDamage();
+                bulletsInClip--;
+                timeElapsedSinceShot = timeBetweenShots;
+                canShoot = false;
+                return;
             }
+
+            GameObject randomDecal;
+
+            // Ok Seems I will hit something "harder" so let's see what am I hitting...
+            switch (hit.transform.tag) {
+                case "Glass":
+                    randomDecal = glassBulletHoles[Random.Range(0, glassBulletHoles.Length)];
+                    break;
+                default:
+                    randomDecal = defaultBulletHoles[Random.Range(0, defaultBulletHoles.Length)];
+                    break;
+            }
+            // Instantiate decal on the spot
+            GameObject temporaryDecal = Instantiate(randomDecal, decalNewPosition, Quaternion.LookRotation(hit.normal));
+            temporaryDecal.transform.parent = hit.transform;
+            Destroy(temporaryDecal, 3f);
         }
 
 
@@ -260,6 +294,7 @@ public class Weapon : MonoBehaviour {
         //Enough Time has passed since the Last Shot, update Flag.
         canShoot = true;
         bulletParticleSystem.SetActive(false);
+        anim.SetBool("isShooting", false);
     }
 
     #endregion

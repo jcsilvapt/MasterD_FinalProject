@@ -182,8 +182,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3674059348692271385}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -1.4901e-10, z: 0.00094054}
+  m_LocalScale: {x: 1, y: 1, z: 1.44219}
   m_Children: []
   m_Father: {fileID: 8051024593492792802}
   m_RootOrder: 0
@@ -274,7 +274,7 @@ Transform:
   m_GameObject: {fileID: 4013543148578440913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9892142, y: 1, z: 1}
   m_Children:
   - {fileID: 8051024593492792802}
   - {fileID: 599794200532861037}
@@ -480,7 +480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8604343910234847157}
   - component: {fileID: 4975491953551532858}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -495,7 +495,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8709225724142909198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.01015, z: -0.04884}
+  m_LocalPosition: {x: 0, y: -0.0101, z: -0.0664}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 327312571953702721}
@@ -526,6 +526,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crane_box
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630809312810720989, guid: f75fdb32ed4e96a40ba3261129bcb84c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4630809312810720989, guid: f75fdb32ed4e96a40ba3261129bcb84c,
         type: 3}
