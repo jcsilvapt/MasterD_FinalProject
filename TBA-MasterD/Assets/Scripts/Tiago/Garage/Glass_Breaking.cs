@@ -10,6 +10,5 @@ public class Glass_Breaking : MonoBehaviour,IDamage
     {
         gm.switchGlass();
     }
-
-   
+     
 }

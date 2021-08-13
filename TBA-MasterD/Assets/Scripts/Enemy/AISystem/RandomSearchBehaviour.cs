@@ -51,7 +51,7 @@ public class RandomSearchBehaviour : AIBehaviour
     }
 
     public override void OnBehaviourStart() {
-        Debug.Log("Random Search Behaviour Started");
+        Debug.Log("Random Search Behaviour Started:" + self.name);
 
         //Set IsActive to True, Set all Flags to False.
         isActive = true;
