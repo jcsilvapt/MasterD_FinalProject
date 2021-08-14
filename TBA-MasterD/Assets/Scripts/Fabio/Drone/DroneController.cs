@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroneController : MonoBehaviour
-{
+public class DroneController : MonoBehaviour {
     #region References
 
     //Rigidbody Reference
@@ -55,8 +54,7 @@ public class DroneController : MonoBehaviour
 
     #endregion
 
-    private void Start()
-    {
+    private void Start() {
         //Get References
         rb = GetComponent<Rigidbody>();
 
@@ -64,8 +62,7 @@ public class DroneController : MonoBehaviour
         shootTimer = 0;
     }
 
-    private void Update()
-    {
+    private void Update() {
 
         Movement();
 
@@ -74,28 +71,25 @@ public class DroneController : MonoBehaviour
         Shoot();
     }
 
-    private void FixedUpdate()
-    {
+    private void OnEnable() {
+        Debug.LogWarning("Keys to interact: " + KeyMapper.inputKey.DroneMoveUp.ToString() + ", to go UP and, " + KeyMapper.inputKey.DroneMoveDown.ToString() + ", to go down.");
+    }
+
+    private void FixedUpdate() {
         rb.velocity = (transform.TransformDirection(movementInput) + heightController).normalized * movementSpeed;
         //rb.velocity += heightController * movementSpeed;
     }
 
-    private void Movement()
-    {
+    private void Movement() {
         //Movement Input by Player
         movementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
         //Height Controller Changes
-        if (Input.GetKey(KeyCode.E))
-        {
+        if (Input.GetKey(KeyMapper.inputKey.DroneMoveUp)) {
             heightController.y = 0.5f;
-        }
-        else if (Input.GetKey(KeyCode.Q))
-        {
+        } else if (Input.GetKey(KeyMapper.inputKey.DroneMoveDown)) {
             heightController.y = -0.5f;
-        }
-        else
-        {
+        } else {
             heightController.y = 0;
         }
 
@@ -103,24 +97,20 @@ public class DroneController : MonoBehaviour
         movementInput = movementInput.normalized;
     }
 
-    private void Look()
-    {
+    private void Look() {
         xRotation += Input.GetAxis("Mouse X") * droneSensitivity;
         yRotation -= Input.GetAxis("Mouse Y") * droneSensitivity;
 
         transform.localEulerAngles = new Vector3((yRotation = Mathf.Clamp(yRotation, rotationLimitMinY, rotationLimitMaxY)), xRotation, 0);
     }
 
-    private void Shoot()
-    {
-        if(shootTimer > 0)
-        {
+    private void Shoot() {
+        if (shootTimer > 0) {
             shootTimer -= Time.deltaTime;
             return;
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
+        if (Input.GetMouseButtonDown(0)) {
             GameObject dartShot = Instantiate(dart, shootingPoint);
             dartShot.transform.parent = null;
 
@@ -128,8 +118,7 @@ public class DroneController : MonoBehaviour
         }
     }
 
-    public void ResetTransform()
-    {
+    public void ResetTransform() {
         //Reset Rotation
         xRotation = 0;
         yRotation = 0;

@@ -29,7 +29,8 @@ public class Weapon : MonoBehaviour {
     [SerializeField] GameObject bulletParticleSystem;
     [SerializeField] GameObject hitEffect;
     [SerializeField] Transform shootingFrom;
-    [SerializeField] Animator anim;
+    [SerializeField] Animator weaponAnimator;
+    [SerializeField] Animator armsAnimator;
     [Header("Decals")]
     [SerializeField] GameObject[] defaultBulletHoles;
     [SerializeField] GameObject[] glassBulletHoles;
@@ -44,10 +45,14 @@ public class Weapon : MonoBehaviour {
         timeBetweenShots = SO_WeaponInformation.timeBetweenShots;
         timeReload = SO_WeaponInformation.timeReload;
 
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
 
         isWeaponActive = false;
         canShoot = true;
+    }
+
+    public string GetWeaponName() {
+        return SO_WeaponInformation.name;
     }
 
     public void WeaponUpdate() {
@@ -66,7 +71,10 @@ public class Weapon : MonoBehaviour {
         if (isWeaponActive) {
 
             if (Input.GetMouseButton(0)) JorgeShooting();
-            if (Input.GetMouseButtonUp(0)) reShot = true;
+            if (Input.GetMouseButtonUp(0)) {
+                reShot = true;
+                armsAnimator.SetBool("isShooting", false);
+            }
             if (Input.GetKeyDown(KeyCode.R)) Reload();
 
             FireRate();
@@ -112,7 +120,9 @@ public class Weapon : MonoBehaviour {
     private void JShoot() {
         bulletParticleSystem.SetActive(true); // Enable Particle System
 
-        anim.SetBool("isShooting", true);
+        weaponAnimator.SetBool("isShooting", true);
+        armsAnimator.SetBool("isShooting", true);
+        armsAnimator.SetTrigger("shoot");
         //anim.SetTrigger("Shoot");
 
         RaycastHit hit;
@@ -161,6 +171,7 @@ public class Weapon : MonoBehaviour {
 
     private bool HasBulletsInClip() {
         if (bulletsInClip <= 0) {
+            armsAnimator.SetBool("isShooting", false);
             return false;
         }
         return true;
@@ -294,7 +305,7 @@ public class Weapon : MonoBehaviour {
         //Enough Time has passed since the Last Shot, update Flag.
         canShoot = true;
         bulletParticleSystem.SetActive(false);
-        anim.SetBool("isShooting", false);
+        weaponAnimator.SetBool("isShooting", false);
     }
 
     #endregion

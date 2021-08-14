@@ -48,10 +48,8 @@ public class DoorController : MonoBehaviour {
     private void Update() {
         #region Fabio Changes
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            if (startsOpen)
-            {
+        if (Input.GetKeyDown(KeyCode.C)) {
+            if (startsOpen) {
                 CloseDoor();
             }
         }
@@ -61,7 +59,7 @@ public class DoorController : MonoBehaviour {
         if (!hasSigns) {
             return;
         }
-        if(lockDoor == lastDoorStatus) {
+        if (lockDoor == lastDoorStatus) {
             return;
         }
 
@@ -71,8 +69,8 @@ public class DoorController : MonoBehaviour {
 
 
     private void OnTriggerStay(Collider other) {
-        if (startsOpen)
-        {
+
+        if (startsOpen) {
             return;
         }
 
@@ -109,8 +107,7 @@ public class DoorController : MonoBehaviour {
     }
 
     private void OnTriggerExit(Collider other) {
-        if (startsOpen)
-        {
+        if (startsOpen) {
             return;
         }
 
@@ -154,8 +151,7 @@ public class DoorController : MonoBehaviour {
 
     #region Fabio Changes
 
-    public void CloseDoor()
-    {
+    public void CloseDoor() {
         anim.SetBool("CloseDoor", true);
 
         //anim.runtimeAnimatorController = ;

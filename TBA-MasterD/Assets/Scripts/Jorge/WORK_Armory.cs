@@ -14,8 +14,8 @@ public class WORK_Armory : MonoBehaviour {
             }
 
             if(showHint) {
-                if(Input.GetKeyDown(KeyCode.E)) {
-                    //TODO
+                if(Input.GetKeyDown(KeyMapper.inputKey.Interaction)) {
+                    GameObject.Find("Player").GetComponent<charController>().EnableWeapon();
                 }
             }
         }
