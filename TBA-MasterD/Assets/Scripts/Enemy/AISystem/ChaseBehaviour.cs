@@ -11,6 +11,7 @@ public class ChaseBehaviour : AIBehaviour
     public bool playerIsVisible = false;
     public Transform target;
     public NavMeshAgent navAgent;
+    private Animator anim;
 
     private Vector3 distance;
     public ChaseBehaviour(MonoBehaviour self, AIStateMachine stateMachine) : base(self, stateMachine, "Chase")
@@ -23,6 +24,7 @@ public class ChaseBehaviour : AIBehaviour
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         navAgent = self.GetComponent<NavMeshAgent>();
+        anim = self.GetComponent<Animator>();
     }
 
     public override void OnBehaviourEnd()
@@ -30,6 +32,7 @@ public class ChaseBehaviour : AIBehaviour
         Debug.Log("Chase Ended");
         navAgent.ResetPath();
         isActive = false;
+        anim.SetBool("iChase", false);
     }
 
     public override void OnBehaviourStart()
@@ -37,16 +40,17 @@ public class ChaseBehaviour : AIBehaviour
         Debug.Log("Lets start Chase him!");
         isActive = true;
         ChasePlayer();
+        anim.SetBool("iChase", true);
     }
 
     public override void OnUpdate()
     {
         if (isActive)
         {
-            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player is visible
+            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player distance is enought to be seen
             {
 
-                if (AIUtils_Tiago.IsChasingPlayer(self.transform, target, 5)) //checks his distance 
+                if (AIUtils_Tiago.IsChasingPlayer(self.transform, target, 5)) //checks if the distance is enought to shoot player
                 {
                     stateMachine.HandleEvent(AIEvents.InRange);
                     return;

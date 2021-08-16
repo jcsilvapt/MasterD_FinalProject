@@ -30,11 +30,12 @@ public class IdleBehaviour : AIBehaviour {
     public override void OnBehaviourEnd() {
         elapsedTime = 0.0f;
         isActive = false;
+        anim.SetBool("iIdle", false);
     }
 
     public override void OnBehaviourStart() {
         isActive = true;
-
+        anim.SetBool("iIdle", true);
         //TODO: Falta controlar o animador.... anim.setbool("Idle", true);
     }
 

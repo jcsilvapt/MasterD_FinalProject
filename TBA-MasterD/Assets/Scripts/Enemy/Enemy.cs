@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage {
     [SerializeField] float idleTime = 1.0f;
     [Range(10.0f, 200.0f)]
     [SerializeField] float distanceToViewTarget = 10.0f;
+    [SerializeField] float distanceToShoot;
     [Tooltip("Define here the patrol points of this AI System")]
     [SerializeField] Transform[] patrolWayPoints;
 
@@ -96,7 +97,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage {
                 new IdleBehaviour(this, this, idleTime),
                 new PatrolBehaviour(this, this, patrolWayPoints),
                 new ChaseBehaviour(this,this),
-                new AttackBehaviour(this, this),
+                new AttackBehaviour(this, this, distanceToShoot),
                 new GotHitBehaviour(this, this),
                 new RandomSearchBehaviour(this, this)
                 // New Behaviours GOES HERE

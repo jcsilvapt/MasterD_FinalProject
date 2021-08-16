@@ -14,8 +14,6 @@ public class AIUtils_Tiago
             return true;
         }
 
-      
-
         return false;
     }
 }

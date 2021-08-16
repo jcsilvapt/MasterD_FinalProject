@@ -34,14 +34,14 @@ public class PatrolBehaviour : AIBehaviour
     public override void OnBehaviourEnd()
     {
         isActive = false;
-
+        anim.SetBool("iWalk", false);
     }
 
     public override void OnBehaviourStart()
     {
         isActive = true;
         NextWayPoint();
-
+        anim.SetBool("iWalk", true);
     }
 
     public override void OnUpdate()

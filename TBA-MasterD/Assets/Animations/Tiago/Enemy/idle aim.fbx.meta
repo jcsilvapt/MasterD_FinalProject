@@ -1,11 +1,15 @@
 fileFormatVersion: 2
-guid: 2bac93b8630651c448bdf03075003b07
+guid: ee3914e7574b760459a8fc6029e1bcc9
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mixamo.com
+<<<<<<< Updated upstream:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle.fbx.meta
+    second: Idle
+=======
+    second: idle
+>>>>>>> Stashed changes:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle aim.fbx.meta
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,21 +39,35 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+<<<<<<< Updated upstream:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle.fbx.meta
+      name: Idle
+=======
+      name: idle
+>>>>>>> Stashed changes:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle aim.fbx.meta
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 43
+      lastFrame: 186
       wrapMode: 0
-      orientationOffsetY: -20.3
+<<<<<<< Updated upstream:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle.fbx.meta
+      orientationOffsetY: 0
+=======
+      orientationOffsetY: -30
+>>>>>>> Stashed changes:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle aim.fbx.meta
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
+<<<<<<< Updated upstream:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle.fbx.meta
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+=======
       loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 1
+>>>>>>> Stashed changes:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle aim.fbx.meta
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1

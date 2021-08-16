@@ -26,6 +26,9 @@ public class RandomSearchBehaviour : AIBehaviour
     //Timer for Wait In Point
     private float timerWaitInPoint;
 
+
+    //added by tiago animator
+    private Animator anim;
     public RandomSearchBehaviour(MonoBehaviour self, AIStateMachine stateMachine) : base(self, stateMachine, "RandomSearch") {
 
     }
@@ -39,6 +42,8 @@ public class RandomSearchBehaviour : AIBehaviour
 
         //Set Time Duration for Wait In Point
         waitInPointTimeDuration = 3f;
+
+        anim = self.GetComponent<Animator>();
     }
 
     public override void OnBehaviourEnd() {
@@ -48,6 +53,7 @@ public class RandomSearchBehaviour : AIBehaviour
         isActive = false;
         randomPointChosen = false;
         reachedPoint = false;
+        anim.SetBool("iWalk", false);
     }
 
     public override void OnBehaviourStart() {
@@ -57,6 +63,7 @@ public class RandomSearchBehaviour : AIBehaviour
         isActive = true;
         randomPointChosen = false;
         reachedPoint = false;
+        anim.SetBool("iWalk", true);
     }
 
     public override void OnUpdate() {
