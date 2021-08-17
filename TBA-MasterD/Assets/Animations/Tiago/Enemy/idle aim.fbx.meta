@@ -5,11 +5,10 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-<<<<<<< Updated upstream:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle.fbx.meta
-    second: Idle
-=======
-    second: idle
->>>>>>> Stashed changes:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle aim.fbx.meta
+    second: 
+  - first:
+      74: -203655887218126122
+    second: mixamo.com
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -37,50 +36,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-<<<<<<< Updated upstream:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle.fbx.meta
-      name: Idle
-=======
-      name: idle
->>>>>>> Stashed changes:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle aim.fbx.meta
-      takeName: mixamo.com
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 186
-      wrapMode: 0
-<<<<<<< Updated upstream:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle.fbx.meta
-      orientationOffsetY: 0
-=======
-      orientationOffsetY: -30
->>>>>>> Stashed changes:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle aim.fbx.meta
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-<<<<<<< Updated upstream:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle.fbx.meta
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-=======
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 1
->>>>>>> Stashed changes:TBA-MasterD/Assets/Animations/Tiago/Enemy/idle aim.fbx.meta
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -93,7 +49,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    fileIdsGeneration: 2
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
