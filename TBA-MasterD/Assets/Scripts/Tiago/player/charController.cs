@@ -59,9 +59,6 @@ public class charController : MonoBehaviour {
 
 
     void Start() {
-
-        Debug.LogWarning("INSERIR O INPUTCONTROLLER PREFAB NA CENA....");
-
         // Get References
         rb = GetComponent<Rigidbody>();
         cameraDefaultHeight = fpsCam.GetComponent<Transform>().localPosition.y;

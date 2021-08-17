@@ -8,8 +8,6 @@ public class cameraRotation : MonoBehaviour {
     private float mouseY;
     public float mouseSensitivy = 100f;
 
-    public bool showCursor = true;
-
     //corpo do jogador
     public Transform playerBody;
     private float xRotation = 0f;
@@ -34,7 +32,6 @@ public class cameraRotation : MonoBehaviour {
     private Transform leftArm;
 
     void Start() {
-        Debug.LogWarning("To Hide the mouse cursor just press 'K'");
         /*head = animator.GetBoneTransform(HumanBodyBones.Head);
         chest = animator.GetBoneTransform(HumanBodyBones.Chest);
         rightUpperArm = animator.GetBoneTransform(HumanBodyBones.RightUpperArm);
@@ -50,10 +47,10 @@ public class cameraRotation : MonoBehaviour {
     void Update() {
 
         if (Input.GetKeyDown(KeyCode.K)) {
-            ToggleCursorVisibility();
+            GameManager.SetCursorVisibility();
         }
 
-        if (!showCursor) {
+        if (!GameManager.GetCursorVisibility()) {
             mouseX = Input.GetAxis("Mouse X") * mouseSensitivy * Time.deltaTime;
             mouseY = Input.GetAxis("Mouse Y") * mouseSensitivy * Time.deltaTime;
 
@@ -98,11 +95,5 @@ public class cameraRotation : MonoBehaviour {
         leftHand.LookAt(target.position);
         leftHand.rotation = leftHand.rotation * Quaternion.Euler(leftHandOffset);
         */
-    }
-
-    private void ToggleCursorVisibility() {
-        showCursor = !showCursor;
-        Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Confined;
-        Cursor.visible = showCursor ? true : false;
     }
 }

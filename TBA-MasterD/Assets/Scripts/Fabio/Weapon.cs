@@ -36,6 +36,13 @@ public class Weapon : MonoBehaviour {
     [SerializeField] GameObject[] glassBulletHoles;
     [SerializeField] GameObject[] woodBulletHoles;
 
+    [SerializeField] bool isSpraying;
+    [SerializeField] float xSpray;
+    [SerializeField] float ySpray;
+    [SerializeField] Vector3 spray;
+
+    [SerializeField] Camera cam;
+
     private void Awake() {
         shootingType = SO_WeaponInformation.shootingType;
         shootingTypeIndex = SO_WeaponInformation.shootingTypeIndex;
@@ -49,6 +56,8 @@ public class Weapon : MonoBehaviour {
 
         isWeaponActive = false;
         canShoot = true;
+
+        cam = Camera.main;
     }
 
     public string GetWeaponName() {
@@ -70,10 +79,14 @@ public class Weapon : MonoBehaviour {
 
         if (isWeaponActive) {
 
-            if (Input.GetMouseButton(0)) JorgeShooting();
+            if (Input.GetMouseButton(0)) {
+                JorgeShooting();
+                CalculateSpray();
+            }
             if (Input.GetMouseButtonUp(0)) {
                 reShot = true;
                 armsAnimator.SetBool("isShooting", false);
+                isSpraying = false;
             }
             if (Input.GetKeyDown(KeyCode.R)) Reload();
 
@@ -117,7 +130,17 @@ public class Weapon : MonoBehaviour {
         isBursting = false;
     }
 
+    private void CalculateSpray() {
+
+        spray = new Vector3(Camera.main.transform.forward.x + Random.Range(-xSpray, xSpray),
+                        Camera.main.transform.forward.y + Random.Range(-ySpray, ySpray),
+                        Camera.main.transform.forward.z
+                        );
+
+    }
+
     private void JShoot() {
+
         bulletParticleSystem.SetActive(true); // Enable Particle System
 
         weaponAnimator.SetBool("isShooting", true);
@@ -126,7 +149,7 @@ public class Weapon : MonoBehaviour {
         //anim.SetTrigger("Shoot");
 
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit)) {
+        if (Physics.Raycast(Camera.main.transform.position, spray, out hit)) {
 
             // On Hit instantiate Particle Effects 'On Hit' and Destroys after 1 second or so...
             GameObject tempHit = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
