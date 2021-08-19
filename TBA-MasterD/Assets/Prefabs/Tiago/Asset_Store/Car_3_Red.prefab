@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5995467009335159980}
   - component: {fileID: 5995467009331753226}
   - component: {fileID: 5995467009332881132}
-  - component: {fileID: 84831111417215557}
+  - component: {fileID: 5220792874446949325}
   m_Layer: 0
   m_Name: Car_3_Red
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5995467009334829110}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 94.888626, y: -2.03, z: 43.577404}
-  m_LocalScale: {x: 144.45999, y: 144.45999, z: 144.45999}
+  m_LocalScale: {x: 120.06552, y: 120.06552, z: 120.06552}
   m_Children:
   - {fileID: 5995467009335150384}
   - {fileID: 5995467009335200100}
@@ -86,8 +86,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &84831111417215557
-BoxCollider:
+--- !u!64 &5220792874446949325
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -96,9 +96,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.045498952, y: 0.01358262, z: 0.021373872}
-  m_Center: {x: -0.000103079714, y: 0.0009655473, z: 4.656613e-10}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 073447e15be6ecc4ab450c6648929467, type: 3}
 --- !u!1 &5995467009334845562
 GameObject:
   m_ObjectHideFlags: 0

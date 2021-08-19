@@ -11,6 +11,7 @@ public class PatrolBehaviour : AIBehaviour
     private Animator anim;
     private NavMeshAgent agent;
     private Transform target;
+    private bool hasWaypoints;
 
     // Patrol Logic
     private Transform[] waypoints;
@@ -20,6 +21,14 @@ public class PatrolBehaviour : AIBehaviour
     public PatrolBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform[] waypoints) : base(self, stateMachine, "Patrol")
     {
         this.waypoints = waypoints;
+        if (this.waypoints.Length == 0)
+        {
+            hasWaypoints = false;
+        }
+        else
+        {
+            hasWaypoints = true;
+        }
     }
 
     public override void Init()
@@ -39,9 +48,16 @@ public class PatrolBehaviour : AIBehaviour
 
     public override void OnBehaviourStart()
     {
-        isActive = true;
-        NextWayPoint();
-        anim.SetBool("iWalk", true);
+        if (hasWaypoints)
+        {
+            isActive = true;
+            NextWayPoint();
+            anim.SetBool("iWalk", true);
+        }
+        else
+        {
+            stateMachine.HandleEvent(AIEvents.ReachedDestination);
+        }
     }
 
     public override void OnUpdate()

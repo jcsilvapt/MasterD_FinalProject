@@ -1416,7 +1416,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6135648405954145952}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 117.14013, y: -3.2886524, z: 17.42}
   m_LocalScale: {x: 1.16, y: 1.16, z: 1.16}
   m_Children:
@@ -1434,7 +1434,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6135648405954145952}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 30
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -1450,7 +1450,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6135648405954145952}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.26
   m_Height: 1.8
@@ -1509,6 +1509,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1866dd780b87e1409d936d09e64389a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bright: {fileID: 2100000, guid: c6e280c540857a74cb4358caaff2d088, type: 2}
+  healthC: 0
+  himself: {fileID: 7446499454983756963}
   bullet: {fileID: 8078174116620158006, guid: 85ad3b7f0bff2e14182c4390d1197150, type: 3}
   bulletSpawn: {fileID: 6478245985151263800}
   casing: {fileID: 6461625440377602478, guid: b5c59afd25ebb164696f764b484fbd8e, type: 3}
@@ -1516,14 +1519,20 @@ MonoBehaviour:
   muzzleFlash: {fileID: 6478245984390522748}
   timeToShoot: 1
   elapsedTime: 0
-  health: 0
+  health: 100
   isAlive: 1
   enableAISystem: 1
   target: {fileID: 0}
   idleTime: 2
   distanceToViewTarget: 20
   distanceToShoot: 15
-  patrolWayPoints: []
+  patrolWayPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   enableTestMovement: 0
 --- !u!1 &6260666465208716795
 GameObject:

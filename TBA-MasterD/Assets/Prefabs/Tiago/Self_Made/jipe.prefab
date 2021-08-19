@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5518039799017026727}
   - component: {fileID: 8879929011530087170}
   - component: {fileID: 6692119431700500424}
-  - component: {fileID: 6482640062249496164}
+  - component: {fileID: -4560131022523572493}
   m_Layer: 0
   m_Name: jipe
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5179090482253327901}
   m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 127.96172, y: 5.02, z: 41.263397}
-  m_LocalScale: {x: 335.14755, y: 102.171715, z: 117.30229}
+  m_LocalScale: {x: 280.39474, y: 93.152, z: 98.1387}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &6482640062249496164
-BoxCollider:
+--- !u!64 &-4560131022523572493
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,6 +92,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.019172998, y: 0.023597203, z: 0.022874875}
-  m_Center: {x: 0.00039735014, y: -0.00010846135, z: 0.0022069032}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2614326980324153893, guid: 01645a711f406c7419275bc9f5c1d9b1, type: 3}

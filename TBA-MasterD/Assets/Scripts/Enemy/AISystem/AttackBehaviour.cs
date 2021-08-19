@@ -47,22 +47,23 @@ public class AttackBehaviour : AIBehaviour {
         if (isActive) {
             if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player is in view
             {
-
                 Vector3 distance = target.transform.position - self.transform.position;
 
                 if (distance.magnitude <= distanceToShoot)  // checks if the distance of the player is enough to shoot
                 {
                     self.transform.LookAt(target.position);
                     enemy.Shoot();
-                
+                    enemy.SetShooting(true);
                     
                 } else {
                     Debug.Log("Lost the Player");
                     stateMachine.HandleEvent(AIEvents.RangeToFar);
+                    enemy.SetShooting(false);
                     return;
                 }
             } else {
                 stateMachine.HandleEvent(AIEvents.LostPlayer);
+                enemy.SetShooting(false);
                 return;
             }
         }

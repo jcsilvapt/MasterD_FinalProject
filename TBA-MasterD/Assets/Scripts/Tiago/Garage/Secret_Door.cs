@@ -17,6 +17,5 @@ public class Secret_Door : MonoBehaviour
         {
             anim.SetBool("gotOpen", true);
         }
-        Debug.Log("i am closing");
     }
 }

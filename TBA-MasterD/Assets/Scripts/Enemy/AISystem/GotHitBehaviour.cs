@@ -6,6 +6,9 @@ using System.Linq;
 
 public class GotHitBehaviour : AIBehaviour
 {
+    //animator
+    private Animator anim;
+
     //Flag Indicating if this Behaviour is Active
     private bool isActive;
 
@@ -68,7 +71,7 @@ public class GotHitBehaviour : AIBehaviour
 
     public GotHitBehaviour(MonoBehaviour self, AIStateMachine stateMachine) : base(self, stateMachine, "GotHit")
     {
-        
+        anim = self.GetComponent<Animator>();
     }
 
     public override void Init()
@@ -93,7 +96,8 @@ public class GotHitBehaviour : AIBehaviour
         isDestinationSet = false;
         isInShotPlace = false;
         isInCoverPlace = false;
-
+        anim.SetBool("iChase", false);
+        
         distance = 0;
     }
 
@@ -110,7 +114,7 @@ public class GotHitBehaviour : AIBehaviour
         isDestinationSet = false;
         isInShotPlace = false;
         isInCoverPlace = false;
-
+        anim.SetBool("iChase", true);
         distance = 0;
     }
 
@@ -147,6 +151,7 @@ public class GotHitBehaviour : AIBehaviour
 
         //Set Is Distance Calculated to True.
         isDistanceCalculated = true;
+        
     }
 
     private void ReactToHitDistanceShort()
@@ -168,7 +173,6 @@ public class GotHitBehaviour : AIBehaviour
         {
             return;
         }
-
         //If the Player already reached the Destination, return.
         if (isInShotPlace)
         {
@@ -179,8 +183,9 @@ public class GotHitBehaviour : AIBehaviour
         if (!isDestinationSet)
         {
             agent.SetDestination(currentTargetPosition);
-
+            
             isDestinationSet = true;
+       
         }
 
         //If Enemy has Vision of Player, Call HandleEvent SeePlayer
@@ -198,6 +203,7 @@ public class GotHitBehaviour : AIBehaviour
 
             stateMachine.HandleEvent(AIEvents.LostPlayer);
         }
+        
     }
 
     private void ReactToHitDistanceLong()
@@ -271,7 +277,9 @@ public class GotHitBehaviour : AIBehaviour
         {
             isInCoverPlace = true;
 
+                     
             stateMachine.HandleEvent(AIEvents.ReachedDestination);
+            return;
         }
     }
 
