@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class TriggerEvent : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
-        TutorialLevelManager.ins.ResetTargets();
+        TutorialLevelManager.ins.TriggerAction();
     }
 
 }

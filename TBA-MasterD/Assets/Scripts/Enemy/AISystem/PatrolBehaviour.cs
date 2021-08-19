@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PatrolBehaviour : AIBehaviour
-{
+public class PatrolBehaviour : AIBehaviour {
 
     private bool isActive;
 
@@ -16,63 +15,63 @@ public class PatrolBehaviour : AIBehaviour
     // Patrol Logic
     private Transform[] waypoints;
     private int currentWayPoint = -1;
+    private Vector3 initialPosition;
 
 
-    public PatrolBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform[] waypoints) : base(self, stateMachine, "Patrol")
-    {
+    public PatrolBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform[] waypoints) : base(self, stateMachine, "Patrol") {
         this.waypoints = waypoints;
-        if (this.waypoints.Length == 0)
-        {
+        if (this.waypoints.Length == 0) {
             hasWaypoints = false;
-        }
-        else
-        {
+        } else {
             hasWaypoints = true;
         }
     }
 
-    public override void Init()
-    {
+    public override void Init() {
         anim = self.GetComponent<Animator>();
         agent = self.GetComponent<NavMeshAgent>();
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        initialPosition = self.transform.position;
 
     }
 
-    public override void OnBehaviourEnd()
-    {
+    private bool IsFarFromOrigin() {
+        float distance = Vector3.Distance(self.transform.position, initialPosition);
+        if (distance > 2f) {
+            return true;
+        }
+        return false;
+    }
+
+    public override void OnBehaviourEnd() {
         isActive = false;
         anim.SetBool("iWalk", false);
     }
 
-    public override void OnBehaviourStart()
-    {
-        if (hasWaypoints)
-        {
+    public override void OnBehaviourStart() {
+        if (hasWaypoints) {
             isActive = true;
             NextWayPoint();
             anim.SetBool("iWalk", true);
-        }
-        else
-        {
-            stateMachine.HandleEvent(AIEvents.ReachedDestination);
+        } else {
+            if (IsFarFromOrigin()) {
+                anim.SetBool("iWalk", true);
+                agent.SetDestination(initialPosition);
+                isActive = true;
+            } else {
+                stateMachine.HandleEvent(AIEvents.ReachedDestination);
+            }
         }
     }
 
-    public override void OnUpdate()
-    {
-        if (isActive)
-        {
-            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView()))
-            {
+    public override void OnUpdate() {
+        if (isActive) {
+            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) {
                 stateMachine.HandleEvent(AIEvents.SeePlayer);
                 return;
-            }
-            else
-            {
-                if (!agent.pathPending && agent.remainingDistance < 0.1f)
-                {
+            } else {
+                if (!agent.pathPending && agent.remainingDistance < 0.1f) {
                     stateMachine.HandleEvent(AIEvents.ReachedDestination);
                     return;
                 }
@@ -80,10 +79,8 @@ public class PatrolBehaviour : AIBehaviour
         }
     }
 
-    private void NextWayPoint()
-    {
-        if (waypoints != null && waypoints.Length > 0)
-        {
+    private void NextWayPoint() {
+        if (waypoints != null && waypoints.Length > 0) {
             currentWayPoint = (currentWayPoint + 1) % waypoints.Length;
             agent.SetDestination(waypoints[currentWayPoint].position);
         }

@@ -7,14 +7,19 @@ public class TutorialLevelManager : MonoBehaviour {
 
     public static TutorialLevelManager ins;
 
+    [SerializeField] Animator[] targets;
+
+    #region EVENTS
+    public event Action triggerAction;
+    #endregion
+
     private void Awake() {
         ins = this;
     }
 
-    public event Action onPassShoot;
-    public void ResetTargets() {
-        if(onPassShoot != null) {
-            onPassShoot();
+    public void TriggerAction() {
+        if(triggerAction != null) {
+            triggerAction();
         }
     }
 

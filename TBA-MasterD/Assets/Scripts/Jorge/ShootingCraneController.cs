@@ -20,7 +20,7 @@ public class ShootingCraneController : MonoBehaviour {
 
     private void Start() {
 
-        TutorialLevelManager.ins.onPassShoot += ResetTarget;
+        TutorialLevelManager.ins.triggerAction += ResetTarget;
 
         _UI.SetActive(false);
         _UIText.SetActive(false);
@@ -32,7 +32,7 @@ public class ShootingCraneController : MonoBehaviour {
     void ResetTarget() {
         selectedDistance = distances[3];
         isMoving = true;
-        TutorialLevelManager.ins.onPassShoot -= ResetTarget;
+        TutorialLevelManager.ins.triggerAction -= ResetTarget;
     }
 
     public void SetTargetDistance(int dist) {
@@ -49,6 +49,12 @@ public class ShootingCraneController : MonoBehaviour {
                 if (Input.GetKeyDown(KeyMapper.inputKey.Interaction)) {
                     _UI.SetActive(true);
                     isUIActive = true;
+                    GameManager.SetCursorVisibility();
+                }
+            } else {
+                if (Input.GetKeyDown(KeyCode.Escape)) {
+                    _UI.SetActive(false);
+                    isUIActive = false;
                     GameManager.SetCursorVisibility();
                 }
             }

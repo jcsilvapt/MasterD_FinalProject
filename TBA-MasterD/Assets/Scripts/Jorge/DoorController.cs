@@ -153,6 +153,7 @@ public class DoorController : MonoBehaviour {
 
     public void CloseDoor() {
         anim.SetBool("CloseDoor", true);
+        anim.SetBool("Open", false);
 
         //anim.runtimeAnimatorController = ;
         startsOpen = false;

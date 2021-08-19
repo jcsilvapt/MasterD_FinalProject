@@ -31,14 +31,17 @@ public class Weapon : MonoBehaviour {
     [SerializeField] Transform shootingFrom;
     [SerializeField] Animator weaponAnimator;
     [SerializeField] Animator armsAnimator;
+
     [Header("Decals")]
     [SerializeField] GameObject[] defaultBulletHoles;
     [SerializeField] GameObject[] glassBulletHoles;
     [SerializeField] GameObject[] woodBulletHoles;
 
     [SerializeField] bool isSpraying;
+    [SerializeField] int bulletsFired = 0;
     [SerializeField] float xSpray;
     [SerializeField] float ySpray;
+    [SerializeField] float zSpray;
     [SerializeField] Vector3 spray;
 
     [SerializeField] Camera cam;
@@ -54,7 +57,7 @@ public class Weapon : MonoBehaviour {
 
         //anim = GetComponent<Animator>();
 
-        isWeaponActive = false;
+        //isWeaponActive = false;
         canShoot = true;
 
         cam = Camera.main;
@@ -81,12 +84,12 @@ public class Weapon : MonoBehaviour {
 
             if (Input.GetMouseButton(0)) {
                 JorgeShooting();
-                CalculateSpray();
             }
             if (Input.GetMouseButtonUp(0)) {
                 reShot = true;
                 armsAnimator.SetBool("isShooting", false);
                 isSpraying = false;
+                bulletsFired = 0;
             }
             if (Input.GetKeyDown(KeyCode.R)) Reload();
 
@@ -117,6 +120,7 @@ public class Weapon : MonoBehaviour {
             case ShootingType.Automatic:
                 if (canShoot) {
                     JShoot();
+                    //isSpraying = true;
                 }
                 break;
         }
@@ -130,12 +134,21 @@ public class Weapon : MonoBehaviour {
         isBursting = false;
     }
 
-    private void CalculateSpray() {
+    /// <summary>
+    /// Function that calculates the weapon spray.
+    /// If Set to false the first bullet will be accurate after that the spray will begin.
+    /// </summary>
+    /// <param name="isToSpray">If is to reset the spray</param>
+    private void CalculateSpray(bool isToSpray) {
+        if (isToSpray) {
+            spray = new Vector3(Camera.main.transform.forward.x + Random.Range(-xSpray, xSpray),
+                            Camera.main.transform.forward.y + Random.Range(-ySpray, ySpray),
+                            Camera.main.transform.forward.z + Random.Range(-zSpray, zSpray)
+                            );
+        } else {
+            spray = Camera.main.transform.forward;
+        }
 
-        spray = new Vector3(Camera.main.transform.forward.x + Random.Range(-xSpray, xSpray),
-                        Camera.main.transform.forward.y + Random.Range(-ySpray, ySpray),
-                        Camera.main.transform.forward.z
-                        );
 
     }
 
@@ -147,6 +160,14 @@ public class Weapon : MonoBehaviour {
         armsAnimator.SetBool("isShooting", true);
         armsAnimator.SetTrigger("shoot");
         //anim.SetTrigger("Shoot");
+
+        bulletsFired++;
+
+        if(bulletsFired >= 4) {
+            isSpraying = true;
+        }
+
+        CalculateSpray(isSpraying);
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, spray, out hit)) {
