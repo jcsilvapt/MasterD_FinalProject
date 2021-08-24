@@ -14,6 +14,9 @@ public class DroneController : MonoBehaviour {
     //Shooting Point
     [SerializeField] private Transform shootingPoint;
 
+    //DroneCamera
+    [SerializeField] private Camera droneCamera;
+
     #endregion
 
     #region Movement Variables
@@ -111,8 +114,16 @@ public class DroneController : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonDown(0)) {
-            GameObject dartShot = Instantiate(dart, shootingPoint);
-            dartShot.transform.parent = null;
+
+            RaycastHit hit;
+            if(Physics.Raycast(droneCamera.transform.position, droneCamera.transform.forward, out hit)) {
+                if(hit.transform.GetComponent<IDamage>() != null) {
+                    hit.transform.GetComponent<IDamage>().TakeDamage();
+                }
+            }
+
+            //GameObject dartShot = Instantiate(dart, shootingPoint);
+            //dartShot.transform.parent = null;
 
             shootTimer = timeBetweenShots;
         }

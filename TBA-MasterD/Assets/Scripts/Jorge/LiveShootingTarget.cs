@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class LiveShootingTarget : MonoBehaviour, IDamage {
 
-    public event Action beenShoot; 
-
     private Animator targetAnim;
     private bool targetIsUp = false;
-    private bool hasBeenHit = false;
+    public bool hasBeenHit = false;
 
     private void Start() {
         targetAnim = GetComponent<Animator>();
@@ -20,6 +18,12 @@ public class LiveShootingTarget : MonoBehaviour, IDamage {
     /// </summary>
     public void TargetRise() {
         targetAnim.SetBool("GoUp", true);
+        targetIsUp = true;
+    }
+
+    public void TargetDown() {
+        targetAnim.SetBool("GoUp", false);
+        targetIsUp = false;
     }
 
     /// <summary>
@@ -31,9 +35,9 @@ public class LiveShootingTarget : MonoBehaviour, IDamage {
     }
 
     public void TakeDamage() {
-        hasBeenHit = true;
-        targetAnim.SetBool("GoUp", false);
+        if(targetIsUp && !hasBeenHit) {
+            TargetDown();
+            hasBeenHit = true;
+        }
     }
-
-
 }

@@ -8,8 +8,8 @@ public class CraneScript : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "Player") {
-            /*player = GameObject.Find("Player").transform;*/
-            player = other.gameObject.transform;
+            player = GameObject.Find("Player").transform;
+            //player = other.gameObject.transform;
             player.parent = transform;
         }
     }

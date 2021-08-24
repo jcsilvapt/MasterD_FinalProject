@@ -232,6 +232,12 @@ public class charController : MonoBehaviour {
                 drone.gameObject.SetActive(true);
 
                 isDroneActive = true;
+
+                // Checks if has a weapon, and if it has needs to disable otherwise will try to shoot with the weapon aswell
+                if (weaponController.HasWeapon()) {
+                    weaponController.DisableCurrentWeapon();
+                }
+
             } else {
                 fpsCam.gameObject.SetActive(true);
 
@@ -241,6 +247,9 @@ public class charController : MonoBehaviour {
                 drone.gameObject.SetActive(false);
 
                 isDroneActive = false;
+                if (weaponController.HasWeapon()) {
+                    weaponController.EnableWeapon();
+                }
             }
         }
     }

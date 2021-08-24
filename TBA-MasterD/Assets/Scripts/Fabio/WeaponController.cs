@@ -173,6 +173,15 @@ public class WeaponController : MonoBehaviour {
         currentWeaponEquipped.SetActiveWeapon(true);
     }
 
+    public void DisableCurrentWeapon() {
+        currentWeaponEquipped.gameObject.SetActive(false);
+        currentWeaponEquipped = null;
+    }
+
+    public bool HasWeapon() {
+        return hasWeapon;
+    }
+
     #endregion
 
 }

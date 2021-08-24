@@ -163,7 +163,7 @@ public class Weapon : MonoBehaviour {
 
         bulletsFired++;
 
-        if(bulletsFired >= 4) {
+        if (bulletsFired >= 4) {
             isSpraying = true;
         }
 
@@ -179,6 +179,8 @@ public class Weapon : MonoBehaviour {
             // Calculate in which direction the bullet has hit and then recalculate a fix value so the decal won't appear "flickering" with other textures
             // Probably use something around 0.001f to fix the flickering
             Vector3 decalNewPosition = new Vector3((hit.point.x + hit.normal.x / 1000), (hit.point.y + hit.normal.y / 1000), (hit.point.z + hit.normal.z / 1000));
+
+            Debug.Log(hit.transform.name);
 
             // Now checks if the thing that we hit is a destructable or not (doesn't make sense creating a decal on a object that will be changed...)
             if (hit.transform.GetComponent<IDamage>() != null) {

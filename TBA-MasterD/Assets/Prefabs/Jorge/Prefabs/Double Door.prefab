@@ -84,10 +84,14 @@ MonoBehaviour:
   - Player
   - Enemy
   lockDoor: 0
+  hasSigns: 1
+  openSign: []
+  closeSign: []
   interactable: 0
   inputKey: 101
   isDoubleDoor: 1
-  openSideWays: 0
+  openSideWays: 1
+  startsOpen: 0
 --- !u!1 &2719941056657263138
 GameObject:
   m_ObjectHideFlags: 0

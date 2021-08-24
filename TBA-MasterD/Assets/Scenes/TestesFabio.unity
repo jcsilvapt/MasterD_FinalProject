@@ -5411,6 +5411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dart: {fileID: 744982249683021536, guid: 506f20f39fb60db42999e7a5208ac867, type: 3}
   shootingPoint: {fileID: 1790957057}
+  droneCamera: {fileID: 0}
   movementSpeed: 5
   droneSensitivity: 2
   rotationLimitMinY: -30
@@ -9448,7 +9449,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355296831}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -17.62, y: -4.26, z: 93.894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1833363892}
@@ -20174,7 +20175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &743701140
 Transform:
   m_ObjectHideFlags: 0
@@ -20183,7 +20184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743701139}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -17.62, y: -4.26, z: 93.894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 968609720}
@@ -23203,10 +23204,18 @@ MonoBehaviour:
   bulletParticleSystem: {fileID: 0}
   hitEffect: {fileID: 0}
   shootingFrom: {fileID: 0}
-  anim: {fileID: 0}
+  weaponAnimator: {fileID: 0}
+  armsAnimator: {fileID: 0}
   defaultBulletHoles: []
   glassBulletHoles: []
   woodBulletHoles: []
+  isSpraying: 0
+  bulletsFired: 0
+  xSpray: 0
+  ySpray: 0
+  zSpray: 0
+  spray: {x: 0, y: 0, z: 0}
+  cam: {fileID: 0}
   reShot: 1
 --- !u!1 &836258167
 GameObject:
@@ -25155,7 +25164,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908848437}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -17.62, y: -4.26, z: 93.894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2013396521}
@@ -26810,7 +26819,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &968600486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26836,7 +26845,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968600485}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.61, z: 0}
+  m_LocalPosition: {x: -17.62, y: 3.35, z: 93.894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -26900,10 +26909,18 @@ MonoBehaviour:
   bulletParticleSystem: {fileID: 0}
   hitEffect: {fileID: 0}
   shootingFrom: {fileID: 0}
-  anim: {fileID: 0}
+  weaponAnimator: {fileID: 0}
+  armsAnimator: {fileID: 0}
   defaultBulletHoles: []
   glassBulletHoles: []
   woodBulletHoles: []
+  isSpraying: 0
+  bulletsFired: 0
+  xSpray: 0
+  ySpray: 0
+  zSpray: 0
+  spray: {x: 0, y: 0, z: 0}
+  cam: {fileID: 0}
   reShot: 1
 --- !u!1001 &968969895
 PrefabInstance:
@@ -27997,7 +28014,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015665009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -17.62, y: -4.26, z: 93.894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 909009034}
@@ -31790,7 +31807,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231586728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -17.62, y: -4.26, z: 93.894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 560775603}
@@ -32128,10 +32145,18 @@ MonoBehaviour:
   bulletParticleSystem: {fileID: 0}
   hitEffect: {fileID: 0}
   shootingFrom: {fileID: 0}
-  anim: {fileID: 0}
+  weaponAnimator: {fileID: 0}
+  armsAnimator: {fileID: 0}
   defaultBulletHoles: []
   glassBulletHoles: []
   woodBulletHoles: []
+  isSpraying: 0
+  bulletsFired: 0
+  xSpray: 0
+  ySpray: 0
+  zSpray: 0
+  spray: {x: 0, y: 0, z: 0}
+  cam: {fileID: 0}
   reShot: 1
 --- !u!114 &1244095820 stripped
 MonoBehaviour:
@@ -33649,7 +33674,7 @@ PrefabInstance:
     - target: {fileID: 3260187440575748912, guid: e15572b2ce2afc04d89166f9b1ec791e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3260187440575748913, guid: e15572b2ce2afc04d89166f9b1ec791e,
         type: 3}
@@ -45218,6 +45243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1866dd780b87e1409d936d09e64389a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthEmission: {fileID: 0}
+  healthC: 0
+  himself: {fileID: 0}
+  redLight: {fileID: 0}
   bullet: {fileID: 0}
   bulletSpawn: {fileID: 0}
   casing: {fileID: 0}
@@ -45231,6 +45260,7 @@ MonoBehaviour:
   target: {fileID: 701464694}
   idleTime: 1
   distanceToViewTarget: 10
+  distanceToShoot: 0
   patrolWayPoints: []
   enableTestMovement: 0
 --- !u!54 &1808020124
@@ -52496,7 +52526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2100128261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52517,6 +52547,10 @@ MonoBehaviour:
   - {fileID: 968609721}
   - {fileID: 834999081}
   timeBetweenMouseWheelMovement: 1
+  hasWeapon: 0
+  animator: {fileID: 0}
+  AKOn: 0
+  PistolOn: 0
 --- !u!4 &2100128262
 Transform:
   m_ObjectHideFlags: 0
@@ -52525,7 +52559,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2100128260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -17.62, y: -4.26, z: 93.894}
   m_LocalScale: {x: 1, y: 1.0000001, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

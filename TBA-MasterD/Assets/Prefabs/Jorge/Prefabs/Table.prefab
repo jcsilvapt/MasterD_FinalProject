@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5619965119633949307}
   - component: {fileID: 8814102014894083550}
   - component: {fileID: 6752316808570730772}
-  - component: {fileID: 5365082368789734149}
+  - component: {fileID: -7338062628896132754}
   m_Layer: 0
   m_Name: Table
   m_TagString: cenario
@@ -80,8 +80,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &5365082368789734149
-BoxCollider:
+--- !u!64 &-7338062628896132754
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,6 +90,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.009467335, z: 0.009908731}
-  m_Center: {x: 0, y: 0, z: 0.0029475251}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6692290496178104961, guid: 2471433197fc0cd4bbb05023e4dbebc0, type: 3}
