@@ -34,8 +34,8 @@ public class Garage_Manager : MonoBehaviour
     #region Breaking Glass
     public void switchGlass()
     {
-        normalGlass.active = false;
-        brokenGlass.active = true;
+        normalGlass.SetActive(false);
+        brokenGlass.SetActive(true);
     }
 
     #endregion
