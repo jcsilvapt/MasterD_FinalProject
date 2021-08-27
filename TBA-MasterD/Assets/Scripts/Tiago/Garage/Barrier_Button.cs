@@ -2,20 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barrier_Button : MonoBehaviour
+public class Barrier_Button : MonoBehaviour, IDamage
 {
     public Garage_Manager gm;
 
-    private void Start()
+   
+   
+    public void TakeDamage()
     {
-       // gm = GetComponent<Garage_Manager>();
-    }
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "DroneDart")
-        {
-            Debug.Log("Got Hit");
-            gm.RotateBarrier();
-        }
+        gm.RotateBarrier();
+        Debug.Log("got Hit");
     }
 }
