@@ -309,7 +309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4239824602052656168}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.011638641, y: 4.520685, z: 9.168723}
+  m_LocalPosition: {x: 0.011638641, y: 4.35, z: 7.28}
   m_LocalScale: {x: 37.474377, y: 37.474377, z: 37.474377}
   m_Children: []
   m_Father: {fileID: 4393587536304856171}
@@ -322,7 +322,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4239824602052656168}
-  m_Mesh: {fileID: 2495703381458242797, guid: 6d304ddeec7369c45a893b3e5d6fb386, type: 3}
+  m_Mesh: {fileID: -3208404386764102627, guid: 6d304ddeec7369c45a893b3e5d6fb386, type: 3}
 --- !u!23 &297113566560277715
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -404,7 +404,7 @@ Transform:
   m_GameObject: {fileID: 7425936605529310003}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0.011638641, y: 4.520685, z: 7.2662535}
-  m_LocalScale: {x: 37.474377, y: 37.474377, z: 37.474377}
+  m_LocalScale: {x: 0, y: 37.474377, z: 37.474377}
   m_Children: []
   m_Father: {fileID: 4393587536304856171}
   m_RootOrder: 2
@@ -495,7 +495,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8709225724142909198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0101, z: -0.0664}
+  m_LocalPosition: {x: 0.00008, y: -0.00059, z: -0.0664}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 327312571953702721}
@@ -592,6 +592,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6576114143504957192, guid: f75fdb32ed4e96a40ba3261129bcb84c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 72a62316c81d31b458d7f50a2bf01d65, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f75fdb32ed4e96a40ba3261129bcb84c, type: 3}
 --- !u!1 &1135199165339516411 stripped

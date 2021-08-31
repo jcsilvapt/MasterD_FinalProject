@@ -29,6 +29,10 @@ public class ShootingCraneController : MonoBehaviour {
         }
     }
 
+    private void OnDisable() {
+        TutorialLevelManager.ins.triggerAction -= ResetTarget;
+    }
+
     void ResetTarget() {
         selectedDistance = distances[3];
         isMoving = true;

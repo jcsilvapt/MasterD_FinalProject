@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Glass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6136180843573603760
 Transform:
@@ -394,7 +394,7 @@ GameObject:
   m_TagString: Glass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7781827108495109893
 Transform:
