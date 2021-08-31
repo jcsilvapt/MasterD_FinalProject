@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CraneController : MonoBehaviour {
+public class CraneController : MonoBehaviour, IDamage {
 
     [Tooltip("Add Here all the moving parts objects in the scene.")]
     [SerializeField] GameObject[] movingParts;
@@ -61,5 +61,9 @@ public class CraneController : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public void TakeDamage() {
+        ActivateCrane();
     }
 }
