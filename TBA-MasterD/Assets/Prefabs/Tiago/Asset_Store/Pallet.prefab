@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5696747351730374852}
   m_Layer: 0
   m_Name: Pallet
-  m_TagString: Untagged
+  m_TagString: cenario
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7ce37d0b1cd019940a15bbcccd01b61d, type: 2}
+  - {fileID: 2100000, guid: 051f5700eb38dd342884d1027e906a90, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
