@@ -45,11 +45,17 @@ public class charController : MonoBehaviour {
     [SerializeField] SkinnedMeshRenderer physicalBodyMesh2;
     [SerializeField] Animator bodyAnim;
 
+
+    [Header("Player Settings: Step Sounds")]
+    [SerializeField] Terrain_Behaviour terrainBehaviour;
+
+
     [Header("DEVELOPER SETTINGS")]
     [SerializeField] bool isRunning;
     [SerializeField] bool isCrouched;
     [SerializeField] bool isGrounded;
     [SerializeField] bool isDroneActive;
+ 
 
     [Header("Extras")]
     Rigidbody rb;
@@ -209,11 +215,11 @@ public class charController : MonoBehaviour {
         }
 
 
-    } // subir degraus
+    } // subir degraus, not in use but working 
 
     #region isGrounded
     private void OnCollisionStay(Collision collision) {
-        if (collision.gameObject.tag == "cenario") {
+        if (collision.gameObject.tag == "cenario" || collision.gameObject.tag == "Stone" || collision.gameObject.tag == "Wood" || collision.gameObject.tag == "Metal") {
             isGrounded = true;
         }
     }
@@ -271,4 +277,5 @@ public class charController : MonoBehaviour {
     }
 
     #endregion
-}
+
+ }
