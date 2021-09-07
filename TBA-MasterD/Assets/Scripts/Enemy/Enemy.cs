@@ -73,7 +73,8 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 
     private void Start()
     {
-        enemyHead = transform.GetChild(2).Find("mixamorig:Head");
+        enemyHead = transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:Neck/mixamorig:Head");
+        Debug.Log(enemyHead);
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
