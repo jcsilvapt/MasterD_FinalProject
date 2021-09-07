@@ -207,11 +207,8 @@ public class GotHitBehaviour : AIBehaviour {
             return;
         }
 
-        Debug.Log(++counter);
-        
         //If the Enemy Destination isn't Set, set it.
         if (!isDestinationSet) {
-            Debug.Log(counter + " | Entered");
 
             List<NavMeshHit> hitList = new List<NavMeshHit>();
             List<Collider> colliderList = new List<Collider>();
