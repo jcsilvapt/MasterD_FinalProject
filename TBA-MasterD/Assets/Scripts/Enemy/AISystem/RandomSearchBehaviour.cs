@@ -14,6 +14,9 @@ public class RandomSearchBehaviour : AIBehaviour
     //Nav Mesh Agente Reference
     private NavMeshAgent agent;
 
+    //Enemy Head Transform Reference
+    private Transform enemyHead;
+
     //Flag Indicating if Enemy Choose the Random Point
     private bool randomPointChosen;
 
@@ -25,12 +28,13 @@ public class RandomSearchBehaviour : AIBehaviour
 
     //Timer for Wait In Point
     private float timerWaitInPoint;
-
-
+    
     //added by tiago animator
     private Animator anim;
-    public RandomSearchBehaviour(MonoBehaviour self, AIStateMachine stateMachine) : base(self, stateMachine, "RandomSearch") {
-
+    
+    
+    public RandomSearchBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform enemyHead) : base(self, stateMachine, "RandomSearch") {
+        this.enemyHead = enemyHead;
     }
 
     public override void Init() {
@@ -73,7 +77,7 @@ public class RandomSearchBehaviour : AIBehaviour
         }
 
         //Check if the Enemy sees the Player and act accordingly.
-        if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView()))
+        if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead.transform, target, self.GetComponent<Enemy>().GetDistanceToView()))
         {
             stateMachine.HandleEvent(AIEvents.SeePlayer);
             return;

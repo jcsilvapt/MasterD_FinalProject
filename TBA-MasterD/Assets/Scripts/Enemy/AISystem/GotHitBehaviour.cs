@@ -5,11 +5,15 @@ using UnityEngine.AI;
 using System.Linq;
 
 public class GotHitBehaviour : AIBehaviour {
-    //animator
-    private Animator anim;
+
+    //Enemy Head's Transform Reference
+    private Transform enemyHead;
 
     //Flag Indicating if this Behaviour is Active
     private bool isActive;
+    
+    //Animator Reference
+    private Animator anim;
 
     //Player Reference
     private Transform target;
@@ -56,6 +60,8 @@ public class GotHitBehaviour : AIBehaviour {
     //Flag Indicating if the Enemy has approached the place where it will take Cover.
     private bool isInCoverPlace;
 
+    private int counter;
+
     /* Objectives:
      *  - Short Distance Hit:
      *    The Enemy will rotate towards the Player and Shoot.
@@ -67,9 +73,9 @@ public class GotHitBehaviour : AIBehaviour {
      *    The enemy will look for cover against the direction where he was shot.
      */
 
-
-    public GotHitBehaviour(MonoBehaviour self, AIStateMachine stateMachine) : base(self, stateMachine, "GotHit") {
+    public GotHitBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform enemyHead) : base(self, stateMachine, "GotHit") {
         anim = self.GetComponent<Animator>();
+        this.enemyHead = enemyHead;
     }
 
     public override void Init() {
@@ -111,6 +117,7 @@ public class GotHitBehaviour : AIBehaviour {
         isInCoverPlace = false;
         anim.SetBool("iChase", true);
         distance = 0;
+        counter = 0;
     }
 
     public override void OnUpdate() {
@@ -174,7 +181,7 @@ public class GotHitBehaviour : AIBehaviour {
         }
 
         //If Enemy has Vision of Player, Call HandleEvent SeePlayer
-        if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) {
+        if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) {
             stateMachine.HandleEvent(AIEvents.SeePlayer);
             return;
         }
@@ -200,9 +207,15 @@ public class GotHitBehaviour : AIBehaviour {
             return;
         }
 
+        Debug.Log(++counter);
+        
         //If the Enemy Destination isn't Set, set it.
         if (!isDestinationSet) {
+            Debug.Log(counter + " | Entered");
+
             List<NavMeshHit> hitList = new List<NavMeshHit>();
+            List<Collider> colliderList = new List<Collider>();
+
             NavMeshHit navHit;
 
             // Create Random Points around the player so we can find the Nearest Point
@@ -220,6 +233,18 @@ public class GotHitBehaviour : AIBehaviour {
                 //Finding Closest Edge from the Enemy
                 NavMesh.FindClosestEdge(spawnPoint, out navHit, NavMesh.AllAreas);
 
+                //Getting Colliders References
+                if(Physics.OverlapSphere(spawnPoint, i).Length > 0)
+                {
+                    foreach(Collider collider in Physics.OverlapSphere(spawnPoint, i))
+                    {
+                        if (!colliderList.Contains(collider))
+                        {
+                            colliderList.Add(collider);
+                        }
+                    }
+                }
+
                 //Add that to the list.
                 hitList.Add(navHit);
             }
@@ -231,19 +256,38 @@ public class GotHitBehaviour : AIBehaviour {
             // If it doesn't point towards the enemy, navigate the agent to that position and break the loop as this is the closest cover for the agent. (Because the list is sorted on distance)
             foreach (NavMeshHit hit in sortedList) {
                 if (Vector3.Dot(hit.normal, (target.transform.position - self.transform.position)) < Random.Range(-0.5f, 0f)) {
-                    agent.SetDestination(hit.position);
 
-                    Debug.Log(hit.position);
+                    float colliderOffset = 3f;
 
-                    isDestinationSet = true;
+                    //If Hit is contained in collider bounds + offset, then check tags. If can hide, SetDestination
+                    foreach(Collider collider in colliderList)
+                    {
+                        if (hit.position.x <= collider.bounds.center.x + collider.bounds.extents.x + colliderOffset &&
+                            hit.position.x >= collider.bounds.center.x - collider.bounds.extents.x - colliderOffset &&
+                            hit.position.y <= collider.bounds.center.y + collider.bounds.extents.y + colliderOffset &&
+                            hit.position.y >= collider.bounds.center.y - collider.bounds.extents.y - colliderOffset)
+                        {
+                            if(collider.tag != "cenario" && collider.tag != "NotHideable" && collider.tag != "Enemy")
+                            {
+                                agent.SetDestination(hit.position);
 
-                    break;
+                                isDestinationSet = true;
+
+                                break;
+                            }
+                        }
+
+                        if (isDestinationSet)
+                        {
+                            break;
+                        }
+                    }
                 }
             }
         }
 
         //If Enemy has Vision of Player, Call HandleEvent SeePlayer
-        if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) {
+        if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) {
             stateMachine.HandleEvent(AIEvents.SeePlayer);
             return;
         }
@@ -252,7 +296,6 @@ public class GotHitBehaviour : AIBehaviour {
         //If Enemy does not have Vision of Player, Call HandleEvent PlayerNotFound
         if (!agent.pathPending && agent.remainingDistance < 1f) {
             isInCoverPlace = true;
-
 
             stateMachine.HandleEvent(AIEvents.ReachedDestination);
             return;
@@ -294,7 +337,7 @@ public class GotHitBehaviour : AIBehaviour {
         self.transform.localEulerAngles = new Vector3(0, Mathf.Lerp(currentSelfRotation.y, angleBetweenEnemyAndTarget, rotationCompletion), 0);
 
         //If in the process, the Enemy sees the Player, Call the HandleEvent and return.
-        if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) {
+        if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) {
             stateMachine.HandleEvent(AIEvents.SeePlayer);
             return;
         }

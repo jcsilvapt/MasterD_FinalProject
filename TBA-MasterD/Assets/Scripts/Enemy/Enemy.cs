@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     public GameObject himself; //mesh of the object that has the health color material
     public GameObject redLight;
     private bool isShooting;
+    private Transform enemyHead;
 
     [Header("Shooting Settings")]
     //objects for shooting
@@ -72,6 +73,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 
     private void Start()
     {
+        enemyHead = transform.GetChild(2).Find("mixamorig:Head");
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
@@ -83,7 +85,6 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 
     private void Update()
     {
-
         healthEmission.SetColor("_EmissionColor", healthColor * 3); // access to emission color of the health material
 
         healthColor = Color.Lerp(Color.green, Color.red * 3, healthC); //gradient between two color for the enemy health
@@ -114,12 +115,12 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         if (isAlive && enableAISystem)
         {
             behaviours = new AIBehaviour[] {
-                new IdleBehaviour(this, this, idleTime),
-                new PatrolBehaviour(this, this, patrolWayPoints),
-                new ChaseBehaviour(this,this),
-                new AttackBehaviour(this, this, distanceToShoot),
-                new GotHitBehaviour(this, this),
-                new RandomSearchBehaviour(this, this)
+                new IdleBehaviour(this, this, enemyHead, idleTime),
+                new PatrolBehaviour(this, this, enemyHead, patrolWayPoints),
+                new ChaseBehaviour(this,this, enemyHead),
+                new AttackBehaviour(this, this, enemyHead, distanceToShoot),
+                new GotHitBehaviour(this, this, enemyHead),
+                new RandomSearchBehaviour(this, this, enemyHead)
                 // New Behaviours GOES HERE
             };
 

@@ -16,7 +16,10 @@ public class IdleBehaviour : AIBehaviour {
     private float idleTime;
     private float elapsedTime;
 
-    public IdleBehaviour(MonoBehaviour self, AIStateMachine stateMachine, float idleTime) : base(self, stateMachine, "Idle") {
+    private Transform enemyHead;
+
+    public IdleBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform enemyHead, float idleTime) : base(self, stateMachine, "Idle") {
+        this.enemyHead = enemyHead;
         this.idleTime = idleTime;
     }
 
@@ -41,7 +44,7 @@ public class IdleBehaviour : AIBehaviour {
 
     public override void OnUpdate() {
         if (isActive) {
-            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) {
+            if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) {
                 stateMachine.HandleEvent(AIEvents.SeePlayer);
                 return;
             }

@@ -74,13 +74,16 @@ public class DroneController : MonoBehaviour {
         Shoot();
     }
 
-    private void OnEnable() {
-        Debug.LogWarning("Keys to interact: " + KeyMapper.inputKey.DroneMoveUp.ToString() + ", to go UP and, " + KeyMapper.inputKey.DroneMoveDown.ToString() + ", to go down.");
-    }
-
     private void FixedUpdate() {
-        rb.velocity = (transform.TransformDirection(movementInput) + heightController).normalized * movementSpeed;
-        //rb.velocity += heightController * movementSpeed;
+        if(movementInput.magnitude != 0 || heightController.magnitude != 0)
+        {
+            rb.velocity = (transform.TransformDirection(movementInput) + heightController).normalized * movementSpeed;
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
     }
 
     private void Movement() {
@@ -136,5 +139,10 @@ public class DroneController : MonoBehaviour {
 
         //Reset Position
         transform.localPosition = Vector3.zero;
+    }
+
+    private void OnEnable()
+    {
+        Debug.LogWarning("Keys to interact: " + KeyMapper.inputKey.DroneMoveUp.ToString() + ", to go UP and, " + KeyMapper.inputKey.DroneMoveDown.ToString() + ", to go down.");
     }
 }

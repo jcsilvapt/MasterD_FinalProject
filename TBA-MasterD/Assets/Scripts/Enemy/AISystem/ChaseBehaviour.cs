@@ -13,10 +13,12 @@ public class ChaseBehaviour : AIBehaviour
     public NavMeshAgent navAgent;
     private Animator anim;
 
-    private Vector3 distance;
-    public ChaseBehaviour(MonoBehaviour self, AIStateMachine stateMachine) : base(self, stateMachine, "Chase")
-    {
+    private Transform enemyHead;
 
+    private Vector3 distance;
+    public ChaseBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform selfHead) : base(self, stateMachine, "Chase")
+    {
+        this.enemyHead = selfHead;
     }
 
 
@@ -47,7 +49,7 @@ public class ChaseBehaviour : AIBehaviour
     {
         if (isActive)
         {
-            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player distance is enought to be seen
+            if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player distance is enought to be seen
             {
 
                 if (AIUtils_Tiago.IsChasingPlayer(self.transform, target, 5)) //checks if the distance is enought to shoot player

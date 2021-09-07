@@ -17,14 +17,17 @@ public class PatrolBehaviour : AIBehaviour {
     private int currentWayPoint = -1;
     private Vector3 initialPosition;
 
+    private Transform enemyHead;
 
-    public PatrolBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform[] waypoints) : base(self, stateMachine, "Patrol") {
+    public PatrolBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform enemyHead, Transform[] waypoints) : base(self, stateMachine, "Patrol") {
         this.waypoints = waypoints;
         if (this.waypoints.Length == 0) {
             hasWaypoints = false;
         } else {
             hasWaypoints = true;
         }
+
+        this.enemyHead = enemyHead;
     }
 
     public override void Init() {
@@ -67,7 +70,7 @@ public class PatrolBehaviour : AIBehaviour {
 
     public override void OnUpdate() {
         if (isActive) {
-            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) {
+            if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) {
                 stateMachine.HandleEvent(AIEvents.SeePlayer);
                 return;
             } else {

@@ -13,12 +13,11 @@ public class AttackBehaviour : AIBehaviour {
     //bullet and spawn
     public Object bullet;
     public Transform bulletSpawn;
+    public Transform enemyHead;
     public float distanceToShoot;
 
-   
-
-
-    public AttackBehaviour(MonoBehaviour self, AIStateMachine stateMachine,float distanceToShoot) : base(self, stateMachine, "Attack") {
+    public AttackBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform selfHead, float distanceToShoot) : base(self, stateMachine, "Attack") {
+        enemyHead = selfHead;
         this.distanceToShoot = distanceToShoot;
     }
 
@@ -45,7 +44,7 @@ public class AttackBehaviour : AIBehaviour {
     public override void OnUpdate() {
 
         if (isActive) {
-            if (AIUtils_Fabio.HasVisionOfPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player is in view
+            if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player is in view
             {
                 Vector3 distance = target.transform.position - self.transform.position;
 
