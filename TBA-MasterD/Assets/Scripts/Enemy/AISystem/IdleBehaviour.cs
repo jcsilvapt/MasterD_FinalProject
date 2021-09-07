@@ -44,6 +44,7 @@ public class IdleBehaviour : AIBehaviour {
 
     public override void OnUpdate() {
         if (isActive) {
+            
             if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) {
                 stateMachine.HandleEvent(AIEvents.SeePlayer);
                 return;

@@ -5319,6 +5319,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 479293420}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &500730701 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6135648405954145952, guid: 992a4d97ee06f3a409c947b89a79548b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1926797199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &504046876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9165963784588604564, guid: 5314a5be3c6d2db49849de045b00adfe,
@@ -18445,6 +18451,10 @@ PlayableDirector:
     value: {fileID: 1825840847}
   - key: {fileID: -7741094528481070631, guid: 07e2402f85f8d034c9de642eb6be3026, type: 2}
     value: {fileID: 2025958552}
+  - key: {fileID: 2404244457006992980, guid: 07e2402f85f8d034c9de642eb6be3026, type: 2}
+    value: {fileID: 1685560127}
+  - key: {fileID: -3196721700437105946, guid: 07e2402f85f8d034c9de642eb6be3026, type: 2}
+    value: {fileID: 500730701}
   m_ExposedReferences:
     m_References:
     - 68d5da4644d4d5445a57c7a59c02633a: {fileID: 0}
@@ -19235,6 +19245,12 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1685560127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6135648405954145952, guid: 992a4d97ee06f3a409c947b89a79548b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2138002544}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1693562928
 PrefabInstance:
   m_ObjectHideFlags: 0

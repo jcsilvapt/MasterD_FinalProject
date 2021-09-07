@@ -97,6 +97,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         {
             //TODO: º+p
         }
+        Debug.Log(enemyHead);
     }
 
     public float GetDistanceToView()
