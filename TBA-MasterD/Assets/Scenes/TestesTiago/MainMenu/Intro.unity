@@ -1797,6 +1797,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletHole_1 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
 --- !u!1001 &190423189
@@ -2488,6 +2493,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 992a4d97ee06f3a409c947b89a79548b, type: 3}
+--- !u!1 &284288442 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4462497583447811798, guid: 6e992f0c6ec55e940a2536870bedd6a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1469813894}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &284288443
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284288442}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &292221240 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9165963784588604564, guid: 5314a5be3c6d2db49849de045b00adfe,
@@ -2575,6 +2605,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BulletHole_1 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
@@ -2811,6 +2846,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletHole_1 (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
 --- !u!4 &319163024 stripped
@@ -2974,6 +3014,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 93313885}
     m_Modifications:
+    - target: {fileID: 8274185111324151294, guid: 047d030d1eb0ded49bf75412d1501625,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1b3473a067a95a4a9336250ebdb0036, type: 2}
     - target: {fileID: 8274185111325986632, guid: 047d030d1eb0ded49bf75412d1501625,
         type: 3}
       propertyPath: m_RootOrder
@@ -3423,6 +3468,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BulletHole_1 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
@@ -4101,6 +4151,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletHole_1 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
 --- !u!4 &384129092 stripped
@@ -4197,6 +4252,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletHole_1 (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
 --- !u!1001 &398534358
@@ -4287,6 +4347,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 93313885}
     m_Modifications:
+    - target: {fileID: 5995467009332881132, guid: 158a3f11e11b9e64b8623a02f3c0a173,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1b3473a067a95a4a9336250ebdb0036, type: 2}
     - target: {fileID: 5995467009334829110, guid: 158a3f11e11b9e64b8623a02f3c0a173,
         type: 3}
       propertyPath: m_Name
@@ -4949,6 +5014,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car_5_Green
       objectReference: {fileID: 0}
+    - target: {fileID: 2779714989860855994, guid: c144de96d74964e4eafd35e5788bf662,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1b3473a067a95a4a9336250ebdb0036, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c144de96d74964e4eafd35e5788bf662, type: 3}
 --- !u!1001 &453591298
@@ -5305,6 +5375,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletHole_1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
 --- !u!4 &479681490 stripped
@@ -5419,6 +5494,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletHole_1 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
 --- !u!4 &518521372 stripped
@@ -5508,6 +5588,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BulletHole_1 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
@@ -5662,6 +5747,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 93313885}
     m_Modifications:
+    - target: {fileID: 5995467009332881132, guid: 158a3f11e11b9e64b8623a02f3c0a173,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1b3473a067a95a4a9336250ebdb0036, type: 2}
     - target: {fileID: 5995467009334829110, guid: 158a3f11e11b9e64b8623a02f3c0a173,
         type: 3}
       propertyPath: m_Name
@@ -5895,6 +5985,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BulletHole_1 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
@@ -6643,6 +6738,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 93313885}
     m_Modifications:
+    - target: {fileID: 3160101149680838608, guid: c12519fb8c94f2640b7bbff8fa44ca3c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1b3473a067a95a4a9336250ebdb0036, type: 2}
     - target: {fileID: 3160101149682504210, guid: c12519fb8c94f2640b7bbff8fa44ca3c,
         type: 3}
       propertyPath: m_Name
@@ -8992,6 +9092,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car_5_Green
       objectReference: {fileID: 0}
+    - target: {fileID: 2779714989860855994, guid: c144de96d74964e4eafd35e5788bf662,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1b3473a067a95a4a9336250ebdb0036, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c144de96d74964e4eafd35e5788bf662, type: 3}
 --- !u!1001 &799158562
@@ -9182,6 +9287,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BulletHole_1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
@@ -10185,6 +10295,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BulletHole_1 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
@@ -11306,6 +11421,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BulletHole_1 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
@@ -13196,6 +13316,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletHole_1 (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
 --- !u!4 &1099375623 stripped
@@ -14593,6 +14718,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car_2_Blue
       objectReference: {fileID: 0}
+    - target: {fileID: 1603229050471842275, guid: 2492d9b0ad4473b4aaee4976358c2fa2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1b3473a067a95a4a9336250ebdb0036, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2492d9b0ad4473b4aaee4976358c2fa2, type: 3}
 --- !u!1001 &1306709809
@@ -14676,6 +14806,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BulletHole_1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
@@ -15746,6 +15881,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletHole_1 (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
 --- !u!4 &1401626030 stripped
@@ -16503,6 +16643,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6957523822009541101, guid: 6e992f0c6ec55e940a2536870bedd6a6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 662be30b26387d54b864baa588fa0889, type: 2}
     - target: {fileID: -6920123598446960962, guid: 6e992f0c6ec55e940a2536870bedd6a6,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -16517,6 +16662,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.44
+      objectReference: {fileID: 0}
+    - target: {fileID: -2450709674633208544, guid: 6e992f0c6ec55e940a2536870bedd6a6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 35.26
+      objectReference: {fileID: 0}
+    - target: {fileID: -2450709674633208544, guid: 6e992f0c6ec55e940a2536870bedd6a6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.2545521
+      objectReference: {fileID: 0}
+    - target: {fileID: -2450709674633208544, guid: 6e992f0c6ec55e940a2536870bedd6a6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 51.548767
       objectReference: {fileID: 0}
     - target: {fileID: -1148664739388350197, guid: 6e992f0c6ec55e940a2536870bedd6a6,
         type: 3}
@@ -16994,6 +17154,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 93313885}
     m_Modifications:
+    - target: {fileID: 8274185111324151294, guid: 047d030d1eb0ded49bf75412d1501625,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1b3473a067a95a4a9336250ebdb0036, type: 2}
     - target: {fileID: 8274185111325986632, guid: 047d030d1eb0ded49bf75412d1501625,
         type: 3}
       propertyPath: m_RootOrder
@@ -18364,6 +18529,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletHole_1 (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
 --- !u!1 &1613018914
@@ -18448,7 +18618,7 @@ PlayableDirector:
   - key: {fileID: 6980405355893895421, guid: 07e2402f85f8d034c9de642eb6be3026, type: 2}
     value: {fileID: 990584834}
   - key: {fileID: 9148331476486515842, guid: 07e2402f85f8d034c9de642eb6be3026, type: 2}
-    value: {fileID: 1825840847}
+    value: {fileID: 284288443}
   - key: {fileID: -7741094528481070631, guid: 07e2402f85f8d034c9de642eb6be3026, type: 2}
     value: {fileID: 2025958552}
   - key: {fileID: 2404244457006992980, guid: 07e2402f85f8d034c9de642eb6be3026, type: 2}
@@ -20013,6 +20183,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletHole_1 (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
 --- !u!4 &1731517760 stripped
@@ -20387,6 +20562,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 93313885}
     m_Modifications:
+    - target: {fileID: 3160101149680838608, guid: c12519fb8c94f2640b7bbff8fa44ca3c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1b3473a067a95a4a9336250ebdb0036, type: 2}
     - target: {fileID: 3160101149682504210, guid: c12519fb8c94f2640b7bbff8fa44ca3c,
         type: 3}
       propertyPath: m_Name
@@ -21099,33 +21279,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletHole_1 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
---- !u!1 &1825840843 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7997185847447435370, guid: 6e992f0c6ec55e940a2536870bedd6a6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1469813894}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1825840847
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825840843}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1827169612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22457,6 +22617,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BulletHole_1 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3839400607200228167, guid: 0f567e11e506be140a6bf23ff0df77bf,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f567e11e506be140a6bf23ff0df77bf, type: 3}
