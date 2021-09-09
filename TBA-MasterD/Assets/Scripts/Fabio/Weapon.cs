@@ -49,7 +49,6 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] AudioSource audioShoot; // by tiago for shooting <--------------------------------------------------------------------------
     [SerializeField] AudioSource audioReload; // by tiago for shooting <--------------------------------------------------------------------------
-    [SerializeField] AudioSource audioBulletHit; // by tiago for shooting <--------------------------------------------------------------------------
 
     private void Awake()
     {
@@ -104,7 +103,7 @@ public class Weapon : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Reload();
-                audioReload.Play();
+                audioReload.Play(); // reload sound by tiago <-------------------------------------------------------------------------
             }
             FireRate();
         }
@@ -180,7 +179,8 @@ public class Weapon : MonoBehaviour
     {
 
         bulletParticleSystem.SetActive(true); // Enable Particle System
-        audioShoot.Play();
+        audioShoot.Play(); // shoot sound by tiago <----------------------------------------------------------
+        
         weaponAnimator.SetBool("isShooting", true);
         armsAnimator.SetBool("isShooting", true);
         armsAnimator.SetTrigger("shoot");
@@ -233,7 +233,7 @@ public class Weapon : MonoBehaviour
                     break;
             }
             // Instantiate decal on the spot
-            GameObject temporaryDecal = Instantiate(randomDecal, decalNewPosition, Quaternion.LookRotation(hit.normal));
+            GameObject temporaryDecal = Instantiate(randomDecal, decalNewPosition, Quaternion.LookRotation(hit.normal));            
             temporaryDecal.transform.parent = hit.transform;
             Destroy(temporaryDecal, 3f);
         }
