@@ -6,7 +6,9 @@ public class cameraRotation : MonoBehaviour {
     //movimentos do Rato
     private float mouseX;
     private float mouseY;
-    public float mouseSensitivy = 100f;
+    [Tooltip("tHis setting is now controlled by the Keymapper controller")]
+    [SerializeField] bool invertMouse;
+    private float mouseMultiplier = 100f; // This value is used to standard the mouseSensitivity values
 
     //corpo do jogador
     public Transform playerBody;
@@ -51,10 +53,15 @@ public class cameraRotation : MonoBehaviour {
         }
 
         if (!GameManager.GetCursorVisibility()) {
-            mouseX = Input.GetAxis("Mouse X") * mouseSensitivy * Time.deltaTime;
-            mouseY = Input.GetAxis("Mouse Y") * mouseSensitivy * Time.deltaTime;
+            mouseX = Input.GetAxis("Mouse X") * (KeyMapper.inputKey.MouseSensitivity * mouseMultiplier) * Time.deltaTime;
+            mouseY = Input.GetAxis("Mouse Y") * (KeyMapper.inputKey.MouseSensitivity * mouseMultiplier) * Time.deltaTime;
 
-            xRotation -= mouseY;
+            if(KeyMapper.inputKey.InvertMouse) {
+                xRotation += mouseY;
+            } else {
+                xRotation -= mouseY;
+            }
+            
             xRotation = Mathf.Clamp(xRotation, -90, 90);
 
             // Roda Câmera no Y
