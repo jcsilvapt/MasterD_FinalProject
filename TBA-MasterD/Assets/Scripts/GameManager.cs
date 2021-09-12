@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
         if (ins == null) {
             ins = this;
             DontDestroyOnLoad(this);
+            GetInitialData();
         } else {
             Destroy(gameObject);
         }
@@ -25,6 +26,18 @@ public class GameManager : MonoBehaviour {
 
     #endregion
 
+    #region VIDEO SETTINGS
+
+    [SerializeField] List<string> displayModes = new List<string>() { "Fullscreen", "Window" };
+    [SerializeField] List<string> resolutions = new List<string>();
+    [SerializeField] List<string> quality = new List<string>() { "Very Low", "Low", "Medium", "High", "Very High", "Ultra" };
+
+    [SerializeField] bool isFullscreen;
+    [SerializeField] Resolution currentResolution;
+    [SerializeField] int currentQualitySelected;
+
+    #endregion
+
     #region DEVELOPER SETTINGS
 
     [SerializeField] bool displayCursor = false;
@@ -32,10 +45,28 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     private void Start() {
-        Debug.LogWarning("Game Manager: To Hide the mouse cursor just press 'K'");
 
-        if(!displayCursor) {
+
+        Debug.LogWarning("Game Manager: To Hide the mouse cursor just press 'K'");
+        /*
+        if (!displayCursor) {
             ToggleCursorVisibility();
+        }*/
+    }
+
+    private void GetInitialData() {
+        // Set current quality
+        currentQualitySelected = quality.Count - 1;
+
+        // Set current Resolution
+        currentResolution = Screen.currentResolution;
+
+        // Set fullscreen
+        isFullscreen = Screen.fullScreen;
+
+        // Get all availables Screen Resolutions
+        foreach (Resolution r in Screen.resolutions) {
+            resolutions.Add(r.ToString());
         }
     }
 
@@ -59,6 +90,47 @@ public class GameManager : MonoBehaviour {
             return ins.showCursor;
         }
         return false;
+    }
+
+    public static List<string> GetDisplayModes() {
+        if (ins != null) {
+            return ins.displayModes;
+        }
+        return null;
+    }
+
+    public static List<string> GetAvailableResolutions() {
+        if (ins != null) {
+            return ins.resolutions;
+        }
+        return null;
+    }
+
+    public static Resolution GetCurrentResolution() {
+        if (ins != null) {
+            return Screen.currentResolution;
+        }
+        return Screen.currentResolution;
+    }
+
+    public static bool GetFullscreen() {
+        if (ins != null) {
+            return ins.isFullscreen;
+        }
+        return false;
+    }
+
+    public static int GetQualityLevel() {
+        if(ins != null) {
+            return QualitySettings.GetQualityLevel();
+        }
+        return -1;
+    }
+
+    public static void QuitGame() {
+        if(ins != null) {
+            Application.Quit();
+        }
     }
 
     #endregion
