@@ -18,9 +18,12 @@ public class Terrain_Behaviour : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     RaycastHit hit;
     Ray ray;
+    charController charController;
 
-
-
+    private void Start()
+    {
+        charController = GetComponent<charController>();
+    }
     private void Step()
     {
         // função(CLIP) que muda o som do pe esquerdo e direito
@@ -31,10 +34,10 @@ public class Terrain_Behaviour : MonoBehaviour
     {
         CheckTerrain();
     }
-   
+
     private void CheckTerrain()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out hit))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit))
         {
             if (hit.transform.gameObject.tag == "Wood")
             {
@@ -48,6 +51,9 @@ public class Terrain_Behaviour : MonoBehaviour
             {
                 clip = stoneClips[Random.Range(0, stoneClips.Length)];
             }
+          
         }
+
+
     }
 }

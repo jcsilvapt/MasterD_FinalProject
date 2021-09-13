@@ -29,8 +29,8 @@ public class ChaseBehaviour : AIBehaviour
         anim = self.GetComponent<Animator>();
     }
 
-    public override void OnBehaviourEnd()
-    {
+    public override void OnBehaviourEnd()    {
+        
         Debug.Log("Chase Ended");
         navAgent.ResetPath();
         isActive = false;
@@ -39,6 +39,7 @@ public class ChaseBehaviour : AIBehaviour
 
     public override void OnBehaviourStart()
     {
+        enemyHead.LookAt(target);
         Debug.Log("Lets start Chase him!");
         isActive = true;
         ChasePlayer();
@@ -47,11 +48,11 @@ public class ChaseBehaviour : AIBehaviour
 
     public override void OnUpdate()
     {
+        Debug.DrawLine(enemyHead.transform.position, enemyHead.transform.forward, Color.red, 10f);
         if (isActive)
         {
             if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player distance is enought to be seen
             {
-
                 if (AIUtils_Tiago.IsChasingPlayer(self.transform, target, 5)) //checks if the distance is enought to shoot player
                 {
                     stateMachine.HandleEvent(AIEvents.InRange);
@@ -71,6 +72,8 @@ public class ChaseBehaviour : AIBehaviour
     }
     private void ChasePlayer()
     {
+       
+       // this.enemyHead.LookAt(target);
         navAgent.SetDestination(target.position);
     }
 

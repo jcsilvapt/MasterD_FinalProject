@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
-public class charController : MonoBehaviour {
+public class charController : MonoBehaviour
+{
 
     [Header("Player Settgins")]
     [SerializeField] int Health = 100;
@@ -55,23 +57,33 @@ public class charController : MonoBehaviour {
     [SerializeField] bool isCrouched;
     [SerializeField] bool isGrounded;
     [SerializeField] bool isDroneActive;
- 
 
-    [Header("Extras")]
-    Rigidbody rb;
+    [Header("Sound Effects")]
+    public AudioSource steps;
+    [SerializeField] float crouchPitch;
+    [SerializeField] float runPitch;
+    [SerializeField] AudioMixer mixer;
+    [SerializeField] AudioMixerSnapshot[] snapShot;
+    [SerializeField] float[] snapNumber;
+
+    [Header("Extras Stuff")]
+    [SerializeField] Rigidbody rb;
     public Camera fpsCam;
     public GameObject armaAtual;
     public float radius;
 
 
-    void Start() {
+
+    void Start()
+    {
         // Get References
         rb = GetComponent<Rigidbody>();
         cameraDefaultHeight = fpsCam.GetComponent<Transform>().localPosition.y;
         characterDefaultHeight = character.localScale.y;
 
         // When the game begins it needs to hide the Arms
-        if (hasWeapon) {
+        if (hasWeapon)
+        {
             weaponController.EnableWeapon();
         }
         arms.SetActive(hasWeapon);
@@ -79,19 +91,23 @@ public class charController : MonoBehaviour {
         // Disables SkinnedMeshRenderer only to cast shadows
         physicalBodyMesh1.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
         physicalBodyMesh2.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+
     }
 
-
-    void Update() {
-
-        if (!isDroneActive) {
+    void Update()
+    {
+        if (!isDroneActive)
+        {
             Movement();
 
-            Chrouch();
+            Crouch();
 
             Jump();
 
-            if (enableStairsWalk) {
+            CheckStateForSounds();
+
+            if (enableStairsWalk)
+            {
                 StepClimb();
             }
         }
@@ -99,13 +115,17 @@ public class charController : MonoBehaviour {
             DroneControl();
     }
 
-    private void Chrouch() {
+    private void Crouch()
+    {
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(character.transform.position + Vector3.up, Vector3.up, out hitInfo, minDistanceToStandUp)) {
+        if (Physics.Raycast(character.transform.position + Vector3.up, Vector3.up, out hitInfo, minDistanceToStandUp))
+        {
             if (hitInfo.transform.tag != "Armory")
                 isCrouched = true;
-        } else {
+        }
+        else
+        {
             isCrouched = Input.GetKey(KeyMapper.inputKey.Crouch);
         }
 
@@ -118,10 +138,8 @@ public class charController : MonoBehaviour {
         fpsCam.transform.localPosition = new Vector3(fpsCam.transform.localPosition.x, cameraNewY, fpsCam.transform.localPosition.z);
         character.transform.localScale = new Vector3(character.transform.localScale.x, charNewY, character.transform.localScale.z);
     }
-
-
-
-    void Movement() {
+    void Movement()
+    {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
@@ -134,63 +152,100 @@ public class charController : MonoBehaviour {
         movePos = movePos.normalized;
 
 
-        if (movePos != Vector3.zero && isGrounded) {
+        if (movePos != Vector3.zero && isGrounded)
+        {
             Vector3 rbVelocity = new Vector3(movePos.x, rb.velocity.y, movePos.z);
             rb.velocity = Vector3.Scale(rbVelocity, new Vector3(tempMoveSpeed, 1, tempMoveSpeed));
             bodyAnim.SetBool("isWalking", true);
-        } else if (isGrounded) {
+        }
+        else if (isGrounded)
+        {
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
             bodyAnim.SetBool("isWalking", false);
         }
 
-        if (!isGrounded) {
+        if (!isGrounded)
+        {
 
-            if (rb.velocity.x == 0 && rb.velocity.z == 0) {
+            if (rb.velocity.x == 0 && rb.velocity.z == 0)
+            {
                 return;
             }
 
-            if (rb.velocity.z > 0) {
-                if (movePos.z > 0) {
+            if (rb.velocity.z > 0)
+            {
+                if (movePos.z > 0)
+                {
                     movePos.z = 0;
                 }
-            } else if (rb.velocity.z < 0) {
-                if (movePos.z < 0) {
+            }
+            else if (rb.velocity.z < 0)
+            {
+                if (movePos.z < 0)
+                {
                     movePos.z = 0;
                 }
             }
 
-            if (rb.velocity.x > 0) {
-                if (movePos.x > 0) {
+            if (rb.velocity.x > 0)
+            {
+                if (movePos.x > 0)
+                {
                     movePos.x = 0;
                 }
-            } else if (rb.velocity.x < 0) {
-                if (movePos.x < 0) {
+            }
+            else if (rb.velocity.x < 0)
+            {
+                if (movePos.x < 0)
+                {
                     movePos.x = 0;
                 }
             }
 
             rb.velocity = new Vector3(rb.velocity.x + (movePos.x * 0.1f), rb.velocity.y, rb.velocity.z + (movePos.z * 0.1f));
         }
-
-    } // andar correr e crouch
-
-
-
-    void Jump() {
+    }
+    void CheckStateForSounds() //uses audioMixer SnapShots to switch between all three states of movemente, walking, running and crouching by switching their weight from 0 to 1 for most value  
+    {
+        if (isCrouched)
+        {
+            snapNumber[0] = 1f;
+            snapNumber[1] = 0f;
+            snapNumber[2] = 0f;
+            mixer.TransitionToSnapshots(snapShot, snapNumber, 0f);
+        }
+        else if (isRunning)
+        {
+            snapNumber[0] = 0f;
+            snapNumber[1] = 1f;
+            snapNumber[2] = 0f;
+            mixer.TransitionToSnapshots(snapShot, snapNumber, 0f);
+        }
+        else
+        {
+            snapNumber[0] = 0f;
+            snapNumber[1] = 0f;
+            snapNumber[2] = 1f;
+            mixer.TransitionToSnapshots(snapShot, snapNumber, 0f);
+        }
+    }
+    void Jump()
+    {
         //salta
         if (isCrouched == false && isGrounded == true) //pode-se alterar, criado por questoes de testes(saltar enquanto crouch)
         {
-            if (Input.GetKeyDown(KeyCode.Space)) {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
                 rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
             }
         }
     }
-
-    void StepClimb() // 
-    {
+    void StepClimb()
+    {// uses two raycasts to measure height of objects in front and determine is the character can climb stairs up with a tiny jump or not
 
         RaycastHit hitLower;
-        if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.1f)) {
+        if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.1f))
+        {
             RaycastHit hitHigher;
             if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(Vector3.forward), out hitHigher, 0.2f)) // so é chamado caso o primeiro atinga algo
             {
@@ -199,17 +254,21 @@ public class charController : MonoBehaviour {
         }
 
         RaycastHit hitLower45;
-        if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitLower45, 0.1f)) {
+        if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitLower45, 0.1f))
+        {
             RaycastHit hitHigher45;
-            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitHigher45, 0.2f)) {
+            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitHigher45, 0.2f))
+            {
                 rb.position -= new Vector3(0f, -stepSmooth, 0f);
             }
         }
 
         RaycastHit hitLower90;
-        if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitLower90, 0.1f)) {
+        if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitLower90, 0.1f))
+        {
             RaycastHit hitHigher90;
-            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitHigher90, 0.2f)) {
+            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitHigher90, 0.2f))
+            {
                 rb.position -= new Vector3(0f, -stepSmooth, 0f);
             }
         }
@@ -218,21 +277,27 @@ public class charController : MonoBehaviour {
     } // subir degraus, not in use but working 
 
     #region isGrounded
-    private void OnCollisionStay(Collision collision) {
-        if (collision.gameObject.tag == "cenario" || collision.gameObject.tag == "Stone" || collision.gameObject.tag == "Wood" || collision.gameObject.tag == "Metal") {
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "cenario" || collision.gameObject.tag == "Stone" || collision.gameObject.tag == "Wood" || collision.gameObject.tag == "Metal")
+        {
             isGrounded = true;
         }
     }
 
-    private void OnCollisionExit(Collision collision) {
+    private void OnCollisionExit(Collision collision)
+    {
         isGrounded = false;
     }
     #endregion
 
     //MEGA TESTES
-    private void DroneControl() {
-        if (Input.GetKeyDown(KeyMapper.inputKey.DroneActivation)) {
-            if (!isDroneActive) {
+    private void DroneControl()
+    {
+        if (Input.GetKeyDown(KeyMapper.inputKey.DroneActivation))
+        {
+            if (!isDroneActive)
+            {
                 fpsCam.gameObject.SetActive(false);
 
                 drone.gameObject.SetActive(true);
@@ -240,11 +305,14 @@ public class charController : MonoBehaviour {
                 isDroneActive = true;
 
                 // Checks if has a weapon, and if it has needs to disable otherwise will try to shoot with the weapon aswell
-                if (weaponController.HasWeapon()) {
+                if (weaponController.HasWeapon())
+                {
                     weaponController.DisableCurrentWeapon();
                 }
 
-            } else {
+            }
+            else
+            {
                 fpsCam.gameObject.SetActive(true);
 
 
@@ -253,7 +321,8 @@ public class charController : MonoBehaviour {
                 drone.gameObject.SetActive(false);
 
                 isDroneActive = false;
-                if (weaponController.HasWeapon()) {
+                if (weaponController.HasWeapon())
+                {
                     weaponController.EnableWeapon();
                 }
             }
@@ -265,12 +334,14 @@ public class charController : MonoBehaviour {
     /// Public function that can enable or disable when the player has acess to the drone.
     /// </summary>
     /// <param name="value">True enables drone control | False disables drone control</param>
-    public void SetDroneControl(bool value) {
+    public void SetDroneControl(bool value)
+    {
         canUseDrone = value;
         Debug.LogWarning("You can now use the drone by pressing the key: '" + KeyMapper.inputKey.DroneActivation.ToString() + "'");
     }
 
-    public void EnableWeapon() {
+    public void EnableWeapon()
+    {
         hasWeapon = true;
         weaponController.EnableWeapon();
         arms.SetActive(true);
@@ -278,4 +349,4 @@ public class charController : MonoBehaviour {
 
     #endregion
 
- }
+}
