@@ -1511,10 +1511,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1866dd780b87e1409d936d09e64389a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthEmission: {fileID: 0}
+  healthEmission: {fileID: 2100000, guid: c6e280c540857a74cb4358caaff2d088, type: 2}
   healthC: 0
   himself: {fileID: 7446499454983756963}
-  redLight: {fileID: 0}
+  redLight: {fileID: 3145544438006220081}
   bullet: {fileID: 8078174116620158006, guid: 85ad3b7f0bff2e14182c4390d1197150, type: 3}
   bulletSpawn: {fileID: 6478245985151263800}
   casing: {fileID: 6461625440377602478, guid: b5c59afd25ebb164696f764b484fbd8e, type: 3}
@@ -1529,13 +1529,7 @@ MonoBehaviour:
   idleTime: 2
   distanceToViewTarget: 20
   distanceToShoot: 15
-  patrolWayPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  patrolWayPoints: []
   enableTestMovement: 0
 --- !u!82 &5701123209139360554
 AudioSource:

@@ -14,6 +14,7 @@ public class ChaseBehaviour : AIBehaviour
     private Animator anim;
 
     private Transform enemyHead;
+   
 
     private Vector3 distance;
     public ChaseBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform selfHead) : base(self, stateMachine, "Chase")

@@ -40,7 +40,6 @@ public class AIUtils_Fabio {
         //If Target can be seen by the RayCast and HitInfo GameObject name is the same as the Target's, return true. Else, return false.
         if (Physics.Raycast(palpatine, out hitInfo, maxDistance, layerMask)) {
             //  Debug.Log("I'm seeing: " + hitInfo.transform.name);
-            Debug.DrawRay(self.position, hitInfo.point, Color.red);
             if (hitInfo.transform.tag == target.tag) {
                 return true;
             }

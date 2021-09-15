@@ -7,17 +7,19 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 {
 
     // References
+    [Header("Components")]
+    [SerializeField] Material healthEmission; // material of the color that will change with hp
     private Animator animator;
     private Rigidbody rb;
     private GameObject character;
     private NavMeshAgent agent;
-    public Material healthEmission; // material of the color that will change with hp
     private Color healthColor; // color of the hp that will change with hits
-    public float healthC;
-    public GameObject himself; //mesh of the object that has the health color material
-    public GameObject redLight;
+    private float healthC;
+    [SerializeField] GameObject himself; //mesh of the object that has the health color material
+    [SerializeField] GameObject redLight;
     private bool isShooting;
     private Transform enemyHead;
+    [SerializeField] GameObject headRay;
 
     [Header("Shooting Settings")]
     //objects for shooting
@@ -35,6 +37,9 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     [SerializeField] float health;
     [Tooltip("Use to determine if this character is alive or not.")]
     [SerializeField] bool isAlive = true;
+    [Tooltip("Checks if stealth has been broken and engages new actions")]
+    [SerializeField] bool isAlerted = false;
+
 
     [Header("AI Settings")]
 
@@ -97,7 +102,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         {
             //TODO: º+p
         }
-        //Debug.Log(enemyHead);
+        CheckSurroundingEnemies();
     }
 
     public float GetDistanceToView()
@@ -180,7 +185,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
             default:
                 break;
         }
-
+        //put bool false <---------------------------------
         EnableNextBehaviour(nextState);
 
     }
@@ -220,8 +225,8 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         }
         health -= 10;
         healthC = healthC + 0.1f;
-
-        if (health <= 0)
+        CheckSurroundingEnemies();
+        if (health <= 0) // Is Dead and does this
         {
             SetKinematic(false);
             animator.enabled = false;
@@ -274,4 +279,24 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 
 
     #endregion
+
+    private void CheckSurroundingEnemies()
+    {
+        if (isAlerted == true)
+        {
+            if (currentState == AIStates.GotHit)
+            {
+                Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 5f);
+
+                foreach (Collider Ally in hitColliders)
+                {
+                    if (Ally.gameObject.tag == "Enemy")
+                    {
+                        Ally.transform.GetComponent<Enemy>().HandleEvent(AIEvents.GotAttacked);
+                        Debug.Log(Ally.name + " " + Ally.GetComponent<Enemy>().currentState);
+                    }
+                }
+            }
+        }
+    }
 }

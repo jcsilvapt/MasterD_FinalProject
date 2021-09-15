@@ -279,7 +279,7 @@ public class charController : MonoBehaviour
     #region isGrounded
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "cenario" || collision.gameObject.tag == "Stone" || collision.gameObject.tag == "Wood" || collision.gameObject.tag == "Metal")
+        if (collision.gameObject.tag == "cenario" || collision.gameObject.tag == "Wood" || collision.gameObject.tag == "Metal")
         {
             isGrounded = true;
         }

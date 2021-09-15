@@ -50,10 +50,7 @@ public class Terrain_Behaviour : MonoBehaviour
             else
             {
                 clip = stoneClips[Random.Range(0, stoneClips.Length)];
-            }
-          
+            }          
         }
-
-
     }
 }
