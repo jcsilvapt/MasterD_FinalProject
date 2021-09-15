@@ -91,7 +91,7 @@ public class MenuVideo : MonoBehaviour {
     }
 
     private void UpdateUI() {
-        displayText.text = isFullScreen ? "Fullscreen" : "Windowd";
+        displayText.text = isFullScreen ? "Fullscreen" : "Windowed";
         resolutionText.text = currentResolution;
         qualityText.text = quality[currentQualitySettingId];
         applyPanel.SetActive(CheckChanges());

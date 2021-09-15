@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour {
 
@@ -20,6 +21,9 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     #region DECLARATIONS
+
+    [Header("Audio")]
+    [SerializeField] AudioMixer mixer;
 
     [SerializeField] bool isGamePaused = false;
     [SerializeField] bool showCursor = true;
@@ -48,10 +52,16 @@ public class GameManager : MonoBehaviour {
 
 
         Debug.LogWarning("Game Manager: To Hide the mouse cursor just press 'K'");
+        
         /*
         if (!displayCursor) {
             ToggleCursorVisibility();
         }*/
+
+        // Sets the volume to default values
+        mixer.SetFloat("Master", -10);
+        mixer.SetFloat("Music", 0);
+        mixer.SetFloat("Effects", 0);
     }
 
     private void GetInitialData() {
@@ -68,6 +78,8 @@ public class GameManager : MonoBehaviour {
         foreach (Resolution r in Screen.resolutions) {
             resolutions.Add(r.ToString());
         }
+
+
     }
 
 
@@ -121,37 +133,88 @@ public class GameManager : MonoBehaviour {
     }
 
     public static int GetQualityLevel() {
-        if(ins != null) {
+        if (ins != null) {
             return QualitySettings.GetQualityLevel();
         }
         return -1;
     }
 
     public static void QuitGame() {
-        if(ins != null) {
+        if (ins != null) {
             Application.Quit();
         }
     }
 
-    #endregion
-
-    private void _SetPauseGame() {
-        if (isGamePaused) {
-            Time.timeScale = 1;
-            isGamePaused = false;
-            Debug.Log("Game Manager: Game Unpaused");
-        } else {
-            Time.timeScale = 0;
-            isGamePaused = true;
-            Debug.Log("Game Manager: Game Paused");
+    public static void SetMasterVolume(float volume) {
+        if (ins != null) {
+            ins.mixer.SetFloat("Master", volume);
         }
     }
 
-    private void ToggleCursorVisibility() {
-        showCursor = !showCursor;
-        Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Confined;
-        Cursor.visible = showCursor ? true : false;
+    public static void SetMusicVolume(float volume) {
+        if (ins != null) {
+            ins.mixer.SetFloat("Music", volume);
+        }
     }
+
+    public static void SetEffectVolume(float volume) {
+        if (ins != null) {
+            ins.mixer.SetFloat("Effects", volume);
+        }
+    }
+
+    public static float GetMasterVolume() {
+        if (ins != null) {
+            float value;
+            if (ins.mixer.GetFloat("Master", out value)) {
+                return value;
+            }
+            return value;
+        }
+        return -80;
+    }
+
+    public static float GetMusicVolume() {
+        if (ins != null) {
+            float value;
+            if (ins.mixer.GetFloat("Music", out value)) {
+                return value;
+            }
+            return value;
+        }
+        return -80;
+    }
+
+    public static float GetEffectVolume() {
+        if (ins != null) {
+            float value;
+            if (ins.mixer.GetFloat("Effects", out value)) {
+                return value;
+            }
+            return value;
+        }
+        return -80;
+    }
+
+#endregion
+
+private void _SetPauseGame() {
+    if (isGamePaused) {
+        Time.timeScale = 1;
+        isGamePaused = false;
+        Debug.Log("Game Manager: Game Unpaused");
+    } else {
+        Time.timeScale = 0;
+        isGamePaused = true;
+        Debug.Log("Game Manager: Game Paused");
+    }
+}
+
+private void ToggleCursorVisibility() {
+    showCursor = !showCursor;
+    Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Confined;
+    Cursor.visible = showCursor ? true : false;
+}
 
 
 }

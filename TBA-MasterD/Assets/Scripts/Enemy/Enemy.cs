@@ -28,8 +28,8 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     public GameObject casing;
     public GameObject casingSpawn;
     public ParticleSystem muzzleFlash;
-    public float timeToShoot = 0.5f;
-    public float elapsedTime;
+    public float timeToShoot = 1f;
+    public float elapsedTime = 0;
 
 
     [Header("Enemy Settings")]
@@ -199,11 +199,22 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     {
         if (elapsedTime >= timeToShoot)
         {
+            Debug.Log("I'M SHOOTING MOFO");
+            /*
             bulletSpawn.transform.LookAt(target.transform.position);
             Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation); // instantiate bullet
             Instantiate(casing, casingSpawn.transform.position, casingSpawn.transform.rotation); // instantiate bullet casing
             muzzleFlash.Play();
             Debug.Log("Just Shoot");
+            */
+            RaycastHit hit;
+            if(Physics.Raycast(bulletSpawn.transform.position, bulletSpawn.transform.forward, out hit)) {
+                if(hit.transform.GetComponent<IDamage>() != null) {
+                    hit.transform.GetComponent<IDamage>().TakeDamage();
+                    return;
+                }
+            }
+
             elapsedTime = 0f;
         }
         else

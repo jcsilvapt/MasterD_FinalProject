@@ -4,15 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class charController : MonoBehaviour
+public class charController : MonoBehaviour, IDamage
 {
 
     [Header("Player Settgins")]
-    [SerializeField] int Health = 100;
+    [SerializeField] float health = 100;
     [SerializeField] float moveSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float crouchSpeed;
     [SerializeField] float jumpHeight;
+
+    [Header("Player Health Effect")]
+    [SerializeField] Material healthEmission;
+    [SerializeField] GameObject armsMesh;
+    private float healthC;
+    private Color healthColor;
 
     [Header("Player Settings: Weapon Controller")]
     [SerializeField] WeaponController weaponController;
@@ -92,10 +98,17 @@ public class charController : MonoBehaviour
         physicalBodyMesh1.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
         physicalBodyMesh2.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
 
+        healthEmission = armsMesh.GetComponent<SkinnedMeshRenderer>().material;
     }
 
     void Update()
     {
+
+        //Testing pruposes
+        healthEmission.SetColor("_EmissionColor", healthColor * 3);
+
+        healthColor = Color.Lerp(Color.green, Color.red * 3, healthC);
+
         if (!isDroneActive)
         {
             Movement();
@@ -345,6 +358,13 @@ public class charController : MonoBehaviour
         hasWeapon = true;
         weaponController.EnableWeapon();
         arms.SetActive(true);
+    }
+
+    public void TakeDamage() {
+        health -= 5;
+        if(health > 0) {
+            healthC += 0.1f;
+        }
     }
 
     #endregion

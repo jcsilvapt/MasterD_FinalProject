@@ -9,10 +9,11 @@ public class KeyMapper : MonoBehaviour {
     [Header("Mouse Settings")]
     [Range(0.0f, 10f)]
     [SerializeField] float mouseSensitivity = 1f;
+
     public float MouseSensitivity {
         get { return mouseSensitivity; }
         set { mouseSensitivity = value; }
-    }
+    } 
 
     [SerializeField] bool invertMouse;
     public bool InvertMouse {
