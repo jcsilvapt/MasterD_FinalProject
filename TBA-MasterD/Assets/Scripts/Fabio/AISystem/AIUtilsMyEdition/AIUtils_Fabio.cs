@@ -41,6 +41,7 @@ public class AIUtils_Fabio {
         if (Physics.Raycast(palpatine, out hitInfo, maxDistance, layerMask)) {
             //  Debug.Log("I'm seeing: " + hitInfo.transform.name);
             if (hitInfo.transform.tag == target.tag) {
+                self.LookAt(target);
                 return true;
             }
         }

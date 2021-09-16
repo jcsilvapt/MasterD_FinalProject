@@ -8,18 +8,19 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 
     // References
     [Header("Components")]
-    [SerializeField] Material healthEmission; // material of the color that will change with hp
+    [Tooltip("material of the color that will change with hp")]
+    [SerializeField] Material healthEmission;
+    private Color healthColor; // color of the hp that will change with hits
+    private float healthC; //percentage of color change for each hit
     private Animator animator;
     private Rigidbody rb;
     private GameObject character;
     private NavMeshAgent agent;
-    private Color healthColor; // color of the hp that will change with hits
-    private float healthC;
-    [SerializeField] GameObject himself; //mesh of the object that has the health color material
+    [Tooltip("mesh of the object that has the health color material")]
+    [SerializeField] GameObject himself;
     [SerializeField] GameObject redLight;
     private bool isShooting;
-    private Transform enemyHead;
-    [SerializeField] GameObject headRay;
+    [SerializeField] Transform enemyHead;
 
     [Header("Shooting Settings")]
     //objects for shooting
@@ -37,9 +38,8 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     [SerializeField] float health;
     [Tooltip("Use to determine if this character is alive or not.")]
     [SerializeField] bool isAlive = true;
-    [Tooltip("Checks if stealth has been broken and engages new actions")]
-    [SerializeField] bool isAlerted = false;
-
+    [Tooltip("Used to see if there are allies nearby to attack target")]
+    [SerializeField] bool allyAlert = false;
 
     [Header("AI Settings")]
 
@@ -78,7 +78,8 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 
     private void Start()
     {
-        enemyHead = transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:Neck/mixamorig:Head");
+        //enemyHead = transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:Neck/mixamorig:Head");
+
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
@@ -90,6 +91,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 
     private void Update()
     {
+        Debug.Log(gameObject.name + " " + currentState);
         healthEmission.SetColor("_EmissionColor", healthColor * 3); // access to emission color of the health material
 
         healthColor = Color.Lerp(Color.green, Color.red * 3, healthC); //gradient between two color for the enemy health
@@ -102,12 +104,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         {
             //TODO: º+p
         }
-        CheckSurroundingEnemies();
-    }
-
-    public float GetDistanceToView()
-    {
-        return distanceToViewTarget;
+        //  CheckSurroundingEnemies();
     }
 
 
@@ -189,8 +186,30 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         EnableNextBehaviour(nextState);
 
     }
+    public void CheckSurroundingEnemies() //see if there are enemies nearby and activate behaviours to help them attack the player
+    {
+        if (allyAlert == true)
+        {
+            Collider[] hitColliders = Physics.OverlapBox(this.transform.position, new Vector3(6, 1, 6));
+
+            foreach (Collider Ally in hitColliders)
+            {
+                if (Ally.gameObject.tag == "Enemy")
+                {
+                    if (Ally.transform.GetComponent<Enemy>().currentState != AIStates.GotHit || Ally.transform.GetComponent<Enemy>().currentState != AIStates.Chase )
+                    {
+                        Ally.transform.GetComponent<Enemy>().HandleEvent(AIEvents.GotAttacked);
+                    }
+                }
+            }
+        }
+    }
 
 
+    public float GetDistanceToView()
+    {
+        return distanceToViewTarget;
+    }
     #endregion
 
     #region Shooting
@@ -199,7 +218,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     {
         if (elapsedTime >= timeToShoot)
         {
-            Debug.Log("I'M SHOOTING MOFO");
+            //  Debug.Log("I'M SHOOTING MOFO");
             /*
             bulletSpawn.transform.LookAt(target.transform.position);
             Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation); // instantiate bullet
@@ -208,13 +227,14 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
             Debug.Log("Just Shoot");
             */
             RaycastHit hit;
-            if(Physics.Raycast(bulletSpawn.transform.position, bulletSpawn.transform.forward, out hit)) {
-                if(hit.transform.GetComponent<IDamage>() != null) {
+            if (Physics.Raycast(bulletSpawn.transform.position, bulletSpawn.transform.forward, out hit))
+            {
+                if (hit.transform.GetComponent<IDamage>() != null)
+                {
                     hit.transform.GetComponent<IDamage>().TakeDamage();
                     return;
                 }
-            }
-
+            }            
             elapsedTime = 0f;
         }
         else
@@ -228,6 +248,8 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         isShooting = iShoot;
     }
     #endregion
+
+    #region Animation and Alive Checker
     public void TakeDamage()
     {
         if (isShooting == false)
@@ -243,6 +265,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
             animator.enabled = false;
             GetComponent<Collider>().enabled = false;
             GetComponent<Rigidbody>().isKinematic = true;
+            this.gameObject.layer = 13;
             redLight.SetActive(false);
             DisableAgent();
             Debug.Log("me dies");
@@ -262,6 +285,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     {
         if (behaviours != null)
         {
+
             foreach (AIBehaviour b in behaviours)
             {
                 b.OnBehaviourEnd();
@@ -269,7 +293,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
             }
         }
     }
-
+    #endregion
 
     #region Ragdoll
     private void SetKinematic(bool value)
@@ -288,26 +312,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         GetComponent<Collider>().enabled = true;
     }
 
-
     #endregion
 
-    private void CheckSurroundingEnemies()
-    {
-        if (isAlerted == true)
-        {
-            if (currentState == AIStates.GotHit)
-            {
-                Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 5f);
 
-                foreach (Collider Ally in hitColliders)
-                {
-                    if (Ally.gameObject.tag == "Enemy")
-                    {
-                        Ally.transform.GetComponent<Enemy>().HandleEvent(AIEvents.GotAttacked);
-                        Debug.Log(Ally.name + " " + Ally.GetComponent<Enemy>().currentState);
-                    }
-                }
-            }
-        }
-    }
 }

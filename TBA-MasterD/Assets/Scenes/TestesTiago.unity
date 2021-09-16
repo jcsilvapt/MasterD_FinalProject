@@ -909,7 +909,7 @@ MonoBehaviour:
   healthEmission: {fileID: 0}
   himself: {fileID: 0}
   redLight: {fileID: 0}
-  headRay: {fileID: 0}
+  enemyHead: {fileID: 0}
   bullet: {fileID: 0}
   bulletSpawn: {fileID: 0}
   casing: {fileID: 0}
@@ -919,7 +919,7 @@ MonoBehaviour:
   elapsedTime: 0
   health: 0
   isAlive: 1
-  isAlerted: 0
+  allyAlert: 0
   enableAISystem: 1
   target: {fileID: 447076652}
   idleTime: 1
@@ -1597,6 +1597,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6926546190102509555, guid: 1a2749c094afc7f4ea84a86bdf4a2187,
         type: 3}
+      propertyPath: allyAlert
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926546190102509555, guid: 1a2749c094afc7f4ea84a86bdf4a2187,
+        type: 3}
       propertyPath: isAlerted
       value: 1
       objectReference: {fileID: 0}
@@ -1758,11 +1763,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba7c138d249773418a786ac212f898b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
+  health: 100
   moveSpeed: 7
   runSpeed: 12
   crouchSpeed: 4
   jumpHeight: 4
+  healthEmission: {fileID: 0}
+  armsMesh: {fileID: 0}
   weaponController: {fileID: 0}
   hasWeapon: 0
   enableStairsWalk: 0
@@ -2241,7 +2248,7 @@ MonoBehaviour:
   healthEmission: {fileID: 0}
   himself: {fileID: 0}
   redLight: {fileID: 0}
-  headRay: {fileID: 0}
+  enemyHead: {fileID: 0}
   bullet: {fileID: 8078174116620158006, guid: 85ad3b7f0bff2e14182c4390d1197150, type: 3}
   bulletSpawn: {fileID: 2127865311}
   casing: {fileID: 6461625440377602478, guid: b5c59afd25ebb164696f764b484fbd8e, type: 3}
@@ -2251,7 +2258,7 @@ MonoBehaviour:
   elapsedTime: 0
   health: 0
   isAlive: 1
-  isAlerted: 0
+  allyAlert: 0
   enableAISystem: 1
   target: {fileID: 0}
   idleTime: 1
@@ -12693,6 +12700,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5415784362122449817, guid: 3142eb715d2e0b24ea6e77c92715db24,
+        type: 3}
+      propertyPath: mixer
+      value: 
+      objectReference: {fileID: 24100000, guid: 4f7eed251ee6a404892e2d40de1058e2,
+        type: 2}
     - target: {fileID: 5415784362122449822, guid: 3142eb715d2e0b24ea6e77c92715db24,
         type: 3}
       propertyPath: m_RootOrder
@@ -13184,6 +13197,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6926546190102509555, guid: 1a2749c094afc7f4ea84a86bdf4a2187,
         type: 3}
+      propertyPath: allyAlert
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926546190102509555, guid: 1a2749c094afc7f4ea84a86bdf4a2187,
+        type: 3}
       propertyPath: isAlerted
       value: 1
       objectReference: {fileID: 0}
@@ -13557,6 +13575,11 @@ PrefabInstance:
     - target: {fileID: 2061141615, guid: 1a2749c094afc7f4ea84a86bdf4a2187, type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: -0.049442332
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926546190102509555, guid: 1a2749c094afc7f4ea84a86bdf4a2187,
+        type: 3}
+      propertyPath: allyAlert
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6926546190102509555, guid: 1a2749c094afc7f4ea84a86bdf4a2187,
         type: 3}
@@ -14073,6 +14096,11 @@ PrefabInstance:
     - target: {fileID: 2061141615, guid: 1a2749c094afc7f4ea84a86bdf4a2187, type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: -0.049443074
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926546190102509555, guid: 1a2749c094afc7f4ea84a86bdf4a2187,
+        type: 3}
+      propertyPath: allyAlert
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6926546190102509555, guid: 1a2749c094afc7f4ea84a86bdf4a2187,
         type: 3}

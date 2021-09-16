@@ -65,7 +65,7 @@ public class charController : MonoBehaviour, IDamage
     [SerializeField] bool isDroneActive;
 
     [Header("Sound Effects")]
-    public AudioSource steps;
+    [SerializeField] AudioSource steps;
     [SerializeField] float crouchPitch;
     [SerializeField] float runPitch;
     [SerializeField] AudioMixer mixer;
@@ -74,10 +74,11 @@ public class charController : MonoBehaviour, IDamage
 
     [Header("Extras Stuff")]
     [SerializeField] Rigidbody rb;
-    public Camera fpsCam;
-    public GameObject armaAtual;
-    public float radius;
-
+    [SerializeField] Camera fpsCam;
+    [SerializeField] GameObject armaAtual;
+    [SerializeField] float radius;
+    [Tooltip("Check if player is still stealth or if enemy saw him")]
+    public bool isStealth = true;
 
 
     void Start()
@@ -126,8 +127,11 @@ public class charController : MonoBehaviour, IDamage
         }
         if (canUseDrone)
             DroneControl();
+
+        CheckStealthiness();
     }
 
+    #region Movement Functions
     private void Crouch()
     {
 
@@ -303,8 +307,9 @@ public class charController : MonoBehaviour, IDamage
         isGrounded = false;
     }
     #endregion
+    #endregion
 
-    //MEGA TESTES
+    #region Drone
     private void DroneControl()
     {
         if (Input.GetKeyDown(KeyMapper.inputKey.DroneActivation))
@@ -341,8 +346,6 @@ public class charController : MonoBehaviour, IDamage
             }
         }
     }
-
-    #region PUBLIC ACESS
     /// <summary>
     /// Public function that can enable or disable when the player has acess to the drone.
     /// </summary>
@@ -352,6 +355,9 @@ public class charController : MonoBehaviour, IDamage
         canUseDrone = value;
         Debug.LogWarning("You can now use the drone by pressing the key: '" + KeyMapper.inputKey.DroneActivation.ToString() + "'");
     }
+    #endregion
+
+    #region PUBLIC ACESS
 
     public void EnableWeapon()
     {
@@ -360,10 +366,20 @@ public class charController : MonoBehaviour, IDamage
         arms.SetActive(true);
     }
 
-    public void TakeDamage() {
+    public void TakeDamage()
+    {
         health -= 5;
-        if(health > 0) {
+        if (health > 0)
+        {
             healthC += 0.1f;
+        }          
+    }
+
+    public void CheckStealthiness()
+    {
+        if(health < 100)
+        {
+            isStealth = false;
         }
     }
 

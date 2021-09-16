@@ -2,48 +2,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public class AttackBehaviour : AIBehaviour {
+public class AttackBehaviour : AIBehaviour
+{
 
-    public Transform target;
-    public NavMeshAgent navAgent;
-    public bool isActive;
-    public Enemy enemy;
+    //components
+    [SerializeField] Transform target;
+    [SerializeField] NavMeshAgent navAgent;
+    [SerializeField] bool isActive;
+    [SerializeField] Enemy enemy;
     private Animator anim;
 
     //bullet and spawn
-    public Object bullet;
-    public Transform bulletSpawn;
-    public Transform enemyHead;
-    public float distanceToShoot;
+    [SerializeField] Object bullet;
+    [SerializeField] Transform bulletSpawn;
+    [SerializeField] Transform enemyHead;
+    [SerializeField] float distanceToShoot;
 
-    public AttackBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform selfHead, float distanceToShoot) : base(self, stateMachine, "Attack") {
+    public AttackBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform selfHead, float distanceToShoot) : base(self, stateMachine, "Attack")
+    {
         enemyHead = selfHead;
         this.distanceToShoot = distanceToShoot;
     }
 
-    public override void Init() {
+    public override void Init()
+    {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         navAgent = self.GetComponent<NavMeshAgent>();
         enemy = self.GetComponent<Enemy>();
         anim = self.GetComponent<Animator>();
 
     }
-    public override void OnBehaviourEnd() {
+    public override void OnBehaviourEnd()
+    {
         Debug.Log("Player is gone");
         isActive = false;
         anim.SetBool("iShoot", false);
     }
 
-    public override void OnBehaviourStart() {
+    public override void OnBehaviourStart()
+    {
         isActive = true;
         Debug.Log("I'm Attacking the enemy");
         enemy.Shoot();
         anim.SetBool("iShoot", true);
+        //self.GetComponent<Enemy>().CheckSurroundingEnemies();
     }
 
-    public override void OnUpdate() {
+    public override void OnUpdate()
+    {
 
-        if (isActive) {
+        if (isActive)
+        {
             if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player is in view
             {
                 Vector3 distance = target.transform.position - self.transform.position;
@@ -53,14 +62,18 @@ public class AttackBehaviour : AIBehaviour {
                     self.transform.LookAt(target.position);
                     enemy.Shoot();
                     enemy.SetShooting(true);
-                    
-                } else {
+
+                }
+                else
+                {
                     Debug.Log("Lost the Player");
                     stateMachine.HandleEvent(AIEvents.RangeToFar);
                     enemy.SetShooting(false);
                     return;
                 }
-            } else {
+            }
+            else
+            {
                 stateMachine.HandleEvent(AIEvents.LostPlayer);
                 enemy.SetShooting(false);
                 return;

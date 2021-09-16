@@ -6,15 +6,15 @@ using UnityEngine.AI;
 public class ChaseBehaviour : AIBehaviour
 {
 
-    public bool isActive;
-    public Vector3 lastPlayerSeen;
-    public bool playerIsVisible = false;
-    public Transform target;
-    public NavMeshAgent navAgent;
+    [SerializeField] bool isActive;
+    [SerializeField] Vector3 lastPlayerSeen;
+    [SerializeField] bool playerIsVisible = false;
+    [SerializeField] Transform target;
+    [SerializeField] NavMeshAgent navAgent;
     private Animator anim;
 
     private Transform enemyHead;
-   
+
 
     private Vector3 distance;
     public ChaseBehaviour(MonoBehaviour self, AIStateMachine stateMachine, Transform selfHead) : base(self, stateMachine, "Chase")
@@ -30,8 +30,9 @@ public class ChaseBehaviour : AIBehaviour
         anim = self.GetComponent<Animator>();
     }
 
-    public override void OnBehaviourEnd()    {
-        
+    public override void OnBehaviourEnd()
+    {
+
         Debug.Log("Chase Ended");
         navAgent.ResetPath();
         isActive = false;
@@ -49,12 +50,11 @@ public class ChaseBehaviour : AIBehaviour
 
     public override void OnUpdate()
     {
-        Debug.DrawLine(enemyHead.transform.position, enemyHead.transform.forward, Color.red, 10f);
         if (isActive)
         {
             if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player distance is enought to be seen
             {
-                if (AIUtils_Tiago.IsChasingPlayer(self.transform, target, 5)) //checks if the distance is enought to shoot player
+                if (AIUtils_Tiago.IsChasingPlayer(self.transform, target, 10)) //checks if the distance is enought to shoot player
                 {
                     stateMachine.HandleEvent(AIEvents.InRange);
                     return;
@@ -66,15 +66,17 @@ public class ChaseBehaviour : AIBehaviour
             }
             else
             {
-                stateMachine.HandleEvent(AIEvents.LostPlayer);
-                return;
+                if (!navAgent.pathPending && navAgent.remainingDistance < 0.1f)
+                {
+                    stateMachine.HandleEvent(AIEvents.LostPlayer);
+                    return;
+                }
             }
         }
     }
     private void ChasePlayer()
     {
-       
-       // this.enemyHead.LookAt(target);
+        enemyHead.LookAt(target);
         navAgent.SetDestination(target.position);
     }
 

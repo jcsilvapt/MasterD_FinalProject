@@ -63,11 +63,6 @@ public class GotHitBehaviour : AIBehaviour
 
     private int counter;
 
-    //----------------------------------------------------------------//------------------------------------------------------------------- checking for enemies test
-
-    private bool isAlerted = false;
-
-
     /* Objectives:
      *  - Short Distance Hit:
      *    The Enemy will rotate towards the Player and Shoot.
@@ -108,13 +103,14 @@ public class GotHitBehaviour : AIBehaviour
         isInShotPlace = false;
         isInCoverPlace = false;
         anim.SetBool("iChase", false);
-
         distance = 0;
+
+
     }
 
     public override void OnBehaviourStart()
     {
-      //  Debug.Log("Got Hit Behaviour Started");
+        //  Debug.Log("Got Hit Behaviour Started");
 
         //Set IsActive to True, Set all Flags to False.
         //Set Distance to 0
@@ -128,6 +124,8 @@ public class GotHitBehaviour : AIBehaviour
         anim.SetBool("iChase", true);
         distance = 0;
         counter = 0;
+
+        //self.GetComponent<Enemy>().CheckSurroundingEnemies();
     }
 
     public override void OnUpdate()
@@ -143,7 +141,9 @@ public class GotHitBehaviour : AIBehaviour
         ReactToHitDistanceShort();
         ReactToHitDistanceMedium();
         ReactToHitDistanceLong();
-       }
+
+
+    }
 
     private void GetDistance()
     {
