@@ -70,7 +70,7 @@ public class DoorController : MonoBehaviour {
 
     private void OnTriggerStay(Collider other) {
 
-        Debug.Log(other.transform.name);
+        //Debug.Log(other.transform.name);
 
         if (startsOpen) {
             return;
