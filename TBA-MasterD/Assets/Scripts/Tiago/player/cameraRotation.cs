@@ -51,11 +51,13 @@ public class cameraRotation : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.K)) {
             GameManager.SetCursorVisibility();
         }
-
+        /*
         if (!GameManager.GetCursorVisibility()) {
-            mouseX = Input.GetAxis("Mouse X") * (KeyMapper.inputKey.MouseSensitivity * mouseMultiplier) * Time.deltaTime;
-            mouseY = Input.GetAxis("Mouse Y") * (KeyMapper.inputKey.MouseSensitivity * mouseMultiplier) * Time.deltaTime;
-
+            mouseX += Input.GetAxis("Mouse X") * (KeyMapper.inputKey.MouseSensitivity * mouseMultiplier) * Time.deltaTime;
+            Debug.Log("Mouse X: " + mouseX);
+            mouseY += Input.GetAxis("Mouse Y") * (KeyMapper.inputKey.MouseSensitivity * mouseMultiplier) * Time.deltaTime;
+            Debug.Log("Sense: " + KeyMapper.inputKey.MouseSensitivity * mouseMultiplier);
+            mouseY = 0;
             if(KeyMapper.inputKey.InvertMouse) {
                 xRotation += mouseY;
             } else {
@@ -69,7 +71,38 @@ public class cameraRotation : MonoBehaviour {
             // Roda Câmera no X
             playerBody.Rotate(Vector3.up * mouseX);
         }
+        */
+    }
 
+    private void FixedUpdate() {
+        if (!GameManager.GetCursorVisibility()) {
+            GetMouseMovement();
+            RotateCamera();
+        }
+    }
+
+    private void RotateCamera() {
+        Quaternion playerBodyRotate = Quaternion.Euler(0, mouseX, 0);
+
+        playerBody.rotation = playerBodyRotate;
+        transform.localRotation = Quaternion.Euler(mouseY, 0, 0);
+
+    }
+
+    private void GetMouseMovement() {
+
+        float sensitivity = KeyMapper.inputKey.MouseSensitivity;
+        Debug.Log("input: " + Input.GetAxis("Mouse X"));
+        mouseX += Input.GetAxis("Mouse X") * sensitivity;
+
+        if(KeyMapper.inputKey.InvertMouse) {
+            mouseY += Input.GetAxis("Mouse Y") * sensitivity;
+        } else {
+            mouseY -= Input.GetAxis("Mouse Y") * sensitivity;
+        }
+        mouseY = Mathf.Clamp(mouseY, -90, 90);
+
+        Debug.Log(mouseX);
     }
 
     private void LateUpdate() {

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour, AIStateMachine, IDamage
-{
+public class Enemy : MonoBehaviour, AIStateMachine, IDamage {
 
     // References
     [Header("Components")]
@@ -63,9 +62,10 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     [Tooltip("Enable this for movement test only.")]
     [SerializeField] bool enableTestMovement = false;
 
+    private bool canShoot = false;
 
-    Dictionary<AIEvents, AIStates> nextEvent = new Dictionary<AIEvents, AIStates>
-    {
+
+    Dictionary<AIEvents, AIStates> nextEvent = new Dictionary<AIEvents, AIStates> {
         [AIEvents.NoLongerIdle] = AIStates.Patrol,
         [AIEvents.SeePlayer] = AIStates.Chase,
         [AIEvents.ReachedDestination] = AIStates.Idle,
@@ -76,8 +76,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     };
 
 
-    private void Start()
-    {
+    private void Start() {
         //enemyHead = transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:Neck/mixamorig:Head");
 
         animator = GetComponent<Animator>();
@@ -89,22 +88,18 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         BehaviourRegistration();
     }
 
-    private void Update()
-    {
+    private void Update() {
         Debug.Log(gameObject.name + " " + currentState);
         healthEmission.SetColor("_EmissionColor", healthColor * 3); // access to emission color of the health material
 
         healthColor = Color.Lerp(Color.green, Color.red * 3, healthC); //gradient between two color for the enemy health
 
-        if (isAlive && enableAISystem)
-        {
+        if (isAlive && enableAISystem) {
             currentBehaviour.OnUpdate();
-        }
-        else
-        {
+        } else {
             //TODO: º+p
         }
-        //  CheckSurroundingEnemies();
+        CheckIfCanShoot();
     }
 
 
@@ -113,10 +108,8 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     /// <summary>
     /// Register All Behaviours (expand when new behaviours is created...)
     /// </summary>
-    private void BehaviourRegistration()
-    {
-        if (isAlive && enableAISystem)
-        {
+    private void BehaviourRegistration() {
+        if (isAlive && enableAISystem) {
             behaviours = new AIBehaviour[] {
                 new IdleBehaviour(this, this, enemyHead, idleTime),
                 new PatrolBehaviour(this, this, enemyHead, patrolWayPoints),
@@ -127,8 +120,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
                 // New Behaviours GOES HERE
             };
 
-            foreach (AIBehaviour b in behaviours)
-            {
+            foreach (AIBehaviour b in behaviours) {
                 b.Init();
             }
 
@@ -141,8 +133,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     /// Function that Enables the next State to be Active
     /// </summary>
     /// <param name="newState"></param>
-    private void EnableNextBehaviour(AIStates newState)
-    {
+    private void EnableNextBehaviour(AIStates newState) {
         currentState = newState;
         currentBehaviour = behaviours[(int)currentState];
         currentBehaviour.OnBehaviourStart();
@@ -152,15 +143,13 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     /// State Machine
     /// </summary>
     /// <param name="aiEvent"></param>
-    public void HandleEvent(AIEvents aiEvent)
-    {
+    public void HandleEvent(AIEvents aiEvent) {
         // Disables Current Behaviour
         currentBehaviour.OnBehaviourEnd();
 
         AIStates nextState = AIStates.Idle;
 
-        switch (currentState)
-        {
+        switch (currentState) {
             case AIStates.Idle:
                 nextState = nextEvent[aiEvent];
                 break;
@@ -188,16 +177,12 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     }
     public void CheckSurroundingEnemies() //see if there are enemies nearby and activate behaviours to help them attack the player
     {
-        if (allyAlert == true)
-        {
+        if (allyAlert == true) {
             Collider[] hitColliders = Physics.OverlapBox(this.transform.position, new Vector3(6, 1, 6));
 
-            foreach (Collider Ally in hitColliders)
-            {
-                if (Ally.gameObject.tag == "Enemy")
-                {
-                    if (Ally.transform.GetComponent<Enemy>().currentState != AIStates.GotHit || Ally.transform.GetComponent<Enemy>().currentState != AIStates.Chase )
-                    {
+            foreach (Collider Ally in hitColliders) {
+                if (Ally.gameObject.tag == "Enemy") {
+                    if (Ally.transform.GetComponent<Enemy>().currentState != AIStates.GotHit || Ally.transform.GetComponent<Enemy>().currentState != AIStates.Chase) {
                         Ally.transform.GetComponent<Enemy>().HandleEvent(AIEvents.GotAttacked);
                     }
                 }
@@ -206,54 +191,42 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     }
 
 
-    public float GetDistanceToView()
-    {
+    public float GetDistanceToView() {
         return distanceToViewTarget;
     }
     #endregion
 
     #region Shooting
 
-    public void Shoot() //shooting and timer
-    {
-        if (elapsedTime >= timeToShoot)
-        {
-            //  Debug.Log("I'M SHOOTING MOFO");
-            /*
-            bulletSpawn.transform.LookAt(target.transform.position);
-            Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation); // instantiate bullet
-            Instantiate(casing, casingSpawn.transform.position, casingSpawn.transform.rotation); // instantiate bullet casing
-            muzzleFlash.Play();
-            Debug.Log("Just Shoot");
-            */
-            RaycastHit hit;
-            if (Physics.Raycast(bulletSpawn.transform.position, bulletSpawn.transform.forward, out hit))
-            {
-                if (hit.transform.GetComponent<IDamage>() != null)
-                {
-                    hit.transform.GetComponent<IDamage>().TakeDamage();
-                    return;
-                }
-            }            
+    private void CheckIfCanShoot() {
+        if (elapsedTime >= timeToShoot) {
             elapsedTime = 0f;
-        }
-        else
-        {
+            canShoot = true;
+        } else {
+            canShoot = false;
             elapsedTime += Time.deltaTime;
         }
-
     }
-    public void SetShooting(bool iShoot)
+
+    public void Shoot() //shooting and timer
     {
+        if (canShoot) {
+            RaycastHit hit;
+            if (Physics.Raycast(bulletSpawn.transform.position, bulletSpawn.transform.forward, out hit)) {
+                if (hit.transform.GetComponent<IDamage>() != null) {
+                    hit.transform.GetComponent<IDamage>().TakeDamage();
+                }
+            }
+        }
+    }
+    public void SetShooting(bool iShoot) {
         isShooting = iShoot;
     }
     #endregion
 
     #region Animation and Alive Checker
-    public void TakeDamage()
-    {
-        if (isShooting == false)
-        {
+    public void TakeDamage() {
+        if (isShooting == false) {
             HandleEvent(AIEvents.GotAttacked);
         }
         health -= 10;
@@ -273,21 +246,16 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 
     }
 
-    private void OnAnimatorMove()
-    {
-        if (Time.deltaTime != 0)
-        {
+    private void OnAnimatorMove() {
+        if (Time.deltaTime != 0) {
             agent.speed = (animator.deltaPosition / Time.deltaTime).magnitude;
         }
     }
 
-    private void DisableAgent()
-    {
-        if (behaviours != null)
-        {
+    private void DisableAgent() {
+        if (behaviours != null) {
 
-            foreach (AIBehaviour b in behaviours)
-            {
+            foreach (AIBehaviour b in behaviours) {
                 b.OnBehaviourEnd();
                 //b.KillBehaviour();
             }
@@ -296,17 +264,14 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     #endregion
 
     #region Ragdoll
-    private void SetKinematic(bool value)
-    {
+    private void SetKinematic(bool value) {
         Rigidbody[] bodyParts = GetComponentsInChildren<Rigidbody>();
-        foreach (Rigidbody rb in bodyParts)
-        {
+        foreach (Rigidbody rb in bodyParts) {
             rb.isKinematic = value;
         }
 
         Collider[] bodyColisions = GetComponentsInChildren<Collider>();
-        foreach (Collider col in bodyColisions)
-        {
+        foreach (Collider col in bodyColisions) {
             col.enabled = !value;
         }
         GetComponent<Collider>().enabled = true;
