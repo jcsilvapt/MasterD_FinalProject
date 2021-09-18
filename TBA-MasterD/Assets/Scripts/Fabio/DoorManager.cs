@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorManager : MonoBehaviour
+public class DoorManager : MonoBehaviour, IDamage
 {
     //Doors To Be Locked
     [SerializeField] private DoorController[] toBeLocked;
@@ -13,32 +13,34 @@ public class DoorManager : MonoBehaviour
     //Doors To Be Closed
     [SerializeField] private DoorController[] toBeClosed;
 
-    private void OnCollisionEnter(Collision collision)
+    public void TakeDamage()
     {
-        if (collision.gameObject.tag == "DroneDart")
+        DoorInteraction();
+    }
+
+    public void DoorInteraction()
+    {
+        if (toBeLocked.Length > 0)
         {
-            if(toBeLocked.Length > 0)
+            foreach (DoorController door in toBeLocked)
             {
-                foreach (DoorController door in toBeLocked)
-                {
-                    door.LockMode(true);
-                }
+                door.LockMode(true);
             }
+        }
 
-            if(toBeUnlocked.Length > 0)
+        if (toBeUnlocked.Length > 0)
+        {
+            foreach (DoorController door in toBeUnlocked)
             {
-                foreach(DoorController door in toBeUnlocked)
-                {
-                    door.LockMode(false);
-                }
+                door.LockMode(false);
             }
+        }
 
-            if (toBeClosed.Length > 0)
+        if (toBeClosed.Length > 0)
+        {
+            foreach (DoorController door in toBeClosed)
             {
-                foreach (DoorController door in toBeClosed)
-                {
-                    door.CloseDoor();
-                }
+                door.CloseDoor();
             }
         }
     }

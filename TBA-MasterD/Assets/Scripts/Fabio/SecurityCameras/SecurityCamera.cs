@@ -6,6 +6,9 @@ public class SecurityCamera : MonoBehaviour
 {
     #region References
 
+    //Second Level Manager Reference
+    [SerializeField] private SecondLevelManager secondLevelManager;
+
     //Enemies References
     [SerializeField] private Fabio_EnemySecondLevel[] enemies;
 
@@ -14,6 +17,9 @@ public class SecurityCamera : MonoBehaviour
 
     //More Security Cameras to Disable
     [SerializeField] private SecurityCamera[] securityCameras;
+
+    //Associated Door
+    [SerializeField] private DoorController door;
 
     #endregion
 
@@ -59,6 +65,7 @@ public class SecurityCamera : MonoBehaviour
         }
 
         DeactivateLight();
+        secondLevelManager.OpenDoor(door);
     }
 
     private void OnTriggerEnter(Collider other)
