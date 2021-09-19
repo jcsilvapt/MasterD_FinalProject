@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour {
@@ -21,9 +20,10 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private float timeElapsedSinceShot;
     [SerializeField] private bool isWeaponActive;
     private bool isBursting;
-    public bool canShoot;
+    public bool canShoot = true;
     public bool isReloading = false;
     private int numberOfBurstShots;
+    public bool reShot = true;
 
     #endregion
 
@@ -51,6 +51,7 @@ public class Weapon : MonoBehaviour {
     [SerializeField] AudioSource audioReload; // by tiago for shooting <--------------------------------------------------------------------------
 
     private void Awake() {
+        // Initialize all weapon status
         shootingType = SO_WeaponInformation.shootingType;
         shootingTypeIndex = SO_WeaponInformation.shootingTypeIndex;
         maximumBullets = SO_WeaponInformation.maximumBullets;
@@ -59,22 +60,16 @@ public class Weapon : MonoBehaviour {
         timeBetweenShots = SO_WeaponInformation.timeBetweenShots;
         timeReload = SO_WeaponInformation.timeReload;
 
-        //anim = GetComponent<Animator>();
-        //isWeaponActive = false;
-        canShoot = true;
-
+        // Get's the camera
         cam = Camera.main;
     }
 
-    public string GetWeaponName() {
-        return SO_WeaponInformation.name;
-    }
 
     public void WeaponUpdate() {
         if (isWeaponActive && !isReloading) {
 
             if (Input.GetMouseButton(0)) {
-                JorgeShooting();
+                TypeOfShooting();
             }
             if (Input.GetMouseButtonUp(0)) {
                 reShot = true;
@@ -84,47 +79,10 @@ public class Weapon : MonoBehaviour {
             }
             if (Input.GetKeyDown(KeyCode.R)) {
                 Reload();
-                
+
             }
             FireRate();
         }
-    }
-
-    public bool reShot = true;
-
-    private void JorgeShooting() {
-
-        if (!HasBulletsInClip()) return;
-
-        switch (shootingType[shootingTypeIndex]) {
-            case ShootingType.Single:
-                if (canShoot && reShot) {
-                    JShoot();
-                    reShot = false;
-                }
-                break;
-            case ShootingType.Burst:
-                if (canShoot && !isBursting && reShot) {
-                    StartCoroutine(BurstShooting());
-                    isBursting = true;
-                    reShot = false;
-                }
-                break;
-            case ShootingType.Automatic:
-                if (canShoot) {
-                    JShoot();
-                    //isSpraying = true;
-                }
-                break;
-        }
-    }
-
-    private IEnumerator BurstShooting() {
-        for (int i = 0; i < 3; i++) {
-            JShoot();
-            yield return new WaitForSeconds(timeBetweenShots);
-        }
-        isBursting = false;
     }
 
     /// <summary>
@@ -145,7 +103,7 @@ public class Weapon : MonoBehaviour {
 
     }
 
-    private void JShoot() {
+    private void Shoot() {
 
         bulletParticleSystem.SetActive(true); // Enable Particle System
         audioShoot.Play(); // shoot sound by tiago <----------------------------------------------------------
@@ -207,94 +165,39 @@ public class Weapon : MonoBehaviour {
         canShoot = false;
     }
 
-    private bool HasBulletsInClip() {
-        if (bulletsInClip <= 0) {
-            armsAnimator.SetBool("isShooting", false);
-            return false;
-        }
-        return true;
-    }
 
-    private void BurstShot() {
-        //If the Player isn't Bursting, return.
-        if (!isBursting) {
-            return;
-        }
 
-        //If the Player can't Shot, return.
-        if (!canShoot) {
-            return;
-        }
-
-        //If there are no bullets in the Clip, Player stops Bursting, the Number of BurstShots resets and returns.
-        if (bulletsInClip <= 0) {
-            numberOfBurstShots = 0;
-            isBursting = false;
-            return;
-        }
-
-        //Increments the number of shots and removes one bullet from the clip, Time Since the Last Shot is Updated and, consequently, CanShoot as well.
-        numberOfBurstShots++;
-        bulletsInClip--;
-        timeElapsedSinceShot = timeBetweenShots;
-
-        //If the Player has Bursted three shots, The Number of Burst Shots resets and is no longer Bursting.
-        if (numberOfBurstShots == 3) {
-            numberOfBurstShots = 0;
-            isBursting = false;
-        }
-    }
 
     #region Weapon Methods
 
-    private void Shooting() {
-        //If the Player's Changing Weapon, Cannot shoot, return.
-        if (!isWeaponActive) {
-            return;
-        }
+    /// <summary>
+    /// Method that defines what type of shooting will be done.
+    /// Controls whether is a Automatic, Brust or Single Shot
+    /// </summary>
+    private void TypeOfShooting() {
 
-        //If the player doesn't have Bullets in Clip, return.
-        if (bulletsInClip <= 0) {
-            return;
-        }
+        if (!HasBulletsInClip()) return;
 
-        //If the Player is Bursting, return.
-        if (isBursting) {
-            return;
-        }
-
-        //If the player Can't shoot, return.
-        if (!canShoot) {
-            return;
-        }
-
-
-        //Depending on the current Shooting Type, different Effects and Input's will take place
         switch (shootingType[shootingTypeIndex]) {
-            case ShootingType.Automatic:
-                if (Input.GetMouseButton(0)) {
-                    bulletsInClip--;
-                    timeElapsedSinceShot = timeBetweenShots;
-
-                }
-                break;
-
-            case ShootingType.Burst:
-                if (Input.GetMouseButtonDown(0)) {
-                    isBursting = true;
-                }
-                break;
-
             case ShootingType.Single:
-                if (Input.GetMouseButtonDown(0)) {
-                    bulletsInClip--;
-                    GameObject tempBullet = Instantiate(bulletParticleSystem, shootingFrom);
-                    tempBullet.transform.localPosition = new Vector3(0, 0, 0);
-                    tempBullet.transform.parent = null;
+                if (canShoot && reShot) {
+                    Shoot();
+                    reShot = false;
+                }
+                break;
+            case ShootingType.Burst:
+                if (canShoot && !isBursting && reShot) {
+                    StartCoroutine(BurstShooting());
+                    isBursting = true;
+                    reShot = false;
+                }
+                break;
+            case ShootingType.Automatic:
+                if (canShoot) {
+                    Shoot();
                 }
                 break;
         }
-
     }
 
     private void Reload() {
@@ -324,23 +227,11 @@ public class Weapon : MonoBehaviour {
 
         StartCoroutine(ReloadWeapon(timeReload));
 
-        /*
-        //IF -> The Number of Bullets to be placed in Bullets In Clip is less than the Number of Maximum Bullets,
-        //removing that number from Maximum Bullets and Place it in Bullets In Clip 
-        //ELSE -> The Number of Bullets to be placed in Bullets In Clip is more than the Number of Maximum Bullets,
-        //Setting Maximum Bullets to 0, and Place them all in Bullets In Clip 
-        if (maximumBullets >= clipSize - bulletsInClip) {
-            maximumBullets -= (clipSize - bulletsInClip);
-            bulletsInClip = clipSize;
-        } else {
-            bulletsInClip += maximumBullets;
-            maximumBullets = 0;
-        }
-        */
-
     }
 
     private IEnumerator ReloadWeapon(float time) {
+        bulletParticleSystem.SetActive(false); // Enable Particle System
+        armsAnimator.SetTrigger("Reload");
         yield return new WaitForSeconds(time);
         //IF -> The Number of Bullets to be placed in Bullets In Clip is less than the Number of Maximum Bullets,
         //removing that number from Maximum Bullets and Place it in Bullets In Clip 
@@ -372,12 +263,50 @@ public class Weapon : MonoBehaviour {
 
     }
 
+    private bool HasBulletsInClip() {
+        if (bulletsInClip <= 0) {
+            armsAnimator.SetBool("isShooting", false);
+            return false;
+        }
+        return true;
+    }
+
     #endregion
 
-    #region Set's
+    #region PUBLIC METHODS
 
+    /// <summary>
+    /// Method that activate the Weapon;
+    /// </summary>
+    /// <param name="isChangingWeapon"></param>
     public void SetActiveWeapon(bool isChangingWeapon) {
         isWeaponActive = isChangingWeapon;
+        isReloading = false;
+    }
+
+    /// <summary>
+    /// Method that returns the Weapon Name
+    /// </summary>
+    /// <returns>Weapon Name</returns>
+    public string GetWeaponName() {
+        return SO_WeaponInformation.name;
+    }
+
+
+    #endregion
+
+    #region COROUTINES
+
+    /// <summary>
+    /// Coroutine to shoot in brust
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator BurstShooting() {
+        for (int i = 0; i < 3; i++) {
+            Shoot();
+            yield return new WaitForSeconds(timeBetweenShots);
+        }
+        isBursting = false;
     }
 
     #endregion
