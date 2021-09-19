@@ -28,10 +28,11 @@ public class DoorController : MonoBehaviour {
     private bool isDoorOpen = false;
     private bool lastDoorStatus = false;
 
-
     #region Fabio Changes
 
     [SerializeField] private bool startsOpen;
+
+    [SerializeField] private bool isAlwaysOpen;
 
     #endregion
 
@@ -46,15 +47,6 @@ public class DoorController : MonoBehaviour {
     }
 
     private void Update() {
-        #region Fabio Changes
-
-        if (Input.GetKeyDown(KeyCode.C)) {
-            if (startsOpen) {
-                CloseDoor();
-            }
-        }
-
-        #endregion
 
         if (!hasSigns) {
             return;
@@ -71,6 +63,11 @@ public class DoorController : MonoBehaviour {
     private void OnTriggerStay(Collider other) {
 
         //Debug.Log(other.transform.name);
+
+        if (isAlwaysOpen)
+        {
+            return;
+        }
 
         if (startsOpen) {
             return;
@@ -109,6 +106,12 @@ public class DoorController : MonoBehaviour {
     }
 
     private void OnTriggerExit(Collider other) {
+
+        if (isAlwaysOpen)
+        {
+            return;
+        }
+        
         if (startsOpen) {
             return;
         }
@@ -159,6 +162,13 @@ public class DoorController : MonoBehaviour {
 
         //anim.runtimeAnimatorController = ;
         startsOpen = false;
+    }
+
+    public void SetAlwaysOpen()
+    {
+        anim.SetBool("Open", true);
+
+        isAlwaysOpen = true;
     }
 
     #endregion
