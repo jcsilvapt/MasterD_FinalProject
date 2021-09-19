@@ -22,6 +22,7 @@ public class Weapon : MonoBehaviour {
     [SerializeField] private bool isWeaponActive;
     private bool isBursting;
     public bool canShoot;
+    public bool isReloading = false;
     private int numberOfBurstShots;
 
     #endregion
@@ -70,7 +71,7 @@ public class Weapon : MonoBehaviour {
     }
 
     public void WeaponUpdate() {
-        if (isWeaponActive) {
+        if (isWeaponActive && !isReloading) {
 
             if (Input.GetMouseButton(0)) {
                 JorgeShooting();
@@ -83,7 +84,7 @@ public class Weapon : MonoBehaviour {
             }
             if (Input.GetKeyDown(KeyCode.R)) {
                 Reload();
-                audioReload.Play(); // reload sound by tiago <-------------------------------------------------------------------------
+                
             }
             FireRate();
         }
@@ -149,7 +150,7 @@ public class Weapon : MonoBehaviour {
         bulletParticleSystem.SetActive(true); // Enable Particle System
         audioShoot.Play(); // shoot sound by tiago <----------------------------------------------------------
 
-        //weaponAnimator.SetBool("isShooting", true);
+        armsAnimator.SetTrigger("shoot");
         armsAnimator.SetBool("isShooting", true);
 
         bulletsFired++;
@@ -301,12 +302,12 @@ public class Weapon : MonoBehaviour {
         if (!isWeaponActive) {
             return;
         }
-
+        /*
         //If Player didn't Press the Reload Key, return.
         if (!Input.GetKeyDown(KeyCode.R)) {
             return;
         }
-
+        */
         //If the Weapon's Clip is full, return.
         if (bulletsInClip == clipSize) {
             return;
@@ -317,6 +318,13 @@ public class Weapon : MonoBehaviour {
             return;
         }
 
+        audioReload.Play(); // reload sound by tiago <-------------------------------------------------------------------------
+
+        isReloading = true;
+
+        StartCoroutine(ReloadWeapon(timeReload));
+
+        /*
         //IF -> The Number of Bullets to be placed in Bullets In Clip is less than the Number of Maximum Bullets,
         //removing that number from Maximum Bullets and Place it in Bullets In Clip 
         //ELSE -> The Number of Bullets to be placed in Bullets In Clip is more than the Number of Maximum Bullets,
@@ -328,8 +336,26 @@ public class Weapon : MonoBehaviour {
             bulletsInClip += maximumBullets;
             maximumBullets = 0;
         }
+        */
 
     }
+
+    private IEnumerator ReloadWeapon(float time) {
+        yield return new WaitForSeconds(time);
+        //IF -> The Number of Bullets to be placed in Bullets In Clip is less than the Number of Maximum Bullets,
+        //removing that number from Maximum Bullets and Place it in Bullets In Clip 
+        //ELSE -> The Number of Bullets to be placed in Bullets In Clip is more than the Number of Maximum Bullets,
+        //Setting Maximum Bullets to 0, and Place them all in Bullets In Clip 
+        if (maximumBullets >= clipSize - bulletsInClip) {
+            maximumBullets -= (clipSize - bulletsInClip);
+            bulletsInClip = clipSize;
+        } else {
+            bulletsInClip += maximumBullets;
+            maximumBullets = 0;
+        }
+        isReloading = false;
+    }
+
 
     private void FireRate() {
         //If the Time Since the Last Shot isn't enough, decrement it, update flag so it can't shoot and return.
