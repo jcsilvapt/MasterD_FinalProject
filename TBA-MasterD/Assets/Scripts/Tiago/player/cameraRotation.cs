@@ -6,7 +6,7 @@ public class cameraRotation : MonoBehaviour {
     //movimentos do Rato
     private float mouseX;
     private float mouseY;
-    [Tooltip("tHis setting is now controlled by the Keymapper controller")]
+    [Tooltip("This setting is now controlled by the Keymapper controller")]
     [SerializeField] bool invertMouse;
     private float mouseMultiplier = 100f; // This value is used to standard the mouseSensitivity values
 
@@ -85,15 +85,15 @@ public class cameraRotation : MonoBehaviour {
         Quaternion playerBodyRotate = Quaternion.Euler(0, mouseX, 0);
 
         playerBody.rotation = playerBodyRotate;
-        transform.localRotation = Quaternion.Euler(mouseY, 0, 0);
+        transform.localRotation = Quaternion.Euler(mouseY,0, 0);
 
     }
 
     private void GetMouseMovement() {
 
         float sensitivity = KeyMapper.inputKey.MouseSensitivity;
-        Debug.Log("input: " + Input.GetAxis("Mouse X"));
-        mouseX += Input.GetAxis("Mouse X") * sensitivity;
+
+        mouseX += Input.GetAxis("Mouse X") * sensitivity ;
 
         if(KeyMapper.inputKey.InvertMouse) {
             mouseY += Input.GetAxis("Mouse Y") * sensitivity;
@@ -102,7 +102,6 @@ public class cameraRotation : MonoBehaviour {
         }
         mouseY = Mathf.Clamp(mouseY, -90, 90);
 
-        Debug.Log(mouseX);
     }
 
     private void LateUpdate() {

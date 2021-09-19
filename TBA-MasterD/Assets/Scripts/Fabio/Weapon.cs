@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
-{
+public class Weapon : MonoBehaviour {
     #region Reference SO_Weapon
 
     [SerializeField] private WeaponInformation SO_WeaponInformation;
@@ -50,8 +49,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] AudioSource audioShoot; // by tiago for shooting <--------------------------------------------------------------------------
     [SerializeField] AudioSource audioReload; // by tiago for shooting <--------------------------------------------------------------------------
 
-    private void Awake()
-    {
+    private void Awake() {
         shootingType = SO_WeaponInformation.shootingType;
         shootingTypeIndex = SO_WeaponInformation.shootingTypeIndex;
         maximumBullets = SO_WeaponInformation.maximumBullets;
@@ -67,41 +65,23 @@ public class Weapon : MonoBehaviour
         cam = Camera.main;
     }
 
-    public string GetWeaponName()
-    {
+    public string GetWeaponName() {
         return SO_WeaponInformation.name;
     }
 
-    public void WeaponUpdate()
-    {
-        /*
-        FireRate();
+    public void WeaponUpdate() {
+        if (isWeaponActive) {
 
-        Shooting();
-
-        Reload();
-
-        BurstShot();
-        */
-
-        // Jorge Testes para depois juntar se necessário
-
-        if (isWeaponActive)
-        {
-
-            if (Input.GetMouseButton(0))
-            {
+            if (Input.GetMouseButton(0)) {
                 JorgeShooting();
             }
-            if (Input.GetMouseButtonUp(0))
-            {
+            if (Input.GetMouseButtonUp(0)) {
                 reShot = true;
                 armsAnimator.SetBool("isShooting", false);
                 isSpraying = false;
                 bulletsFired = 0;
             }
-            if (Input.GetKeyDown(KeyCode.R))
-            {
+            if (Input.GetKeyDown(KeyCode.R)) {
                 Reload();
                 audioReload.Play(); // reload sound by tiago <-------------------------------------------------------------------------
             }
@@ -111,31 +91,26 @@ public class Weapon : MonoBehaviour
 
     public bool reShot = true;
 
-    private void JorgeShooting()
-    {
+    private void JorgeShooting() {
 
         if (!HasBulletsInClip()) return;
 
-        switch (shootingType[shootingTypeIndex])
-        {
+        switch (shootingType[shootingTypeIndex]) {
             case ShootingType.Single:
-                if (canShoot && reShot)
-                {
+                if (canShoot && reShot) {
                     JShoot();
                     reShot = false;
                 }
                 break;
             case ShootingType.Burst:
-                if (canShoot && !isBursting && reShot)
-                {
+                if (canShoot && !isBursting && reShot) {
                     StartCoroutine(BurstShooting());
                     isBursting = true;
                     reShot = false;
                 }
                 break;
             case ShootingType.Automatic:
-                if (canShoot)
-                {
+                if (canShoot) {
                     JShoot();
                     //isSpraying = true;
                 }
@@ -143,10 +118,8 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private IEnumerator BurstShooting()
-    {
-        for (int i = 0; i < 3; i++)
-        {
+    private IEnumerator BurstShooting() {
+        for (int i = 0; i < 3; i++) {
             JShoot();
             yield return new WaitForSeconds(timeBetweenShots);
         }
@@ -158,61 +131,51 @@ public class Weapon : MonoBehaviour
     /// If Set to false the first bullet will be accurate after that the spray will begin.
     /// </summary>
     /// <param name="isToSpray">If is to reset the spray</param>
-    private void CalculateSpray(bool isToSpray)
-    {
-        if (isToSpray)
-        {
+    private void CalculateSpray(bool isToSpray) {
+        if (isToSpray) {
             spray = new Vector3(Camera.main.transform.forward.x + Random.Range(-xSpray, xSpray),
                             Camera.main.transform.forward.y + Random.Range(-ySpray, ySpray),
                             Camera.main.transform.forward.z + Random.Range(-zSpray, zSpray)
                             );
-        }
-        else
-        {
+        } else {
             spray = Camera.main.transform.forward;
         }
 
 
     }
 
-    private void JShoot()
-    {
+    private void JShoot() {
 
         bulletParticleSystem.SetActive(true); // Enable Particle System
         audioShoot.Play(); // shoot sound by tiago <----------------------------------------------------------
-        
-        weaponAnimator.SetBool("isShooting", true);
+
+        //weaponAnimator.SetBool("isShooting", true);
         armsAnimator.SetBool("isShooting", true);
-        armsAnimator.SetTrigger("shoot");
-        //anim.SetTrigger("Shoot");
 
         bulletsFired++;
 
-        if (bulletsFired >= 4)
-        {
+        if (bulletsFired >= 4) {
             isSpraying = true;
         }
 
         CalculateSpray(isSpraying);
 
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, spray, out hit))
-        {
+        if (Physics.Raycast(Camera.main.transform.position, spray, out hit)) {
 
             // On Hit instantiate Particle Effects 'On Hit' and Destroys after 1 second or so...
             GameObject tempHit = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(tempHit, 1f);
-            
+
 
             // Calculate in which direction the bullet has hit and then recalculate a fix value so the decal won't appear "flickering" with other textures
             // Probably use something around 0.001f to fix the flickering
             Vector3 decalNewPosition = new Vector3((hit.point.x + hit.normal.x / 1000), (hit.point.y + hit.normal.y / 1000), (hit.point.z + hit.normal.z / 1000));
 
-           // Debug.Log(hit.transform.name);
+            // Debug.Log(hit.transform.name);
 
             // Now checks if the thing that we hit is a destructable or not (doesn't make sense creating a decal on a object that will be changed...)
-            if (hit.transform.GetComponent<IDamage>() != null)
-            {
+            if (hit.transform.GetComponent<IDamage>() != null) {
                 hit.transform.GetComponent<IDamage>().TakeDamage();
                 bulletsInClip--;
                 timeElapsedSinceShot = timeBetweenShots;
@@ -223,8 +186,7 @@ public class Weapon : MonoBehaviour
             GameObject randomDecal;
 
             // Ok Seems I will hit something "harder" so let's see what am I hitting...
-            switch (hit.transform.tag)
-            {
+            switch (hit.transform.tag) {
                 case "Glass":
                     randomDecal = glassBulletHoles[Random.Range(0, glassBulletHoles.Length)];
                     break;
@@ -233,7 +195,7 @@ public class Weapon : MonoBehaviour
                     break;
             }
             // Instantiate decal on the spot
-            GameObject temporaryDecal = Instantiate(randomDecal, decalNewPosition, Quaternion.LookRotation(hit.normal));            
+            GameObject temporaryDecal = Instantiate(randomDecal, decalNewPosition, Quaternion.LookRotation(hit.normal));
             temporaryDecal.transform.parent = hit.transform;
             Destroy(temporaryDecal, 3f);
         }
@@ -241,36 +203,30 @@ public class Weapon : MonoBehaviour
 
         bulletsInClip--;
         timeElapsedSinceShot = timeBetweenShots;
-        canShoot = false;                
+        canShoot = false;
     }
 
-    private bool HasBulletsInClip()
-    {
-        if (bulletsInClip <= 0)
-        {
+    private bool HasBulletsInClip() {
+        if (bulletsInClip <= 0) {
             armsAnimator.SetBool("isShooting", false);
             return false;
         }
         return true;
     }
 
-    private void BurstShot()
-    {
+    private void BurstShot() {
         //If the Player isn't Bursting, return.
-        if (!isBursting)
-        {
+        if (!isBursting) {
             return;
         }
 
         //If the Player can't Shot, return.
-        if (!canShoot)
-        {
+        if (!canShoot) {
             return;
         }
 
         //If there are no bullets in the Clip, Player stops Bursting, the Number of BurstShots resets and returns.
-        if (bulletsInClip <= 0)
-        {
+        if (bulletsInClip <= 0) {
             numberOfBurstShots = 0;
             isBursting = false;
             return;
@@ -282,8 +238,7 @@ public class Weapon : MonoBehaviour
         timeElapsedSinceShot = timeBetweenShots;
 
         //If the Player has Bursted three shots, The Number of Burst Shots resets and is no longer Bursting.
-        if (numberOfBurstShots == 3)
-        {
+        if (numberOfBurstShots == 3) {
             numberOfBurstShots = 0;
             isBursting = false;
         }
@@ -291,55 +246,46 @@ public class Weapon : MonoBehaviour
 
     #region Weapon Methods
 
-    private void Shooting()
-    {
+    private void Shooting() {
         //If the Player's Changing Weapon, Cannot shoot, return.
-        if (!isWeaponActive)
-        {
+        if (!isWeaponActive) {
             return;
         }
 
         //If the player doesn't have Bullets in Clip, return.
-        if (bulletsInClip <= 0)
-        {
+        if (bulletsInClip <= 0) {
             return;
         }
 
         //If the Player is Bursting, return.
-        if (isBursting)
-        {
+        if (isBursting) {
             return;
         }
 
         //If the player Can't shoot, return.
-        if (!canShoot)
-        {
+        if (!canShoot) {
             return;
         }
 
 
         //Depending on the current Shooting Type, different Effects and Input's will take place
-        switch (shootingType[shootingTypeIndex])
-        {
+        switch (shootingType[shootingTypeIndex]) {
             case ShootingType.Automatic:
-                if (Input.GetMouseButton(0))
-                {
+                if (Input.GetMouseButton(0)) {
                     bulletsInClip--;
                     timeElapsedSinceShot = timeBetweenShots;
-                    
+
                 }
                 break;
 
             case ShootingType.Burst:
-                if (Input.GetMouseButtonDown(0))
-                {
+                if (Input.GetMouseButtonDown(0)) {
                     isBursting = true;
                 }
                 break;
 
             case ShootingType.Single:
-                if (Input.GetMouseButtonDown(0))
-                {
+                if (Input.GetMouseButtonDown(0)) {
                     bulletsInClip--;
                     GameObject tempBullet = Instantiate(bulletParticleSystem, shootingFrom);
                     tempBullet.transform.localPosition = new Vector3(0, 0, 0);
@@ -350,29 +296,24 @@ public class Weapon : MonoBehaviour
 
     }
 
-    private void Reload()
-    {
+    private void Reload() {
         //If that Weapon isn't active, return.
-        if (!isWeaponActive)
-        {
+        if (!isWeaponActive) {
             return;
         }
 
         //If Player didn't Press the Reload Key, return.
-        if (!Input.GetKeyDown(KeyCode.R))
-        {
+        if (!Input.GetKeyDown(KeyCode.R)) {
             return;
         }
 
         //If the Weapon's Clip is full, return.
-        if (bulletsInClip == clipSize)
-        {
+        if (bulletsInClip == clipSize) {
             return;
         }
 
         //If the Weapon doesn't have any Bullets Available, return.
-        if (maximumBullets <= 0)
-        {
+        if (maximumBullets <= 0) {
             return;
         }
 
@@ -380,24 +321,19 @@ public class Weapon : MonoBehaviour
         //removing that number from Maximum Bullets and Place it in Bullets In Clip 
         //ELSE -> The Number of Bullets to be placed in Bullets In Clip is more than the Number of Maximum Bullets,
         //Setting Maximum Bullets to 0, and Place them all in Bullets In Clip 
-        if (maximumBullets >= clipSize - bulletsInClip)
-        {
+        if (maximumBullets >= clipSize - bulletsInClip) {
             maximumBullets -= (clipSize - bulletsInClip);
             bulletsInClip = clipSize;
-        }
-        else
-        {
+        } else {
             bulletsInClip += maximumBullets;
             maximumBullets = 0;
         }
 
     }
 
-    private void FireRate()
-    {
+    private void FireRate() {
         //If the Time Since the Last Shot isn't enough, decrement it, update flag so it can't shoot and return.
-        if (timeElapsedSinceShot > 0)
-        {
+        if (timeElapsedSinceShot > 0) {
             timeElapsedSinceShot -= Time.deltaTime;
             canShoot = false;
             return;
@@ -406,16 +342,15 @@ public class Weapon : MonoBehaviour
         //Enough Time has passed since the Last Shot, update Flag.
         canShoot = true;
         bulletParticleSystem.SetActive(false);
-        weaponAnimator.SetBool("isShooting", false);
-        
+        //weaponAnimator.SetBool("isShooting", false);
+
     }
 
     #endregion
 
     #region Set's
 
-    public void SetActiveWeapon(bool isChangingWeapon)
-    {
+    public void SetActiveWeapon(bool isChangingWeapon) {
         isWeaponActive = isChangingWeapon;
     }
 
