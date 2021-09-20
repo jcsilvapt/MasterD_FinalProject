@@ -395,11 +395,13 @@ public class charController : MonoBehaviour, IDamage
             Debug.Log("Got Health");
             health += 20;
             healthC -= .2f;
+            Destroy(other.gameObject);
         }
         else if (other.gameObject.name == "Ammo_Parent")
         {
             Debug.Log("Got Ammo");
             GetComponentInChildren<Weapon>().maximumBullets += 20;
+            Destroy(other.gameObject);
         }
     }
 

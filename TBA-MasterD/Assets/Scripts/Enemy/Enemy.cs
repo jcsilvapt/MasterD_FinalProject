@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         {
             //TODO: º+p
         }
-        CheckIfCanShoot();      
+        CheckIfCanShoot();
     }
 
 
@@ -304,25 +304,22 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 
     private void PackDropper()
     {
-        if (target.GetComponent<charController>().health <= 50)
+        if (pistol.maximumBullets <= 24 || ak.maximumBullets <= 60 && target.GetComponent<charController>().health <= 50)
         {
-            Instantiate(healthPack, packSpawner.transform.position, Quaternion.identity);
-            Debug.Log("Dropped Health");
+            Instantiate(healthPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            Instantiate(ammoPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
         }
         else if (pistol.maximumBullets <= 24 || ak.maximumBullets <= 60)
         {
-            Debug.Log("Dropped Ammo");
-            Instantiate(ammoPack, packSpawner.transform.position, Quaternion.identity);
+            Instantiate(ammoPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
         }
-        else if (pistol.maximumBullets <= 24 || ak.maximumBullets <= 60 && target.GetComponent<charController>().health <= 50)
+        else if (target.GetComponent<charController>().health <= 50)
         {
-            Debug.Log("Dropped Ammo and health");
-            Instantiate(ammoPack, packSpawner.transform.position, Quaternion.identity);
-            Instantiate(healthPack, packSpawner.transform.position, Quaternion.identity);
+            Instantiate(healthPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
         }
         else
         {
-            
+
         }
     }
     #endregion
