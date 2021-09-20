@@ -8,7 +8,7 @@ public class charController : MonoBehaviour, IDamage
 {
 
     [Header("Player Settgins")]
-    [SerializeField] float health = 100;
+    public float health = 100;
     [SerializeField] float moveSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float crouchSpeed;
