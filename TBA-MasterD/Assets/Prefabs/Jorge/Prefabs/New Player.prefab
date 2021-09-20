@@ -2079,8 +2079,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2070918077443889220}
   - component: {fileID: 3525718167939667824}
-  - component: {fileID: 3397373853922782920}
   - component: {fileID: 4634220951313816158}
+  - component: {fileID: 9002616319807921673}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -2121,19 +2121,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &3397373853922782920
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7467024512056733830}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.125, y: 0.35, z: 0.475}
-  m_Center: {x: 0, y: 0.065, z: 0}
 --- !u!114 &4634220951313816158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2154,6 +2141,19 @@ MonoBehaviour:
   rotationLimitMinY: -30
   rotationLimitMaxY: 30
   timeBetweenShots: 2
+--- !u!135 &9002616319807921673
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7467024512056733830}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!1 &8668325692750047313
 GameObject:
   m_ObjectHideFlags: 0
