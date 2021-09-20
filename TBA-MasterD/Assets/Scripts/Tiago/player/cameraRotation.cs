@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class cameraRotation : MonoBehaviour {
     //movimentos do Rato
-    private float mouseX;
-    private float mouseY;
+    public float mouseX;
+    public float mouseY;
     [Tooltip("This setting is now controlled by the Keymapper controller")]
     [SerializeField] bool invertMouse;
     private float mouseMultiplier = 100f; // This value is used to standard the mouseSensitivity values
@@ -43,6 +43,7 @@ public class cameraRotation : MonoBehaviour {
         leftUpperArm = animator.GetBoneTransform(HumanBodyBones.LeftUpperArm);
         leftLowerArm = animator.GetBoneTransform(HumanBodyBones.LeftLowerArm);
         leftHand = animator.GetBoneTransform(HumanBodyBones.LeftHand);*/
+        mouseX = playerBody.eulerAngles.y;
     }
 
 
