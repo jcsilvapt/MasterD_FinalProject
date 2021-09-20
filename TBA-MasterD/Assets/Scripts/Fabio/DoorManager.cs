@@ -13,6 +13,44 @@ public class DoorManager : MonoBehaviour, IDamage
     //Doors To Be Closed
     [SerializeField] private DoorController[] toBeClosed;
 
+    //Detect if Player's Can Interact
+    [SerializeField] private bool canInteract;
+
+    //Detect if Player already interacted
+    private bool alreadyInteracted;
+
+    private void Start()
+    {
+        canInteract = false;
+        alreadyInteracted = false;
+    }
+
+    private void Update()
+    {
+        if(canInteract && !alreadyInteracted && Input.GetKeyDown(KeyMapper.inputKey.Interaction))
+        {
+            TakeDamage();
+            canInteract = false;
+            alreadyInteracted = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            canInteract = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            canInteract = false;
+        }
+    }
+
     public void TakeDamage()
     {
         DoorInteraction();
