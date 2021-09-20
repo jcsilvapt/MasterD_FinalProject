@@ -32,8 +32,6 @@ public class ChaseBehaviour : AIBehaviour
 
     public override void OnBehaviourEnd()
     {
-
-        Debug.Log("Chase Ended");
         navAgent.ResetPath();
         isActive = false;
         anim.SetBool("iChase", false);
@@ -42,7 +40,6 @@ public class ChaseBehaviour : AIBehaviour
     public override void OnBehaviourStart()
     {
         enemyHead.LookAt(target);
-        Debug.Log("Lets start Chase him!");
         isActive = true;
         ChasePlayer();
         anim.SetBool("iChase", true);

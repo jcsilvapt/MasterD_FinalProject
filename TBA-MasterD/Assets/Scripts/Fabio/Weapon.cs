@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
-{
+public class Weapon : MonoBehaviour {
     #region Reference SO_Weapon
 
     [SerializeField] private WeaponInformation SO_WeaponInformation;
@@ -12,7 +11,8 @@ public class Weapon : MonoBehaviour
     #region Local Weapon Stats
     [SerializeField] private ShootingType[] shootingType;
     [SerializeField] private int shootingTypeIndex;
-    public int maximumBullets;
+    [SerializeField] int currentBullets;
+    [SerializeField] int maxBulletsAllowed;
     [SerializeField] private int clipSize;
     [SerializeField] private int bulletsInClip;
     [SerializeField] private float timeBetweenShots;
@@ -56,7 +56,8 @@ public class Weapon : MonoBehaviour
         // Initialize all weapon status
         shootingType = SO_WeaponInformation.shootingType;
         shootingTypeIndex = SO_WeaponInformation.shootingTypeIndex;
-        maximumBullets = SO_WeaponInformation.maximumBullets;
+        maxBulletsAllowed = SO_WeaponInformation.maximumBullets;
+        currentBullets = maxBulletsAllowed;
         clipSize = SO_WeaponInformation.clipSize;
         bulletsInClip = SO_WeaponInformation.bulletsInClip;
         timeBetweenShots = SO_WeaponInformation.timeBetweenShots;
@@ -241,7 +242,7 @@ public class Weapon : MonoBehaviour
         }
 
         //If the Weapon doesn't have any Bullets Available, return.
-        if (maximumBullets <= 0)
+        if (currentBullets <= 0)
         {
             return;
         }
@@ -263,15 +264,15 @@ public class Weapon : MonoBehaviour
         //removing that number from Maximum Bullets and Place it in Bullets In Clip 
         //ELSE -> The Number of Bullets to be placed in Bullets In Clip is more than the Number of Maximum Bullets,
         //Setting Maximum Bullets to 0, and Place them all in Bullets In Clip 
-        if (maximumBullets >= clipSize - bulletsInClip)
+        if (currentBullets >= clipSize - bulletsInClip)
         {
-            maximumBullets -= (clipSize - bulletsInClip);
+            currentBullets -= (clipSize - bulletsInClip);
             bulletsInClip = clipSize;
         }
         else
         {
-            bulletsInClip += maximumBullets;
-            maximumBullets = 0;
+            bulletsInClip += currentBullets;
+            currentBullets = 0;
         }
         isReloading = false;
     }
@@ -326,7 +327,22 @@ public class Weapon : MonoBehaviour
     {
         return SO_WeaponInformation.name;
     }
+    
+    /// <summary>
+    /// X: Maximum Bullets | Y: Current Bullets
+    /// </summary>
+    /// <returns></returns>
+    public Vector2 GetWeaponBullets() {
+        return new Vector2(maxBulletsAllowed, currentBullets);
+    }
 
+    public void AddBullets(int amount) {
+        if(currentBullets + amount >= maxBulletsAllowed) {
+            currentBullets = maxBulletsAllowed;
+        } else {
+            currentBullets += amount;
+        }
+    }
 
     #endregion
 

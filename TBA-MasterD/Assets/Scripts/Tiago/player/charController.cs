@@ -8,7 +8,7 @@ public class charController : MonoBehaviour, IDamage
 {
 
     [Header("Player Settgins")]
-    public float health = 100;
+    [SerializeField] float health = 100;
     [SerializeField] float moveSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float crouchSpeed;
@@ -383,6 +383,18 @@ public class charController : MonoBehaviour, IDamage
         }
     }
 
+    public float GetHealth() {
+        return health;
+    }
+
+    /// <summary>
+    /// X: Maximum Bullets | Y: Current Bullets
+    /// </summary>
+    /// <returns></returns>
+    public Vector2 GetCurrentWeaponBullets() {
+        return weaponController.GetCurrentWeaponAmmo();
+    }
+
     #endregion
 
     #region Extras
@@ -400,7 +412,7 @@ public class charController : MonoBehaviour, IDamage
         else if (other.gameObject.tag == "Ammo")
         {
             Debug.Log("Got Ammo");
-            GetComponentInChildren<Weapon>().maximumBullets += 20;
+            GetComponentInChildren<Weapon>().AddBullets(20);
             Destroy(other.gameObject);
         }
     }

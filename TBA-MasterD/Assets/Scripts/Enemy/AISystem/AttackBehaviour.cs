@@ -34,7 +34,6 @@ public class AttackBehaviour : AIBehaviour
     }
     public override void OnBehaviourEnd()
     {
-        Debug.Log("Player is gone");
         isActive = false;
         anim.SetBool("iShoot", false);
     }
@@ -42,7 +41,6 @@ public class AttackBehaviour : AIBehaviour
     public override void OnBehaviourStart()
     {
         isActive = true;
-        Debug.Log("I'm Attacking the enemy");
         enemy.Shoot();
         anim.SetBool("iShoot", true);
         //self.GetComponent<Enemy>().CheckSurroundingEnemies();
@@ -66,7 +64,6 @@ public class AttackBehaviour : AIBehaviour
                 }
                 else
                 {
-                    Debug.Log("Lost the Player");
                     stateMachine.HandleEvent(AIEvents.RangeToFar);
                     enemy.SetShooting(false);
                     return;

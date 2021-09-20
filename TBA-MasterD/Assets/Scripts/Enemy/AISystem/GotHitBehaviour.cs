@@ -91,8 +91,6 @@ public class GotHitBehaviour : AIBehaviour
 
     public override void OnBehaviourEnd()
     {
-        Debug.Log("Got Hit Behaviour Ended");
-
         //Set IsActive to False, and Reset all the other Flags.
         //Set Distance to 0
         isActive = false;
@@ -110,7 +108,6 @@ public class GotHitBehaviour : AIBehaviour
 
     public override void OnBehaviourStart()
     {
-        //  Debug.Log("Got Hit Behaviour Started");
 
         //Set IsActive to True, Set all Flags to False.
         //Set Distance to 0
@@ -163,7 +160,6 @@ public class GotHitBehaviour : AIBehaviour
 
         //Set Is Distance Calculated to True.
         isDistanceCalculated = true;
-        Debug.Log("distancia calculada " + self.name);
     }
 
     private void ReactToHitDistanceShort()

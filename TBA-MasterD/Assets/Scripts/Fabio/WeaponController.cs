@@ -182,6 +182,18 @@ public class WeaponController : MonoBehaviour {
         return hasWeapon;
     }
 
+    /// <summary>
+    /// X: Maximum Bullets | Y: Current Bullets
+    /// </summary>
+    /// <returns></returns>
+    public Vector2 GetCurrentWeaponAmmo() {
+        return currentWeaponEquipped.GetWeaponBullets();
+    }
+
+    public void AddBulletsToCurrentWeapon(int amount) {
+        currentWeaponEquipped.AddBullets(amount);
+    }
+
     #endregion
 
 }

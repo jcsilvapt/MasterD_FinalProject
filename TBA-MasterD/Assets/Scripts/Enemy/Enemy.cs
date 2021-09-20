@@ -304,20 +304,25 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 
     private void PackDropper()
     {
-        float health = target.GetComponent<charController>().health;
-        Debug.Log(health + " " + pistol.maximumBullets + " " + ak.maximumBullets);
-        if (health <= 50)
-        {
-            Instantiate(healthPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
-        }
-        else if (pistol.maximumBullets <= 24 || ak.maximumBullets <= 60)
-        {
-            Instantiate(ammoPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
-        }
-        else if (pistol.maximumBullets <= 24 || ak.maximumBullets <= 60 && health <= 50)
+        float health = target.GetComponent<charController>().GetHealth();
+        int currentBullets = (int) target.GetComponent<charController>().GetCurrentWeaponBullets().y;
+        int currentMaximumBullets = (int)target.GetComponent<charController>().GetCurrentWeaponBullets().x;
+        Debug.Log("health: " + health + ", MaximumBullets: " + currentMaximumBullets + ", CurrentBullets: " + currentBullets);
+        if (currentBullets <= currentMaximumBullets / 2 && health <= 50)
         {
             Instantiate(healthPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
             Instantiate(ammoPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            Debug.Log("Droping Health & Ammo");
+        }
+        else if (currentBullets <= currentMaximumBullets /2) 
+        {
+            Instantiate(ammoPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            Debug.Log("Dropping Ammo");
+        }
+        else if (health <= 50)
+        {
+            Instantiate(healthPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            Debug.Log("Dropping Health");
         }
         else
         {
