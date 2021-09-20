@@ -372,12 +372,12 @@ public class charController : MonoBehaviour, IDamage
         if (health > 0)
         {
             healthC += 0.1f;
-        }          
+        }
     }
 
     public void CheckStealthiness()
     {
-        if(health < 100)
+        if (health < 100)
         {
             isStealth = false;
         }
@@ -385,4 +385,23 @@ public class charController : MonoBehaviour, IDamage
 
     #endregion
 
+    #region Extras
+
+    // Used when player touches health pack or ammo pack, get some ammo or some health
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Health_Parent")
+        {
+            Debug.Log("Got Health");
+            health += 20;
+            healthC -= .2f;
+        }
+        else if (other.gameObject.name == "Ammo_Parent")
+        {
+            Debug.Log("Got Ammo");
+            GetComponentInChildren<Weapon>().maximumBullets += 20;
+        }
+    }
+
+    #endregion
 }

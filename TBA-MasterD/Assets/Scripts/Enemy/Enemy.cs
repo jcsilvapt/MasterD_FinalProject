@@ -322,7 +322,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         }
         else
         {
-            return;
+            
         }
     }
     #endregion
