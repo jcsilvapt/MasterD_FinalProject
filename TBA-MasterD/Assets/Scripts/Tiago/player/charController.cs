@@ -390,20 +390,19 @@ public class charController : MonoBehaviour, IDamage
     // Used when player touches health pack or ammo pack, get some ammo or some health
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Health_Parent")
+        if (other.gameObject.tag == "Health")
         {
             Debug.Log("Got Health");
             health += 20;
             healthC -= .2f;
             Destroy(other.gameObject);
         }
-        else if (other.gameObject.name == "Ammo_Parent")
+        else if (other.gameObject.tag == "Ammo")
         {
             Debug.Log("Got Ammo");
             GetComponentInChildren<Weapon>().maximumBullets += 20;
             Destroy(other.gameObject);
         }
     }
-
     #endregion
 }
