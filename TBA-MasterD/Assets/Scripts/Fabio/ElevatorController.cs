@@ -1,0 +1,37 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ElevatorController : MonoBehaviour
+{
+    #region References
+
+    //Animator Reference
+    private Animator animator;
+
+    //Signs GameObjects References
+    [SerializeField] private GameObject signAvailable;
+    [SerializeField] private GameObject signUnavailable;
+
+    #endregion
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    public void SetAvailability(bool isAvailable)
+    {
+        signAvailable.SetActive(isAvailable);
+        signUnavailable.SetActive(!isAvailable);
+
+        animator.SetBool("Open", isAvailable);
+        animator.SetBool("Close", !isAvailable);
+    }
+
+    public void CloseElevatorDoor()
+    {
+        animator.SetBool("Close", true);
+        animator.SetBool("Open", false);
+    }
+}

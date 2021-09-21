@@ -313,4 +313,9 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, AIStateMachine, IDamage
     }
 
     #endregion
+
+    public float GetEnemyHealth()
+    {
+        return health;
+    }
 }
