@@ -18,6 +18,8 @@ public class ElevatorController : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+
+        signUnavailable.SetActive(true);
     }
 
     public void SetAvailability(bool isAvailable)
