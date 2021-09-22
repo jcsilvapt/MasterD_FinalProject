@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour {
 
 
         Debug.LogWarning("Game Manager: To Hide the mouse cursor just press 'K'");
-        
+
         /*
         if (!displayCursor) {
             ToggleCursorVisibility();
@@ -196,25 +196,23 @@ public class GameManager : MonoBehaviour {
         return -80;
     }
 
-#endregion
+    #endregion
 
-private void _SetPauseGame() {
-    if (isGamePaused) {
-        Time.timeScale = 1;
-        isGamePaused = false;
-        Debug.Log("Game Manager: Game Unpaused");
-    } else {
-        Time.timeScale = 0;
-        isGamePaused = true;
-        Debug.Log("Game Manager: Game Paused");
+    private void _SetPauseGame() {
+        if (isGamePaused) {
+            Time.timeScale = 1;
+            isGamePaused = false;
+            Debug.Log("Game Manager: Game Unpaused");
+        } else {
+            Time.timeScale = 0;
+            isGamePaused = true;
+            Debug.Log("Game Manager: Game Paused");
+        }
     }
-}
 
-private void ToggleCursorVisibility() {
-    showCursor = !showCursor;
-    Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Confined;
-    Cursor.visible = showCursor ? true : false;
-}
-
-
+    private void ToggleCursorVisibility() {
+        showCursor = !showCursor;
+        Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Confined;
+        Cursor.visible = showCursor ? true : false;
+    }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class cameraRotation : MonoBehaviour {
     //movimentos do Rato
+
     public float mouseX;
     public float mouseY;
     [Tooltip("This setting is now controlled by the Keymapper controller")]
@@ -83,20 +84,22 @@ public class cameraRotation : MonoBehaviour {
     }
 
     private void RotateCamera() {
-        Quaternion playerBodyRotate = Quaternion.Euler(0, mouseX, 0);
+        //Quaternion playerBodyRotate = Quaternion.Euler(0, mouseX, 0);
+        Vector3 bodyRotation = new Vector3(0, mouseX, 0);
 
-        playerBody.rotation = playerBodyRotate;
-        transform.localRotation = Quaternion.Euler(mouseY,0, 0);
+        playerBody.localRotation = Quaternion.AngleAxis(mouseX, playerBody.transform.up);
+        transform.localRotation = Quaternion.AngleAxis(mouseY, Vector3.right);
 
     }
 
     private void GetMouseMovement() {
 
         float sensitivity = KeyMapper.inputKey.MouseSensitivity;
+        Debug.Log("Camera Sensitivity: " + sensitivity);
 
-        mouseX += Input.GetAxis("Mouse X") * sensitivity ;
+        mouseX += Input.GetAxis("Mouse X") * sensitivity;
 
-        if(KeyMapper.inputKey.InvertMouse) {
+        if (KeyMapper.inputKey.InvertMouse) {
             mouseY += Input.GetAxis("Mouse Y") * sensitivity;
         } else {
             mouseY -= Input.GetAxis("Mouse Y") * sensitivity;
