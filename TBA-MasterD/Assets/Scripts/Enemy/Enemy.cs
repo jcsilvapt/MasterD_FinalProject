@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     [Tooltip("Use to determine if this character is alive or not.")]
     [SerializeField] bool isAlive = true;
     [Tooltip("Used to see if there are allies nearby to attack target")]
-    [SerializeField] bool allyAlert = false;
+    [SerializeField] bool canAlertClosebyEnemies = false;
 
     [Header("AI Settings")]
 
@@ -199,7 +199,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     }
     public void CheckSurroundingEnemies() //see if there are enemies nearby and activate behaviours to help them attack the player
     {
-        if (allyAlert == true)
+        if (canAlertClosebyEnemies == true)
         {
             if (hasAlertedOther == false)
             {
@@ -250,7 +250,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     {
         if (canShoot)
         {
-            shootSoundSource.Play();
+            shootSoundSource.PlayOneShot(shootSoundSource.clip);
             RaycastHit hit;
             if (Physics.Raycast(bulletSpawn.transform.position, bulletSpawn.transform.forward, out hit))
             {
@@ -271,13 +271,13 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     #region Animation, Alive Checker and Drop Packs
     public void TakeDamage()
     {
+        // Get all enemies closeby and activate the behaviour...
         if (isShooting == false)
         {
             HandleEvent(AIEvents.GotAttacked);
         }
         health -= 10;
         healthC = healthC + 0.1f;
-        //CheckSurroundingEnemies();
         if (health <= 0) // Is Dead and does this
         {
             SetKinematic(false);
@@ -289,8 +289,9 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
             DisableAgent();
             PackDropper();
             Debug.Log("me dies");
+            return;
         }
-
+        CheckSurroundingEnemies();
     }
 
     private void OnAnimatorMove()

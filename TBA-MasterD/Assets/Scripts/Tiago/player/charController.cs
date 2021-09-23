@@ -30,8 +30,8 @@ public class charController : MonoBehaviour, IDamage
     [SerializeField] bool enableStairsWalk = false;
     [SerializeField] GameObject stepHigh;
     [SerializeField] GameObject stepLow;
-    [SerializeField] float stepHeight;
-    [SerializeField] float stepSmooth;
+    //[SerializeField] float stepHeight;
+    [SerializeField] float stepJumpHeight;
 
     [Header("Player Settings: Crouch")]
     [SerializeField] Transform character;
@@ -266,7 +266,7 @@ public class charController : MonoBehaviour, IDamage
             RaycastHit hitHigher;
             if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(Vector3.forward), out hitHigher, 0.2f)) // so é chamado caso o primeiro atinga algo
             {
-                rb.position -= new Vector3(0f, -stepSmooth, 0f); //quanto maior os stepsmooth, mais a personagem salta
+                rb.position -= new Vector3(0f, -stepJumpHeight, 0f); //quanto maior os stepsmooth, mais a personagem salta
             }
         }
 
@@ -276,7 +276,7 @@ public class charController : MonoBehaviour, IDamage
             RaycastHit hitHigher45;
             if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitHigher45, 0.2f))
             {
-                rb.position -= new Vector3(0f, -stepSmooth, 0f);
+                rb.position -= new Vector3(0f, -stepJumpHeight, 0f);
             }
         }
 
@@ -286,7 +286,7 @@ public class charController : MonoBehaviour, IDamage
             RaycastHit hitHigher90;
             if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitHigher90, 0.2f))
             {
-                rb.position -= new Vector3(0f, -stepSmooth, 0f);
+                rb.position -= new Vector3(0f, -stepJumpHeight, 0f);
             }
         }
 
