@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class charController : MonoBehaviour, IDamage
 {
 
     [Header("Player Settgins")]
     [SerializeField] float health = 100;
+    [SerializeField] float maxHealth = 100;
     [SerializeField] float moveSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float crouchSpeed;
@@ -79,8 +81,8 @@ public class charController : MonoBehaviour, IDamage
     [SerializeField] float radius;
     [Tooltip("Check if player is still stealth or if enemy saw him")]
     public bool isStealth = true;
-
-
+    [SerializeField] Image screenDamage;
+    [SerializeField] CanvasGroup screenRed;
     void Start()
     {
         // Get References
@@ -104,8 +106,6 @@ public class charController : MonoBehaviour, IDamage
 
     void Update()
     {
-
-        //Testing pruposes
         healthEmission.SetColor("_EmissionColor", healthColor * 3);
 
         healthColor = Color.Lerp(Color.green, Color.red * 3, healthC);
@@ -371,7 +371,8 @@ public class charController : MonoBehaviour, IDamage
         health -= 5;
         if (health > 0)
         {
-            healthC += 0.1f;
+            ScreenDamageColor();
+            healthC += 0.05f;
         }
     }
 
@@ -382,8 +383,16 @@ public class charController : MonoBehaviour, IDamage
             isStealth = false;
         }
     }
+    private void CheckHealth()
+    {
+        if(health > maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
 
-    public float GetHealth() {
+    public float GetHealth()
+    {
         return health;
     }
 
@@ -391,7 +400,8 @@ public class charController : MonoBehaviour, IDamage
     /// X: Maximum Bullets | Y: Current Bullets
     /// </summary>
     /// <returns></returns>
-    public Vector2 GetCurrentWeaponBullets() {
+    public Vector2 GetCurrentWeaponBullets()
+    {
         return weaponController.GetCurrentWeaponAmmo();
     }
 
@@ -404,17 +414,25 @@ public class charController : MonoBehaviour, IDamage
     {
         if (other.gameObject.tag == "Health")
         {
-            Debug.Log("Got Health");
-            health += 20;
-            healthC -= .2f;
+            health += 50;
+            CheckHealth();
+            ScreenDamageColor();
+            healthC -= .5f;
             Destroy(other.gameObject);
         }
         else if (other.gameObject.tag == "Ammo")
         {
-            Debug.Log("Got Ammo");
             GetComponentInChildren<Weapon>().AddBullets(20);
             Destroy(other.gameObject);
         }
+    }
+
+    private void ScreenDamageColor()
+    {
+        /* Color c = screenDamage.color;
+         c.a = 1 - (health / 100);
+         screenDamage.color = c;*/
+        screenRed.alpha = 1 - (health / 100);
     }
     #endregion
 }

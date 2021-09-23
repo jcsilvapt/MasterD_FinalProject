@@ -41,6 +41,7 @@ public class AttackBehaviour : AIBehaviour
     public override void OnBehaviourStart()
     {
         isActive = true;
+        enemy.hasAlertedOther = true;
         enemy.Shoot();
         anim.SetBool("iShoot", true);
         //self.GetComponent<Enemy>().CheckSurroundingEnemies();

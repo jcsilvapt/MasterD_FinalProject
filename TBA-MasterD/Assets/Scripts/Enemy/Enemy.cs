@@ -22,11 +22,10 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     private bool isShooting;
     [SerializeField] Transform enemyHead;
     [Tooltip("used to check if ammo is equal or below half")]
-    [SerializeField] Weapon pistol;
-    [SerializeField] Weapon ak;
     [SerializeField] GameObject ammoPack;
     [SerializeField] GameObject healthPack;
-    [SerializeField] GameObject packSpawner;
+    [SerializeField] GameObject healthSpawner;
+    [SerializeField] GameObject ammoSpawner;
 
 
     [Header("Shooting Settings")]
@@ -38,6 +37,8 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     public ParticleSystem muzzleFlash;
     public float timeToShoot = 1f;
     public float elapsedTime = 0;
+    [SerializeField] AudioSource shootSoundSource;
+    [SerializeField] AudioClip shootSound;
 
 
     [Header("Enemy Settings")]
@@ -61,6 +62,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     [SerializeField] float distanceToShoot;
     [Tooltip("Define here the patrol points of this AI System")]
     [SerializeField] Transform[] patrolWayPoints;
+    public bool hasAlertedOther = false;
 
     private AIStates currentState;
     private AIBehaviour currentBehaviour;
@@ -198,15 +200,20 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     {
         if (allyAlert == true)
         {
-            Collider[] hitColliders = Physics.OverlapBox(this.transform.position, new Vector3(6, 1, 6));
-
-            foreach (Collider Ally in hitColliders)
+            if (hasAlertedOther == false)
             {
-                if (Ally.gameObject.tag == "Enemy")
+                Collider[] hitColliders = Physics.OverlapBox(this.transform.position, new Vector3(6, 1, 6));
+
+                foreach (Collider Ally in hitColliders)
                 {
-                    if (Ally.transform.GetComponent<Enemy>().currentState != AIStates.GotHit || Ally.transform.GetComponent<Enemy>().currentState != AIStates.Chase)
+                    if (Ally.gameObject.tag == "Enemy")
                     {
-                        Ally.transform.GetComponent<Enemy>().HandleEvent(AIEvents.GotAttacked);
+
+                        if (Ally.transform.GetComponent<Enemy>().currentState != AIStates.GotHit || Ally.transform.GetComponent<Enemy>().currentState != AIStates.Chase)
+                        {
+                            hasAlertedOther = true;
+                            Ally.transform.GetComponent<Enemy>().HandleEvent(AIEvents.GotAttacked);
+                        }
                     }
                 }
             }
@@ -218,6 +225,8 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     {
         return distanceToViewTarget;
     }
+
+    
     #endregion
 
     #region Shooting
@@ -240,6 +249,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     {
         if (canShoot)
         {
+            shootSoundSource.Play();
             RaycastHit hit;
             if (Physics.Raycast(bulletSpawn.transform.position, bulletSpawn.transform.forward, out hit))
             {
@@ -253,6 +263,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     public void SetShooting(bool iShoot)
     {
         isShooting = iShoot;
+
     }
     #endregion
 
@@ -305,23 +316,23 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     private void PackDropper()
     {
         float health = target.GetComponent<charController>().GetHealth();
-        int currentBullets = (int) target.GetComponent<charController>().GetCurrentWeaponBullets().y;
+        int currentBullets = (int)target.GetComponent<charController>().GetCurrentWeaponBullets().y;
         int currentMaximumBullets = (int)target.GetComponent<charController>().GetCurrentWeaponBullets().x;
         Debug.Log("health: " + health + ", MaximumBullets: " + currentMaximumBullets + ", CurrentBullets: " + currentBullets);
         if (currentBullets <= currentMaximumBullets / 2 && health <= 50)
         {
-            Instantiate(healthPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
-            Instantiate(ammoPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            Instantiate(healthPack, healthSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            Instantiate(ammoPack, ammoSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
             Debug.Log("Droping Health & Ammo");
         }
-        else if (currentBullets <= currentMaximumBullets /2) 
+        else if (currentBullets <= currentMaximumBullets / 2)
         {
-            Instantiate(ammoPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            Instantiate(ammoPack, ammoSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
             Debug.Log("Dropping Ammo");
         }
         else if (health <= 50)
         {
-            Instantiate(healthPack, packSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            Instantiate(healthPack, healthSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
             Debug.Log("Dropping Health");
         }
         else

@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 7082358348380692310}
   - component: {fileID: 5020774907006430108}
   - component: {fileID: 7782502604176159630}
-  - component: {fileID: 6094579390012104937}
+  - component: {fileID: 1400090124}
   m_Layer: 0
   m_Name: cone_transito (1)
-  m_TagString: Untagged
+  m_TagString: NotHideable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6822280933983357513}
   m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 15.488831, y: 0.2887025, z: -18.067278}
-  m_LocalScale: {x: 22.341473, y: 22.341467, z: 22.341467}
+  m_LocalScale: {x: 22.341473, y: 22.34147, z: 22.341467}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -98,8 +98,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &6094579390012104937
-MeshCollider:
+--- !u!65 &1400090124
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -108,7 +108,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1566525361488777857, guid: 36fec5e394aa9954a9d7af693a9c8e5b, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.019416623, y: 0.019416621, z: 0.020653047}
+  m_Center: {x: -0.0000973465, y: -4.471117e-12, z: -0.00032652266}

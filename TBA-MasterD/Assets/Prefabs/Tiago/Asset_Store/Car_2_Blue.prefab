@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 3458442506456516707}
   m_Layer: 0
   m_Name: Car_2_Blue
-  m_TagString: Untagged
+  m_TagString: NotHideable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

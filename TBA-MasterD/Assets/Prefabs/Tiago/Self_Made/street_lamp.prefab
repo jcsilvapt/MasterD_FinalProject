@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4207156350385023801}
   m_Layer: 0
   m_Name: street_lamp
-  m_TagString: Untagged
+  m_TagString: NotHideable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

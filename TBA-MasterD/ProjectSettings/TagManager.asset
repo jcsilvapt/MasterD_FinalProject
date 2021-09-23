@@ -15,6 +15,8 @@ TagManager:
   - NotHideable
   - Wood
   - Metal
+  - Health
+  - Ammo
   layers:
   - Default
   - TransparentFX

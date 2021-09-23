@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3618561619509698321}
   m_Layer: 0
   m_Name: Car_6_Blue
-  m_TagString: Untagged
+  m_TagString: NotHideable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 3160101149682504210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 98.46799, y: -1.78, z: 44.501495}
-  m_LocalScale: {x: 106.02905, y: 106.02905, z: 106.02905}
+  m_LocalScale: {x: 115.2921, y: 115.29209, z: 115.2921}
   m_Children:
   - {fileID: 3160101149682734494}
   - {fileID: 3160101149682780454}
