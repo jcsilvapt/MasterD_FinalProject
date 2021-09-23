@@ -109,12 +109,13 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         if (isAlive && enableAISystem)
         {
             currentBehaviour.OnUpdate();
+            CheckIfCanShoot();
         }
         else
         {
             //TODO: º+p
         }
-        CheckIfCanShoot();
+        
     }
 
 
@@ -276,7 +277,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         }
         health -= 10;
         healthC = healthC + 0.1f;
-        CheckSurroundingEnemies();
+        //CheckSurroundingEnemies();
         if (health <= 0) // Is Dead and does this
         {
             SetKinematic(false);
