@@ -17,7 +17,7 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   gradingMode:
-    overrideState: 0
+    overrideState: 1
     value: 1
   externalLut:
     overrideState: 0
@@ -56,13 +56,13 @@ MonoBehaviour:
     value: -1
   tint:
     overrideState: 0
-    value: -59
+    value: -100
   colorFilter:
     overrideState: 0
     value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     overrideState: 0
-    value: 0
+    value: -50
   saturation:
     overrideState: 0
     value: -100
@@ -71,7 +71,7 @@ MonoBehaviour:
     value: 0
   postExposure:
     overrideState: 1
-    value: 0.2
+    value: -0.01
   contrast:
     overrideState: 0
     value: -18
@@ -1323,7 +1323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94fcd11afffcb142908bfcb1e261fba, type: 3}
   m_Name: MotionBlur
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
@@ -1402,7 +1402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -1436,7 +1436,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 1.6
+    value: 1.47
   threshold:
     overrideState: 0
     value: 1
@@ -1483,13 +1483,13 @@ MonoBehaviour:
     value: 1
   filtering:
     overrideState: 1
-    value: {x: 53.999992, y: 99}
+    value: {x: 53.99999, y: 99}
   minLuminance:
     overrideState: 1
     value: 0.18
   maxLuminance:
     overrideState: 1
-    value: 0.74
+    value: 9
   keyValue:
     overrideState: 1
     value: 1
