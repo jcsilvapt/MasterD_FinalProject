@@ -9,8 +9,7 @@ using UnityEngine.AI;
 public class AIUtils_Fabio {
 
     //Detects if Self has vision on the Target
-    public static bool HasVisionOfPlayer(Transform self, Transform target, float maxDistance, int layerMask = 8) {
-
+    public static bool HasVisionOfPlayer(Transform self, Transform target, float maxDistance, int layerMask = 2) {
         // Bit shift the index of the layer (8) to get a bit mask
         layerMask = 1 << layerMask;
         // This would cast rays only against colliders in layer 8.
@@ -39,7 +38,6 @@ public class AIUtils_Fabio {
        
         //If Target can be seen by the RayCast and HitInfo GameObject name is the same as the Target's, return true. Else, return false.
         if (Physics.Raycast(palpatine, out hitInfo, maxDistance, layerMask)) {
-            //  Debug.Log("I'm seeing: " + hitInfo.transform.name);
             if (hitInfo.transform.tag == target.tag) {
                 self.LookAt(target);
                 return true;

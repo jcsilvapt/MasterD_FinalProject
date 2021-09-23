@@ -9,6 +9,9 @@ public class SecurityCamera : MonoBehaviour
     //Second Level Manager Reference
     [SerializeField] private SecondLevelManager secondLevelManager;
 
+    //Second Level AI Manager Reference
+    [SerializeField] private Fabio_AIManager aiManager;
+
     //Enemies References
     [SerializeField] private Fabio_EnemySecondLevel[] enemies;
 
@@ -54,9 +57,7 @@ public class SecurityCamera : MonoBehaviour
     {
         foreach(Fabio_EnemySecondLevel enemy in enemies)
         {
-            //Posso vir a substituir esta linha por algo como enemy.ActivateEnemy e, lá dentro, ter algo que me activa a luz do inimigo.
-            enemy.gameObject.transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:Neck/mixamorig:Head/Spot Light").gameObject.SetActive(true);
-            //TODO: Activate AI
+            aiManager.PlayerDetected();
         }
 
         foreach (SecurityCamera camera in securityCameras)
