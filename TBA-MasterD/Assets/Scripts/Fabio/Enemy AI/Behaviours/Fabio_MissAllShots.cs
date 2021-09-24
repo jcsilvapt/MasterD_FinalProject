@@ -39,15 +39,15 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
         timeBetweenShots = 0.1f;
-        currentTimerBetweenShots = timeBetweenShots;
     }
 
     public override void OnBehaviourStart()
     {
         isActive = true;
-        animator.SetBool("Idle", true);
+        animator.SetBool("IsShooting", true);
 
         numberOfShots = 0;
+        currentTimerBetweenShots = 0;
 
         Debug.Log("Started " + GetName());
     }
@@ -55,9 +55,10 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
     public override void OnBehaviourEnd()
     {
         isActive = false;
-        animator.SetBool("Idle", false);
+        animator.SetBool("IsShooting", false);
 
         numberOfShots = 0;
+        currentTimerBetweenShots = 0;
 
         Debug.Log("Ended " + GetName());
     }
@@ -76,17 +77,19 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
          * */
         if (isActive)
         {
+            Debug.Log("MissAllShots update entered with " + numberOfShots + " shots");
             currentTimerBetweenShots += Time.deltaTime;
 
             if (currentTimerBetweenShots >= timeBetweenShots && numberOfShots > 0)
             {
+                Debug.Log("MissAllShots just fired! I have " + (numberOfShots - 1) + " shots left!");
+
                 RaycastHit hit;
-                if (Physics.Raycast(bulletSpawn.transform.position, bulletSpawn.transform.forward, out hit))
+                if (Physics.Raycast(bulletSpawn.transform.position, GetMissedShot(), out hit))
                 {
                     if (hit.transform.GetComponent<IDamage>() != null)
                     {
                         hit.transform.GetComponent<IDamage>().TakeDamage();
-                        aiManager.HitPlayer();
                     }
                 }
 
@@ -103,6 +106,23 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
 
     public void SetAllShots(int shots)
     {
+        Debug.Log("Set All Shots was called! It has " + shots + " shots left!");
         numberOfShots = shots;
+    }
+
+    public Vector3 GetMissedShot()
+    {
+        Vector3 bulletDirection = bulletSpawn.transform.forward;
+
+        int isXPositive = Random.Range(0, 2);
+        int isYPositive = Random.Range(0, 2);
+
+        float xMissedDirection = Random.Range(3f, 12f);
+        float yMissedDirection = Random.Range(3f, 12f);
+
+        xMissedDirection = (isXPositive == 0) ? xMissedDirection : -xMissedDirection;
+        yMissedDirection = (isYPositive == 0) ? yMissedDirection : -yMissedDirection;
+
+        return bulletDirection = new Vector3(bulletDirection.x + xMissedDirection, bulletDirection.y + yMissedDirection, bulletDirection.z);
     }
 }

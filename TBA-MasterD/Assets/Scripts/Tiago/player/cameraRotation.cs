@@ -95,7 +95,7 @@ public class cameraRotation : MonoBehaviour {
     private void GetMouseMovement() {
 
         float sensitivity = KeyMapper.inputKey.MouseSensitivity;
-        Debug.Log("Camera Sensitivity: " + sensitivity);
+        //Debug.Log("Camera Sensitivity: " + sensitivity);
 
         mouseX += Input.GetAxis("Mouse X") * sensitivity;
 

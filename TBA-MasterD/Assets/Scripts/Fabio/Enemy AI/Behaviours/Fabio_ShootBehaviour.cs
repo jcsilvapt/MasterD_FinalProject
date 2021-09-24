@@ -38,15 +38,15 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
         timeBetweenShots = 0.1f;
-        currentTimerBetweenShots = timeBetweenShots;
     }
 
     public override void OnBehaviourStart()
     {
         isActive = true;
-        animator.SetBool("Idle", true);
+        animator.SetBool("IsShooting", true);
 
         numberOfShots = Random.Range(1, 5);
+        currentTimerBetweenShots = timeBetweenShots;
 
         Debug.Log("Started " + GetName());
     }
@@ -54,9 +54,10 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
     public override void OnBehaviourEnd()
     {
         isActive = false;
-        animator.SetBool("Idle", false);
+        animator.SetBool("IsShooting", false);
 
         numberOfShots = 0;
+        currentTimerBetweenShots = 0;
 
         Debug.Log("Ended " + GetName());
     }
@@ -67,7 +68,7 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
         {
             currentTimerBetweenShots += Time.deltaTime;
 
-            if(currentTimerBetweenShots <= timeBetweenShots && numberOfShots > 0)
+            if(currentTimerBetweenShots >= timeBetweenShots && numberOfShots > 0)
             {
                 Debug.Log("I shot!  Number of Shots Left: " + numberOfShots);
 
@@ -76,9 +77,18 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
                 {
                     if (hit.transform.GetComponent<IDamage>() != null)
                     {
-                        Debug.Log("I hit the Player!");
                         hit.transform.GetComponent<IDamage>().TakeDamage();
-                        aiManager.HitPlayer();
+                        
+                        if(hit.transform.gameObject.tag == "Player")
+                        {
+                            numberOfShots--;
+
+                            Debug.Log("I hit the Player!");
+                            Debug.Log("Shoot! I still have " + numberOfShots + " shots left!");
+                            aiManager.HitPlayer();
+
+                            return;
+                        }
                     }
                 }
 
@@ -88,7 +98,7 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
 
             if (numberOfShots <= 0)
             {
-                Debug.Log("!Entered!");
+                Debug.Log("I don't have any more bullets!");
                 stateMachine.HandleEvent(Fabio_AIEvents.FinishedShooting);
             }
         }

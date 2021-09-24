@@ -15,12 +15,16 @@ public class Fabio_ChaseBehaviour : Fabio_AIBehaviour
     private Transform target;
 
     private Transform enemyHead;
+    private Fabio_AIManager aiManager;
+
+    private Vector3 destiny;
 
     #endregion
 
-    public Fabio_ChaseBehaviour(MonoBehaviour self, Fabio_AIStateMachine stateMachine, Transform enemyHead) : base(self, stateMachine, "Chase")
+    public Fabio_ChaseBehaviour(MonoBehaviour self, Fabio_AIStateMachine stateMachine, Transform enemyHead, Fabio_AIManager aiManager) : base(self, stateMachine, "Chase")
     {
         this.enemyHead = enemyHead;
+        this.aiManager = aiManager;
     }
 
     public override void Init()
@@ -34,7 +38,9 @@ public class Fabio_ChaseBehaviour : Fabio_AIBehaviour
     public override void OnBehaviourStart()
     {
         isActive = true;
-        animator.SetBool("Idle", true);
+        animator.SetBool("IsChasing", true);
+
+        SetEnemyDestination();
 
         Debug.Log("Started " + GetName());
     }
@@ -42,7 +48,7 @@ public class Fabio_ChaseBehaviour : Fabio_AIBehaviour
     public override void OnBehaviourEnd()
     {
         isActive = false;
-        animator.SetBool("Idle", false);
+        animator.SetBool("IsChasing", false);
 
         Debug.Log("Ended " + GetName());
     }
@@ -51,7 +57,24 @@ public class Fabio_ChaseBehaviour : Fabio_AIBehaviour
     {
         if (isActive)
         {
+            if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead, target, 50))
+            {
+                aiManager.HasVisionOnPlayer();
+                stateMachine.HandleEvent(Fabio_AIEvents.SawPlayer);
+                return;
+            }
+
+            if (target.position != destiny)
+            {
+                SetEnemyDestination();
+            }
 
         }
+    }
+
+    private void SetEnemyDestination()
+    {
+        destiny = target.position;
+        agent.SetDestination(destiny);
     }
 }

@@ -36,7 +36,7 @@ public class Fabio_ReadyToFireBehaviour : Fabio_AIBehaviour
     public override void OnBehaviourStart()
     {
         isActive = true;
-        animator.SetBool("Idle", true);
+        animator.SetBool("IsAware", true);
 
         Debug.Log("Started " + GetName());
     }
@@ -44,7 +44,7 @@ public class Fabio_ReadyToFireBehaviour : Fabio_AIBehaviour
     public override void OnBehaviourEnd()
     {
         isActive = false;
-        animator.SetBool("Idle", false);
+        animator.SetBool("IsAware", false);
 
         Debug.Log("Ended " + GetName());
     }
@@ -53,14 +53,13 @@ public class Fabio_ReadyToFireBehaviour : Fabio_AIBehaviour
     {
         if (isActive)
         {
+            self.transform.LookAt(target);
 
+            if (!AIUtils_Fabio.HasVisionOfPlayer(enemyHead, target, 50))
+            {
+                aiManager.LostVisionOnPlayer();
+                stateMachine.HandleEvent(Fabio_AIEvents.LostPlayer);
+            }
         }
-        /*
-        if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead, target, 50))
-        {
-            aiManager.HasVisionOnPlayer();
-            stateMachine.HandleEvent(Fabio_AIEvents.SawPlayer);
-        }
-        */
     }
 }

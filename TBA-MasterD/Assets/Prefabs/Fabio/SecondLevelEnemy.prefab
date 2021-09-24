@@ -10362,7 +10362,7 @@ Animator:
   m_GameObject: {fileID: 1889744808953525296}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: dc85d4352f6b99a4e90e612b9f1873f2, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0586f1f57842d8744943a09d35dd1117, type: 2}
+  m_Controller: {fileID: 9100000, guid: 11acb63a6d6d8224d8c193119f60a239, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -10545,6 +10545,7 @@ MonoBehaviour:
   distanceToShoot: 15
   patrolWayPoints: []
   enableTestMovement: 0
+  aiManager: {fileID: 0}
 --- !u!1 &2320968887988608042
 GameObject:
   m_ObjectHideFlags: 0

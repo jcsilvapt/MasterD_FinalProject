@@ -6,6 +6,7 @@ public enum Fabio_AIEvents
 {
     BecomeAware,
     SawPlayer,
+    LostPlayer,
     StartChasing,
     InShootingRange,
     HitPlayer,

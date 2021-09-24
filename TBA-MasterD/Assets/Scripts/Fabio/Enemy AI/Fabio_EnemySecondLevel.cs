@@ -70,6 +70,7 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
     {
         [Fabio_AIEvents.BecomeAware] = Fabio_AIStates.Aware,
         [Fabio_AIEvents.SawPlayer] = Fabio_AIStates.ReadyToFire,
+        [Fabio_AIEvents.LostPlayer] = Fabio_AIStates.Aware,
         [Fabio_AIEvents.StartChasing] = Fabio_AIStates.Chase,
         [Fabio_AIEvents.InShootingRange] = Fabio_AIStates.Shoot,
         [Fabio_AIEvents.HitPlayer] = Fabio_AIStates.MissAllShots,
@@ -123,7 +124,7 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
                 new Fabio_ReadyToFireBehaviour(this, this, enemyHead, aiManager),
                 new Fabio_ShootBehaviour(this, this, bulletSpawn.transform, aiManager),
                 new Fabio_MissAllShots(this, this, bulletSpawn.transform, 0, aiManager),
-                new Fabio_ChaseBehaviour(this, this, enemyHead)
+                new Fabio_ChaseBehaviour(this, this, enemyHead, aiManager)
             };
 
             foreach (Fabio_AIBehaviour b in behaviours)
@@ -166,6 +167,12 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
                 nextState = nextEvent[aiEvent];
                 break;
             case Fabio_AIStates.ReadyToFire:
+                nextState = nextEvent[aiEvent];
+                break;
+            case Fabio_AIStates.Shoot:
+                nextState = nextEvent[aiEvent];
+                break;
+            case Fabio_AIStates.MissAllShots:
                 nextState = nextEvent[aiEvent];
                 break;
             case Fabio_AIStates.Chase:
@@ -248,16 +255,6 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
         return health;
     }
     
-    public void SetAware()
-    {
-        HandleEvent(Fabio_AIEvents.BecomeAware);
-    }
-
-    public void SetShooting()
-    {
-        HandleEvent(Fabio_AIEvents.InShootingRange);
-    }
-
     public bool CanSeeThePlayer()
     {
         return AIUtils_Fabio.HasVisionOfPlayer(enemyHead, target, 50);
@@ -266,6 +263,16 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
     public string GetCurrentBehaviour()
     {
         return currentBehaviour.GetName();
+    }
+
+    public void SetAware()
+    {
+        HandleEvent(Fabio_AIEvents.BecomeAware);
+    }
+
+    public void SetShooting()
+    {
+        HandleEvent(Fabio_AIEvents.InShootingRange);
     }
 
     public void SetMissAllShots()
@@ -279,6 +286,11 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
 
         HandleEvent(Fabio_AIEvents.HitPlayer);
         ((Fabio_MissAllShots) currentBehaviour).SetAllShots(numberOfShots);
+    }
+
+    public void SetChasing()
+    {
+        HandleEvent(Fabio_AIEvents.StartChasing);
     }
 
     #endregion

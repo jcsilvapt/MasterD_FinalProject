@@ -12,6 +12,9 @@ public class Fabio_AIManager : MonoBehaviour
     //Player Reference
     [SerializeField] private Transform player;
 
+    //Door Reference
+    [SerializeField] private Transform door;
+
     #endregion
 
     #region Control Variables
@@ -99,30 +102,33 @@ public class Fabio_AIManager : MonoBehaviour
                         if (enemy.CanSeeThePlayer())
                         {
                             enemiesWithVisionOnPlayer.Add(enemy);
+                            Debug.Log(enemy.name);
                         }
                     }
 
-                    if (enemiesWithVisionOnPlayer.Count == 1)
-                    {
-                        enemiesWithVisionOnPlayer[0].SetShooting();
-                    }
-                    else if (enemiesWithVisionOnPlayer.Count < 3)
-                    {
-                        float[] distancesToPlayer = new float[enemiesWithVisionOnPlayer.Count];
+                    float smallerDistance = 0;
+                    int closestEnemyDistanceIndex = 0;
 
-                        for (int enemyIndex = 0; enemyIndex < enemiesWithVisionOnPlayer.Count; enemyIndex++)
+                    for (int enemyIndex = 0; enemyIndex < enemiesWithVisionOnPlayer.Count; enemyIndex++)
+                    {
+                        if (enemyIndex == 0)
                         {
-                            distancesToPlayer[enemyIndex] = Vector3.Distance(enemiesWithVisionOnPlayer[enemyIndex].transform.position, player.position);
-                        }
-
-                        if (distancesToPlayer[0] > distancesToPlayer[1])
-                        {
-                            enemiesWithVisionOnPlayer[1].SetShooting();
+                            smallerDistance = Vector3.Distance(enemies[enemyIndex].transform.position, door.position);
+                            closestEnemyDistanceIndex = enemyIndex;
                         }
                         else
                         {
-                            enemiesWithVisionOnPlayer[0].SetShooting();
+                            if (Vector3.Distance(enemies[enemyIndex].transform.position, door.position) < smallerDistance)
+                            {
+                                smallerDistance = Vector3.Distance(enemies[enemyIndex].transform.position, door.position);
+                                closestEnemyDistanceIndex = enemyIndex;
+                            }
                         }
+                    }
+
+                    if (enemiesWithVisionOnPlayer.Count < 3)
+                    {
+                        enemiesWithVisionOnPlayer[closestEnemyDistanceIndex].SetShooting();
                     }
                     else if (enemiesWithVisionOnPlayer.Count < 6)
                     {
@@ -130,39 +136,34 @@ public class Fabio_AIManager : MonoBehaviour
 
                         if (howManyWillShoot < 50)
                         {
-                            enemiesWithVisionOnPlayer[Random.Range(0, enemiesWithVisionOnPlayer.Count)].SetShooting();
+                            enemiesWithVisionOnPlayer[closestEnemyDistanceIndex].SetShooting();
                         }
                         else if (howManyWillShoot < 90)
                         {
                             int randomEnemy1 = 0;
-                            int randomEnemy2 = 0;
 
-                            while (randomEnemy1 == randomEnemy2)
+                            while (randomEnemy1 == closestEnemyDistanceIndex)
                             {
                                 randomEnemy1 = Random.Range(0, enemiesWithVisionOnPlayer.Count);
-                                randomEnemy2 = Random.Range(0, enemiesWithVisionOnPlayer.Count);
-
                             }
 
+                            enemiesWithVisionOnPlayer[closestEnemyDistanceIndex].SetShooting();
                             enemiesWithVisionOnPlayer[randomEnemy1].SetShooting();
-                            enemiesWithVisionOnPlayer[randomEnemy2].SetShooting();
                         }
                         else
                         {
                             int randomEnemy1 = 0;
                             int randomEnemy2 = 0;
-                            int randomEnemy3 = 0;
 
-                            while (randomEnemy1 == randomEnemy2 && randomEnemy1 == randomEnemy3 && randomEnemy2 == randomEnemy3)
+                            while (randomEnemy1 == randomEnemy2 && randomEnemy1 == closestEnemyDistanceIndex && randomEnemy2 == closestEnemyDistanceIndex)
                             {
                                 randomEnemy1 = Random.Range(0, enemiesWithVisionOnPlayer.Count);
                                 randomEnemy2 = Random.Range(0, enemiesWithVisionOnPlayer.Count);
-                                randomEnemy3 = Random.Range(0, enemiesWithVisionOnPlayer.Count);
                             }
 
+                            enemiesWithVisionOnPlayer[closestEnemyDistanceIndex].SetShooting();
                             enemiesWithVisionOnPlayer[randomEnemy1].SetShooting();
                             enemiesWithVisionOnPlayer[randomEnemy2].SetShooting();
-                            enemiesWithVisionOnPlayer[randomEnemy3].SetShooting();
                         }
                     }
                     else
@@ -172,43 +173,73 @@ public class Fabio_AIManager : MonoBehaviour
                         if (howManyWillShoot < 50)
                         {
                             int randomEnemy1 = 0;
-                            int randomEnemy2 = 0;
 
-                            while (randomEnemy1 == randomEnemy2)
+                            while (randomEnemy1 == closestEnemyDistanceIndex)
                             {
                                 randomEnemy1 = Random.Range(0, enemiesWithVisionOnPlayer.Count);
-                                randomEnemy2 = Random.Range(0, enemiesWithVisionOnPlayer.Count);
 
                             }
 
+                            enemiesWithVisionOnPlayer[closestEnemyDistanceIndex].SetShooting();
                             enemiesWithVisionOnPlayer[randomEnemy1].SetShooting();
-                            enemiesWithVisionOnPlayer[randomEnemy2].SetShooting();
                         }
                         else if (howManyWillShoot < 90)
                         {
                             int randomEnemy1 = 0;
                             int randomEnemy2 = 0;
-                            int randomEnemy3 = 0;
 
-                            while (randomEnemy1 == randomEnemy2 && randomEnemy1 == randomEnemy3 && randomEnemy2 == randomEnemy3)
+                            while (randomEnemy1 == randomEnemy2 && randomEnemy1 == closestEnemyDistanceIndex && randomEnemy2 == closestEnemyDistanceIndex)
                             {
                                 randomEnemy1 = Random.Range(0, enemiesWithVisionOnPlayer.Count);
                                 randomEnemy2 = Random.Range(0, enemiesWithVisionOnPlayer.Count);
-                                randomEnemy3 = Random.Range(0, enemiesWithVisionOnPlayer.Count);
                             }
 
+                            enemiesWithVisionOnPlayer[closestEnemyDistanceIndex].SetShooting();
                             enemiesWithVisionOnPlayer[randomEnemy1].SetShooting();
                             enemiesWithVisionOnPlayer[randomEnemy2].SetShooting();
-                            enemiesWithVisionOnPlayer[randomEnemy3].SetShooting();
                         }
                         else
                         {
-                            enemiesWithVisionOnPlayer[Random.Range(0, enemiesWithVisionOnPlayer.Count)].SetShooting();
+                            enemiesWithVisionOnPlayer[closestEnemyDistanceIndex].SetShooting();
                         }
                     }
 
                     isShootingThePlayer = false;
                     currentTimerBetweenShootingSprays = 0;
+                }
+            }
+            else
+            {
+                if (!isChasingThePlayer)
+                {
+                    currentTimerChasingThePlayer += Time.deltaTime;
+
+                    if(currentTimerChasingThePlayer >= timeUntilStartsChasingThePlayer)
+                    {
+                        float smallerDistance = 0;
+                        Fabio_EnemySecondLevel enemyToChase = null;
+
+                        for (int enemyIndex = 0; enemyIndex < enemies.Length; enemyIndex++)
+                        {
+                            if(enemyIndex == 0)
+                            {
+                                smallerDistance = Vector3.Distance(enemies[enemyIndex].transform.position, door.position);
+                                enemyToChase = enemies[enemyIndex];
+                            }
+                            else
+                            {
+                                if(Vector3.Distance(enemies[enemyIndex].transform.position, door.position) < smallerDistance)
+                                {
+                                    smallerDistance = Vector3.Distance(enemies[enemyIndex].transform.position, door.position);
+                                    enemyToChase = enemies[enemyIndex];
+                                }
+                            }
+                        }
+
+                        enemyToChase.SetChasing();
+                        isChasingThePlayer = true;
+                        currentTimerChasingThePlayer = 0;
+                    }
                 }
             }
         }
@@ -234,6 +265,11 @@ public class Fabio_AIManager : MonoBehaviour
         hasVisionOnPlayer = true;
     }
 
+    public void LostVisionOnPlayer()
+    {
+        hasVisionOnPlayer = false;
+    }
+
     public void HitPlayer()
     {
         foreach (Fabio_EnemySecondLevel enemy in enemies)
@@ -245,6 +281,7 @@ public class Fabio_AIManager : MonoBehaviour
     public void UnitKilled(Fabio_EnemySecondLevel unitKilled)
     {
         numberOfEnemiesAlive--;
+        LostVisionOnPlayer();
 
         if(numberOfEnemiesAlive <= 0)
         {
@@ -265,5 +302,7 @@ public class Fabio_AIManager : MonoBehaviour
         }
 
         enemies = auxiliarEnemies;
+
+        isChasingThePlayer = false;
     }
 }
