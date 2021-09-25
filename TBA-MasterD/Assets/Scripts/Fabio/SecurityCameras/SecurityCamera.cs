@@ -12,9 +12,6 @@ public class SecurityCamera : MonoBehaviour
     //Second Level AI Manager Reference
     [SerializeField] private Fabio_AIManager aiManager;
 
-    //Enemies References
-    [SerializeField] private Fabio_EnemySecondLevel[] enemies;
-
     //Security Camera Glass Reference
     private Transform cameraGlass;
 
@@ -55,10 +52,7 @@ public class SecurityCamera : MonoBehaviour
 
     private void EnemyDetected()
     {
-        foreach(Fabio_EnemySecondLevel enemy in enemies)
-        {
-            aiManager.PlayerDetected();
-        }
+        aiManager.PlayerDetected();
 
         foreach (SecurityCamera camera in securityCameras)
         {

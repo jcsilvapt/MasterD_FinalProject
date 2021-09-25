@@ -366,6 +366,11 @@ public class Weapon : MonoBehaviour {
         }
     }
 
+    public void ReplenishBullets()
+    {
+
+    }
+
     #endregion
 
     #region COROUTINES

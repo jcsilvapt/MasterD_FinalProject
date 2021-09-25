@@ -29,6 +29,8 @@ public class Fabio_AIManager : MonoBehaviour
 
     #region Detected Player
 
+    public int howManyEnemiesHaveVisionOnPlayer;
+
     private bool hasDetectedPlayer;
 
     private bool hasVisionOnPlayer;
@@ -36,6 +38,9 @@ public class Fabio_AIManager : MonoBehaviour
     #endregion
 
     #region Time to Chase the Player
+
+    private bool hasChasedThePlayerBefore;
+    private Fabio_EnemySecondLevel lastToChase;
 
     private bool isChasingThePlayer;
 
@@ -102,8 +107,12 @@ public class Fabio_AIManager : MonoBehaviour
                         if (enemy.CanSeeThePlayer())
                         {
                             enemiesWithVisionOnPlayer.Add(enemy);
-                            Debug.Log(enemy.name);
                         }
+                    }
+
+                    if(enemiesWithVisionOnPlayer.Count == 0)
+                    {
+                        return;
                     }
 
                     float smallerDistance = 0;
@@ -216,27 +225,66 @@ public class Fabio_AIManager : MonoBehaviour
 
                     if(currentTimerChasingThePlayer >= timeUntilStartsChasingThePlayer)
                     {
-                        float smallerDistance = 0;
-                        Fabio_EnemySecondLevel enemyToChase = null;
-
-                        for (int enemyIndex = 0; enemyIndex < enemies.Length; enemyIndex++)
+                        if (hasChasedThePlayerBefore)
                         {
-                            if(enemyIndex == 0)
+                            if(lastToChase.GetEnemyHealth() > 0)
                             {
-                                smallerDistance = Vector3.Distance(enemies[enemyIndex].transform.position, door.position);
-                                enemyToChase = enemies[enemyIndex];
+                                lastToChase.SetChasing();
                             }
                             else
                             {
-                                if(Vector3.Distance(enemies[enemyIndex].transform.position, door.position) < smallerDistance)
+                                float smallerDistance = 0;
+                                Fabio_EnemySecondLevel enemyToChase = null;
+
+                                for (int enemyIndex = 0; enemyIndex < enemies.Length; enemyIndex++)
+                                {
+                                    if (enemyIndex == 0)
+                                    {
+                                        smallerDistance = Vector3.Distance(enemies[enemyIndex].transform.position, door.position);
+                                        enemyToChase = enemies[enemyIndex];
+                                    }
+                                    else
+                                    {
+                                        if (Vector3.Distance(enemies[enemyIndex].transform.position, door.position) < smallerDistance)
+                                        {
+                                            smallerDistance = Vector3.Distance(enemies[enemyIndex].transform.position, door.position);
+                                            enemyToChase = enemies[enemyIndex];
+                                        }
+                                    }
+                                }
+
+                                enemyToChase.SetChasing();
+                                hasChasedThePlayerBefore = true;
+                                lastToChase = enemyToChase;
+                            }
+                        }
+                        else
+                        {
+                            float smallerDistance = 0;
+                            Fabio_EnemySecondLevel enemyToChase = null;
+
+                            for (int enemyIndex = 0; enemyIndex < enemies.Length; enemyIndex++)
+                            {
+                                if (enemyIndex == 0)
                                 {
                                     smallerDistance = Vector3.Distance(enemies[enemyIndex].transform.position, door.position);
                                     enemyToChase = enemies[enemyIndex];
                                 }
+                                else
+                                {
+                                    if (Vector3.Distance(enemies[enemyIndex].transform.position, door.position) < smallerDistance)
+                                    {
+                                        smallerDistance = Vector3.Distance(enemies[enemyIndex].transform.position, door.position);
+                                        enemyToChase = enemies[enemyIndex];
+                                    }
+                                }
                             }
+
+                            enemyToChase.SetChasing();
+                            hasChasedThePlayerBefore = true;
+                            lastToChase = enemyToChase;
                         }
 
-                        enemyToChase.SetChasing();
                         isChasingThePlayer = true;
                         currentTimerChasingThePlayer = 0;
                     }
@@ -262,19 +310,42 @@ public class Fabio_AIManager : MonoBehaviour
 
     public void HasVisionOnPlayer()
     {
+        howManyEnemiesHaveVisionOnPlayer++;
+
         hasVisionOnPlayer = true;
+
+        if (isChasingThePlayer)
+        {
+            isChasingThePlayer = false;
+            lastToChase.SetAware();
+        }
     }
 
     public void LostVisionOnPlayer()
     {
+        howManyEnemiesHaveVisionOnPlayer--;
+
+        if(howManyEnemiesHaveVisionOnPlayer > 0)
+        {
+            return;
+        }
+
         hasVisionOnPlayer = false;
+    }
+
+    public void StopChasing()
+    {
+        isChasingThePlayer = false;
     }
 
     public void HitPlayer()
     {
         foreach (Fabio_EnemySecondLevel enemy in enemies)
         {
-            enemy.SetMissAllShots();
+            if(enemy.GetCurrentBehaviour() == "Shoot")
+            {
+                enemy.SetMissAllShots();
+            }
         }
     }
 

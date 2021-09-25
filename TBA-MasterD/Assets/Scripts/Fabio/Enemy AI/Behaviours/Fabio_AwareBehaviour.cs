@@ -38,7 +38,7 @@ public class Fabio_AwareBehaviour : Fabio_AIBehaviour
         isActive = true;
         animator.SetBool("IsAware", true);
 
-        Debug.Log("Started " + GetName());
+        Debug.Log(self.name + " Started " + GetName());
     }
 
     public override void OnBehaviourEnd()
@@ -46,7 +46,7 @@ public class Fabio_AwareBehaviour : Fabio_AIBehaviour
         isActive = false;
         animator.SetBool("IsAware", false);
 
-        Debug.Log("Ended " + GetName());
+        Debug.Log(self.name + " Ended " + GetName());
     }
 
     public override void OnUpdate()

@@ -65,25 +65,12 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
 
     public override void OnUpdate()
     {
-        /*
-         * 
-         *    !!!!! FALTA FALHAR O TIRO !!!!!
-         *    
-         *    
-         *    METER OFFSET ABSURDO NA DIRECÇÃO DA BALA!
-         * 
-         * 
-         * 
-         * */
         if (isActive)
         {
-            Debug.Log("MissAllShots update entered with " + numberOfShots + " shots");
             currentTimerBetweenShots += Time.deltaTime;
 
             if (currentTimerBetweenShots >= timeBetweenShots && numberOfShots > 0)
             {
-                Debug.Log("MissAllShots just fired! I have " + (numberOfShots - 1) + " shots left!");
-
                 RaycastHit hit;
                 if (Physics.Raycast(bulletSpawn.transform.position, GetMissedShot(), out hit))
                 {

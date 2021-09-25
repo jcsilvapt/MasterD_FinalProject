@@ -70,8 +70,6 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
 
             if(currentTimerBetweenShots >= timeBetweenShots && numberOfShots > 0)
             {
-                Debug.Log("I shot!  Number of Shots Left: " + numberOfShots);
-
                 RaycastHit hit;
                 if (Physics.Raycast(bulletSpawn.transform.position, bulletSpawn.transform.forward, out hit))
                 {
@@ -84,7 +82,6 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
                             numberOfShots--;
 
                             Debug.Log("I hit the Player!");
-                            Debug.Log("Shoot! I still have " + numberOfShots + " shots left!");
                             aiManager.HitPlayer();
 
                             return;
@@ -98,7 +95,6 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
 
             if (numberOfShots <= 0)
             {
-                Debug.Log("I don't have any more bullets!");
                 stateMachine.HandleEvent(Fabio_AIEvents.FinishedShooting);
             }
         }

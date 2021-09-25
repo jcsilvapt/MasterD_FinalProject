@@ -60,6 +60,7 @@ public class Fabio_ChaseBehaviour : Fabio_AIBehaviour
             if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead, target, 50))
             {
                 aiManager.HasVisionOnPlayer();
+                aiManager.StopChasing();
                 stateMachine.HandleEvent(Fabio_AIEvents.SawPlayer);
                 return;
             }

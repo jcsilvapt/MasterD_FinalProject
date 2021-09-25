@@ -19,6 +19,10 @@ public class DoorManager : MonoBehaviour, IDamage
     //Detect if Player already interacted
     private bool alreadyInteracted;
 
+    [Header("Second Level Related")]
+    [SerializeField] private bool hasAIManagerAssociated;
+    [SerializeField] private Fabio_AIManager aiManager;
+
     private void Start()
     {
         canInteract = false;
@@ -54,6 +58,11 @@ public class DoorManager : MonoBehaviour, IDamage
     public void TakeDamage()
     {
         DoorInteraction();
+
+        if (hasAIManagerAssociated)
+        {
+            aiManager.PlayerDetected();
+        }
     }
 
     public void DoorInteraction()

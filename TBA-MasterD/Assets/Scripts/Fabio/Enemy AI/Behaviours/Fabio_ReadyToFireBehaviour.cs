@@ -57,6 +57,7 @@ public class Fabio_ReadyToFireBehaviour : Fabio_AIBehaviour
 
             if (!AIUtils_Fabio.HasVisionOfPlayer(enemyHead, target, 50))
             {
+                Debug.Log(self.name + " Has Lost Vision of Me! ");
                 aiManager.LostVisionOnPlayer();
                 stateMachine.HandleEvent(Fabio_AIEvents.LostPlayer);
             }
