@@ -4,23 +4,65 @@ using UnityEngine;
 
 public class ElevatorGoToThirdLevel : MonoBehaviour
 {
+    #region References
+
     //Elevator Controller Reference
     [SerializeField] private ElevatorController elevator;
 
     //Resources Replenish Level Flow Reference
     [SerializeField] private ResourcesRoomReplenishResources resourcesReplenish;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            //Stop Player Movement
-            elevator.CloseElevatorDoor();
-            //Load Next Level
+    //Array of AI Manager References
+    [SerializeField] private Fabio_AIManager[] aiManagers;
 
-            //Destroy Resources Replenish
-            resourcesReplenish.TurnOff();
-            resourcesReplenish.gameObject.SetActive(false);
+    #endregion
+
+    #region Control Variables
+
+    private bool canClose;
+
+    private int howManyAIManagersAreWorking;
+
+    #endregion
+
+    private void Update()
+    {
+        howManyAIManagersAreWorking = 0;
+
+        foreach (Fabio_AIManager manager in aiManagers)
+        {
+            if (manager.GetIsAIManagerWorking())
+            {
+                Debug.Log(manager.name);
+                howManyAIManagersAreWorking++;
+                break;
+            }
+        }
+
+        if(howManyAIManagersAreWorking > 0)
+        {
+            canClose = false;
+        }
+        else
+        {
+            canClose = true;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (canClose)
+        {
+            if (other.tag == "Player")
+            {
+                //Stop Player Movement
+                elevator.CloseElevatorDoor();
+                //Load Next Level
+
+                //Destroy Resources Replenish
+                resourcesReplenish.TurnOff();
+                resourcesReplenish.gameObject.SetActive(false);
+            }
         }
     }
 }

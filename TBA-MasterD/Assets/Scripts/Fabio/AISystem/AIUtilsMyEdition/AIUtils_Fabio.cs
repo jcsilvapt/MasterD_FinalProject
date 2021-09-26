@@ -17,7 +17,7 @@ public class AIUtils_Fabio {
         layerMask = ~layerMask;
 
         //Vector Direction from Self to Target
-        Vector3 direction = target.position - self.position;
+        Vector3 direction = (target.position) - self.position;
 
 
         //If the Target is too far away, Self can't detect it, return.

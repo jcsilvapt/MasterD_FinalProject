@@ -27,6 +27,12 @@ public class Fabio_AIManager : MonoBehaviour
 
     #endregion
 
+    #region Is AI Manager Working
+
+    private bool isAIManagerWorking;
+
+    #endregion
+
     #region Detected Player
 
     public int howManyEnemiesHaveVisionOnPlayer;
@@ -66,6 +72,8 @@ public class Fabio_AIManager : MonoBehaviour
     {
         activeAIManager = true;
         numberOfEnemiesAlive = enemies.Length;
+
+        isAIManagerWorking = false;
     }
 
     private void Update()
@@ -297,6 +305,8 @@ public class Fabio_AIManager : MonoBehaviour
     {
         hasDetectedPlayer = true;
         BecomeAware();
+
+        isAIManagerWorking = true;
     }
 
     public void BecomeAware()
@@ -357,6 +367,9 @@ public class Fabio_AIManager : MonoBehaviour
         if(numberOfEnemiesAlive <= 0)
         {
             activeAIManager = false;
+
+            isAIManagerWorking = false;
+
             return;
         }
 
@@ -375,5 +388,10 @@ public class Fabio_AIManager : MonoBehaviour
         enemies = auxiliarEnemies;
 
         isChasingThePlayer = false;
+    }
+
+    public bool GetIsAIManagerWorking()
+    {
+        return isAIManagerWorking;
     }
 }
