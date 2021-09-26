@@ -366,10 +366,20 @@ public class Weapon : MonoBehaviour {
         }
     }
 
+    #region Fabio Edit
+
     public void ReplenishBullets()
     {
+        if (isWeaponActive)
+        {
+            Reload();
+        }
 
+        bulletsInClip = clipSize;
+        currentBullets = maxBulletsAllowed;
     }
+
+    #endregion
 
     #endregion
 

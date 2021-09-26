@@ -5,7 +5,7 @@ using UnityEngine;
 public class ResourcesRoomReplenishResources : MonoBehaviour
 {
     //Player Reference
-    private Weapon[] playerWeapons;
+    [SerializeField] private charController player;
 
     //Control Variable
     private bool isActive;
@@ -19,10 +19,8 @@ public class ResourcesRoomReplenishResources : MonoBehaviour
 
         if (Input.GetKeyDown(KeyMapper.inputKey.Interaction))
         {
-            foreach(Weapon weapon in playerWeapons)
-            {
-                weapon.ReplenishBullets();
-            }
+            player.ReplenishHealth();
+            player.ReplenishBullets();
         }
     }
 
@@ -30,7 +28,7 @@ public class ResourcesRoomReplenishResources : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            isActive = false;
+            isActive = true;
         }
     }
 
@@ -40,5 +38,10 @@ public class ResourcesRoomReplenishResources : MonoBehaviour
         {
             isActive = false;
         }
+    }
+
+    public void TurnOff()
+    {
+        isActive = false;
     }
 }

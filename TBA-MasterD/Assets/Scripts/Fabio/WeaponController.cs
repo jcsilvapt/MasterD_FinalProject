@@ -196,4 +196,12 @@ public class WeaponController : MonoBehaviour {
 
     #endregion
 
+    #region Fabio Edit
+
+    public Weapon[] GetPlayerWeapons()
+    {
+        return weaponsPossessed;
+    }
+
+    #endregion
 }

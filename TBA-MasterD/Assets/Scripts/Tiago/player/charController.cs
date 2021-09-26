@@ -316,6 +316,8 @@ public class charController : MonoBehaviour, IDamage
         {
             if (!isDroneActive)
             {
+                drone.transform.SetParent(null);
+
                 fpsCam.gameObject.SetActive(false);
 
                 drone.gameObject.SetActive(true);
@@ -331,6 +333,8 @@ public class charController : MonoBehaviour, IDamage
             }
             else
             {
+                drone.transform.SetParent(droneSpawn);
+
                 fpsCam.gameObject.SetActive(true);
 
 
@@ -404,6 +408,26 @@ public class charController : MonoBehaviour, IDamage
     {
         return weaponController.GetCurrentWeaponAmmo();
     }
+
+    #region
+
+    public void ReplenishHealth()
+    {
+        health = maxHealth;
+        healthC = 0;
+
+        ScreenDamageColor();
+    }
+
+    public void ReplenishBullets()
+    {
+        foreach (Weapon weapon in weaponController.GetPlayerWeapons())
+        {
+            weapon.ReplenishBullets();
+        }
+    }
+
+    #endregion
 
     #endregion
 
