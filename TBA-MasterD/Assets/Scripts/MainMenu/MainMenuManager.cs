@@ -16,6 +16,9 @@ public class MainMenuManager : MonoBehaviour {
     [SerializeField] GameObject audioPanel;
     [SerializeField] GameObject controlsPanel;
 
+    [Header("UI - Save System")]
+    [SerializeField] GameObject saveInfoPanel;
+
 
     [Header("Developer")]
     [SerializeField] GameObject devCurrentPanelSelected;
@@ -26,6 +29,8 @@ public class MainMenuManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        saveInfoPanel.SetActive(false);
+
         menus.Add(mainMenu);
         menus.Add(playMenu);
         menus.Add(optionsMenu);
@@ -104,10 +109,36 @@ public class MainMenuManager : MonoBehaviour {
 
     }
 
+    #region Public Buttons
+
     public void btnQuit() {
         GameManager.QuitGame();
     }
 
+    public void btnLoadNewGame() {
+        if (GameManager.HasDataSaved()) {
+            saveInfoPanel.SetActive(true);
+        } else {
+            GameManager.ChangeScene(1, true, false);
+        }
+    }
+
+    public void btnForceNewGame() {
+        GameManager.ChangeScene(1, true, false);
+    }
+
+    public void btnContinueGame() {
+        GameManager.ChangeScene(1, true, true);
+    }
+
+    public void btnCancel() {
+        saveInfoPanel.SetActive(false);
+    }
+
+    #endregion
+
+
+    #region COROUTINES
     public bool isFading = false;
 
     IEnumerator FadeIn(CanvasGroup cg) {
@@ -136,7 +167,7 @@ public class MainMenuManager : MonoBehaviour {
         isFading = false;
         yield return null;
     }
-
+    #endregion
 }
 
 public enum FadeType {

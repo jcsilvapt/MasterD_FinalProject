@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f696bd6dc968646bec2d34d871bfeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseSensitivity: 1
+  invertMouse: 0
   walkFoward: 119
   walkBackwards: 115
   walkLeft: 97
@@ -50,6 +52,8 @@ MonoBehaviour:
   crouch: 306
   jump: 32
   sprint: 304
+  save: 286
+  load: 287
   droneActivation: 113
   droneMoveUp: 32
   droneMoveDown: 306

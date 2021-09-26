@@ -173,7 +173,6 @@ public class Weapon : MonoBehaviour {
         if (Physics.Raycast(Camera.main.transform.position, spray, out hit)) {
             if (enableDelayShot) {
                 float timeToHit = Vector3.Distance(Camera.main.transform.position, hit.point) * bulletSpeed;
-                Debug.Log("Hitting in: " + timeToHit);
                 StartCoroutine(ConfirmHit(Camera.main.transform.position, spray, timeToHit));
 
             } else {

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour {
@@ -22,7 +24,7 @@ public class GameManager : MonoBehaviour {
 
     #region DECLARATIONS
 
-    [Header("Audio")]
+    [Header("Audio Settings")]
     [SerializeField] AudioMixer mixer;
 
     [SerializeField] bool isGamePaused = false;
@@ -48,8 +50,19 @@ public class GameManager : MonoBehaviour {
 
     #endregion
 
-    private void Start() {
+    #region Load System
+    [Header("Load System UI")]
+    [SerializeField] GameObject loadCanvas;
+    [SerializeField] Slider loadSlider;
+    #endregion
 
+    #region Game Data
+    [Header("Game Data Settings")]
+    [SerializeField] SO_PlayerData playerProfile;
+    private SaveSystem saveSystem;
+    #endregion
+
+    private void Start() {
 
         Debug.LogWarning("Game Manager: To Hide the mouse cursor just press 'K'");
 
@@ -62,6 +75,9 @@ public class GameManager : MonoBehaviour {
         mixer.SetFloat("Master", -10);
         mixer.SetFloat("Music", 0);
         mixer.SetFloat("Effects", 0);
+
+        // Set inactive load screen
+        loadCanvas.SetActive(false);
     }
 
     private void GetInitialData() {
@@ -79,9 +95,12 @@ public class GameManager : MonoBehaviour {
             resolutions.Add(r.ToString());
         }
 
+        // Initialize Save System
+        saveSystem = new SaveSystem();
+
+
 
     }
-
 
     #region Public References 
 
@@ -196,7 +215,52 @@ public class GameManager : MonoBehaviour {
         return -80;
     }
 
+    public static void ChangeScene(int sceneIndex, bool showLoadPanel, bool loadGameData) {
+        if (ins != null) {
+            ins._changeScene(sceneIndex, showLoadPanel, loadGameData);
+        }
+    }
+
+    public static void SaveGame() {
+        if (ins != null) {
+            ins.Save();
+        }
+    }
+
+    public static void LoadGame() {
+        if (ins != null) {
+            ins.Load();
+        }
+    }
+
+    public static bool HasDataSaved() {
+        if(ins != null) {
+            return ins.saveSystem.HasSavedData();
+        }
+        return false;
+    }
+
     #endregion
+
+    #region Logic
+
+    private void Save() {
+        Debug.Log(Application.persistentDataPath); 
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerProfile.currentPosition = player.transform.position;
+        playerProfile.currentScene = SceneManager.GetActiveScene().buildIndex;
+        saveSystem.Save(playerProfile);
+
+        Debug.Log("Saving Game...");
+    }
+
+    private void Load() {
+        playerProfile = saveSystem.Load();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position = playerProfile.currentPosition;
+
+        Debug.Log("Loading Game...");
+    }
 
     private void _SetPauseGame() {
         if (isGamePaused) {
@@ -215,4 +279,38 @@ public class GameManager : MonoBehaviour {
         Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Confined;
         Cursor.visible = showCursor ? true : false;
     }
+
+    private void _changeScene(int sceneIndex, bool showLoadScreen, bool loadGameData) {
+        if (showLoadScreen) {
+            loadCanvas.SetActive(true);
+            StartCoroutine(LoadAsync(sceneIndex, loadGameData));
+        } else {
+            SceneManager.LoadScene(sceneIndex);
+        }
+    }
+
+    #endregion
+
+    #region COROUTINES
+
+    IEnumerator LoadAsync(int sceneIndex, bool loadGameData) {
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+
+        while (!operation.isDone) {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+
+            loadSlider.value = progress;
+
+            yield return null;
+        }
+
+        loadSlider.value = 0;
+        loadCanvas.SetActive(false);
+
+        if (loadGameData)
+            GameManager.LoadGame();
+    }
+
+    #endregion
 }
