@@ -283,9 +283,11 @@ public class charController : MonoBehaviour, IDamage {
             if (!isDroneActive) {
                 drone.transform.SetParent(null);
 
-                fpsCam.gameObject.SetActive(false);
-
                 drone.gameObject.SetActive(true);
+
+                drone.GetComponent<DroneController>().SetTransform(droneSpawn.position, transform.eulerAngles);
+
+                fpsCam.gameObject.SetActive(false);
 
                 isDroneActive = true;
 
@@ -295,10 +297,9 @@ public class charController : MonoBehaviour, IDamage {
                 }
 
             } else {
-                drone.transform.SetParent(droneSpawn);
-
                 fpsCam.gameObject.SetActive(true);
 
+                drone.transform.SetParent(droneSpawn);
 
                 drone.GetComponent<DroneController>().ResetTransform();
 

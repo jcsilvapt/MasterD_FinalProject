@@ -141,6 +141,15 @@ public class DroneController : MonoBehaviour {
         transform.localPosition = Vector3.zero;
     }
 
+    public void SetTransform(Vector3 position, Vector3 rotation)
+    {
+        transform.position = position;
+        transform.eulerAngles = Vector3.Scale(Vector3.up, rotation);
+
+        xRotation = rotation.y;
+        yRotation = rotation.x;
+    }
+
     private void OnEnable()
     {
         Debug.LogWarning("Keys to interact: " + KeyMapper.inputKey.DroneMoveUp.ToString() + ", to go UP and, " + KeyMapper.inputKey.DroneMoveDown.ToString() + ", to go down.");
