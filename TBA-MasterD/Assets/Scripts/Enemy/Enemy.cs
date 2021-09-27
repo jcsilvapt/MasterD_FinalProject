@@ -252,7 +252,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         {
             shootSoundSource.PlayOneShot(shootSoundSource.clip);
             RaycastHit hit;
-            if (Physics.Raycast(bulletSpawn.transform.position, bulletSpawn.transform.forward, out hit))
+            if (Physics.Raycast(bulletSpawn.transform.position, (target.position - bulletSpawn.transform.position), out hit))
             {
                 if (hit.transform.GetComponent<IDamage>() != null)
                 {
@@ -261,6 +261,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
             }
         }
     }
+
     public void SetShooting(bool iShoot)
     {
         isShooting = iShoot;

@@ -10,4 +10,8 @@ public class SO_PlayerData : ScriptableObject {
     public int currentScene;
     public Vector3 currentPosition;
 
+    // Adicionar checkpoints index
+    // Adicionar se tem arma e o drone...
+    // adicionar inimigos que coiso...
+
 }

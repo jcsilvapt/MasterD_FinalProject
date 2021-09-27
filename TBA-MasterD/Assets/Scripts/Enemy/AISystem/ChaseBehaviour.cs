@@ -51,7 +51,7 @@ public class ChaseBehaviour : AIBehaviour
         {
             if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if player distance is enought to be seen
             {
-                if (AIUtils_Tiago.IsChasingPlayer(self.transform, target, 10)) //checks if the distance is enought to shoot player
+                if (AIUtils_Tiago.IsChasingPlayer(self.transform, target, self.GetComponent<Enemy>().GetDistanceToView())) //checks if the distance is enought to shoot player
                 {
                     stateMachine.HandleEvent(AIEvents.InRange);
                     return;

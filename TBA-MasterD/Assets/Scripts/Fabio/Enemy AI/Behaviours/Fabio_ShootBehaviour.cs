@@ -69,6 +69,7 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(bulletSpawn.transform.position, bulletSpawn.transform.forward, out hit))
                 {
+                    Debug.DrawLine(self.transform.position, self.transform.forward, Color.red, 5f);
                     if (hit.transform.GetComponent<IDamage>() != null)
                     {
                         hit.transform.GetComponent<IDamage>().TakeDamage();
