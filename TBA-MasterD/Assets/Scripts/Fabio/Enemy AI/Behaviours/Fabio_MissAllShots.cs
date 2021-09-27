@@ -48,8 +48,6 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
 
         numberOfShots = 0;
         currentTimerBetweenShots = 0;
-
-        Debug.Log("Started " + GetName());
     }
 
     public override void OnBehaviourEnd()
@@ -59,8 +57,6 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
 
         numberOfShots = 0;
         currentTimerBetweenShots = 0;
-
-        Debug.Log("Ended " + GetName());
     }
 
     public override void OnUpdate()
@@ -93,7 +89,6 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
 
     public void SetAllShots(int shots)
     {
-        Debug.Log("Set All Shots was called! It has " + shots + " shots left!");
         numberOfShots = shots;
     }
 
@@ -104,12 +99,14 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
         int isXPositive = Random.Range(0, 2);
         int isYPositive = Random.Range(0, 2);
 
-        float xMissedDirection = Random.Range(3f, 12f);
-        float yMissedDirection = Random.Range(3f, 12f);
+        float xMissedDirection = Random.Range(3f, 8f);
+        float yMissedDirection = Random.Range(3f, 8f);
 
         xMissedDirection = (isXPositive == 0) ? xMissedDirection : -xMissedDirection;
         yMissedDirection = (isYPositive == 0) ? yMissedDirection : -yMissedDirection;
 
-        return bulletDirection = new Vector3(bulletDirection.x + xMissedDirection, bulletDirection.y + yMissedDirection, bulletDirection.z);
+        bulletDirection = new Vector3(bulletDirection.x + xMissedDirection, bulletDirection.y + yMissedDirection, bulletDirection.z);
+
+        return bulletDirection;
     }
 }

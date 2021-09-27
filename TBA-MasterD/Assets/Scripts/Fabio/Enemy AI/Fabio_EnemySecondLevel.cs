@@ -77,6 +77,12 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
         [Fabio_AIEvents.FinishedShooting] = Fabio_AIStates.ReadyToFire
     };
 
+    #region Edits
+
+    private bool isSeeingThePlayer;
+
+    #endregion
+
 
     private void Start()
     {
@@ -291,6 +297,16 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
     public void SetChasing()
     {
         HandleEvent(Fabio_AIEvents.StartChasing);
+    }
+
+    public void SetIsSeeingPlayer(bool hasVision)
+    {
+        isSeeingThePlayer = hasVision;
+    }
+
+    public bool GetIsSeeingThePlayer()
+    {
+        return isSeeingThePlayer;
     }
 
     #endregion

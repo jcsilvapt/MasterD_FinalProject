@@ -41,16 +41,12 @@ public class Fabio_ChaseBehaviour : Fabio_AIBehaviour
         animator.SetBool("IsChasing", true);
 
         SetEnemyDestination();
-
-        Debug.Log("Started " + GetName());
     }
 
     public override void OnBehaviourEnd()
     {
         isActive = false;
         animator.SetBool("IsChasing", false);
-
-        Debug.Log("Ended " + GetName());
     }
 
     public override void OnUpdate()
@@ -59,7 +55,7 @@ public class Fabio_ChaseBehaviour : Fabio_AIBehaviour
         {
             if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead, target, 50))
             {
-                aiManager.HasVisionOnPlayer();
+                self.GetComponent<Fabio_EnemySecondLevel>().SetIsSeeingPlayer(true);
                 aiManager.StopChasing();
                 stateMachine.HandleEvent(Fabio_AIEvents.SawPlayer);
                 return;

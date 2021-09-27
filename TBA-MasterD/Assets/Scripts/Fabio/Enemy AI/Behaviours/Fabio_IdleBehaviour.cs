@@ -35,16 +35,12 @@ public class Fabio_IdleBehaviour : Fabio_AIBehaviour
     {
         isActive = true;
         animator.SetBool("IsIdle", true);
-
-        Debug.Log("Started " + GetName());
     }
 
     public override void OnBehaviourEnd()
     {
         isActive = false;
         animator.SetBool("IsIdle", false);
-
-        Debug.Log("Ended " + GetName());
     }
 
     public override void OnUpdate()

@@ -37,16 +37,12 @@ public class Fabio_ReadyToFireBehaviour : Fabio_AIBehaviour
     {
         isActive = true;
         animator.SetBool("IsAware", true);
-
-        Debug.Log("Started " + GetName());
     }
 
     public override void OnBehaviourEnd()
     {
         isActive = false;
         animator.SetBool("IsAware", false);
-
-        Debug.Log("Ended " + GetName());
     }
 
     public override void OnUpdate()
@@ -57,8 +53,7 @@ public class Fabio_ReadyToFireBehaviour : Fabio_AIBehaviour
 
             if (!AIUtils_Fabio.HasVisionOfPlayer(enemyHead, target, 50))
             {
-                Debug.Log(self.name + " Has Lost Vision of Me! ");
-                aiManager.LostVisionOnPlayer();
+                self.GetComponent<Fabio_EnemySecondLevel>().SetIsSeeingPlayer(false);
                 stateMachine.HandleEvent(Fabio_AIEvents.LostPlayer);
             }
         }

@@ -47,8 +47,6 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
 
         numberOfShots = Random.Range(1, 5);
         currentTimerBetweenShots = timeBetweenShots;
-
-        Debug.Log("Started " + GetName());
     }
 
     public override void OnBehaviourEnd()
@@ -58,8 +56,6 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
 
         numberOfShots = 0;
         currentTimerBetweenShots = 0;
-
-        Debug.Log("Ended " + GetName());
     }
 
     public override void OnUpdate()

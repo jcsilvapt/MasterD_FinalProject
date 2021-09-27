@@ -102,7 +102,7 @@ public class Fabio_AIManager : MonoBehaviour
              * If there's 6 enemies or more, the manager will decide, randomly, if one, two or three enemies shoot.
              * Very unlikely 1, more likely 2, less likely 3.
             */
-            if (hasVisionOnPlayer)
+            if (HasVisionOnPlayer())
             {
                 currentTimerBetweenShootingSprays += Time.deltaTime;
 
@@ -318,29 +318,17 @@ public class Fabio_AIManager : MonoBehaviour
         }
     }
 
-    public void HasVisionOnPlayer()
+    public bool HasVisionOnPlayer()
     {
-        howManyEnemiesHaveVisionOnPlayer++;
-
-        hasVisionOnPlayer = true;
-
-        if (isChasingThePlayer)
+        foreach(Fabio_EnemySecondLevel enemy in enemies)
         {
-            isChasingThePlayer = false;
-            lastToChase.SetAware();
-        }
-    }
-
-    public void LostVisionOnPlayer()
-    {
-        howManyEnemiesHaveVisionOnPlayer--;
-
-        if(howManyEnemiesHaveVisionOnPlayer > 0)
-        {
-            return;
+            if (enemy.GetIsSeeingThePlayer())
+            {
+                return true;
+            }
         }
 
-        hasVisionOnPlayer = false;
+        return false;
     }
 
     public void StopChasing()
@@ -362,7 +350,6 @@ public class Fabio_AIManager : MonoBehaviour
     public void UnitKilled(Fabio_EnemySecondLevel unitKilled)
     {
         numberOfEnemiesAlive--;
-        LostVisionOnPlayer();
 
         if(numberOfEnemiesAlive <= 0)
         {

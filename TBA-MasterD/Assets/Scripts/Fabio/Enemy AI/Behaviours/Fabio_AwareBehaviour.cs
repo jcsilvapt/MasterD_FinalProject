@@ -37,16 +37,12 @@ public class Fabio_AwareBehaviour : Fabio_AIBehaviour
     {
         isActive = true;
         animator.SetBool("IsAware", true);
-
-        Debug.Log(self.name + " Started " + GetName());
     }
 
     public override void OnBehaviourEnd()
     {
         isActive = false;
         animator.SetBool("IsAware", false);
-
-        Debug.Log(self.name + " Ended " + GetName());
     }
 
     public override void OnUpdate()
@@ -55,7 +51,7 @@ public class Fabio_AwareBehaviour : Fabio_AIBehaviour
         {
             if (AIUtils_Fabio.HasVisionOfPlayer(enemyHead, target, 50))
             {
-                aiManager.HasVisionOnPlayer();
+                self.GetComponent<Fabio_EnemySecondLevel>().SetIsSeeingPlayer(true);
                 stateMachine.HandleEvent(Fabio_AIEvents.SawPlayer);
             }
         }
