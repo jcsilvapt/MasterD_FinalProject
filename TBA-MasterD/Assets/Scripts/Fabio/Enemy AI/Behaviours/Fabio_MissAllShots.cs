@@ -67,12 +67,17 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
 
             if (currentTimerBetweenShots >= timeBetweenShots && numberOfShots > 0)
             {
+                Vector3 missed = GetMissedShot();
+                Debug.DrawRay(bulletSpawn.transform.position, missed, Color.blue, 5f);
                 RaycastHit hit;
-                if (Physics.Raycast(bulletSpawn.transform.position, GetMissedShot(), out hit))
+                if (Physics.Raycast(bulletSpawn.transform.position, missed, out hit))
                 {
                     if (hit.transform.GetComponent<IDamage>() != null)
                     {
-                        hit.transform.GetComponent<IDamage>().TakeDamage();
+                        if(!hit.transform.gameObject == self)
+                        {
+                            hit.transform.GetComponent<IDamage>().TakeDamage();
+                        }
                     }
                 }
 
@@ -94,18 +99,19 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
 
     public Vector3 GetMissedShot()
     {
-        Vector3 bulletDirection = bulletSpawn.transform.forward;
+        Vector3 bulletDirection = (target.transform.position + Vector3.up) - bulletSpawn.position;
 
         int isXPositive = Random.Range(0, 2);
         int isYPositive = Random.Range(0, 2);
 
-        float xMissedDirection = Random.Range(3f, 8f);
-        float yMissedDirection = Random.Range(3f, 8f);
+        float yMissedDirection = Random.Range(1.5f, 4f);
+        float xMissedDirection = Random.Range(1.5f, 4f);
+        float zMissedDirection = Random.Range(1.5f, 4f);
 
         xMissedDirection = (isXPositive == 0) ? xMissedDirection : -xMissedDirection;
         yMissedDirection = (isYPositive == 0) ? yMissedDirection : -yMissedDirection;
 
-        bulletDirection = new Vector3(bulletDirection.x + xMissedDirection, bulletDirection.y + yMissedDirection, bulletDirection.z);
+        bulletDirection += new Vector3(xMissedDirection, yMissedDirection, zMissedDirection);
 
         return bulletDirection;
     }

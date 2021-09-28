@@ -252,7 +252,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         {
             shootSoundSource.PlayOneShot(shootSoundSource.clip);
             RaycastHit hit;
-            if (Physics.Raycast(bulletSpawn.transform.position, (target.position - bulletSpawn.transform.position), out hit))
+            if (Physics.Raycast(bulletSpawn.transform.position, ((target.position + Vector3.up) - bulletSpawn.transform.position) + SetSpray(), out hit))
             {
                 if (hit.transform.GetComponent<IDamage>() != null)
                 {
@@ -364,5 +364,14 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 
     #endregion
 
+    #region Fabio Shooting Edition
 
+    private Vector3 SetSpray()
+    {
+        Vector3 spray = new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f));
+
+        return spray;
+    }
+
+    #endregion
 }

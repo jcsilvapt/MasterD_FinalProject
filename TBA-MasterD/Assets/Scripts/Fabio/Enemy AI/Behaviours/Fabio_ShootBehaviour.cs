@@ -66,10 +66,12 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
 
             if(currentTimerBetweenShots >= timeBetweenShots && numberOfShots > 0)
             {
+                Vector3 spray = SetSpray();
+                Debug.DrawRay(bulletSpawn.transform.position, (target.transform.position + Vector3.up) - bulletSpawn.position + spray, Color.black, 5f);
+                
                 RaycastHit hit;
-                if (Physics.Raycast(bulletSpawn.transform.position, bulletSpawn.transform.forward, out hit))
+                if (Physics.Raycast(bulletSpawn.transform.position, (target.transform.position + Vector3.up) - bulletSpawn.position + spray, out hit))
                 {
-                    Debug.DrawLine(self.transform.position, self.transform.forward, Color.red, 5f);
                     if (hit.transform.GetComponent<IDamage>() != null)
                     {
                         hit.transform.GetComponent<IDamage>().TakeDamage();
@@ -78,7 +80,6 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
                         {
                             numberOfShots--;
 
-                            Debug.Log("I hit the Player!");
                             aiManager.HitPlayer();
 
                             return;
@@ -100,5 +101,12 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
     public int GetNumberOfShots()
     {
         return numberOfShots;
+    }
+
+    private Vector3 SetSpray()
+    {
+        Vector3 spray = new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f));
+        
+        return spray;
     }
 }
