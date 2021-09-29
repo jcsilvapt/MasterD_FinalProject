@@ -227,6 +227,9 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         return distanceToViewTarget;
     }
 
+    public float GetDistanceToShoot() {
+        return distanceToShoot;
+    }
     
     #endregion
 

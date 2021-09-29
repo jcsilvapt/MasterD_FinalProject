@@ -910,10 +910,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 287115115, guid: 461c5995c8c1274419c0b28587ce9c96, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_RootOrder
@@ -973,16 +969,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4409158066193621424, guid: 461c5995c8c1274419c0b28587ce9c96,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4409158067487024123, guid: 461c5995c8c1274419c0b28587ce9c96,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 461c5995c8c1274419c0b28587ce9c96, type: 3}
@@ -1195,6 +1181,10 @@ MonoBehaviour:
   himself: {fileID: 0}
   redLight: {fileID: 0}
   enemyHead: {fileID: 0}
+  ammoPack: {fileID: 0}
+  healthPack: {fileID: 0}
+  healthSpawner: {fileID: 0}
+  ammoSpawner: {fileID: 0}
   bullet: {fileID: 8078174116620158006, guid: 85ad3b7f0bff2e14182c4390d1197150, type: 3}
   bulletSpawn: {fileID: 2118383340}
   casing: {fileID: 6461625440377602478, guid: b5c59afd25ebb164696f764b484fbd8e, type: 3}
@@ -1202,9 +1192,11 @@ MonoBehaviour:
   muzzleFlash: {fileID: 2126181606}
   timeToShoot: 1
   elapsedTime: 0
+  shootSoundSource: {fileID: 0}
+  shootSound: {fileID: 0}
   health: 0
   isAlive: 1
-  allyAlert: 0
+  canAlertClosebyEnemies: 0
   enableAISystem: 1
   target: {fileID: 0}
   idleTime: 1
@@ -1216,6 +1208,7 @@ MonoBehaviour:
   - {fileID: 2060543572}
   - {fileID: 1961935681}
   - {fileID: 1882733644}
+  hasAlertedOther: 0
   enableTestMovement: 0
 --- !u!195 &1473480281
 NavMeshAgent:
@@ -6378,6 +6371,10 @@ MonoBehaviour:
   himself: {fileID: 0}
   redLight: {fileID: 0}
   enemyHead: {fileID: 0}
+  ammoPack: {fileID: 0}
+  healthPack: {fileID: 0}
+  healthSpawner: {fileID: 0}
+  ammoSpawner: {fileID: 0}
   bullet: {fileID: 0}
   bulletSpawn: {fileID: 0}
   casing: {fileID: 0}
@@ -6385,9 +6382,11 @@ MonoBehaviour:
   muzzleFlash: {fileID: 0}
   timeToShoot: 0.5
   elapsedTime: 0
+  shootSoundSource: {fileID: 0}
+  shootSound: {fileID: 0}
   health: 0
   isAlive: 1
-  allyAlert: 0
+  canAlertClosebyEnemies: 0
   enableAISystem: 1
   target: {fileID: 0}
   idleTime: 5
@@ -6399,6 +6398,7 @@ MonoBehaviour:
   - {fileID: 2060543572}
   - {fileID: 1961935681}
   - {fileID: 1882733644}
+  hasAlertedOther: 0
   enableTestMovement: 0
 --- !u!1 &1843523613
 GameObject:

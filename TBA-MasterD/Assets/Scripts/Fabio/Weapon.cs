@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Weapon : MonoBehaviour {
     #region Reference SO_Weapon
@@ -45,6 +47,10 @@ public class Weapon : MonoBehaviour {
     [SerializeField] GameObject[] glassBulletHoles;
     [SerializeField] GameObject[] woodBulletHoles;
 
+    [Header("Weapon UI")]
+    [SerializeField] TMP_Text weaponStatus;
+
+    [Header("Developer Settings")]
     [SerializeField] bool isSpraying;
     [SerializeField] int bulletsFired = 0;
     [SerializeField] float xSpray;
@@ -70,6 +76,8 @@ public class Weapon : MonoBehaviour {
 
         // Get's the camera
         cam = Camera.main;
+
+        weaponStatus.text = "" + bulletsInClip + "/" + currentBullets;
     }
 
 
@@ -195,6 +203,7 @@ public class Weapon : MonoBehaviour {
                     bulletsInClip--;
                     timeElapsedSinceShot = timeBetweenShots;
                     canShoot = false;
+                    weaponStatus.text = "" + bulletsInClip + "/" + currentBullets;
                     return;
                 }
 
@@ -218,6 +227,7 @@ public class Weapon : MonoBehaviour {
 
 
         bulletsInClip--;
+        weaponStatus.text = "" + bulletsInClip + "/" + currentBullets;
         timeElapsedSinceShot = timeBetweenShots;
         canShoot = false;
     }
@@ -302,6 +312,7 @@ public class Weapon : MonoBehaviour {
             currentBullets = 0;
         }
         isReloading = false;
+        weaponStatus.text = "" + bulletsInClip + "/" + currentBullets;
     }
 
 

@@ -80,7 +80,6 @@ public class charController : MonoBehaviour, IDamage {
     [SerializeField] float radius;
     [Tooltip("Check if player is still stealth or if enemy saw him")]
     public bool isStealth = true;
-    [SerializeField] Image screenDamage;
     [SerializeField] CanvasGroup screenRed;
     void Start() {
         // Get References

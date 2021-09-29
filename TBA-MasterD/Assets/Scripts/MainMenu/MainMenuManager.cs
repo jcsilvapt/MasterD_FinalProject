@@ -106,7 +106,6 @@ public class MainMenuManager : MonoBehaviour {
                 StartCoroutine(FadeOut(cg));
                 break;
         }
-
     }
 
     #region Public Buttons

@@ -17,5 +17,5 @@ MonoBehaviour:
   maximumBullets: 48
   clipSize: 12
   bulletsInClip: 12
-  timeBetweenShots: 0.1
+  timeBetweenShots: 0.2
   timeReload: 1
