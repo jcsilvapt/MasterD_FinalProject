@@ -276,7 +276,7 @@ public class GameManager : MonoBehaviour {
 
     private void ToggleCursorVisibility() {
         showCursor = !showCursor;
-        Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Confined;
+        Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = showCursor ? true : false;
     }
 

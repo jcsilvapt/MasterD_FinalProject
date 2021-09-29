@@ -61,7 +61,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.24637681
+        functionName: ShootSound
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: b1866dd780b87e1409d936d09e64389a,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
