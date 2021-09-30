@@ -82,11 +82,14 @@ public class LiveShootingRangeController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Function that Opens the glass door
+    /// </summary>
     private void EnableRoom() {
         liveShootingActive = false;
         swapLightColor = true;
         glassDoor.LockMode(false);
-        mainDoor.LockMode(false);
+        //mainDoor.LockMode(false);
         roomCompleted = true;
     }
 

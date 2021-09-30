@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorManager : MonoBehaviour, IDamage
-{
-    //Doors To Be Locked
+public class DoorManager : MonoBehaviour, IDamage {
+    [Tooltip("Doors To Be Locked")]
     [SerializeField] private DoorController[] toBeLocked;
 
-    //Doors To Be Unlocked
+    [Tooltip("Doors To Be Unlocked")]
     [SerializeField] private DoorController[] toBeUnlocked;
 
-    //Doors To Be Closed
+    [Tooltip("Doors To Be Closed")]
     [SerializeField] private DoorController[] toBeClosed;
 
-    //Detect if Player's Can Interact
+    [Tooltip("Detect if Player's Can Interact using Inputs")]
     [SerializeField] private bool canInteract;
 
     //Detect if Player already interacted
@@ -34,9 +33,6 @@ public class DoorManager : MonoBehaviour, IDamage
         if(canInteract && !alreadyInteracted && Input.GetKeyDown(KeyMapper.inputKey.Interaction))
         {
             TakeDamage();
-            canInteract = false;
-            alreadyInteracted = true;
-            this.enabled = false;
         }
     }
 
@@ -58,11 +54,15 @@ public class DoorManager : MonoBehaviour, IDamage
 
     public void TakeDamage()
     {
-        DoorInteraction();
+        if (!alreadyInteracted) {
+            DoorInteraction();
 
-        if (hasAIManagerAssociated)
-        {
-            aiManager.PlayerDetected();
+            if (hasAIManagerAssociated) {
+                aiManager.PlayerDetected();
+            }
+
+            alreadyInteracted = true;
+            canInteract = false;
         }
     }
 
