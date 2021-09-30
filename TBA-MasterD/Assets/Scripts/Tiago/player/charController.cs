@@ -103,35 +103,48 @@ public class charController : MonoBehaviour, IDamage {
     void Update() {
         // TESTING SAVE SYSTEM
 
-        if (Input.GetKeyDown(KeyMapper.inputKey.Save)) {
-            GameManager.SaveGame();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.SetPause();
         }
 
-        if (Input.GetKeyDown(KeyMapper.inputKey.Load)) {
-            GameManager.LoadGame();
-        }
+        if (!GameManager.GetPause())
+        {
 
-        healthEmission.SetColor("_EmissionColor", healthColor * 3);
-
-        healthColor = Color.Lerp(Color.green, Color.red * 3, healthC);
-
-        if (!isDroneActive) {
-            Movement();
-
-            Crouch();
-
-            Jump();
-
-            CheckStateForSounds();
-
-            if (enableStairsWalk) {
-                StepClimb();
+            if (Input.GetKeyDown(KeyMapper.inputKey.Save))
+            {
+                GameManager.SaveGame();
             }
-        }
-        if (canUseDrone)
-            DroneControl();
 
-        CheckStealthiness();
+            if (Input.GetKeyDown(KeyMapper.inputKey.Load))
+            {
+                GameManager.LoadGame();
+            }
+
+            healthEmission.SetColor("_EmissionColor", healthColor * 3);
+
+            healthColor = Color.Lerp(Color.green, Color.red * 3, healthC);
+
+            if (!isDroneActive)
+            {
+                Movement();
+
+                Crouch();
+
+                Jump();
+
+                CheckStateForSounds();
+
+                if (enableStairsWalk)
+                {
+                    StepClimb();
+                }
+            }
+            if (canUseDrone)
+                DroneControl();
+
+            CheckStealthiness();
+        }
     }
 
     #region Movement Functions

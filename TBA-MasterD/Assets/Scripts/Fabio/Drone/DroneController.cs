@@ -67,11 +67,16 @@ public class DroneController : MonoBehaviour {
 
     private void Update() {
 
-        Movement();
+        if (!GameManager.GetPause())
+        {
 
-        Look();
+            Movement();
 
-        Shoot();
+            Look();
+
+            Shoot();
+
+        }
     }
 
     private void FixedUpdate() {

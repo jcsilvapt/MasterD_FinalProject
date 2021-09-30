@@ -110,6 +110,16 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public static bool GetPause()
+    {
+        if (ins != null)
+        {
+            return ins.isGamePaused;
+        }
+
+        return false;
+    }
+
     public static void SetCursorVisibility() {
         if (ins != null) {
             ins.ToggleCursorVisibility();

@@ -80,13 +80,16 @@ public class WeaponController : MonoBehaviour {
 
     private void Update() {
 
-        if (currentWeaponEquipped == null) return;
+        if (!GameManager.GetPause())
+        {
 
-        currentWeaponEquipped.WeaponUpdate();
+            if (currentWeaponEquipped == null) return;
 
-        ChangeCurrentWeapon(Input.GetAxis("Mouse ScrollWheel"));
+            currentWeaponEquipped.WeaponUpdate();
 
+            ChangeCurrentWeapon(Input.GetAxis("Mouse ScrollWheel"));
 
+        }
     }
 
     private void ChangeCurrentWeapon(float indexIndicator) {
