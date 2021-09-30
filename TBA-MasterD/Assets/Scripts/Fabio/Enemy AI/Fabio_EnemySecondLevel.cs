@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDamage
 {
-
     // References
     [Header("Components")]
     [Tooltip("material of the color that will change with hp")]
@@ -14,7 +13,6 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
     private float healthC; //percentage of color change for each hit
     private Animator animator;
     private Rigidbody rb;
-    private GameObject character;
     private NavMeshAgent agent;
     [Tooltip("mesh of the object that has the health color material")]
     [SerializeField] GameObject himself;
@@ -34,8 +32,6 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
     public GameObject casing;
     public GameObject casingSpawn;
     public ParticleSystem muzzleFlash;
-    public float timeToShoot = 1f;
-    public float elapsedTime = 0;
 
 
     [Header("Enemy Settings")]
@@ -43,30 +39,16 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
     [SerializeField] float health;
     [Tooltip("Use to determine if this character is alive or not.")]
     [SerializeField] bool isAlive = true;
-    [Tooltip("Used to see if there are allies nearby to attack target")]
-    [SerializeField] bool allyAlert = false;
 
     [Header("AI Settings")]
 
     [Tooltip("Usually needs to be enable...")]
     [SerializeField] bool enableAISystem = true;
     [SerializeField] Transform target;
-    [Tooltip("Set how long the character will stay in IdleMode")]
-    [Range(1.0f, 10.0f)]
-    [SerializeField] float idleTime = 1.0f;
-    [Range(10.0f, 200.0f)]
-    [SerializeField] float distanceToViewTarget = 10.0f;
-    [SerializeField] float distanceToShoot;
-    [Tooltip("Define here the patrol points of this AI System")]
-    [SerializeField] Transform[] patrolWayPoints;
 
     private Fabio_AIStates currentState;
     private Fabio_AIBehaviour currentBehaviour;
     private Fabio_AIBehaviour[] behaviours;
-
-    [Header("Developer Settings")]
-    [Tooltip("Enable this for movement test only.")]
-    [SerializeField] bool enableTestMovement = false;
 
     [Header("Specified AI Manager Reference")]
     [SerializeField] private Fabio_AIManager aiManager;
@@ -88,11 +70,8 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
 
     #endregion
 
-
     private void Start()
     {
-        //enemyHead = transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:Neck/mixamorig:Head");
-
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
@@ -111,10 +90,6 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
         if (isAlive && enableAISystem)
         {
             currentBehaviour.OnUpdate();
-        }
-        else
-        {
-            //TODO: º+p
         }
     }
 

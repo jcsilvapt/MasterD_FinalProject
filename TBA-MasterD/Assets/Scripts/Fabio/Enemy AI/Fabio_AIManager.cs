@@ -58,8 +58,6 @@ public class Fabio_AIManager : MonoBehaviour
 
     #region Time Between Shooting Sprays
 
-    private bool isShootingThePlayer;
-
     [SerializeField] private float timeBetweenShootingSprays;
 
     private float currentTimerBetweenShootingSprays;
@@ -221,7 +219,6 @@ public class Fabio_AIManager : MonoBehaviour
                         }
                     }
 
-                    isShootingThePlayer = false;
                     currentTimerBetweenShootingSprays = 0;
                 }
             }
