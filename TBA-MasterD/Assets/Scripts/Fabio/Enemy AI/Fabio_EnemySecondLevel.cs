@@ -198,7 +198,9 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
     {
         if (Time.deltaTime != 0)
         {
-            agent.speed = (animator.deltaPosition / Time.deltaTime).magnitude;
+            if (animator != null) {
+                agent.speed = (animator.deltaPosition / Time.deltaTime).magnitude;
+            }
         }
     }
 
