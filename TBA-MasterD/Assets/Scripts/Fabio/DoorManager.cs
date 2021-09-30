@@ -36,6 +36,7 @@ public class DoorManager : MonoBehaviour, IDamage
             TakeDamage();
             canInteract = false;
             alreadyInteracted = true;
+            this.enabled = false;
         }
     }
 

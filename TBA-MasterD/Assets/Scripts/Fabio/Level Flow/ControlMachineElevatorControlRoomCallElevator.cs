@@ -32,6 +32,7 @@ public class ControlMachineElevatorControlRoomCallElevator : MonoBehaviour
             elevator.SetAvailability(true);
             canInteract = false;
             alreadyInteracted = true;
+            this.enabled = false;
         }
     }
 

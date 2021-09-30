@@ -33,6 +33,7 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
         {
             if (manager.GetIsAIManagerWorking())
             {
+                Debug.LogError("Still working: " + manager.name);
                 howManyAIManagersAreWorking++;
                 break;
             }

@@ -12,6 +12,7 @@ public class AIManagerActivationControlRoom : MonoBehaviour
         if(other.tag == "Player")
         {
             aiManager.PlayerDetected();
+            gameObject.SetActive(false);
         }
     }
 }
