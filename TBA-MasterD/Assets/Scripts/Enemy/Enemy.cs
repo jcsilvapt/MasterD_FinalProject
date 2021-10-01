@@ -112,11 +112,19 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         }
         else
         {
-            //TODO: º+p
+            health = 0;
+            TakeDamage();
         }
         
     }
 
+    #region PUBLIC METHODS
+
+    public void SetIsAlive(bool value) {
+        isAlive = value;
+    }
+
+    #endregion
 
     #region AI System
 
@@ -279,7 +287,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     public void TakeDamage()
     {
         // Get all enemies closeby and activate the behaviour...
-        if (isShooting == false)
+        if (isShooting == false && isAlive)
         {
             HandleEvent(AIEvents.GotAttacked);
         }
