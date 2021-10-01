@@ -13,6 +13,9 @@ public class UIManager : MonoBehaviour {
     private void Awake() {
         if(ins == null) {
             ins = this;
+            DontDestroyOnLoad(this);
+        } else {
+            Destroy(gameObject);
         }
     }
 

@@ -19,10 +19,6 @@ public class Garage_Manager : MonoBehaviour
     }
 
 
-    void Update()
-    {
-    }
-
     #region Barrier Rotation
     public void RotateBarrier()
     {

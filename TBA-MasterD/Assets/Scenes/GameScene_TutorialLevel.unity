@@ -1153,12 +1153,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5415784362122449817, guid: 3142eb715d2e0b24ea6e77c92715db24,
-        type: 3}
-      propertyPath: mixer
-      value: 
-      objectReference: {fileID: 24100000, guid: 4f7eed251ee6a404892e2d40de1058e2,
-        type: 2}
     - target: {fileID: 5415784362122449822, guid: 3142eb715d2e0b24ea6e77c92715db24,
         type: 3}
       propertyPath: m_RootOrder
@@ -44429,6 +44423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1891847281}
   - component: {fileID: 1891847280}
+  - component: {fileID: 1891847282}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -44448,32 +44443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced5b7768b2077e4495a378daccd3ab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjects:
-  - {fileID: 1545436715}
-  - {fileID: 1521213810}
-  - {fileID: 1281053521}
-  - {fileID: 1372323419}
-  - {fileID: 1265977080}
-  - {fileID: 1537413305}
-  - {fileID: 553331982}
-  - {fileID: 2103305306}
-  - {fileID: 903348327}
-  - {fileID: 107169061}
-  - {fileID: 826584222}
-  - {fileID: 374662197}
-  - {fileID: 618635819}
-  - {fileID: 300236979}
-  - {fileID: 1823938332}
-  - {fileID: 1680742635}
-  - {fileID: 2020089793}
-  - {fileID: 1989083561}
-  - {fileID: 1022425318}
-  - {fileID: 1375310978}
-  - {fileID: 291521767}
-  - {fileID: 543001268}
-  - {fileID: 1274150595}
-  - {fileID: 1095302434}
-  - {fileID: 1992621411}
 --- !u!4 &1891847281
 Transform:
   m_ObjectHideFlags: 0
@@ -44491,6 +44460,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1891847282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891847279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4464ea51de82dac42ae704538a937bdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: TestesFabio
 --- !u!1001 &1891986844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52295,6 +52277,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TriggerSceneSwitcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982558913518626475, guid: b8a57d4beffbabd46b7b1ed331f4c37d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8a57d4beffbabd46b7b1ed331f4c37d, type: 3}

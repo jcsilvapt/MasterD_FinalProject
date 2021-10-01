@@ -35,46 +35,9 @@ public class cameraRotation : MonoBehaviour {
     private Transform leftArm;
 
     void Start() {
-        /*head = animator.GetBoneTransform(HumanBodyBones.Head);
-        chest = animator.GetBoneTransform(HumanBodyBones.Chest);
-        rightUpperArm = animator.GetBoneTransform(HumanBodyBones.RightUpperArm);
-        rightLowerArm = animator.GetBoneTransform(HumanBodyBones.RightLowerArm);
-        rightHand = animator.GetBoneTransform(HumanBodyBones.RightHand);
-
-        leftUpperArm = animator.GetBoneTransform(HumanBodyBones.LeftUpperArm);
-        leftLowerArm = animator.GetBoneTransform(HumanBodyBones.LeftLowerArm);
-        leftHand = animator.GetBoneTransform(HumanBodyBones.LeftHand);*/
         mouseX = playerBody.eulerAngles.y;
     }
 
-
-    void Update() {
-
-        if (Input.GetKeyDown(KeyCode.K)) {
-            GameManager.SetCursorVisibility();
-        }
-        /*
-        if (!GameManager.GetCursorVisibility()) {
-            mouseX += Input.GetAxis("Mouse X") * (KeyMapper.inputKey.MouseSensitivity * mouseMultiplier) * Time.deltaTime;
-            Debug.Log("Mouse X: " + mouseX);
-            mouseY += Input.GetAxis("Mouse Y") * (KeyMapper.inputKey.MouseSensitivity * mouseMultiplier) * Time.deltaTime;
-            Debug.Log("Sense: " + KeyMapper.inputKey.MouseSensitivity * mouseMultiplier);
-            mouseY = 0;
-            if(KeyMapper.inputKey.InvertMouse) {
-                xRotation += mouseY;
-            } else {
-                xRotation -= mouseY;
-            }
-            
-            xRotation = Mathf.Clamp(xRotation, -90, 90);
-
-            // Roda Câmera no Y
-            transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-            // Roda Câmera no X
-            playerBody.Rotate(Vector3.up * mouseX);
-        }
-        */
-    }
 
     private void FixedUpdate() {
         if (!GameManager.GetCursorVisibility()) {
@@ -84,7 +47,6 @@ public class cameraRotation : MonoBehaviour {
     }
 
     private void RotateCamera() {
-        //Quaternion playerBodyRotate = Quaternion.Euler(0, mouseX, 0);
         Vector3 bodyRotation = new Vector3(0, mouseX, 0);
 
         playerBody.localRotation = Quaternion.AngleAxis(mouseX, playerBody.transform.up);
@@ -95,7 +57,6 @@ public class cameraRotation : MonoBehaviour {
     private void GetMouseMovement() {
 
         float sensitivity = KeyMapper.inputKey.MouseSensitivity;
-        //Debug.Log("Camera Sensitivity: " + sensitivity);
 
         mouseX += Input.GetAxis("Mouse X") * sensitivity;
 
@@ -108,35 +69,4 @@ public class cameraRotation : MonoBehaviour {
 
     }
 
-    private void LateUpdate() {
-        /*
-        chest.LookAt(target.position);
-        chest.rotation = chest.rotation * Quaternion.Euler(chestOffset);
-
-        head.LookAt(target.position);
-        head.rotation = head.rotation * Quaternion.Euler(headOffset);
-        */
-        /*
-        // Right Arm
-        rightUpperArm.LookAt(target.position);
-        rightUpperArm.rotation = rightUpperArm.rotation * Quaternion.Euler(rightUpperArmOffset);
-
-        rightLowerArm.LookAt(target.position);
-        rightLowerArm.rotation = rightLowerArm.rotation * Quaternion.Euler(rightLowerArmOffset);
-
-        rightHand.LookAt(target.position);
-        rightHand.rotation = rightHand.rotation * Quaternion.Euler(rightHandOffset);
-
-
-        // Left Arm
-        leftUpperArm.LookAt(target.position);
-        leftUpperArm.rotation = leftUpperArm.rotation * Quaternion.Euler(leftUpperArmOffset);
-
-        leftLowerArm.LookAt(target.position);
-        leftLowerArm.rotation = leftLowerArm.rotation * Quaternion.Euler(leftLowerArmOffset);
-
-        leftHand.LookAt(target.position);
-        leftHand.rotation = leftHand.rotation * Quaternion.Euler(leftHandOffset);
-        */
-    }
 }

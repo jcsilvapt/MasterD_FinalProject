@@ -16,6 +16,9 @@ public class ElevatorController : MonoBehaviour
     //Array of AI Manager References
     [SerializeField] private Fabio_AIManager[] aiManager;
 
+    // Player Reference
+    private Transform player = null;
+
     #endregion
 
     #region Control Variables
@@ -42,5 +45,19 @@ public class ElevatorController : MonoBehaviour
     {
         animator.SetBool("Close", true);
         animator.SetBool("Open", false);
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if(other.CompareTag("Player")) {
+            player = GameObject.Find("Player").transform;
+            player.parent = transform;
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if(other.CompareTag("Player")) {
+            player.parent = null;
+            player = null;
+        }
     }
 }

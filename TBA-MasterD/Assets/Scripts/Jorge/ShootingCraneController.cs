@@ -44,7 +44,7 @@ public class ShootingCraneController : MonoBehaviour {
         isMoving = true;
         _UI.SetActive(false);
         isUIActive = false;
-        GameManager.SetCursorVisibility();
+        GameManager.SetCursorVisibility(true); // <--------------------- CONFIRMAR ISTO (JORGE)
     }
 
     private void Update() {
@@ -53,13 +53,13 @@ public class ShootingCraneController : MonoBehaviour {
                 if (Input.GetKeyDown(KeyMapper.inputKey.Interaction)) {
                     _UI.SetActive(true);
                     isUIActive = true;
-                    GameManager.SetCursorVisibility();
+                    GameManager.SetCursorVisibility(true);
                 }
             } else {
                 if (Input.GetKeyDown(KeyCode.Escape)) {
                     _UI.SetActive(false);
                     isUIActive = false;
-                    GameManager.SetCursorVisibility();
+                    GameManager.SetCursorVisibility(false);
                 }
             }
         }
@@ -83,6 +83,6 @@ public class ShootingCraneController : MonoBehaviour {
         isUIActive = false;
         hasPlayer = false;
         if (GameManager.GetCursorVisibility())
-            GameManager.SetCursorVisibility();
+            GameManager.SetCursorVisibility(false);
     }
 }

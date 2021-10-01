@@ -15,9 +15,21 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
     [Tooltip("Set true if you wish to disable the objects")]
     [SerializeField] bool isToDisable = false;
 
+    [Header("Move Object To Scene")]
+    [SerializeField] bool isToMoveObject = false;
+    [SerializeField] Transform objectToBeMoved;
+    [SerializeField] Vector3 posToBeMoved;
+    [SerializeField] Vector3 rotToBeMoved;
+
+
     [Header("Developer Settings")]
     [SerializeField] bool isToExecute = false;
     [SerializeField] bool isLoaded = false;
+
+
+    private void Start() {
+        //GameManager.ChangeScene(sceneName, false, true);
+    }
 
 
     /// <summary>
@@ -39,6 +51,14 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
         return isToReload;
     }
 
+    public bool GetIsToMoveObject() {
+        return isToMoveObject;
+    }
+
+    public void SetObjectToMove(Transform ObjectTransform) {
+        objectToBeMoved = ObjectTransform;
+    }
+
     public void ToogleTypeOfSwitch() {
         isToDisable = !isToDisable;
         Debug.Log("On the next trigger enter is to Disable Objects? " + isToDisable);
@@ -55,6 +75,12 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
                 if (!isToReload) isLoaded = true;
             }
         }
+    }
+
+    public void SetObjectToPosition() {
+        objectToBeMoved.parent = null;
+        objectToBeMoved.position = posToBeMoved;
+        objectToBeMoved.rotation = Quaternion.Euler(rotToBeMoved);
     }
 
 }
