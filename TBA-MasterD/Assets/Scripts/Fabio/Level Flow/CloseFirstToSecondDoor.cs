@@ -8,9 +8,13 @@ public class CloseFirstToSecondDoor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
-            secondLevelManager.LockDoorFirstToSecondLevel();
+            //VERIFICA SE JÁ PASSOU NA OUTRA SALA!
+            //if(other.GetComponent<charController>()){
+            //
+            //}
+            secondLevelManager.UnlockDoorFirstToSecondLevel();
         }
 
         Destroy(gameObject);

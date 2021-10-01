@@ -54,9 +54,9 @@ public class SecondLevelManager : MonoBehaviour
         doorFirstToSecondLevel.LockMode(true);
     }
 
-    public void UnlockDoorElevatorControlRoom()
+    public void UnlockDoorFirstToSecondLevel()
     {
-        
+        doorFirstToSecondLevel.LockMode(false);
     }
 
     public void UnlockDoorSecondLevelExit()

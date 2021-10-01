@@ -190,7 +190,7 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
             PackDropper();
             DisableAgent();
             Debug.Log("Unit Killed");
-
+            muzzleFlash.SetActive(false);
             aiManager.UnitKilled(this);
         }
 
