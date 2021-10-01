@@ -327,7 +327,9 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         float health = target.GetComponent<charController>().GetHealth();
         int currentBullets = (int)target.GetComponent<charController>().GetCurrentWeaponBullets().y;
         int currentMaximumBullets = (int)target.GetComponent<charController>().GetCurrentWeaponBullets().x;
+
         Debug.Log("health: " + health + ", MaximumBullets: " + currentMaximumBullets + ", CurrentBullets: " + currentBullets);
+
         if (currentBullets <= currentMaximumBullets / 2 && health <= 50)
         {
             Instantiate(healthPack, healthSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
