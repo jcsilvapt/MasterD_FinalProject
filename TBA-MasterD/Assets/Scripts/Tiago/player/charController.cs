@@ -81,6 +81,8 @@ public class charController : MonoBehaviour, IDamage {
     [Tooltip("Check if player is still stealth or if enemy saw him")]
     public bool isStealth = true;
     [SerializeField] CanvasGroup screenRed;
+
+
     void Start() {
         // Get References
         rb = GetComponent<Rigidbody>();
@@ -103,53 +105,50 @@ public class charController : MonoBehaviour, IDamage {
     void Update() {
         // TESTING SAVE SYSTEM
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            GameManager.SetPause();
+        if (Input.GetKeyDown(KeyMapper.inputKey.Save)) {
+            GameManager.SaveGame();
         }
 
-        if (!GameManager.GetPause())
-        {
-
-            if (Input.GetKeyDown(KeyMapper.inputKey.Save))
-            {
-                GameManager.SaveGame();
-            }
-
-            if (Input.GetKeyDown(KeyMapper.inputKey.Load))
-            {
-                GameManager.LoadGame();
-            }
+        if (Input.GetKeyDown(KeyMapper.inputKey.Load)) {
+            GameManager.LoadGame();
+        }
 
             healthEmission.SetColor("_EmissionColor", healthColor * 3);
 
             healthColor = Color.Lerp(Color.green, Color.red * 3, healthC);
 
-            if (!isDroneActive)
-            {
-                Movement();
+        if (isDroneActive)
+        {
+            steps.mute = true;
+            screenRed.alpha = 0;
+        }
+        else
+        {
+            steps.mute = false;
+            screenRed.alpha = 1 - (health / 100);
+        }
+
+        if (!isDroneActive) {
+            Movement();
 
                 Crouch();
 
-                Jump();
+            Jump();
 
-                CheckStateForSounds();
+            CheckStateForSounds();
 
-                if (enableStairsWalk)
-                {
-                    StepClimb();
-                }
+            if (enableStairsWalk) {
+                StepClimb();
             }
-            if (canUseDrone)
-                DroneControl();
-
-            CheckStealthiness();
         }
+        if (canUseDrone)
+            DroneControl();
+
+        CheckStealthiness();
     }
 
     #region Movement Functions
     private void Crouch() {
-
         RaycastHit hitInfo;
         if (Physics.Raycast(character.transform.position + Vector3.up, Vector3.up, out hitInfo, minDistanceToStandUp)) {
             if (hitInfo.transform.tag != "Armory")

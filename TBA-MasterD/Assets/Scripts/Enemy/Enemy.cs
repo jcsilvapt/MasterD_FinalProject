@@ -73,6 +73,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     [SerializeField] bool enableTestMovement = false;
 
     private bool canShoot = false;
+    
 
 
     Dictionary<AIEvents, AIStates> nextEvent = new Dictionary<AIEvents, AIStates>
@@ -89,7 +90,6 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 
     private void Start()
     {
-        //enemyHead = transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:Neck/mixamorig:Head");
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
@@ -101,7 +101,6 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
 
     private void Update()
     {
-        //Debug.Log(gameObject.name + " " + currentState);
         healthEmission.SetColor("_EmissionColor", healthColor * 3); // access to emission color of the health material
 
         healthColor = Color.Lerp(Color.green, Color.red * 3, healthC); //gradient between two color for the enemy health
@@ -267,14 +266,13 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     public void SetShooting(bool iShoot)
     {
         isShooting = iShoot;
-
     }
 
-
-    private void ShootSound()
+    private void ShootSound() // used for shooting sounds in an event on the animation
     {
         shootSoundSource.PlayOneShot(shootSoundSource.clip);
     }
+
     #endregion
 
     #region Animation, Alive Checker and Drop Packs
