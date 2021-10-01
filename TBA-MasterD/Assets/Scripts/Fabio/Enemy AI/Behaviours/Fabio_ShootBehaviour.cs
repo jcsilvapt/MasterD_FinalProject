@@ -16,6 +16,8 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
 
     private Transform bulletSpawn;
     private Fabio_AIManager aiManager;
+    private AudioSource shootSoundSource;
+    private GameObject bulletParticleSystem;
 
     #endregion
 
@@ -24,10 +26,12 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
     private float timeBetweenShots;
     private float currentTimerBetweenShots;
 
-    public Fabio_ShootBehaviour(MonoBehaviour self, Fabio_AIStateMachine stateMachine, Transform bulletSpawn, Fabio_AIManager aiManager) : base(self, stateMachine, "Shoot")
+    public Fabio_ShootBehaviour(MonoBehaviour self, Fabio_AIStateMachine stateMachine, Transform bulletSpawn, Fabio_AIManager aiManager, AudioSource shootSoundSource, GameObject bulletParticleSystem) : base(self, stateMachine, "Shoot")
     {
         this.bulletSpawn = bulletSpawn;
         this.aiManager = aiManager;
+        this.shootSoundSource = shootSoundSource;
+        this.bulletParticleSystem = bulletParticleSystem;
     }
 
     public override void Init()
@@ -66,9 +70,11 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
 
             if(currentTimerBetweenShots >= timeBetweenShots && numberOfShots > 0)
             {
+                bulletParticleSystem.SetActive(true);
+                ShootSound();
+
                 Vector3 spray = SetSpray();
-                Debug.DrawRay(bulletSpawn.transform.position, (target.transform.position + Vector3.up) - bulletSpawn.position + spray, Color.black, 5f);
-                
+
                 RaycastHit hit;
                 if (Physics.Raycast(bulletSpawn.transform.position, (target.transform.position + Vector3.up) - bulletSpawn.position + spray, out hit))
                 {
@@ -93,6 +99,7 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
 
             if (numberOfShots <= 0)
             {
+                bulletParticleSystem.SetActive(false);
                 stateMachine.HandleEvent(Fabio_AIEvents.FinishedShooting);
             }
         }
@@ -108,5 +115,10 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
         Vector3 spray = new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f));
         
         return spray;
+    }
+
+    private void ShootSound() // used for shooting sounds in an event on the animation
+    {
+        shootSoundSource.PlayOneShot(shootSoundSource.clip);
     }
 }

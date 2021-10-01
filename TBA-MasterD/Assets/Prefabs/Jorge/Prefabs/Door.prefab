@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!4 &2535394692803337076
 Transform:
@@ -111,7 +111,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1242887243865090568
 Transform:
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 8414522263675096388}
   - component: {fileID: 6268025583658884279}
   - component: {fileID: 7103160670275761862}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,8 @@ MonoBehaviour:
   tagsAllowed:
   - Player
   - Enemy
-  lockDoor: 0
+  lockDoor: 1
+  hasSigns: 1
   openSign:
   - {fileID: 1338165321100510330}
   - {fileID: 3300870455766702158}
@@ -263,6 +264,8 @@ MonoBehaviour:
   inputKey: 101
   isDoubleDoor: 0
   openSideWays: 0
+  startsOpen: 0
+  isAlwaysOpen: 0
 --- !u!95 &7103160670275761862
 Animator:
   serializedVersion: 3
@@ -299,7 +302,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4537766909143437124
 Transform:
@@ -393,7 +396,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!4 &2539331355977638234
 Transform:
@@ -581,7 +584,7 @@ GameObject:
   m_TagString: cenario
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5396372465160885038
 Transform:

@@ -31,7 +31,9 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
     public GameObject bulletSpawn;
     public GameObject casing;
     public GameObject casingSpawn;
-    public ParticleSystem muzzleFlash;
+    public GameObject muzzleFlash;
+    [SerializeField] AudioSource shootSoundSource;
+    [SerializeField] AudioClip shootSound;
 
 
     [Header("Enemy Settings")]
@@ -108,8 +110,8 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
                 new Fabio_IdleBehaviour(this, this, enemyHead),
                 new Fabio_AwareBehaviour(this, this, enemyHead, aiManager),
                 new Fabio_ReadyToFireBehaviour(this, this, enemyHead, aiManager),
-                new Fabio_ShootBehaviour(this, this, bulletSpawn.transform, aiManager),
-                new Fabio_MissAllShots(this, this, bulletSpawn.transform, 0, aiManager),
+                new Fabio_ShootBehaviour(this, this, bulletSpawn.transform, aiManager, shootSoundSource, muzzleFlash),
+                new Fabio_MissAllShots(this, this, bulletSpawn.transform, 0, aiManager, shootSoundSource, muzzleFlash),
                 new Fabio_ChaseBehaviour(this, this, enemyHead, aiManager)
             };
 
@@ -243,7 +245,7 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
 
         #endregion
 
-        #region Ragdoll
+    #region Ragdoll
         private void SetKinematic(bool value)
     {
         Rigidbody[] bodyParts = GetComponentsInChildren<Rigidbody>();

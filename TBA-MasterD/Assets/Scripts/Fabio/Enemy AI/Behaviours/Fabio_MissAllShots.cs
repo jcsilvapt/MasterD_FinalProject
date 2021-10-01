@@ -16,6 +16,8 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
 
     private Transform bulletSpawn;
     private Fabio_AIManager aiManager;
+    private AudioSource shootSoundSource;
+    private GameObject bulletParticleSystem;
 
     #endregion
 
@@ -25,10 +27,12 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
     private float currentTimerBetweenShots;
 
 
-    public Fabio_MissAllShots(MonoBehaviour self, Fabio_AIStateMachine stateMachine, Transform bulletSpawn, int numberOfShots,Fabio_AIManager aiManager) : base(self, stateMachine, "MissAllShots")
+    public Fabio_MissAllShots(MonoBehaviour self, Fabio_AIStateMachine stateMachine, Transform bulletSpawn, int numberOfShots,Fabio_AIManager aiManager, AudioSource shootSoundSource, GameObject bulletParticleSystem) : base(self, stateMachine, "MissAllShots")
     {
         this.bulletSpawn = bulletSpawn;
         this.aiManager = aiManager;
+        this.shootSoundSource = shootSoundSource;
+        this.bulletParticleSystem = bulletParticleSystem;
     }
 
     public override void Init()
@@ -62,11 +66,13 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
     public override void OnUpdate()
     {
         if (isActive)
-        {
-            currentTimerBetweenShots += Time.deltaTime;
+        {   currentTimerBetweenShots += Time.deltaTime;
 
             if (currentTimerBetweenShots >= timeBetweenShots && numberOfShots > 0)
             {
+                bulletParticleSystem.SetActive(true);
+                ShootSound();
+
                 Vector3 missed = GetMissedShot();
                 Debug.DrawRay(bulletSpawn.transform.position, missed, Color.blue, 5f);
                 RaycastHit hit;
@@ -87,6 +93,7 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
 
             if (numberOfShots <= 0)
             {
+                bulletParticleSystem.SetActive(false);
                 stateMachine.HandleEvent(Fabio_AIEvents.FinishedShooting);
             }
         }
@@ -114,5 +121,10 @@ public class Fabio_MissAllShots : Fabio_AIBehaviour
         bulletDirection += new Vector3(xMissedDirection, yMissedDirection, zMissedDirection);
 
         return bulletDirection;
+    }
+
+    private void ShootSound() // used for shooting sounds in an event on the animation
+    {
+        shootSoundSource.PlayOneShot(shootSoundSource.clip);
     }
 }

@@ -131,7 +131,7 @@ public class charController : MonoBehaviour, IDamage {
         if (!isDroneActive) {
             Movement();
 
-                Crouch();
+            Crouch();
 
             Jump();
 
