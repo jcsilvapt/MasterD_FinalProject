@@ -64,13 +64,6 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
 
-        Debug.LogWarning("Game Manager: To Hide the mouse cursor just press 'K'");
-
-        /*
-        if (!displayCursor) {
-            ToggleCursorVisibility();
-        }*/
-
         // Sets the volume to default values
         mixer.SetFloat("Master", -10);
         mixer.SetFloat("Music", 0);
@@ -120,15 +113,15 @@ public class GameManager : MonoBehaviour {
         return false;
     }
 
-    public static void SetCursorVisibility() {
+    public static void SetCursorVisibility(bool showCursor) {
         if (ins != null) {
-            ins.ToggleCursorVisibility();
+            ins.ToggleCursorVisibility(showCursor);
         }
     }
 
     public static bool GetCursorVisibility() {
         if (ins != null) {
-            return ins.showCursor;
+            return ins.isGamePaused;
         }
         return false;
     }
@@ -231,6 +224,12 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public static void ChangeScene(string sceneName, bool loadGameData, bool loadAdditive) {
+        if(ins != null) {
+            ins._changeScene(sceneName, loadGameData, loadAdditive);
+        }
+    }
+
     public static void SaveGame() {
         if (ins != null) {
             ins.Save();
@@ -274,20 +273,22 @@ public class GameManager : MonoBehaviour {
 
     private void _SetPauseGame() {
         if (isGamePaused) {
-            Time.timeScale = 1;
-            isGamePaused = false;
-            Debug.Log("Game Manager: Game Unpaused");
-        } else {
+            ToggleCursorVisibility(true);
             Time.timeScale = 0;
             isGamePaused = true;
             Debug.Log("Game Manager: Game Paused");
+        } else {
+            ToggleCursorVisibility(false);
+            Time.timeScale = 1;
+            isGamePaused = false;
+            Debug.Log("Game Manager: Game Unpaused");
         }
     }
 
-    private void ToggleCursorVisibility() {
-        showCursor = !showCursor;
-        Cursor.lockState = showCursor ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = showCursor ? true : false;
+    private void ToggleCursorVisibility(bool showCursor) {
+        this.showCursor = showCursor;
+        Cursor.lockState = this.showCursor ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = this.showCursor ? true : false;
     }
 
     private void _changeScene(int sceneIndex, bool showLoadScreen, bool loadGameData) {
@@ -299,10 +300,23 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    private void _changeScene(string sceneName, bool loadGameData, bool loadAdditive) {
+        if(loadAdditive) {
+            Debug.LogWarning("GAME MANAGER LOADING::::::::::::::::");
+            StartCoroutine(LoadAsync(sceneName));
+        }
+    }
+
     #endregion
 
     #region COROUTINES
 
+    /// <summary>
+    /// Coroutine that loads a scene (default scene loader)
+    /// </summary>
+    /// <param name="sceneIndex"></param>
+    /// <param name="loadGameData"></param>
+    /// <returns></returns>
     IEnumerator LoadAsync(int sceneIndex, bool loadGameData) {
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
@@ -320,6 +334,20 @@ public class GameManager : MonoBehaviour {
 
         if (loadGameData)
             GameManager.LoadGame();
+    }
+
+    /// <summary>
+    /// Coroutine that loads a scene by Name (used to Additive Mode)
+    /// </summary>
+    /// <param name="sceneName"></param>
+    /// <returns></returns>
+    IEnumerator LoadAsync(string sceneName) {
+        Debug.LogWarning("LOAD ASYNC:::::::::::::::::::");
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+
+        while (!operation.isDone) {
+            yield return null;
+        }
     }
 
     #endregion
