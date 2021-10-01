@@ -279,6 +279,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
     private void ShootSound() // used for shooting sounds in an event on the animation
     {
         shootSoundSource.PlayOneShot(shootSoundSource.clip);
+        muzzleFlash.Play();
     }
 
     #endregion
