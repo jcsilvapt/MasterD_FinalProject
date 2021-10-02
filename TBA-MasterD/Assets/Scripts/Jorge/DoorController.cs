@@ -27,6 +27,8 @@ public class DoorController : MonoBehaviour {
     private Animator anim;
     private bool isDoorOpen = false;
     private bool lastDoorStatus = false;
+    public AudioSource doorSoundsSource;
+    public AudioClip doorSounds;
 
     #region Fabio Changes
 
@@ -79,12 +81,14 @@ public class DoorController : MonoBehaviour {
                     if (interactable) {
                         if (Input.GetKey(KeyCode.E)) {
                             isDoorOpen = true;
+                            DoorSound();
                             inside.Add(other.gameObject);
                             return;
                         }
                     } else {
                         isDoorOpen = true;
                         inside.Add(other.gameObject);
+                        DoorSound();
                         return;
                     }
                 }
@@ -100,13 +104,14 @@ public class DoorController : MonoBehaviour {
             }
             if (isDoubleDoor) {
                 anim.SetBool("side", openSideWays);
+
             }
-            anim.SetBool("Open", isDoorOpen);
+            anim.SetBool("Open", isDoorOpen);            
         }
     }
 
     private void OnTriggerExit(Collider other) {
-
+       
         if (isAlwaysOpen)
         {
             return;
@@ -127,6 +132,7 @@ public class DoorController : MonoBehaviour {
                 isDoorOpen = false;
                 anim.SetBool("side", openSideWays);
                 anim.SetBool("Open", isDoorOpen);
+                DoorSound();
             }
         }
     }
@@ -154,12 +160,15 @@ public class DoorController : MonoBehaviour {
         }
     }
 
+    private void DoorSound()
+    {
+        doorSoundsSource.PlayOneShot(doorSounds);
+    }
     #region Fabio Changes
 
     public void CloseDoor() {
         anim.SetBool("CloseDoor", true);
         anim.SetBool("Open", false);
-
         //anim.runtimeAnimatorController = ;
         startsOpen = false;
     }

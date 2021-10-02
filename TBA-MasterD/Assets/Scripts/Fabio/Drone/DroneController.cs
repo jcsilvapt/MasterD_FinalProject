@@ -55,6 +55,10 @@ public class DroneController : MonoBehaviour {
     //Timer keeping track of the times
     private float shootTimer;
 
+
+    //dart shoot sound
+    public AudioClip dartShootSound;
+    public AudioSource dartSound;
     #endregion
 
     private void Start() {
@@ -122,7 +126,7 @@ public class DroneController : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonDown(0)) {
-
+            dartSound.PlayOneShot(dartShootSound);
             RaycastHit hit;
             if(Physics.Raycast(droneCamera.transform.position, droneCamera.transform.forward, out hit)) {
                 if(hit.transform.GetComponent<IDamage>() != null) {

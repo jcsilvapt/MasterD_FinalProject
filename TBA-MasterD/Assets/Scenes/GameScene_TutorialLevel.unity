@@ -4692,17 +4692,17 @@ PrefabInstance:
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.31
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.61
+      value: 0.136
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 53.47
+      value: 21.093
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
@@ -51875,6 +51875,8 @@ MonoBehaviour:
   inputKey: 101
   isDoubleDoor: 1
   openSideWays: 1
+  doorSoundsSource: {fileID: 0}
+  doorSounds: {fileID: 0}
   startsOpen: 0
   isAlwaysOpen: 0
 --- !u!1001 &3156241212140876540
@@ -51884,6 +51886,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 783716402}
     m_Modifications:
+    - target: {fileID: 241362187267448626, guid: a73c942514cf48741a58a60339c3a93d,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2813713447358401052, guid: a73c942514cf48741a58a60339c3a93d,
         type: 3}
       propertyPath: m_Name
@@ -51963,6 +51970,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6268025583658884279, guid: a73c942514cf48741a58a60339c3a93d,
+        type: 3}
+      propertyPath: lockDoor
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a73c942514cf48741a58a60339c3a93d, type: 3}
