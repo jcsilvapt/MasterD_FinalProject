@@ -17,7 +17,7 @@ public class ElevatorController : MonoBehaviour
     [SerializeField] private Fabio_AIManager[] aiManager;
 
     // Player Reference
-    private Transform player = null;
+    [SerializeField] private Transform player = null;
 
     #endregion
 
@@ -49,7 +49,7 @@ public class ElevatorController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Player")) {
-            player = GameObject.Find("Player").transform;
+            player = other.transform.parent.parent;
             player.parent = transform;
         }
     }

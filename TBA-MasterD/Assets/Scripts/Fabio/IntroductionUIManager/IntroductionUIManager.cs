@@ -50,7 +50,7 @@ public class IntroductionUIManager : MonoBehaviour
 
     #endregion
 
-    private void Start()
+    private void Awake()
     {
         roomName = GetComponent<TextMeshProUGUI>();
         lastRegionPresented = Region.ElevatorControlRoom;

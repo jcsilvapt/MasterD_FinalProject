@@ -16,14 +16,15 @@ public class IntroductionUIRoom : MonoBehaviour
 
     #endregion
 
-    private void Start()
-    {
-        introductionManager = GameObject.Find("RoomName").GetComponent<IntroductionUIManager>();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")){
+
+            if (introductionManager == null)
+            {
+                introductionManager = other.transform.parent.parent.GetChild(3).GetChild(2).Find("RoomName").GetComponent<IntroductionUIManager>();
+            }
+
             if (!alreadyIdentified)
             {
                 introductionManager.ShowText(regionName);
