@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
 
+        ToggleCursorVisibility(showCursor);
+
         // Sets the volume to default values
         mixer.SetFloat("Master", -10);
         mixer.SetFloat("Music", 0);
@@ -90,8 +92,6 @@ public class GameManager : MonoBehaviour {
 
         // Initialize Save System
         saveSystem = new SaveSystem();
-
-
 
     }
 

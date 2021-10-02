@@ -64,6 +64,7 @@ public class CraneController : MonoBehaviour, IDamage {
     }
 
     public void TakeDamage() {
+        Debug.Log("I WORK SOMEHOW...");
         ActivateCrane();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class DoorManager : MonoBehaviour, IDamage {
     [Tooltip("Doors To Be Locked")]
     [SerializeField] private DoorController[] toBeLocked;
@@ -20,6 +21,10 @@ public class DoorManager : MonoBehaviour, IDamage {
 
     //Flag Controlling if UI is shown to the player
     private bool showUI;
+
+    [Header("Related To Tutorial Map")]
+    [SerializeField] CraneController cc;
+
 
     [Header("Second Level Related")]
     [SerializeField] private bool hasAIManagerAssociated;
@@ -81,6 +86,10 @@ public class DoorManager : MonoBehaviour, IDamage {
 
             if (hasAIManagerAssociated) {
                 aiManager.PlayerDetected();
+            }
+
+            if(cc != null) {
+                cc.TakeDamage();
             }
 
             alreadyInteracted = true;

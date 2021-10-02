@@ -35,22 +35,20 @@ public class cameraRotation : MonoBehaviour {
     private Transform leftArm;
 
     void Start() {
-        mouseX = playerBody.eulerAngles.y;
+        //mouseX = playerBody.eulerAngles.y;
     }
-
+   
 
     private void FixedUpdate() {
-        if (!GameManager.GetCursorVisibility()) {
+       if (!GameManager.GetCursorVisibility()) {
             GetMouseMovement();
             RotateCamera();
         }
     }
 
     private void RotateCamera() {
-        Vector3 bodyRotation = new Vector3(0, mouseX, 0);
-
-        playerBody.localRotation = Quaternion.AngleAxis(mouseX, playerBody.transform.up);
-        transform.localRotation = Quaternion.AngleAxis(mouseY, Vector3.right);
+        playerBody.Rotate(Vector3.up * mouseX);
+        transform.localRotation = Quaternion.Euler(mouseY, 0, 0);
 
     }
 
@@ -58,15 +56,14 @@ public class cameraRotation : MonoBehaviour {
 
         float sensitivity = KeyMapper.inputKey.MouseSensitivity;
 
-        mouseX += Input.GetAxis("Mouse X") * sensitivity;
-
+        mouseX = Input.GetAxis("Mouse X") * sensitivity;
         if (KeyMapper.inputKey.InvertMouse) {
-            mouseY += Input.GetAxis("Mouse Y") * sensitivity;
+            mouseY = Input.GetAxis("Mouse Y") * sensitivity;
         } else {
             mouseY -= Input.GetAxis("Mouse Y") * sensitivity;
         }
         mouseY = Mathf.Clamp(mouseY, -90, 90);
 
     }
-
+    
 }

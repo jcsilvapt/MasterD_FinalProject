@@ -129,6 +129,7 @@ public class DroneController : MonoBehaviour {
             dartSound.PlayOneShot(dartShootSound);
             RaycastHit hit;
             if(Physics.Raycast(droneCamera.transform.position, droneCamera.transform.forward, out hit)) {
+                Debug.Log("DRONE::: " + hit.transform.GetComponent<IDamage>());
                 if(hit.transform.GetComponent<IDamage>() != null) {
                     hit.transform.GetComponent<IDamage>().TakeDamage();
                 }

@@ -1153,6 +1153,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5415784362122449817, guid: 3142eb715d2e0b24ea6e77c92715db24,
+        type: 3}
+      propertyPath: showCursor
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5415784362122449822, guid: 3142eb715d2e0b24ea6e77c92715db24,
         type: 3}
       propertyPath: m_RootOrder
@@ -3855,6 +3860,7 @@ MonoBehaviour:
   - {fileID: 565448118}
   toBeClosed: []
   canInteract: 1
+  cc: {fileID: 0}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
 --- !u!4 &210765550 stripped
@@ -4692,17 +4698,17 @@ PrefabInstance:
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.03
+      value: -2.7
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.136
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 21.093
+      value: 52.73
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
@@ -4744,6 +4750,11 @@ PrefabInstance:
       propertyPath: hasWeapon
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2076039594507607858, guid: 461c5995c8c1274419c0b28587ce9c96,
+        type: 3}
+      propertyPath: canUseDrone
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607859, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_Name
@@ -4752,7 +4763,7 @@ PrefabInstance:
     - target: {fileID: 2076039594507607859, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3598675406744137842, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
@@ -38253,9 +38264,9 @@ MonoBehaviour:
   toBeLocked: []
   toBeUnlocked:
   - {fileID: 1195448650}
-  - {fileID: 0}
   toBeClosed: []
   canInteract: 0
+  cc: {fileID: 1588105345}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
 --- !u!64 &1588105344
@@ -38293,6 +38304,19 @@ MonoBehaviour:
   interactionWithBullet: 1
   isActive: 0
   keyToInteract: 0
+--- !u!65 &1588105346
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588105339}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3000008, y: 3.9999974, z: 1.9550016}
+  m_Center: {x: -0.36, y: -0.0000015443568, z: 0.9775003}
 --- !u!1 &1590301219
 GameObject:
   m_ObjectHideFlags: 0
@@ -38762,7 +38786,7 @@ PrefabInstance:
     - target: {fileID: 4393587536304856171, guid: 20eae6924b2e538458e0554488a1f8b8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 34.14
+      value: 34.78
       objectReference: {fileID: 0}
     - target: {fileID: 4393587536304856171, guid: 20eae6924b2e538458e0554488a1f8b8,
         type: 3}
@@ -41844,6 +41868,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 662330779}
     m_Modifications:
+    - target: {fileID: 173165193167759014, guid: 6cd8a0f7c736e9f4e8d46b86e0f50b3d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2014804600754314863, guid: 6cd8a0f7c736e9f4e8d46b86e0f50b3d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8161280965132871324, guid: 6cd8a0f7c736e9f4e8d46b86e0f50b3d,
         type: 3}
       propertyPath: m_Name
@@ -47725,6 +47759,7 @@ MonoBehaviour:
   - {fileID: 565448118}
   toBeClosed: []
   canInteract: 1
+  cc: {fileID: 0}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
 --- !u!65 &2001988391
@@ -51539,6 +51574,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 662330779}
     m_Modifications:
+    - target: {fileID: 1808242625414515177, guid: 0a39381d267271640af4dbef3c153357,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808242625414515177, guid: 0a39381d267271640af4dbef3c153357,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.55
+      objectReference: {fileID: 0}
     - target: {fileID: 1868596102567958325, guid: 0a39381d267271640af4dbef3c153357,
         type: 3}
       propertyPath: m_RootOrder
@@ -51613,6 +51658,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WoodPlanks
+      objectReference: {fileID: 0}
+    - target: {fileID: 1872058467530725493, guid: 0a39381d267271640af4dbef3c153357,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wood
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1807894004422999713, guid: 0a39381d267271640af4dbef3c153357, type: 3}
