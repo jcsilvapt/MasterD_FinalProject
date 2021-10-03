@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class Barrier_Button : MonoBehaviour, IDamage
 {
-    public Garage_Manager gm;
-
-   
+    public Garage_Manager gm;   
    
     public void TakeDamage()
     {
         gm.RotateBarrier();
-        Debug.Log("got Hit");
     }
 }
