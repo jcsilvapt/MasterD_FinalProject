@@ -348,15 +348,6 @@ public class Fabio_AIManager : MonoBehaviour
     {
         numberOfEnemiesAlive--;
 
-        if(numberOfEnemiesAlive <= 0)
-        {
-            activeAIManager = false;
-
-            isAIManagerWorking = false;
-
-            return;
-        }
-
         Fabio_EnemySecondLevel[] auxiliarEnemies = new Fabio_EnemySecondLevel[enemies.Length - 1];
         int auxiliarIndex = 0;
 
@@ -372,6 +363,15 @@ public class Fabio_AIManager : MonoBehaviour
         enemies = auxiliarEnemies;
 
         isChasingThePlayer = false;
+
+        if (numberOfEnemiesAlive <= 0)
+        {
+            activeAIManager = false;
+
+            isAIManagerWorking = false;
+
+            return;
+        }
     }
 
     public bool GetIsAIManagerWorking()

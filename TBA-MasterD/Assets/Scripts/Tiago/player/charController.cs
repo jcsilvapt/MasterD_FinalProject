@@ -14,6 +14,7 @@ public class charController : MonoBehaviour, IDamage {
     [SerializeField] float runSpeed;
     [SerializeField] float crouchSpeed;
     [SerializeField] float jumpHeight;
+    private bool canMove;
 
     [Header("Player Health Effect")]
     [SerializeField] Material healthEmission;
@@ -103,48 +104,59 @@ public class charController : MonoBehaviour, IDamage {
         physicalBodyMesh2.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
 
         healthEmission = armsMesh.GetComponent<SkinnedMeshRenderer>().material;
+
+        canMove = true;
     }
 
     void Update() {
         // TESTING SAVE SYSTEM
-
-        if(Input.GetKeyDown(KeyMapper.inputKey.Save)) {
-            SaveSystemManager.Save();
-        }
-
-        if (Input.GetKeyDown(KeyMapper.inputKey.Load)) {
-            SaveSystemManager.LoadData();
-        }
-
-        healthEmission.SetColor("_EmissionColor", healthColor * 3);
-
-        healthColor = Color.Lerp(Color.green, Color.red * 3, healthC);
-
-        if (isDroneActive) {
-            steps.mute = true;
-            screenRed.alpha = 0;
-        } else {
-            steps.mute = false;
-            screenRed.alpha = 1 - (health / 100);
-        }
-
-        if (!isDroneActive) {
-            Movement();
-
-            Crouch();
-
-            Jump();
-
-            CheckStateForSounds();
-
-            if (enableStairsWalk) {
-                StepClimb();
+        if (canMove)
+        {
+            if (Input.GetKeyDown(KeyMapper.inputKey.Save))
+            {
+                SaveSystemManager.Save();
             }
-        }
-        if (canUseDrone)
-            DroneControl();
 
-        CheckStealthiness();
+            if (Input.GetKeyDown(KeyMapper.inputKey.Load))
+            {
+                SaveSystemManager.LoadData();
+            }
+
+            healthEmission.SetColor("_EmissionColor", healthColor * 3);
+
+            healthColor = Color.Lerp(Color.green, Color.red * 3, healthC);
+
+            if (isDroneActive)
+            {
+                steps.mute = true;
+                screenRed.alpha = 0;
+            }
+            else
+            {
+                steps.mute = false;
+                screenRed.alpha = 1 - (health / 100);
+            }
+
+            if (!isDroneActive)
+            {
+                Movement();
+
+                Crouch();
+
+                Jump();
+
+                CheckStateForSounds();
+
+                if (enableStairsWalk)
+                {
+                    StepClimb();
+                }
+            }
+            if (canUseDrone)
+                DroneControl();
+
+            CheckStealthiness();
+        }
     }
 
     #region Movement Functions
@@ -286,6 +298,17 @@ public class charController : MonoBehaviour, IDamage {
         isGrounded = false;
     }
     #endregion
+
+    public void StartMovement()
+    {
+        canMove = true;
+    }
+
+    public void StopMovement()
+    {
+        canMove = false;
+    }
+
     #endregion
 
     #region Drone

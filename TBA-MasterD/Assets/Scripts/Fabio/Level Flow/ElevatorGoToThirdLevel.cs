@@ -48,17 +48,19 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
         }
     }
 
+    public void DoorsOpened()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<charController>().StartMovement();
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (canClose)
         {
             if (other.tag == "Player")
             {
-                //Stop Player Movement
+                other.transform.parent.parent.GetComponent<charController>().StopMovement();
                 elevator.CloseElevatorDoor();
-                //Load Next Level
-
-                //Destroy Resources Replenish
                 resourcesReplenish.TurnOff();
                 resourcesReplenish.gameObject.SetActive(false);
             }

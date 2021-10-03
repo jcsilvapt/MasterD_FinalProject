@@ -38,6 +38,11 @@ public class ElevatorController : MonoBehaviour
         animator.SetBool("Close", !isAvailable);
     }
 
+    public void ElevatorDoorsOpen()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<charController>().StartMovement();
+    }
+
     public void CloseElevatorDoor()
     {
         animator.SetBool("Close", true);
