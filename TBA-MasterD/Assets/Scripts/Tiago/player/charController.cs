@@ -470,7 +470,11 @@ public class charController : MonoBehaviour, IDamage
         }
         else if (other.gameObject.tag == "Ammo")
         {
-            GetComponentInChildren<Weapon>().AddBullets(20);
+            foreach(Weapon weapon in weaponController.GetPlayerWeapons())
+            {
+                weapon.AddBullets(20);
+            }
+
             Destroy(other.gameObject);
         }
     }

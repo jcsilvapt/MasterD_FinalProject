@@ -81,14 +81,14 @@ public class DoorController : MonoBehaviour {
                     if (interactable) {
                         if (Input.GetKey(KeyCode.E)) {
                             isDoorOpen = true;
-                            DoorSound();
+                            //DoorSound();
                             inside.Add(other.gameObject);
                             return;
                         }
                     } else {
                         isDoorOpen = true;
                         inside.Add(other.gameObject);
-                        DoorSound();
+                        //DoorSound();
                         return;
                     }
                 }
@@ -132,7 +132,7 @@ public class DoorController : MonoBehaviour {
                 isDoorOpen = false;
                 anim.SetBool("side", openSideWays);
                 anim.SetBool("Open", isDoorOpen);
-                DoorSound();
+                //DoorSound();
             }
         }
     }

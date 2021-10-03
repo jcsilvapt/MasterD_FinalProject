@@ -5490,7 +5490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1655302892538838506
 Transform:
   m_ObjectHideFlags: 0
@@ -13548,9 +13548,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1257181908094657709}
     m_Modifications:
+    - target: {fileID: 100000, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
       propertyPath: m_Name
       value: WFX_MF FPS RIFLE1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 30b4cc2728d8cec499fad63ba93785a4, type: 3}
       propertyPath: m_IsActive
