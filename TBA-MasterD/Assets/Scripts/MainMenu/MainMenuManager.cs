@@ -115,19 +115,19 @@ public class MainMenuManager : MonoBehaviour {
     }
 
     public void btnLoadNewGame() {
-        if (GameManager.HasDataSaved()) {
+        if (SaveSystemManager.HasSavedData()) {
             saveInfoPanel.SetActive(true);
         } else {
-            GameManager.ChangeScene(1, true, false);
+            GameManager.ChangeScene(1, false);
         }
     }
 
     public void btnForceNewGame() {
-        GameManager.ChangeScene(1, true, false);
+        GameManager.ChangeScene(1, false);
     }
 
     public void btnContinueGame() {
-        GameManager.ChangeScene(1, true, true);
+        GameManager.ChangeScene(SaveSystemManager.GetCurrentSaveScene(), true);
     }
 
     public void btnCancel() {

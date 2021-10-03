@@ -71,8 +71,7 @@ public class DroneController : MonoBehaviour {
 
     private void Update() {
 
-        if (!GameManager.GetPause())
-        {
+        if (!GameManager.GetPause()) {
 
             Movement();
 
@@ -84,12 +83,9 @@ public class DroneController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if(movementInput.magnitude != 0 || heightController.magnitude != 0)
-        {
+        if (movementInput.magnitude != 0 || heightController.magnitude != 0) {
             rb.velocity = (transform.TransformDirection(movementInput) + heightController).normalized * movementSpeed;
-        }
-        else
-        {
+        } else {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
@@ -128,9 +124,9 @@ public class DroneController : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             dartSound.PlayOneShot(dartShootSound);
             RaycastHit hit;
-            if(Physics.Raycast(droneCamera.transform.position, droneCamera.transform.forward, out hit)) {
+            if (Physics.Raycast(droneCamera.transform.position, droneCamera.transform.forward, out hit)) {
                 Debug.Log("DRONE::: " + hit.transform.GetComponent<IDamage>());
-                if(hit.transform.GetComponent<IDamage>() != null) {
+                if (hit.transform.GetComponent<IDamage>() != null) {
                     hit.transform.GetComponent<IDamage>().TakeDamage();
                 }
             }
@@ -151,8 +147,7 @@ public class DroneController : MonoBehaviour {
         transform.localPosition = Vector3.zero;
     }
 
-    public void SetTransform(Vector3 position, Vector3 rotation)
-    {
+    public void SetTransform(Vector3 position, Vector3 rotation) {
         transform.position = position;
         transform.eulerAngles = Vector3.Scale(Vector3.up, rotation);
 
@@ -160,8 +155,7 @@ public class DroneController : MonoBehaviour {
         yRotation = rotation.x;
     }
 
-    private void OnEnable()
-    {
+    private void OnEnable() {
         Debug.LogWarning("Keys to interact: " + KeyMapper.inputKey.DroneMoveUp.ToString() + ", to go UP and, " + KeyMapper.inputKey.DroneMoveDown.ToString() + ", to go down.");
     }
 }

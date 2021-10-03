@@ -6,6 +6,9 @@ using UnityEngine;
 public class SaveProfile {
 
     public int currentScene;
-    public float x, y, z;
+    public float transform_x, transform_y, transform_z;
+    public float rotation_x, rotation_y, rotation_z;
+    public bool hasDrone;
+    public bool hasWeapon;
 
 }

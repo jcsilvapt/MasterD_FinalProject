@@ -11,7 +11,7 @@ public class ForceLoadScene : MonoBehaviour {
     private void Start() {
         Debug.LogWarning("HERE:::::::::::::::::::::::::");
         Debug.Log("ForceLoadScene: Loading Next Scene");
-        GameManager.ChangeScene(sceneToLoad, false, true);
+        GameManager.ForceAsyncLoad(sceneToLoad);
     }
 
 }

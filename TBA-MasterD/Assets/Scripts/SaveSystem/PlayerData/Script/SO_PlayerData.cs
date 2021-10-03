@@ -9,9 +9,10 @@ public class SO_PlayerData : ScriptableObject {
     [Header("Current Status")]
     public int currentScene;
     public Vector3 currentPosition;
+    public Vector3 currentRotation;
+    public bool hasDrone;
+    public bool hasWeapon;
 
-    // Adicionar checkpoints index
-    // Adicionar se tem arma e o drone...
     // adicionar inimigos que coiso...
 
 }

@@ -103,10 +103,8 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public static bool GetPause()
-    {
-        if (ins != null)
-        {
+    public static bool GetPause() {
+        if (ins != null) {
             return ins.isGamePaused;
         }
 
@@ -218,58 +216,21 @@ public class GameManager : MonoBehaviour {
         return -80;
     }
 
-    public static void ChangeScene(int sceneIndex, bool showLoadPanel, bool loadGameData) {
+    public static void ChangeScene(int sceneIndex, bool loadGameData) {
         if (ins != null) {
-            ins._changeScene(sceneIndex, showLoadPanel, loadGameData);
+            ins._changeScene(sceneIndex, loadGameData);
         }
     }
 
-    public static void ChangeScene(string sceneName, bool loadGameData, bool loadAdditive) {
-        if(ins != null) {
-            ins._changeScene(sceneName, loadGameData, loadAdditive);
-        }
-    }
-
-    public static void SaveGame() {
+    public static void ForceAsyncLoad(string sceneName) {
         if (ins != null) {
-            ins.Save();
+            ins._changeScene(sceneName);
         }
-    }
-
-    public static void LoadGame() {
-        if (ins != null) {
-            ins.Load();
-        }
-    }
-
-    public static bool HasDataSaved() {
-        if(ins != null) {
-            return ins.saveSystem.HasSavedData();
-        }
-        return false;
     }
 
     #endregion
 
     #region Logic
-
-    private void Save() {
-        Debug.Log(Application.persistentDataPath); 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        playerProfile.currentPosition = player.transform.position;
-        playerProfile.currentScene = SceneManager.GetActiveScene().buildIndex;
-        saveSystem.Save(playerProfile);
-
-        Debug.Log("Saving Game...");
-    }
-
-    private void Load() {
-        playerProfile = saveSystem.Load();
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = playerProfile.currentPosition;
-
-        Debug.Log("Loading Game...");
-    }
 
     private void _SetPauseGame() {
         if (isGamePaused) {
@@ -291,20 +252,16 @@ public class GameManager : MonoBehaviour {
         Cursor.visible = this.showCursor ? true : false;
     }
 
-    private void _changeScene(int sceneIndex, bool showLoadScreen, bool loadGameData) {
-        if (showLoadScreen) {
-            loadCanvas.SetActive(true);
-            StartCoroutine(LoadAsync(sceneIndex, loadGameData));
-        } else {
-            SceneManager.LoadScene(sceneIndex);
-        }
+    private void _changeScene(int sceneIndex, bool loadGameData) {
+        ToggleCursorVisibility(false);
+        loadCanvas.SetActive(true);
+        StartCoroutine(LoadAsync(sceneIndex, loadGameData));
+
     }
 
-    private void _changeScene(string sceneName, bool loadGameData, bool loadAdditive) {
-        if(loadAdditive) {
-            Debug.LogWarning("GAME MANAGER LOADING::::::::::::::::");
-            StartCoroutine(LoadAsync(sceneName));
-        }
+    private void _changeScene(string sceneName) {
+        ToggleCursorVisibility(false);
+        StartCoroutine(LoadAsync(sceneName));
     }
 
     #endregion
@@ -333,7 +290,7 @@ public class GameManager : MonoBehaviour {
         loadCanvas.SetActive(false);
 
         if (loadGameData)
-            GameManager.LoadGame();
+            SaveSystemManager.LoadData();
     }
 
     /// <summary>
@@ -342,7 +299,6 @@ public class GameManager : MonoBehaviour {
     /// <param name="sceneName"></param>
     /// <returns></returns>
     IEnumerator LoadAsync(string sceneName) {
-        Debug.LogWarning("LOAD ASYNC:::::::::::::::::::");
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
         while (!operation.isDone) {
