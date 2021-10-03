@@ -113,7 +113,7 @@ public class charController : MonoBehaviour, IDamage {
         }
 
         if (Input.GetKeyDown(KeyMapper.inputKey.Load)) {
-            SaveSystemManager.Load();
+            SaveSystemManager.LoadData();
         }
 
         healthEmission.SetColor("_EmissionColor", healthColor * 3);

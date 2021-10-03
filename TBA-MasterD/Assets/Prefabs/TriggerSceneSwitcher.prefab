@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6982558913518626471}
   - component: {fileID: 6982558913518626470}
   - component: {fileID: 6982558913518626469}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TriggerSceneSwitcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,5 +125,9 @@ MonoBehaviour:
   - {fileID: 0}
   isToReload: 0
   isToDisable: 1
+  isToMoveObject: 0
+  objectToBeMoved: {fileID: 0}
+  posToBeMoved: {x: 0, y: 0, z: 0}
+  rotToBeMoved: {x: 0, y: 0, z: 0}
   isToExecute: 0
   isLoaded: 0

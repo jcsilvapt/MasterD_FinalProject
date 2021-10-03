@@ -13,9 +13,6 @@ public class ElevatorController : MonoBehaviour
     [SerializeField] private GameObject signAvailable;
     [SerializeField] private GameObject signUnavailable;
 
-    //Array of AI Manager References
-    [SerializeField] private Fabio_AIManager[] aiManager;
-
     // Player Reference
     [SerializeField] private Transform player = null;
 
