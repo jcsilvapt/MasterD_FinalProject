@@ -115,13 +115,13 @@ public class PauseMenuManager : MonoBehaviour
 
     public void btnRestartCheckpoint()
     {
-        //TODO
+        SaveSystemManager.Load();
     }
 
     public void btnQuit()
     {
-        //GameManager.QuitGame();
-        //TODO: Go to Main Menu
+        GameManager.SetPause();
+        GameManager.ChangeScene(0, false);
     }
 
     public void btnQuitGame()

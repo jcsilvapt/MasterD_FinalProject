@@ -58,3 +58,4 @@ MonoBehaviour:
   droneMoveUp: 32
   droneMoveDown: 306
   interaction: 101
+  escape: 27

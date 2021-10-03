@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField] bool isGamePaused = false;
     [SerializeField] bool showCursor = true;
 
+    [Header("Pause Menu")]
+    [SerializeField] private GameObject pauseMenu;
+
     #endregion
 
     #region VIDEO SETTINGS
@@ -233,13 +236,15 @@ public class GameManager : MonoBehaviour {
     #region Logic
 
     private void _SetPauseGame() {
-        if (isGamePaused) {
+        if (!isGamePaused) {
+            TogglePauseMenu(true);
             ToggleCursorVisibility(true);
             Time.timeScale = 0;
             isGamePaused = true;
             Debug.Log("Game Manager: Game Paused");
         } else {
             ToggleCursorVisibility(false);
+            TogglePauseMenu(false);
             Time.timeScale = 1;
             isGamePaused = false;
             Debug.Log("Game Manager: Game Unpaused");
@@ -250,6 +255,11 @@ public class GameManager : MonoBehaviour {
         this.showCursor = showCursor;
         Cursor.lockState = this.showCursor ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = this.showCursor ? true : false;
+    }
+
+    private void TogglePauseMenu(bool activate)
+    {
+        pauseMenu.SetActive(activate);
     }
 
     private void _changeScene(int sceneIndex, bool loadGameData) {

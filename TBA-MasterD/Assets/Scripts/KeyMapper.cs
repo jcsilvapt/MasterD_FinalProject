@@ -106,6 +106,13 @@ public class KeyMapper : MonoBehaviour {
         set { interaction = value; }
     }
 
+    [SerializeField] KeyCode escape;
+    public KeyCode Escape
+    {
+        get { return escape; }
+        set { escape = value; }
+    }
+
     #endregion
 
     private void Awake() {

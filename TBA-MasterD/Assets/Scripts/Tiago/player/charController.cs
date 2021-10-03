@@ -110,52 +110,62 @@ public class charController : MonoBehaviour, IDamage {
 
     void Update() {
         // TESTING SAVE SYSTEM
-        if (canMove)
+
+        if (!GameManager.GetPause())
         {
-            if (Input.GetKeyDown(KeyMapper.inputKey.Save))
+
+            if (Input.GetKeyDown(KeyMapper.inputKey.Escape))
             {
-                SaveSystemManager.Save();
+                GameManager.SetPause();
             }
 
-            if (Input.GetKeyDown(KeyMapper.inputKey.Load))
+            if (canMove)
             {
-                SaveSystemManager.LoadData();
-            }
-
-            healthEmission.SetColor("_EmissionColor", healthColor * 3);
-
-            healthColor = Color.Lerp(Color.green, Color.red * 3, healthC);
-
-            if (isDroneActive)
-            {
-                steps.mute = true;
-                screenRed.alpha = 0;
-            }
-            else
-            {
-                steps.mute = false;
-                screenRed.alpha = 1 - (health / 100);
-            }
-
-            if (!isDroneActive)
-            {
-                Movement();
-
-                Crouch();
-
-                Jump();
-
-                CheckStateForSounds();
-
-                if (enableStairsWalk)
+                if (Input.GetKeyDown(KeyMapper.inputKey.Save))
                 {
-                    StepClimb();
+                    SaveSystemManager.Save();
                 }
-            }
-            if (canUseDrone)
-                DroneControl();
 
-            CheckStealthiness();
+                if (Input.GetKeyDown(KeyMapper.inputKey.Load))
+                {
+                    SaveSystemManager.LoadData();
+                }
+
+                healthEmission.SetColor("_EmissionColor", healthColor * 3);
+
+                healthColor = Color.Lerp(Color.green, Color.red * 3, healthC);
+
+                if (isDroneActive)
+                {
+                    steps.mute = true;
+                    screenRed.alpha = 0;
+                }
+                else
+                {
+                    steps.mute = false;
+                    screenRed.alpha = 1 - (health / 100);
+                }
+
+                if (!isDroneActive)
+                {
+                    Movement();
+
+                    Crouch();
+
+                    Jump();
+
+                    CheckStateForSounds();
+
+                    if (enableStairsWalk)
+                    {
+                        StepClimb();
+                    }
+                }
+                if (canUseDrone)
+                    DroneControl();
+
+                CheckStealthiness();
+            }
         }
     }
 
@@ -307,6 +317,7 @@ public class charController : MonoBehaviour, IDamage {
     public void StopMovement()
     {
         canMove = false;
+        rb.velocity = Vector3.zero;
     }
 
     #endregion
