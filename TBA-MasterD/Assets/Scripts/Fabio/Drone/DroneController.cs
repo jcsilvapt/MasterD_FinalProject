@@ -127,7 +127,10 @@ public class DroneController : MonoBehaviour {
             if (Physics.Raycast(droneCamera.transform.position, droneCamera.transform.forward, out hit)) {
                 Debug.Log("DRONE::: " + hit.transform.GetComponent<IDamage>());
                 if (hit.transform.GetComponent<IDamage>() != null) {
-                    hit.transform.GetComponent<IDamage>().TakeDamage();
+                    if (!hit.transform.CompareTag("Enemy"))
+                    {
+                        hit.transform.GetComponent<IDamage>().TakeDamage();
+                    }
                 }
             }
 
