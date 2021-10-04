@@ -23,10 +23,21 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
 
     private int howManyAIManagersAreWorking;
 
+    private bool isSecondLevelActive;
+
     #endregion
+
+    private void Start()
+    {
+        isSecondLevelActive = true;
+    }
 
     private void Update()
     {
+        if(!isSecondLevelActive){
+            return;
+        }
+
         howManyAIManagersAreWorking = 0;
 
         foreach (Fabio_AIManager manager in aiManagers)
@@ -63,6 +74,7 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
                 elevator.CloseElevatorDoor();
                 resourcesReplenish.TurnOff();
                 resourcesReplenish.gameObject.SetActive(false);
+                isSecondLevelActive = false;
             }
         }
     }
