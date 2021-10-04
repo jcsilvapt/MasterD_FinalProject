@@ -15,6 +15,7 @@ public class charController : MonoBehaviour, IDamage {
     [SerializeField] float crouchSpeed;
     [SerializeField] float jumpHeight;
     private bool canMove;
+    private bool isAlive;
 
     [Header("Player Health Effect")]
     [SerializeField] Material healthEmission;
@@ -106,14 +107,27 @@ public class charController : MonoBehaviour, IDamage {
         healthEmission = armsMesh.GetComponent<SkinnedMeshRenderer>().material;
 
         canMove = true;
+        isAlive = true;
     }
 
     void Update() {
         // TESTING SAVE SYSTEM
 
+        if (!isAlive)
+        {
+            return;
+        }
+
+        if(health <= 0 && isAlive)
+        {
+            isAlive = false;
+            StopMovement();
+            GameManager.SetPlayerDeath(true);
+        }
+
         if (!GameManager.GetPause())
         {
-
+            
             if (Input.GetKeyDown(KeyMapper.inputKey.Escape))
             {
                 GameManager.SetPause();

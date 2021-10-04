@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
 
     [Header("Pause Menu")]
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject deathMenu;
 
     #endregion
 
@@ -99,6 +100,14 @@ public class GameManager : MonoBehaviour {
     }
 
     #region Public References 
+
+    public static void SetPlayerDeath(bool isDead)
+    {
+        if (ins != null)
+        {
+            ins._SetPlayerDeath(isDead);
+        }
+    }
 
     public static void SetPause() {
         if (ins != null) {
@@ -235,6 +244,21 @@ public class GameManager : MonoBehaviour {
 
     #region Logic
 
+    private void _SetPlayerDeath(bool isDead)
+    {
+        if (isDead)
+        {
+            ToggleDeathMenu(isDead);
+            ToggleCursorVisibility(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            ToggleDeathMenu(isDead);
+        }
+    }
+
     private void _SetPauseGame() {
         if (!isGamePaused) {
             TogglePauseMenu(true);
@@ -260,6 +284,11 @@ public class GameManager : MonoBehaviour {
     private void TogglePauseMenu(bool activate)
     {
         pauseMenu.SetActive(activate);
+    }
+
+    private void ToggleDeathMenu(bool activate)
+    {
+        deathMenu.SetActive(activate);
     }
 
     private void _changeScene(int sceneIndex, bool loadGameData) {
