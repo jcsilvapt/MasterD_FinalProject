@@ -22,6 +22,10 @@ public class Garage_Manager : MonoBehaviour
     private float mapBeginnerHealth;
     public bool isStealth = true;
 
+    [Header("EndGame Enemies")]
+    [SerializeField] GameObject enemyHolder;
+    [SerializeField] GameObject endGameEnemies;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<charController>();
@@ -32,13 +36,13 @@ public class Garage_Manager : MonoBehaviour
     }
     private void Update()
     {
-     if(isStealth == false)
+        if (isStealth == false)
         {
             stealthMusic.SetActive(false);
             actionMusic.SetActive(true);
         }
 
-     if(player.GetHealth() < mapBeginnerHealth)
+        if (player.GetHealth() < mapBeginnerHealth)
         {
             isStealth = false;
         }
@@ -60,7 +64,12 @@ public class Garage_Manager : MonoBehaviour
 
     #endregion
 
-    #region Music
-    
+    #region End Scene
+    public void EndingEnemies()
+    {
+        enemyHolder.SetActive(false);
+        endGameEnemies.SetActive(true);
+    }
+
     #endregion
 }

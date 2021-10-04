@@ -18,6 +18,7 @@ TagManager:
   - Health
   - Ammo
   - Elevator
+  - Manager
   layers:
   - Default
   - TransparentFX

@@ -8,12 +8,14 @@ public class Escape_Car : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject endCamera;
 
-    //car animator
+    //car animator and Garage Manager
     private Animator anim;
+    public Garage_Manager gm;
 
     //Car effects and sounds
     [SerializeField] GameObject frontLights;
     [SerializeField] GameObject smoke;
+    [SerializeField] GameObject tireEffect;
     private AudioSource audioS;
     [SerializeField] AudioClip turnOn;
     [SerializeField] AudioClip moveCar;
@@ -31,6 +33,11 @@ public class Escape_Car : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         audioS = GetComponent<AudioSource>();
+        gm = GameObject.FindGameObjectWithTag("Manager").GetComponent<Garage_Manager>();
+    }
+    private void Update()
+    {
+       
     }
     private void OnTriggerStay(Collider other)
     {
@@ -39,6 +46,10 @@ public class Escape_Car : MonoBehaviour
             if (Input.GetKeyDown(KeyMapper.inputKey.Interaction))
             {
                 StartCoroutine(ThankYouScreen());
+                if (gm.isStealth == false)
+                {
+                    gm.EndingEnemies();
+                }
             }
         }
     }
@@ -78,5 +89,10 @@ public class Escape_Car : MonoBehaviour
         yield return new WaitForSeconds(4);
         thankYouScreen.SetActive(false);
         anim.SetTrigger("hasEscaped");        
+    }
+
+    public void TiresSmoke()
+    {
+        tireEffect.SetActive(true);
     }
 }
