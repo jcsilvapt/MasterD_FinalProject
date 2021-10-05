@@ -28,7 +28,7 @@ public class Fabio_IdleBehaviour : Fabio_AIBehaviour
         animator = self.GetComponent<Animator>();
         agent = self.GetComponent<NavMeshAgent>();
 
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("PlayerParent").transform;
     }
 
     public override void OnBehaviourStart()

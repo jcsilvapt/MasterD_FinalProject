@@ -34,7 +34,7 @@ public class PatrolBehaviour : AIBehaviour {
         anim = self.GetComponent<Animator>();
         agent = self.GetComponent<NavMeshAgent>();
 
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("PlayerParent").transform;
         initialPosition = self.transform.position;
 
     }

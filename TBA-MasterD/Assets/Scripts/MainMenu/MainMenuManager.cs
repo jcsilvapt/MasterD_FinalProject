@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class MainMenuManager : MonoBehaviour {
@@ -10,6 +11,9 @@ public class MainMenuManager : MonoBehaviour {
     [SerializeField] GameObject playMenu;
     [SerializeField] GameObject optionsMenu;
     [SerializeField] GameObject creditsMenu;
+
+    [Header("UI - Play Game")]
+    [SerializeField] Button btnContinue;
 
     [Header("UI - Navigation Options")]
     [SerializeField] GameObject videoPanel;
@@ -26,6 +30,8 @@ public class MainMenuManager : MonoBehaviour {
     [SerializeField] string devCurrentDisplayModeSelected;
 
     public List<GameObject> menus = new List<GameObject>();
+
+    private bool hasSave = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -44,6 +50,19 @@ public class MainMenuManager : MonoBehaviour {
         SetAllAlphasToZero();
 
         devCurrentPanelSelected = mainMenu;
+
+        btnContinue.interactable = false;
+
+    }
+
+    private void Update() {
+        
+        if (hasSave) return;
+
+        if(SaveSystemManager.HasSavedData()) {
+            hasSave = true;
+            btnContinue.interactable = true;
+        }
     }
 
     private void SetAllAlphasToZero() {

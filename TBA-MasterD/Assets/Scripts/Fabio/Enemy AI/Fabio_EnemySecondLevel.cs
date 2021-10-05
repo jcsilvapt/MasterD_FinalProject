@@ -77,7 +77,7 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("PlayerParent").transform;
         healthEmission = himself.GetComponent<SkinnedMeshRenderer>().material;
         SetKinematic(true);
         BehaviourRegistration();
@@ -224,17 +224,14 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
         float health = target.GetComponent<charController>().GetHealth();
         int currentBullets = (int)target.GetComponent<charController>().GetCurrentWeaponBullets().y;
         int currentMaximumBullets = (int)target.GetComponent<charController>().GetCurrentWeaponBullets().x;
-        Debug.Log("health: " + health + ", MaximumBullets: " + currentMaximumBullets + ", CurrentBullets: " + currentBullets);
         if (currentBullets <= currentMaximumBullets / 2 && health <= 50)
         {
             Instantiate(healthPack, healthSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
-            Instantiate(ammoPack, ammoSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
-            Debug.Log("Droping Health & Ammo");
+            Instantiate(ammoPack, ammoSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0))); 
         }
         else if (currentBullets <= currentMaximumBullets / 2)
         {
             Instantiate(ammoPack, ammoSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
-            Debug.Log("Dropping Ammo");
         }
         else if (health <= 50)
         {

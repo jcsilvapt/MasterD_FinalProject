@@ -41,6 +41,14 @@ public class SecondLevelManager : MonoBehaviour
         }
     }
 
+    private void Start() {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (!player.activeSelf) {
+            player.SetActive(true);
+        } 
+    }
+
     public void OpenDoor(DoorController door)
     {
         door.LockMode(false);

@@ -64,9 +64,11 @@ public class SceneController : MonoBehaviour {
     IEnumerator EnableAllObjectsAsync(List<GameObject> objectsToActivate, SceneSwitcher s) {
 
         // Loads All GameObjects
-        foreach(GameObject b in objectsToActivate) {
-            b.SetActive(true);
-            yield return new WaitForSeconds(0.5f);
+        if (objectsToActivate.Count > 0) {
+            foreach (GameObject b in objectsToActivate) {
+                b.SetActive(true);
+                yield return new WaitForSeconds(0.5f);
+            }
         }
         s.ToogleTypeOfSwitch();
         s.ToogleExecute();

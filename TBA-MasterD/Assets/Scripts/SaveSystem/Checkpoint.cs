@@ -5,7 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Checkpoint : MonoBehaviour {
 
-    [Header("Settup")]
+    [Header("Setup")]
+    [Tooltip("Input the scene Index")]
+    [SerializeField] int sceneIndex;
     [Tooltip("Add here all the enemies (objects) represented in the scene")]
     [SerializeField] List<GameObject> enemiesInScene;
     [Tooltip("Set true if you wish to make this checkpoint recurrent")]
@@ -22,9 +24,9 @@ public class Checkpoint : MonoBehaviour {
             if(!isActivated) {
                 if (other.CompareTag("Player")) {
                     if(enemiesInScene.Count > 0) { // Confirms if the scene has enemies and perform accordingly
-                        SaveSystemManager.Save(enemiesInScene);
+                        SaveSystemManager.Save(this, enemiesInScene);
                     } else {
-                        SaveSystemManager.Save();
+                        SaveSystemManager.Save(this);
                     }
                 }
                 isActivated = true;
@@ -34,7 +36,18 @@ public class Checkpoint : MonoBehaviour {
     }
 
     public void LoadLastCheckPoint() {
-        enemiesInScene = SaveSystemManager.LoadData(enemiesInScene);
+        SaveSystemManager.Load();
     }
 
+    public List<GameObject> GetEnemiesInScene() {
+        return enemiesInScene;
+    }
+
+    public void SetEnemiesStats(List<GameObject> enemies) {
+        enemiesInScene = enemies;
+    }
+
+    public int GetCurrentSceneIndex() {
+        return sceneIndex;
+    }
 }

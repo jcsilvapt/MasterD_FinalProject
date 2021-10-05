@@ -39,7 +39,7 @@ public class RandomSearchBehaviour : AIBehaviour
 
     public override void Init() {
         //Get Player Reference
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("PlayerParent").transform;
 
         //Get Nav Mesh Agent Component
         agent = self.GetComponent<NavMeshAgent>();

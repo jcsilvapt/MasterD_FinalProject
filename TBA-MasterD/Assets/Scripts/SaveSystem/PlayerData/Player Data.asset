@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8588f9271f9ef494c81f9ab43ca9525d, type: 3}
   m_Name: Player Data
   m_EditorClassIdentifier: 
-  currentScene: 1
-  currentPosition: {x: 0, y: 0, z: 0}
+  currentScene: 2
+  currentPosition: {x: -16.127, y: -4.259918, z: 94.7175}
+  currentRotation: {x: 0, y: 0, z: 0}
+  hasDrone: 1
+  hasWeapon: 1

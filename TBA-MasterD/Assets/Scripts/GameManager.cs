@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour {
     #region DEVELOPER SETTINGS
 
     [SerializeField] bool displayCursor = false;
+    [SerializeField] bool continuous = false;
 
     #endregion
 
@@ -60,19 +61,14 @@ public class GameManager : MonoBehaviour {
     [SerializeField] Slider loadSlider;
     #endregion
 
-    #region Game Data
-    [Header("Game Data Settings")]
-    [SerializeField] SO_PlayerData playerProfile;
-    private SaveSystem saveSystem;
-    #endregion
 
     private void Start() {
 
         ToggleCursorVisibility(showCursor);
 
         // Sets the volume to default values
-        mixer.SetFloat("Master", -10);
-        mixer.SetFloat("Music", 0);
+        mixer.SetFloat("Master", -5);
+        mixer.SetFloat("Music", -0);
         mixer.SetFloat("Effects", 0);
 
         // Set inactive load screen
@@ -93,10 +89,6 @@ public class GameManager : MonoBehaviour {
         foreach (Resolution r in Screen.resolutions) {
             resolutions.Add(r.ToString());
         }
-
-        // Initialize Save System
-        saveSystem = new SaveSystem();
-
     }
 
     #region Public References 
@@ -240,6 +232,20 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public static int GetCurrentSceneIndex() {
+        if(ins != null) {
+            return SceneManager.GetActiveScene().buildIndex;
+        }
+        return 0;
+    }
+
+    public static bool IsContinuous() {
+        if(ins != null) {
+            return ins.continuous;
+        }
+        return false;
+    }
+
     #endregion
 
     #region Logic
@@ -292,6 +298,9 @@ public class GameManager : MonoBehaviour {
     }
 
     private void _changeScene(int sceneIndex, bool loadGameData) {
+        if(sceneIndex == 1) {
+            continuous = true;
+        }
         ToggleCursorVisibility(false);
         loadCanvas.SetActive(true);
         StartCoroutine(LoadAsync(sceneIndex, loadGameData));
@@ -327,6 +336,10 @@ public class GameManager : MonoBehaviour {
 
         loadSlider.value = 0;
         loadCanvas.SetActive(false);
+
+        if(!continuous && sceneIndex > 1) {
+            GameObject.FindGameObjectWithTag("SceneController").GetComponent<NewSceneController>().COMECA();
+        }
 
         if (loadGameData)
             SaveSystemManager.LoadData();

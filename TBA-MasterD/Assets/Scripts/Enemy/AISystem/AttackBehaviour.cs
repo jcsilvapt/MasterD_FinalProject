@@ -26,7 +26,7 @@ public class AttackBehaviour : AIBehaviour
 
     public override void Init()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("PlayerParent").transform;
         navAgent = self.GetComponent<NavMeshAgent>();
         enemy = self.GetComponent<Enemy>();
         anim = self.GetComponent<Animator>();

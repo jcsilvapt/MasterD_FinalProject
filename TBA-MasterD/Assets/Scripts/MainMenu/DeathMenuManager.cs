@@ -13,6 +13,7 @@ public class DeathMenuManager : MonoBehaviour
     public void RestartLastCheckpoint()
     {
         GameManager.SetPlayerDeath(false);
+        //GameObject.FindGameObjectWithTag("Player").GetComponent<charController>().GetLastCheckpoint().LoadLastCheckPoint();
         SaveSystemManager.Load();
     }
 }

@@ -3862,6 +3862,7 @@ MonoBehaviour:
   cc: {fileID: 0}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
+  player: {fileID: 0}
 --- !u!4 &210765550 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4902910200722361673, guid: f4b89333be8ba8c47a84b8d4c0e31552,
@@ -4721,10 +4722,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2076039594507607858, guid: 461c5995c8c1274419c0b28587ce9c96,
+        type: 3}
+      propertyPath: canUseDrone
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607859, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076039594507607859, guid: 461c5995c8c1274419c0b28587ce9c96,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 461c5995c8c1274419c0b28587ce9c96, type: 3}
@@ -38152,6 +38163,7 @@ MonoBehaviour:
   cc: {fileID: 1588105345}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
+  player: {fileID: 0}
 --- !u!64 &1588105344
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -47652,6 +47664,7 @@ MonoBehaviour:
   cc: {fileID: 0}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
+  player: {fileID: 0}
 --- !u!65 &2001988391
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51857,6 +51870,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Checkpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 835278916309313083, guid: 5a198f2dd6d9304448f6588af505e7bd,
+        type: 3}
+      propertyPath: sceneIndex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a198f2dd6d9304448f6588af505e7bd, type: 3}

@@ -20,6 +20,10 @@ public class UIManager : MonoBehaviour {
     }
 
     private void ToggleCrosshair(bool value) {
+        if(uiCrosshair == null && uiInteraction == null) {
+            uiCrosshair = GameObject.Find("Crosshair");
+            uiInteraction = GameObject.Find("Interaction");
+        }
         uiCrosshair.SetActive(value);
         uiInteraction.SetActive(!value);
     }

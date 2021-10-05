@@ -32,7 +32,7 @@ public class Fabio_ChaseBehaviour : Fabio_AIBehaviour
         animator = self.GetComponent<Animator>();
         agent = self.GetComponent<NavMeshAgent>();
 
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("PlayerParent").transform;
     }
 
     public override void OnBehaviourStart()

@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("PlayerParent").transform;
         healthEmission = himself.GetComponent<SkinnedMeshRenderer>().material;
         SetKinematic(true);
         BehaviourRegistration();

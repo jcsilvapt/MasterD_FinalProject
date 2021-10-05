@@ -11,7 +11,7 @@ public class IntroductionUIRoom : MonoBehaviour
     [SerializeField] IntroductionUIManager.Region regionName;
 
     private bool alreadyIdentified;
-
+    [Tooltip("When Enable only work one time")]
     [SerializeField] private bool turnOffAfterIdentifier;
 
     #endregion

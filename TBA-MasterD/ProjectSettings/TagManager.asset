@@ -19,6 +19,8 @@ TagManager:
   - Ammo
   - Elevator
   - Manager
+  - SceneController
+  - PlayerParent
   layers:
   - Default
   - TransparentFX

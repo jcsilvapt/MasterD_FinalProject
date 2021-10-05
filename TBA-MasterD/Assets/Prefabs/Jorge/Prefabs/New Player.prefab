@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 3598675406924485959}
   m_Layer: 0
   m_Name: New Player
-  m_TagString: Player
+  m_TagString: PlayerParent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1468,10 +1468,13 @@ MonoBehaviour:
   physicalBodyMesh2: {fileID: 5822821947593017810}
   bodyAnim: {fileID: 5866666021428666464}
   terrainBehaviour: {fileID: 1376096751}
+  uiCrosshair: {fileID: 483728907}
+  uiInteraction: {fileID: 1999348699}
   isRunning: 0
   isCrouched: 0
   isGrounded: 0
   isDroneActive: 0
+  lastCheckpoint: {fileID: 0}
   steps: {fileID: 1376096750}
   crouchPitch: 0.7
   runPitch: 2

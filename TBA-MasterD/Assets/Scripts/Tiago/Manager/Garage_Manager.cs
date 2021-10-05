@@ -28,7 +28,7 @@ public class Garage_Manager : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<charController>();
+        player = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<charController>();
         animBarr = barrier.GetComponent<Animator>();
         stealthMusic.SetActive(true);
         actionMusic.SetActive(false);

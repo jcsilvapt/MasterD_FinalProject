@@ -30,6 +30,9 @@ public class DoorManager : MonoBehaviour, IDamage {
     [SerializeField] private bool hasAIManagerAssociated;
     [SerializeField] private Fabio_AIManager aiManager;
 
+    [Header("Developer Settings")]
+    [SerializeField] charController player;
+
     private void Start()
     {
         canInteract = false;
@@ -39,21 +42,14 @@ public class DoorManager : MonoBehaviour, IDamage {
 
     private void Update()
     {
-        Debug.Log(alreadyInteracted + " | " + showUI);
-        if (!alreadyInteracted)
+        if (!alreadyInteracted && player != null)
         {
             if (showUI)
             {
-                Debug.Log("wORKS");
-                UIManager.UI_ToggleCrosshair(false);
-            }
-            else
-            {
-                UIManager.UI_ToggleCrosshair(true);
+                player.EnableInteractionUI(true);
             }
         }
         
-
         if(canInteract && !alreadyInteracted && Input.GetKeyDown(KeyMapper.inputKey.Interaction))
         {
             TakeDamage();
@@ -63,8 +59,9 @@ public class DoorManager : MonoBehaviour, IDamage {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.CompareTag("Player"))
         {
+            player = other.transform.parent.parent.GetComponent<charController>();
             canInteract = true;
             showUI = true;
         }
@@ -72,8 +69,10 @@ public class DoorManager : MonoBehaviour, IDamage {
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
+            player.EnableInteractionUI(false);
+            player = null;
             canInteract = false;
             showUI = false;
         }

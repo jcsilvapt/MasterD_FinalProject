@@ -25,7 +25,7 @@ public class ChaseBehaviour : AIBehaviour
 
     public override void Init()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("PlayerParent").transform;
         navAgent = self.GetComponent<NavMeshAgent>();
         anim = self.GetComponent<Animator>();
     }

@@ -25,6 +25,8 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
     [Header("Developer Settings")]
     [SerializeField] bool isToExecute = false;
     [SerializeField] bool isLoaded = false;
+    [SerializeField] NewSceneController nController;
+    [SerializeField] GameObject player;
 
 
     private void Start() {
@@ -70,6 +72,7 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
     private void OnTriggerEnter(Collider other) {
         if (!isLoaded) {
             if (other.CompareTag("Player")) {
+                player = other.gameObject;
                 isToExecute = true;
                 SceneController.AsyncEnable(sceneName);
                 if (!isToReload) isLoaded = true;

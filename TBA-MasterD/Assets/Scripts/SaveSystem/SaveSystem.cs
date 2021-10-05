@@ -53,19 +53,19 @@ public class SaveSystem {
         //SO_PlayerData data = ScriptableObject.CreateInstance<SO_PlayerData>();
 
         // Load Player Position data
-        profile.transform_x = data.currentPosition.x;
-        profile.transform_y = data.currentPosition.y;
-        profile.transform_z = data.currentPosition.z;
+        data.currentPosition.x = profile.transform_x;
+        data.currentPosition.y = profile.transform_y;
+        data.currentPosition.z = profile.transform_z;
         // Load Player Rotation data
-        profile.rotation_x = data.currentRotation.x;
-        profile.rotation_y = data.currentRotation.y;
-        profile.rotation_z = data.currentRotation.z;
+        data.currentRotation.x = profile.rotation_x;
+        data.currentRotation.y = profile.rotation_y;
+        data.currentRotation.z = profile.rotation_z;
         // Load Player Has Drone
-        profile.hasDrone = data.hasDrone;
+        data.hasDrone = profile.hasDrone;
         // Load Player Has Weapon
-        profile.hasWeapon = data.hasWeapon;
+        data.hasWeapon = profile.hasWeapon;
         // Load Player currentScene
-        profile.currentScene = data.currentScene;
+        data.currentScene = profile.currentScene;
 
         fs.Close();
 

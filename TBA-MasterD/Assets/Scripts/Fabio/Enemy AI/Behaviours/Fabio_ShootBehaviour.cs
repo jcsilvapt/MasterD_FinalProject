@@ -39,7 +39,7 @@ public class Fabio_ShootBehaviour : Fabio_AIBehaviour
         animator = self.GetComponent<Animator>();
         agent = self.GetComponent<NavMeshAgent>();
 
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("PlayerParent").transform;
 
         timeBetweenShots = 0.1f;
     }

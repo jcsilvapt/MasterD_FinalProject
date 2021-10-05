@@ -6,9 +6,11 @@ public class SaveSystemManager : MonoBehaviour {
 
     public static SaveSystemManager ins;
 
-    private List<Enemy> enemiesInScene = new List<Enemy>();
+    [SerializeField] List<Fabio_EnemySecondLevel> enemiesInSceneFabio = new List<Fabio_EnemySecondLevel>();
+    [SerializeField] List<Enemy> enemiesInSceneTiago = new List<Enemy>();
 
     [SerializeField] SO_PlayerData playerProfile;
+    [SerializeField] Checkpoint cpoint = null;
     private SaveSystem saveSystem;
 
 
@@ -27,8 +29,7 @@ public class SaveSystemManager : MonoBehaviour {
     /// Method that gets the current saved Data.
     /// </summary>
     private void GetInitialData() {
-        if(HasSavedData()) {
-            Debug.Log("initialData");
+        if (HasSavedData()) {
             playerProfile = saveSystem.Load(playerProfile);
         }
     }
@@ -37,19 +38,27 @@ public class SaveSystemManager : MonoBehaviour {
     /// Method that Saves the current Game State
     /// </summary>
     /// <param name="objectsToBeSaved">Usual is the List of the enemies on the scene</param>
-    private void SaveGame(List<GameObject> objectsToBeSaved = null) {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+    private void SaveGame(Checkpoint checkpoint = null, List < GameObject> objectsToBeSaved = null) {
+
+        GameObject player = GameObject.FindGameObjectWithTag("PlayerParent");
         charController charPlayer = player.GetComponent<charController>();
-        Debug.Log("Player Location: " + player.transform.position);
+
         playerProfile.currentPosition = player.transform.position;
-        //playerProfile.currentRotation = Quaternion.Euler(player.transform.Rota);
+
         playerProfile.hasDrone = charPlayer.canUseDrone;
         playerProfile.hasWeapon = charPlayer.hasWeapon;
+        playerProfile.currentScene = checkpoint.GetCurrentSceneIndex();
         saveSystem.Save(playerProfile);
 
-        if(objectsToBeSaved != null) {
+        if (checkpoint != null) cpoint = checkpoint;
+
+        if (objectsToBeSaved != null) {
             foreach (GameObject b in objectsToBeSaved) {
-                enemiesInScene.Add(b.GetComponent<Enemy>());
+                if (b.GetComponent<Enemy>() != null) {
+                    enemiesInSceneTiago.Add(b.GetComponent<Enemy>());
+                } else {
+                    enemiesInSceneFabio.Add(b.GetComponent<Fabio_EnemySecondLevel>());
+                }
             }
         }
         Debug.Log("Saving Game...");
@@ -60,22 +69,29 @@ public class SaveSystemManager : MonoBehaviour {
     /// </summary>
     /// <param name="objectsToBeLoaded">List of the enemies in the current scene (CheckPoint Only)</param>
     /// <returns></returns>
-    private List<GameObject> LoadGameData(List<GameObject> objectsToBeLoaded = null) {        
+    private void LoadGameData() {
         playerProfile = saveSystem.Load(playerProfile);
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = GameObject.FindGameObjectWithTag("PlayerParent");
         charController charPlayer = player.GetComponent<charController>();
         player.transform.position = playerProfile.currentPosition;
         //player.transform.rotation = playerProfile.currentRotation;
         charPlayer.canUseDrone = playerProfile.hasDrone;
         charPlayer.hasWeapon = playerProfile.hasWeapon;
-
         Debug.Log("Loading Game...");
+    }
 
-        if(objectsToBeLoaded != null) {
+    private List<GameObject> UpdateEnemiesInScene(List<GameObject> objectsToBeLoaded) {
+        if (objectsToBeLoaded != null) {
             int counter = 0;
             foreach (GameObject b in objectsToBeLoaded) {
-                Enemy temp = b.GetComponent<Enemy>();
-                temp = enemiesInScene[counter];
+                if (b.GetComponent<Enemy>() != null) {
+                    Enemy temp = b.GetComponent<Enemy>();
+                    temp = enemiesInSceneTiago[counter];
+                } else {
+                    Fabio_EnemySecondLevel temp = b.GetComponent<Fabio_EnemySecondLevel>();
+                    temp = enemiesInSceneFabio[counter];
+
+                }
                 counter++;
             }
             return objectsToBeLoaded;
@@ -85,11 +101,15 @@ public class SaveSystemManager : MonoBehaviour {
 
     private void LoadGame() {
         GameManager.ChangeScene(playerProfile.currentScene, true);
+        if (cpoint != null) {
+            List<GameObject> temp = UpdateEnemiesInScene(cpoint.GetEnemiesInScene());
+            cpoint.SetEnemiesStats(temp);
+        }
     }
 
-    public static void Save(List<GameObject> objectsToBeSaved = null) {
+    public static void Save(Checkpoint checkpoint = null, List < GameObject> objectsToBeSaved = null) {
         if (ins != null) {
-            ins.SaveGame(objectsToBeSaved);
+            ins.SaveGame(checkpoint, objectsToBeSaved);
         }
     }
 
@@ -98,22 +118,22 @@ public class SaveSystemManager : MonoBehaviour {
     /// </summary>
     /// <param name="objectsToBeLoaded"></param>
     /// <returns></returns>
-    public static List<GameObject> LoadData(List<GameObject> objectsToBeLoaded = null) {
+    public static void LoadData() {
         if (ins != null) {
-            return ins.LoadGameData(objectsToBeLoaded);
+            ins.LoadGameData();
         }
-        return null;
+
     }
 
     /// <summary>
     /// Method that Loads the game (full-restart)
     /// </summary>
     public static void Load() {
-        if(ins != null) {
+        if (ins != null) {
             ins.LoadGame();
         }
     }
-        
+
     public static bool HasSavedData() {
         if (ins != null) {
             return ins.saveSystem.HasSavedData();
@@ -122,7 +142,8 @@ public class SaveSystemManager : MonoBehaviour {
     }
 
     public static int GetCurrentSaveScene() {
-        if(ins != null) {
+        if (ins != null) {
+            Debug.Log(ins.playerProfile.currentScene);
             return ins.playerProfile.currentScene;
         }
         return -1;

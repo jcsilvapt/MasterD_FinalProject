@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.Audio;
+using TMPro;
 
 public class charController : MonoBehaviour, IDamage {
 
@@ -61,6 +62,10 @@ public class charController : MonoBehaviour, IDamage {
 
     [Header("Player Settings: Step Sounds")]
     [SerializeField] Terrain_Behaviour terrainBehaviour;
+
+    [Header("Player Settings: Player UI")]
+    [SerializeField] GameObject uiCrosshair;
+    [SerializeField] GameObject uiInteraction;
 
 
     [Header("DEVELOPER SETTINGS")]
@@ -123,6 +128,7 @@ public class charController : MonoBehaviour, IDamage {
             isAlive = false;
             StopMovement();
             GameManager.SetPlayerDeath(true);
+            return;
         }
 
         if (!GameManager.GetPause())
@@ -135,16 +141,6 @@ public class charController : MonoBehaviour, IDamage {
 
             if (canMove)
             {
-                if (Input.GetKeyDown(KeyMapper.inputKey.Save))
-                {
-                    SaveSystemManager.Save();
-                }
-
-                if (Input.GetKeyDown(KeyMapper.inputKey.Load))
-                {
-                    SaveSystemManager.LoadData();
-                }
-
                 healthEmission.SetColor("_EmissionColor", healthColor * 3);
 
                 healthColor = Color.Lerp(Color.green, Color.red * 3, healthC);
@@ -410,6 +406,16 @@ public class charController : MonoBehaviour, IDamage {
 
     public float GetHealth() {
         return health;
+    }
+
+    public Checkpoint GetLastCheckpoint() {
+        return lastCheckpoint;
+    }
+
+    public void EnableInteractionUI(bool enableUI) {
+        uiCrosshair.SetActive(!enableUI);
+        uiInteraction.GetComponentInChildren<Text>().text = "PRESS '" + KeyMapper.inputKey.Interaction + "' TO INTERACT";
+        uiInteraction.SetActive(enableUI);
     }
 
     /// <summary>
