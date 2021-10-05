@@ -80662,6 +80662,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SecondLevel_Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6088180164480062592, guid: 443d4f62700c8c74ca16e3685a8032b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7257747970833489825, guid: 443d4f62700c8c74ca16e3685a8032b7,
         type: 3}
       propertyPath: m_IsActive
@@ -106588,7 +106593,7 @@ PrefabInstance:
     - target: {fileID: 1257181907379056266, guid: 443d4f62700c8c74ca16e3685a8032b7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.807501
+      value: 10.8075
       objectReference: {fileID: 0}
     - target: {fileID: 1257181907379056266, guid: 443d4f62700c8c74ca16e3685a8032b7,
         type: 3}
@@ -106639,6 +106644,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SecondLevel_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6088180164480062592, guid: 443d4f62700c8c74ca16e3685a8032b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8563832436888714906, guid: 443d4f62700c8c74ca16e3685a8032b7,
         type: 3}
