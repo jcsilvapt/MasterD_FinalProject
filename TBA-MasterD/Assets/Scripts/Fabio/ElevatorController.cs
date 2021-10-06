@@ -40,7 +40,7 @@ public class ElevatorController : MonoBehaviour
 
     public void ElevatorDoorsOpen()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<charController>().StartMovement();
+        GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<charController>().StartMovement();
     }
 
     public void CloseElevatorDoor()

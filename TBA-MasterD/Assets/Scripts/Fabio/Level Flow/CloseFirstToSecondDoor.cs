@@ -14,7 +14,7 @@ public class CloseFirstToSecondDoor : MonoBehaviour
             //if(other.GetComponent<charController>()){
             //
             //}
-            secondLevelManager.UnlockDoorFirstToSecondLevel();
+            secondLevelManager.LockDoorFirstToSecondLevel();
         }
 
         Destroy(gameObject);

@@ -5,10 +5,15 @@ using UnityEngine;
 public class ResourcesRoomReplenishResources : MonoBehaviour
 {
     //Player Reference
-    [SerializeField] private charController player;
+    private charController player;
 
     //Control Variable
     private bool isActive;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<charController>();
+    }
 
     private void Update()
     {

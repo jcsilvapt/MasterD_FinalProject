@@ -61,7 +61,7 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
 
     public void DoorsOpened()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<charController>().StartMovement();
+        GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<charController>().StartMovement();
     }
 
     private void OnTriggerStay(Collider other)
