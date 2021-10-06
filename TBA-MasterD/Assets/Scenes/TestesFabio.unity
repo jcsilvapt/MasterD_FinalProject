@@ -147,6 +147,7 @@ MonoBehaviour:
   - {fileID: 542006683}
   toBeClosed: []
   canInteract: 0
+  isOnlyManuallyInteractive: 1
   cc: {fileID: 0}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
@@ -57895,6 +57896,7 @@ MonoBehaviour:
   - {fileID: 1071191601}
   toBeClosed: []
   canInteract: 0
+  isOnlyManuallyInteractive: 0
   cc: {fileID: 0}
   hasAIManagerAssociated: 1
   aiManager: {fileID: 779244924}
@@ -85729,6 +85731,7 @@ MonoBehaviour:
   - {fileID: 1323012056}
   toBeClosed: []
   canInteract: 0
+  isOnlyManuallyInteractive: 1
   cc: {fileID: 0}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}

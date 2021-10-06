@@ -22,6 +22,12 @@ public class DoorManager : MonoBehaviour, IDamage {
     //Flag Controlling if UI is shown to the player
     private bool showUI;
 
+    [Tooltip("If true, can only work by interaction and not by shooting at it")]
+    [SerializeField] private bool isOnlyManuallyInteractive;
+
+    private bool canManuallyInteract;
+    private bool isInteracting;
+
     [Header("Related To Tutorial Map")]
     [SerializeField] CraneController cc;
 
@@ -54,7 +60,9 @@ public class DoorManager : MonoBehaviour, IDamage {
         
         if(canInteract && !alreadyInteracted && Input.GetKeyDown(KeyMapper.inputKey.Interaction))
         {
+            isInteracting = true;
             TakeDamage();
+            isInteracting = false;
             showUI = false;
         }
     }
@@ -65,6 +73,7 @@ public class DoorManager : MonoBehaviour, IDamage {
         {
             player = other.transform.parent.parent.GetComponent<charController>();
             canInteract = true;
+            canManuallyInteract = true;
             showUI = true;
         }
     }
@@ -76,6 +85,7 @@ public class DoorManager : MonoBehaviour, IDamage {
             player.EnableInteractionUI(false);
             player = null;
             canInteract = false;
+            canManuallyInteract = false;
             showUI = false;
         }
     }
@@ -83,7 +93,22 @@ public class DoorManager : MonoBehaviour, IDamage {
     public void TakeDamage()
     {
         if (!alreadyInteracted) {
-            DoorInteraction();
+            if (!isOnlyManuallyInteractive)
+            {
+                DoorInteraction();
+                alreadyInteracted = true;
+            }
+            else
+            {
+                if (canManuallyInteract)
+                {
+                    if (isInteracting)
+                    {
+                        DoorInteraction();
+                        alreadyInteracted = true;
+                    }
+                }
+            }
 
             if (hasAIManagerAssociated) {
                 aiManager.PlayerDetected();
@@ -97,9 +122,6 @@ public class DoorManager : MonoBehaviour, IDamage {
             {
                 player.EnableInteractionUI(false);
             }
-
-            alreadyInteracted = true;
-            canInteract = false;
         }
     }
 
