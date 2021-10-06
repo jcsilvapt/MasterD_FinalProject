@@ -150,7 +150,6 @@ MonoBehaviour:
   cc: {fileID: 0}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
-  player: {fileID: 0}
 --- !u!65 &1250035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -42093,36 +42092,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 801569165}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &802583860
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 802583861}
-  m_Layer: 0
-  m_Name: Elevator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &802583861
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 802583860}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1971499094}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &803069527
 GameObject:
   m_ObjectHideFlags: 0
@@ -45645,7 +45614,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elevator: {fileID: 7396950668087923036}
-  resourcesReplenish: {fileID: 850829625}
   aiManagers:
   - {fileID: 1463460664}
   - {fileID: 1162074839}
@@ -57876,7 +57844,6 @@ MonoBehaviour:
   cc: {fileID: 0}
   hasAIManagerAssociated: 1
   aiManager: {fileID: 779244924}
-  player: {fileID: 0}
 --- !u!1001 &1122527819
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85684,7 +85651,6 @@ MonoBehaviour:
   cc: {fileID: 0}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
-  player: {fileID: 0}
 --- !u!65 &1783633959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -95559,7 +95525,6 @@ Transform:
   - {fileID: 2022469384}
   - {fileID: 881983734}
   - {fileID: 1776917340}
-  - {fileID: 802583861}
   - {fileID: 2008437240}
   m_Father: {fileID: 1475120151}
   m_RootOrder: 0
@@ -97191,7 +97156,7 @@ Transform:
   m_Children:
   - {fileID: 550854574}
   m_Father: {fileID: 1971499094}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2009434014
 PrefabInstance:

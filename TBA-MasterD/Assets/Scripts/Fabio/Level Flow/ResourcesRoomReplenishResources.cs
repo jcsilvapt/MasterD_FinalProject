@@ -7,25 +7,42 @@ public class ResourcesRoomReplenishResources : MonoBehaviour
     //Player Reference
     private charController player;
 
-    //Control Variable
-    private bool isActive;
+    //Detect if Player already interacted
+    private bool alreadyInteracted;
+
+    //Detect if Player can Interact using Inputs
+    private bool canInteract;
+
+    //Flag Controlling if UI is shown to the player
+    private bool showUI;
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<charController>();
+
     }
 
     private void Update()
     {
-        if (!isActive)
+        if (alreadyInteracted)
         {
             return;
         }
 
-        if (Input.GetKeyDown(KeyMapper.inputKey.Interaction))
+        if (!alreadyInteracted && player != null)
+        {
+            if (showUI)
+            {
+                player.EnableInteractionUI(true);
+            }
+        }
+
+        if (canInteract && !alreadyInteracted && Input.GetKeyDown(KeyMapper.inputKey.Interaction))
         {
             player.ReplenishHealth();
             player.ReplenishBullets();
+            player.EnableInteractionUI(false);
+            showUI = false;
+            alreadyInteracted = true;
         }
     }
 
@@ -33,7 +50,9 @@ public class ResourcesRoomReplenishResources : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            isActive = true;
+            player = other.transform.parent.parent.GetComponent<charController>();
+            canInteract = true;
+            showUI = true;
         }
     }
 
@@ -41,12 +60,13 @@ public class ResourcesRoomReplenishResources : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            isActive = false;
+            if(player != null)
+            {
+                player.EnableInteractionUI(false);
+            }
+            player = null;
+            canInteract = false;
+            showUI = false;
         }
-    }
-
-    public void TurnOff()
-    {
-        isActive = false;
     }
 }

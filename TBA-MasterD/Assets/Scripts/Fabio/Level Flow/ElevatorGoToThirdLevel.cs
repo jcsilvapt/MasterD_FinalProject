@@ -9,9 +9,6 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
     //Elevator Controller Reference
     [SerializeField] private ElevatorController elevator;
 
-    //Resources Replenish Level Flow Reference
-    [SerializeField] private ResourcesRoomReplenishResources resourcesReplenish;
-
     //Array of AI Manager References
     [SerializeField] private Fabio_AIManager[] aiManagers;
 
@@ -72,8 +69,6 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
             {
                 other.transform.parent.parent.GetComponent<charController>().StopMovement();
                 elevator.CloseElevatorDoor();
-                resourcesReplenish.TurnOff();
-                resourcesReplenish.gameObject.SetActive(false);
                 isSecondLevelActive = false;
             }
         }

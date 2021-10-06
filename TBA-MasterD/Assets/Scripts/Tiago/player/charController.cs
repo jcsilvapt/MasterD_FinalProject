@@ -328,6 +328,8 @@ public class charController : MonoBehaviour, IDamage {
     {
         canMove = false;
         rb.velocity = Vector3.zero;
+        bodyAnim.SetBool("isWalking", false);
+        steps.mute = true;
     }
 
     #endregion

@@ -31,10 +31,12 @@ public class DoorManager : MonoBehaviour, IDamage {
     [SerializeField] private Fabio_AIManager aiManager;
 
     [Header("Developer Settings")]
-    [SerializeField] charController player;
+    private charController player;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<charController>();
+
         canInteract = false;
         alreadyInteracted = false;
         showUI = false;
@@ -89,6 +91,11 @@ public class DoorManager : MonoBehaviour, IDamage {
 
             if(cc != null) {
                 cc.TakeDamage();
+            }
+
+            if(player != null)
+            {
+                player.EnableInteractionUI(false);
             }
 
             alreadyInteracted = true;
