@@ -14,6 +14,9 @@ public class ShootingCraneController : MonoBehaviour {
 
     private Transform selectedDistance;
 
+    public charController player;
+    public cameraRotation pCam;
+
     private bool isMoving = false;
     private bool isUIActive = false;
     private bool hasPlayer = false;
@@ -44,6 +47,8 @@ public class ShootingCraneController : MonoBehaviour {
         isMoving = true;
         _UI.SetActive(false);
         isUIActive = false;
+        player.StartMovement();
+        pCam.StartMouseMovement();
         GameManager.SetCursorVisibility(true); // <--------------------- CONFIRMAR ISTO (JORGE)
     }
 
@@ -51,12 +56,16 @@ public class ShootingCraneController : MonoBehaviour {
         if (hasPlayer) {
             if (!isUIActive) {
                 if (Input.GetKeyDown(KeyMapper.inputKey.Interaction)) {
+                    player.StopMovement();
+                    pCam.StopMouseMovement();
                     _UI.SetActive(true);
                     isUIActive = true;
                     GameManager.SetCursorVisibility(true);
                 }
             } else {
-                if (Input.GetKeyDown(KeyCode.Escape)) {
+                if (Input.GetKeyDown(KeyMapper.inputKey.Interaction)) {
+                    player.StartMovement();
+                    pCam.StartMouseMovement();
                     _UI.SetActive(false);
                     isUIActive = false;
                     GameManager.SetCursorVisibility(false);
@@ -72,6 +81,8 @@ public class ShootingCraneController : MonoBehaviour {
 
     private void OnTriggerStay(Collider other) {
         if (other.transform.tag == "Player") {
+            player = other.transform.parent.parent.GetComponent<charController>();
+            pCam = other.transform.parent.parent.GetComponentInChildren<cameraRotation>();
             _UIText.SetActive(true);
             hasPlayer = true;
         }
@@ -82,6 +93,10 @@ public class ShootingCraneController : MonoBehaviour {
         _UIText.SetActive(false);
         isUIActive = false;
         hasPlayer = false;
+        player.StartMovement();
+        player = null;
+        pCam.StartMouseMovement();
+        pCam = null;
         if (GameManager.GetCursorVisibility())
             GameManager.SetCursorVisibility(false);
     }

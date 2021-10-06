@@ -38,7 +38,7 @@ public class SaveSystemManager : MonoBehaviour {
     /// Method that Saves the current Game State
     /// </summary>
     /// <param name="objectsToBeSaved">Usual is the List of the enemies on the scene</param>
-    private void SaveGame(Checkpoint checkpoint = null, List < GameObject> objectsToBeSaved = null) {
+    private void SaveGame(Checkpoint checkpoint = null, List <GameObject> objectsToBeSaved = null) {
 
         GameObject player = GameObject.FindGameObjectWithTag("PlayerParent");
         charController charPlayer = player.GetComponent<charController>();

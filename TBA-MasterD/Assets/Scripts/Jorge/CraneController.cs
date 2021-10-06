@@ -7,13 +7,15 @@ public class CraneController : MonoBehaviour, IDamage {
     [Tooltip("Add Here all the moving parts objects in the scene.")]
     [SerializeField] GameObject[] movingParts;
     [Tooltip("Add the GameObjects Tag that are allowed to use this.")]
-    [SerializeField] List<string> allowedTagsToInteract = new List<string> { "Player" };
+    [SerializeField] List<string> allowedTagsToInteract = new List<string> { "Player", "PlayerParent" };
 
     [SerializeField] bool interactionWithBullet = false;
     [SerializeField] bool isActive = false;
 
     [SerializeField] KeyCode keyToInteract;
 
+    private charController player = null;
+    private bool hasBeenInteracted = false;
 
     private void Start() {
         if (!isActive) {
@@ -23,6 +25,16 @@ public class CraneController : MonoBehaviour, IDamage {
         }
     }
 
+
+    private void Update() {
+        if(!hasBeenInteracted && player != null) {
+            if (Input.GetKeyDown(keyToInteract)) {
+                ActivateCrane();
+                player.EnableInteractionUI(false);
+                hasBeenInteracted = true;
+            }
+        }
+    }
 
     private void ActivateCrane() {
         foreach (GameObject g in movingParts) {
@@ -42,13 +54,19 @@ public class CraneController : MonoBehaviour, IDamage {
 
     private void OnTriggerStay(Collider other) {
         if (!isActive) {
-            if (allowedTagsToInteract.Contains(other.gameObject.tag)) {
-                if (Input.GetKeyDown(keyToInteract)) {
-                    ActivateCrane();
-                }
+            if (allowedTagsToInteract.Contains(other.tag)) {
+                player = other.transform.parent.parent.GetComponent<charController>();
+                player.EnableInteractionUI(true);
             }
         }
 
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if(allowedTagsToInteract.Contains(other.tag)) {
+            player.EnableInteractionUI(false);
+            player = null;
+        }
     }
 
     private void OnCollisionEnter(Collision other) {
@@ -64,7 +82,6 @@ public class CraneController : MonoBehaviour, IDamage {
     }
 
     public void TakeDamage() {
-        Debug.Log("I WORK SOMEHOW...");
         ActivateCrane();
     }
 }

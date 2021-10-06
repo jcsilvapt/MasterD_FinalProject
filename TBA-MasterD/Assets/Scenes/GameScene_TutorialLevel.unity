@@ -615,6 +615,8 @@ MonoBehaviour:
   crane: {fileID: 702322785}
   distancesTransform: {fileID: 1757400129}
   craneSpeed: 1.5
+  player: {fileID: 0}
+  pCam: {fileID: 0}
 --- !u!65 &25645121
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3859,10 +3861,10 @@ MonoBehaviour:
   - {fileID: 565448118}
   toBeClosed: []
   canInteract: 1
+  isOnlyManuallyInteractive: 0
   cc: {fileID: 0}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
-  player: {fileID: 0}
 --- !u!4 &210765550 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4902910200722361673, guid: f4b89333be8ba8c47a84b8d4c0e31552,
@@ -4675,22 +4677,22 @@ PrefabInstance:
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -21.02
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3.84
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.207
+      value: 66.132
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071071
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
@@ -4700,7 +4702,7 @@ PrefabInstance:
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000046193603
+      value: -0.7071065
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
@@ -4715,7 +4717,7 @@ PrefabInstance:
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90.00001
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
@@ -5945,6 +5947,8 @@ MonoBehaviour:
   crane: {fileID: 15364679}
   distancesTransform: {fileID: 1671743527}
   craneSpeed: 1.5
+  player: {fileID: 0}
+  pCam: {fileID: 0}
 --- !u!65 &280940249
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14318,6 +14322,8 @@ MonoBehaviour:
   crane: {fileID: 918000917}
   distancesTransform: {fileID: 1152648757}
   craneSpeed: 1.5
+  player: {fileID: 0}
+  pCam: {fileID: 0}
 --- !u!65 &646516132
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17164,6 +17170,8 @@ MonoBehaviour:
   crane: {fileID: 1525998113}
   distancesTransform: {fileID: 1109697591}
   craneSpeed: 1.5
+  player: {fileID: 0}
+  pCam: {fileID: 0}
 --- !u!65 &746926641
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27712,6 +27720,8 @@ MonoBehaviour:
   crane: {fileID: 617605817}
   distancesTransform: {fileID: 818801564}
   craneSpeed: 1.5
+  player: {fileID: 0}
+  pCam: {fileID: 0}
 --- !u!65 &1141079142
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38160,10 +38170,10 @@ MonoBehaviour:
   - {fileID: 1195448650}
   toBeClosed: []
   canInteract: 0
+  isOnlyManuallyInteractive: 0
   cc: {fileID: 1588105345}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
-  player: {fileID: 0}
 --- !u!64 &1588105344
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -40369,6 +40379,8 @@ MonoBehaviour:
   crane: {fileID: 840694837}
   distancesTransform: {fileID: 673183401}
   craneSpeed: 1.5
+  player: {fileID: 0}
+  pCam: {fileID: 0}
 --- !u!65 &1688345743
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -44408,7 +44420,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891847279}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4464ea51de82dac42ae704538a937bdb, type: 3}
   m_Name: 
@@ -47661,10 +47673,10 @@ MonoBehaviour:
   - {fileID: 565448118}
   toBeClosed: []
   canInteract: 1
+  isOnlyManuallyInteractive: 0
   cc: {fileID: 0}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
-  player: {fileID: 0}
 --- !u!65 &2001988391
 BoxCollider:
   m_ObjectHideFlags: 0

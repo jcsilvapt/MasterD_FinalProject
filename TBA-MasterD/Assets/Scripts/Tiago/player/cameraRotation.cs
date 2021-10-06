@@ -34,15 +34,19 @@ public class cameraRotation : MonoBehaviour {
     private Transform leftUpperArm, leftLowerArm, leftHand;
     private Transform leftArm;
 
+    private bool canMoveMouse = true;
+
     void Start() {
         //mouseX = playerBody.eulerAngles.y;
     }
-   
+
 
     private void FixedUpdate() {
-       if (!GameManager.GetCursorVisibility()) {
-            GetMouseMovement();
-            RotateCamera();
+        if (canMoveMouse) {
+            if (!GameManager.GetCursorVisibility()) {
+                GetMouseMovement();
+                RotateCamera();
+            }
         }
     }
 
@@ -65,5 +69,13 @@ public class cameraRotation : MonoBehaviour {
         mouseY = Mathf.Clamp(mouseY, -90, 90);
 
     }
+
+    public void StopMouseMovement() {
+        canMoveMouse = false;
+    }    
     
+    public void StartMouseMovement() {
+        canMoveMouse = true;
+    }
+
 }

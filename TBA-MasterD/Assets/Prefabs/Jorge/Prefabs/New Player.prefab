@@ -1446,6 +1446,7 @@ MonoBehaviour:
   runSpeed: 7
   crouchSpeed: 2
   jumpHeight: 80
+  cam: {fileID: 0}
   healthEmission: {fileID: 2100000, guid: c6e280c540857a74cb4358caaff2d088, type: 2}
   armsMesh: {fileID: 4517143046679991597}
   weaponController: {fileID: 3598675406924485959}
@@ -1459,7 +1460,7 @@ MonoBehaviour:
   characterCrouchHeight: 0.7
   cameraCrouchHeight: 1
   cameraCrouchLerpSpeed: 0.2
-  canUseDrone: 1
+  canUseDrone: 0
   droneSpawn: {fileID: 8120164854828861779}
   drone: {fileID: 2070918077443889220}
   arms: {fileID: 919132147696559918}

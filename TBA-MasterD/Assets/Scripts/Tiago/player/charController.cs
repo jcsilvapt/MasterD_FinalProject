@@ -15,6 +15,7 @@ public class charController : MonoBehaviour, IDamage {
     [SerializeField] float runSpeed;
     [SerializeField] float crouchSpeed;
     [SerializeField] float jumpHeight;
+    [SerializeField] cameraRotation cam;
     private bool canMove;
     private bool isAlive;
 
@@ -171,7 +172,7 @@ public class charController : MonoBehaviour, IDamage {
                         StepClimb();
                     }
                 }
-                if (canUseDrone)
+                if (canUseDrone && isGrounded)
                     DroneControl();
 
                 CheckStealthiness();
