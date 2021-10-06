@@ -4639,6 +4639,7 @@ GameObject:
   m_Component:
   - component: {fileID: 84686188}
   - component: {fileID: 84686189}
+  - component: {fileID: 84686190}
   m_Layer: 0
   m_Name: When-to-Go-to-Beaches-in-Hawaii (2)
   m_TagString: Untagged
@@ -4710,6 +4711,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &84686190
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84686187}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 12.8, y: 7.95}
+    newSize: {x: 12.8, y: 7.95}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 12.8, y: 7.95}
+  m_EdgeRadius: 0
 --- !u!1001 &88256545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56777,6 +56804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1100753459}
   - component: {fileID: 1100753460}
+  - component: {fileID: 1100753461}
   m_Layer: 0
   m_Name: When-to-Go-to-Beaches-in-Hawaii
   m_TagString: Untagged
@@ -56848,6 +56876,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1100753461
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100753458}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 12.8, y: 7.95}
+    newSize: {x: 12.8, y: 7.95}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 12.8, y: 7.95}
+  m_EdgeRadius: 0
 --- !u!1 &1100812385 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8925910885411907710, guid: 7ea070d0bb61b8143b700c44e4bada99,
@@ -72415,6 +72469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1470325189}
   - component: {fileID: 1470325190}
+  - component: {fileID: 1470325191}
   m_Layer: 0
   m_Name: When-to-Go-to-Beaches-in-Hawaii (1)
   m_TagString: Untagged
@@ -72486,6 +72541,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1470325191
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470325188}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 12.8, y: 7.95}
+    newSize: {x: 12.8, y: 7.95}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 12.8, y: 7.95}
+  m_EdgeRadius: 0
 --- !u!1001 &1470686329
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87409,6 +87490,26 @@ Transform:
   m_Father: {fileID: 328977489}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1811525243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8343248219658952724, guid: ccf52f17af6aa074ba586d7313c26211,
+    type: 3}
+  m_PrefabInstance: {fileID: 2091333790}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1811525244
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811525243}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5551418225153903260, guid: ccf52f17af6aa074ba586d7313c26211, type: 3}
 --- !u!1001 &1812269439
 PrefabInstance:
   m_ObjectHideFlags: 0
