@@ -30,6 +30,13 @@ public class DroneController : MonoBehaviour {
     //Drone Speed
     [SerializeField] private float movementSpeed;
 
+
+    //Drone Sounds
+    [SerializeField] AudioSource movementSounds;
+    [SerializeField] AudioClip droneIdle;
+    [SerializeField] AudioClip droneMove;
+    private string currentStatus = "";
+    private string status = "p";
     #endregion
 
     #region Look Variables
@@ -67,6 +74,9 @@ public class DroneController : MonoBehaviour {
 
         //Set Shoot Timer
         shootTimer = 0;
+
+        movementSounds.clip = droneIdle;
+        movementSounds.Play();
     }
 
     private void Update() {
@@ -78,17 +88,20 @@ public class DroneController : MonoBehaviour {
             Look();
 
             Shoot();
-
         }
     }
 
     private void FixedUpdate() {
         if (movementInput.magnitude != 0 || heightController.magnitude != 0) {
             rb.velocity = (transform.TransformDirection(movementInput) + heightController).normalized * movementSpeed;
+            status = "p";
         } else {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+            status = "";
         }
+
+        SoundsForMovement();
     }
 
     private void Movement() {
@@ -106,8 +119,45 @@ public class DroneController : MonoBehaviour {
 
         //Normalize Movement
         movementInput = movementInput.normalized;
+        
     }
 
+    private void SoundsForMovement()
+    {
+        if (currentStatus != status)
+        {
+            currentStatus = status;
+        }
+        else
+        {
+            return;
+        }
+        switch (currentStatus)
+        {
+            case "p":
+                movementSounds.clip = droneMove;
+                movementSounds.Play();
+                break;
+            default:
+                movementSounds.clip = droneIdle;
+                movementSounds.Play();
+                break;
+        }
+            /*if (movementInput.magnitude != 0 || heightController.magnitude != 0)
+            {
+                movementSounds.clip = droneMove;
+                movementSounds.Play();
+               
+            }
+            else
+            {
+                movementSounds.clip = droneIdle;
+                movementSounds.Play();
+               
+            }*/
+            
+        
+    }
     private void Look() {
         xRotation += Input.GetAxis("Mouse X") * droneSensitivity;
         yRotation -= Input.GetAxis("Mouse Y") * droneSensitivity;

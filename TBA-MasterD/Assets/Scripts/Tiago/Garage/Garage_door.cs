@@ -15,7 +15,7 @@ public class Garage_door : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.CompareTag("Player"))
         {
             if (gm.isStealth == false)
             {
