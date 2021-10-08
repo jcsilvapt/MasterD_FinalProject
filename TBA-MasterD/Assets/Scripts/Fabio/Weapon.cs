@@ -63,6 +63,7 @@ public class Weapon : MonoBehaviour {
     [SerializeField] AudioSource audioShoot; // by tiago for shooting <--------------------------------------------------------------------------
     [SerializeField] AudioSource audioReload; // by tiago for shooting <--------------------------------------------------------------------------
 
+
     private void Awake() {
         // Initialize all weapon status
         shootingType = SO_WeaponInformation.shootingType;
@@ -333,7 +334,7 @@ public class Weapon : MonoBehaviour {
 
     private bool HasBulletsInClip() {
         if (bulletsInClip <= 0) {
-            armsAnimator.SetBool("isShooting", false);
+            armsAnimator.SetBool("isShooting", false);           
             return false;
         }
         return true;

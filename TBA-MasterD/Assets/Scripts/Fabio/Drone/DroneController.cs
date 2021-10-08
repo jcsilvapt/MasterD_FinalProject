@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroneController : MonoBehaviour {
+public class DroneController : MonoBehaviour
+{
     #region References
 
     //Rigidbody Reference
@@ -68,7 +69,8 @@ public class DroneController : MonoBehaviour {
     public AudioSource dartSound;
     #endregion
 
-    private void Start() {
+    private void Start()
+    {
         //Get References
         rb = GetComponent<Rigidbody>();
 
@@ -79,23 +81,31 @@ public class DroneController : MonoBehaviour {
         movementSounds.Play();
     }
 
-    private void Update() {
+    private void Update()
+    {
 
-        if (!GameManager.GetPause()) {
+        if (!GameManager.GetPause())
+        {
 
             Movement();
 
             Look();
 
             Shoot();
+
+            
         }
     }
 
-    private void FixedUpdate() {
-        if (movementInput.magnitude != 0 || heightController.magnitude != 0) {
+    private void FixedUpdate()
+    {
+        if (movementInput.magnitude != 0 || heightController.magnitude != 0)
+        {
             rb.velocity = (transform.TransformDirection(movementInput) + heightController).normalized * movementSpeed;
             status = "p";
-        } else {
+        }
+        else
+        {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             status = "";
@@ -104,22 +114,28 @@ public class DroneController : MonoBehaviour {
         SoundsForMovement();
     }
 
-    private void Movement() {
+    private void Movement()
+    {
         //Movement Input by Player
         movementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
         //Height Controller Changes
-        if (Input.GetKey(KeyMapper.inputKey.DroneMoveUp)) {
+        if (Input.GetKey(KeyMapper.inputKey.DroneMoveUp))
+        {
             heightController.y = 0.5f;
-        } else if (Input.GetKey(KeyMapper.inputKey.DroneMoveDown)) {
+        }
+        else if (Input.GetKey(KeyMapper.inputKey.DroneMoveDown))
+        {
             heightController.y = -0.5f;
-        } else {
+        }
+        else
+        {
             heightController.y = 0;
         }
 
         //Normalize Movement
         movementInput = movementInput.normalized;
-        
+
     }
 
     private void SoundsForMovement()
@@ -135,63 +151,55 @@ public class DroneController : MonoBehaviour {
         switch (currentStatus)
         {
             case "p":
-                movementSounds.clip = droneMove;
-                movementSounds.Play();
+                /* movementSounds.clip = droneMove;
+                 movementSounds.Play();*/
+                movementSounds.pitch = Mathf.Lerp(movementSounds.pitch, 1.2f, .5f * Time.deltaTime);
                 break;
             default:
-                movementSounds.clip = droneIdle;
-                movementSounds.Play();
+                /*  movementSounds.clip = droneIdle;
+                  movementSounds.Play();*/
+                movementSounds.pitch = Mathf.Lerp(movementSounds.pitch, 1, .5f * Time.deltaTime);
                 break;
         }
-            /*if (movementInput.magnitude != 0 || heightController.magnitude != 0)
-            {
-                movementSounds.clip = droneMove;
-                movementSounds.Play();
-               
-            }
-            else
-            {
-                movementSounds.clip = droneIdle;
-                movementSounds.Play();
-               
-            }*/
-            
-        
+
     }
-    private void Look() {
+    private void Look()
+    {
         xRotation += Input.GetAxis("Mouse X") * droneSensitivity;
         yRotation -= Input.GetAxis("Mouse Y") * droneSensitivity;
 
         transform.localEulerAngles = new Vector3((yRotation = Mathf.Clamp(yRotation, rotationLimitMinY, rotationLimitMaxY)), xRotation, 0);
     }
 
-    private void Shoot() {
-        if (shootTimer > 0) {
+    private void Shoot()
+    {
+        if (shootTimer > 0)
+        {
             shootTimer -= Time.deltaTime;
             return;
         }
 
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0))
+        {
             dartSound.PlayOneShot(dartShootSound);
             RaycastHit hit;
-            if (Physics.Raycast(droneCamera.transform.position, droneCamera.transform.forward, out hit)) {
+            if (Physics.Raycast(droneCamera.transform.position, droneCamera.transform.forward, out hit))
+            {
                 Debug.Log("DRONE::: " + hit.transform.GetComponent<IDamage>());
-                if (hit.transform.GetComponent<IDamage>() != null) {
+                if (hit.transform.GetComponent<IDamage>() != null)
+                {
                     if (!hit.transform.CompareTag("Enemy"))
                     {
                         hit.transform.GetComponent<IDamage>().TakeDamage();
                     }
                 }
             }
-
-            //GameObject dartShot = Instantiate(dart, shootingPoint);
-            //dartShot.transform.parent = null;
-
             shootTimer = timeBetweenShots;
         }
     }
 
-    public void ResetTransform() {
+    public void ResetTransform()
+    {
         //Reset Rotation
         xRotation = 0;
         yRotation = 0;
@@ -200,7 +208,8 @@ public class DroneController : MonoBehaviour {
         transform.localPosition = Vector3.zero;
     }
 
-    public void SetTransform(Vector3 position, Vector3 rotation) {
+    public void SetTransform(Vector3 position, Vector3 rotation)
+    {
         transform.position = position;
         transform.eulerAngles = Vector3.Scale(Vector3.up, rotation);
 
@@ -208,7 +217,8 @@ public class DroneController : MonoBehaviour {
         yRotation = rotation.x;
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         Debug.LogWarning("Keys to interact: " + KeyMapper.inputKey.DroneMoveUp.ToString() + ", to go UP and, " + KeyMapper.inputKey.DroneMoveDown.ToString() + ", to go down.");
     }
 }

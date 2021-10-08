@@ -9,10 +9,6 @@ public class Garage_Manager : MonoBehaviour
     public GameObject barrier;
     private Animator animBarr;
 
-    [Header("Glass")]
-    public GameObject normalGlass;
-    public GameObject brokenGlass;
-
     [Header("Music")]
     [SerializeField] GameObject stealthMusic;
     [SerializeField] GameObject actionMusic;
@@ -53,16 +49,7 @@ public class Garage_Manager : MonoBehaviour
         animBarr.SetTrigger("isRotate");
     }
 
-    #endregion
-
-    #region Breaking Glass
-    public void switchGlass()
-    {
-        normalGlass.SetActive(false);
-        brokenGlass.SetActive(true);
-    }
-
-    #endregion
+    #endregion   
 
     #region End Scene
     public void EndingEnemies()

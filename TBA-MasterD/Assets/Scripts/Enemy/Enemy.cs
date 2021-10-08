@@ -210,7 +210,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         {
             if (hasAlertedOther == false)
             {
-                Collider[] hitColliders = Physics.OverlapBox(this.transform.position, new Vector3(6, 1, 6));
+                Collider[] hitColliders = Physics.OverlapBox(this.transform.position, new Vector3(7, 1, 7));
 
                 foreach (Collider Ally in hitColliders)
                 {

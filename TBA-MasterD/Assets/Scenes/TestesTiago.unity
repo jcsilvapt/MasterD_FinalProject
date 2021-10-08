@@ -592,6 +592,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!20 &191321087 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1361000390, guid: 461c5995c8c1274419c0b28587ce9c96,
+    type: 3}
+  m_PrefabInstance: {fileID: 1287397339}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &194655333
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,6 +916,10 @@ MonoBehaviour:
   himself: {fileID: 0}
   redLight: {fileID: 0}
   enemyHead: {fileID: 0}
+  ammoPack: {fileID: 0}
+  healthPack: {fileID: 0}
+  healthSpawner: {fileID: 0}
+  ammoSpawner: {fileID: 0}
   bullet: {fileID: 0}
   bulletSpawn: {fileID: 0}
   casing: {fileID: 0}
@@ -917,9 +927,11 @@ MonoBehaviour:
   muzzleFlash: {fileID: 0}
   timeToShoot: 0.5
   elapsedTime: 0
+  shootSoundSource: {fileID: 0}
+  shootSound: {fileID: 0}
   health: 0
   isAlive: 1
-  allyAlert: 0
+  canAlertClosebyEnemies: 0
   enableAISystem: 1
   target: {fileID: 447076652}
   idleTime: 1
@@ -929,6 +941,7 @@ MonoBehaviour:
   - {fileID: 375253238}
   - {fileID: 2107105972}
   - {fileID: 785118968}
+  hasAlertedOther: 0
   enableTestMovement: 0
 --- !u!195 &242753390
 NavMeshAgent:
@@ -1675,6 +1688,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7845658533955111590, guid: 1a2749c094afc7f4ea84a86bdf4a2187,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a2749c094afc7f4ea84a86bdf4a2187, type: 3}
 --- !u!1 &423726269
@@ -1710,6 +1728,72 @@ Transform:
   - {fileID: 785118968}
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &442228467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 442228470}
+  - component: {fileID: 442228469}
+  - component: {fileID: 442228468}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &442228468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442228467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &442228469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442228467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &442228470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442228467}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &444987114 stripped
 GameObject:
@@ -1764,10 +1848,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  maxHealth: 100
   moveSpeed: 7
   runSpeed: 12
   crouchSpeed: 4
   jumpHeight: 4
+  cam: {fileID: 0}
   healthEmission: {fileID: 0}
   armsMesh: {fileID: 0}
   weaponController: {fileID: 0}
@@ -1775,8 +1861,7 @@ MonoBehaviour:
   enableStairsWalk: 0
   stepHigh: {fileID: 494351221}
   stepLow: {fileID: 148472661}
-  stepHeight: 0.3
-  stepSmooth: 0.05
+  stepJumpHeight: 0
   character: {fileID: 0}
   minDistanceToStandUp: 0.5
   characterCrouchHeight: 0
@@ -1791,10 +1876,13 @@ MonoBehaviour:
   physicalBodyMesh2: {fileID: 0}
   bodyAnim: {fileID: 0}
   terrainBehaviour: {fileID: 0}
+  uiCrosshair: {fileID: 0}
+  uiInteraction: {fileID: 0}
   isRunning: 0
   isCrouched: 0
   isGrounded: 0
   isDroneActive: 0
+  lastCheckpoint: {fileID: 0}
   steps: {fileID: 0}
   crouchPitch: 0
   runPitch: 0
@@ -1805,6 +1893,8 @@ MonoBehaviour:
   fpsCam: {fileID: 1389101797}
   armaAtual: {fileID: 211765514}
   radius: 1
+  isStealth: 1
+  screenRed: {fileID: 0}
 --- !u!54 &447076648
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2249,6 +2339,10 @@ MonoBehaviour:
   himself: {fileID: 0}
   redLight: {fileID: 0}
   enemyHead: {fileID: 0}
+  ammoPack: {fileID: 0}
+  healthPack: {fileID: 0}
+  healthSpawner: {fileID: 0}
+  ammoSpawner: {fileID: 0}
   bullet: {fileID: 8078174116620158006, guid: 85ad3b7f0bff2e14182c4390d1197150, type: 3}
   bulletSpawn: {fileID: 2127865311}
   casing: {fileID: 6461625440377602478, guid: b5c59afd25ebb164696f764b484fbd8e, type: 3}
@@ -2256,9 +2350,11 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1252369281}
   timeToShoot: 1
   elapsedTime: 0
+  shootSoundSource: {fileID: 0}
+  shootSound: {fileID: 0}
   health: 0
   isAlive: 1
-  allyAlert: 0
+  canAlertClosebyEnemies: 0
   enableAISystem: 1
   target: {fileID: 0}
   idleTime: 1
@@ -2269,6 +2365,7 @@ MonoBehaviour:
   - {fileID: 595593761}
   - {fileID: 1056679525}
   - {fileID: 267594722}
+  hasAlertedOther: 0
   enableTestMovement: 0
 --- !u!1 &715207390
 GameObject:
@@ -12508,22 +12605,22 @@ PrefabInstance:
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.5779079
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.81610197
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
@@ -12533,12 +12630,22 @@ PrefabInstance:
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 109.393005
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076039594507607858, guid: 461c5995c8c1274419c0b28587ce9c96,
+        type: 3}
+      propertyPath: hasWeapon
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076039594507607858, guid: 461c5995c8c1274419c0b28587ce9c96,
+        type: 3}
+      propertyPath: canUseDrone
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607859, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
@@ -12623,6 +12730,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ae75f78777ea74f977db33ef9df45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseX: 0
+  mouseY: 0
   invertMouse: 0
   playerBody: {fileID: 447076652}
   headOffset: {x: 0, y: 0, z: 0}
@@ -13270,6 +13379,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7845658533955111590, guid: 1a2749c094afc7f4ea84a86bdf4a2187,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a2749c094afc7f4ea84a86bdf4a2187, type: 3}
 --- !u!1 &1556005404 stripped
@@ -13387,6 +13501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ae75f78777ea74f977db33ef9df45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseX: 0
+  mouseY: 0
   invertMouse: 0
   playerBody: {fileID: 146267834}
   headOffset: {x: 0, y: 0, z: 0}
@@ -13655,6 +13771,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7845658533955111590, guid: 1a2749c094afc7f4ea84a86bdf4a2187,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a2749c094afc7f4ea84a86bdf4a2187, type: 3}
@@ -14177,6 +14298,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7845658533955111590, guid: 1a2749c094afc7f4ea84a86bdf4a2187,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a2749c094afc7f4ea84a86bdf4a2187, type: 3}
 --- !u!1 &1959954447
@@ -14459,3 +14585,118 @@ Transform:
   m_Father: {fileID: 1507470915}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &6495582546275768955
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6495582546404359970, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 191321087}
+    - target: {fileID: 6495582546404359981, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547090681307, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: subsToWrite
+      value: It seems the way forward is blocked, i think theres a vent on that wall
+        on the right that leads to the guards room, you can unlock you path there
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547090681316, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547090681316, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 50.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547090681316, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547090681316, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547090681316, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547090681316, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547090681316, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547090681316, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547090681316, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547090681316, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547090681316, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547090681318, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_Name
+      value: Voice & Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547133297480, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547133297486, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547133297486, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547133297486, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_margin.y
+      value: -30.695225
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547133297486, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -1617.065
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495582547133297486, guid: 347820279a23b974a90813703a6a27a5,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 45
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 347820279a23b974a90813703a6a27a5, type: 3}
