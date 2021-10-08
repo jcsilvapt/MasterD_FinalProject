@@ -10,9 +10,9 @@ public class MenuAudio : MonoBehaviour {
     [SerializeField] Slider effectsSlider;
 
     private void Start() {
-        masterSlider.value = -5;
-        musicSlider.value = 0;
-        effectsSlider.value = 0;
+        masterSlider.value = GameManager.GetMasterVolume();
+        musicSlider.value = GameManager.GetMusicVolume();
+        effectsSlider.value = GameManager.GetEffectVolume();
     }
 
     public void MasterVolume(float value) {

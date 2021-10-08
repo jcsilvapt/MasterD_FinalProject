@@ -16,7 +16,7 @@ public class charController : MonoBehaviour, IDamage {
     [SerializeField] float crouchSpeed;
     [SerializeField] float jumpHeight;
     [SerializeField] cameraRotation cam;
-    private bool canMove;
+    [SerializeField] bool canMove;
     private bool isAlive;
 
     [Header("Player Health Effect")]

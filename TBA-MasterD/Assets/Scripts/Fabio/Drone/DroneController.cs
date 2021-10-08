@@ -36,8 +36,6 @@ public class DroneController : MonoBehaviour
     [SerializeField] AudioSource movementSounds;
     [SerializeField] AudioClip droneIdle;
     [SerializeField] AudioClip droneMove;
-    private string currentStatus = "";
-    private string status = "p";
     #endregion
 
     #region Look Variables
@@ -102,16 +100,15 @@ public class DroneController : MonoBehaviour
         if (movementInput.magnitude != 0 || heightController.magnitude != 0)
         {
             rb.velocity = (transform.TransformDirection(movementInput) + heightController).normalized * movementSpeed;
-            status = "p";
+            movementSounds.pitch = Mathf.Lerp(movementSounds.pitch, 1.2f, 1.2f * Time.deltaTime);
         }
         else
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            status = "";
+            movementSounds.pitch = Mathf.Lerp(movementSounds.pitch, 1, 2f * Time.deltaTime);
         }
 
-        SoundsForMovement();
     }
 
     private void Movement()
@@ -138,31 +135,6 @@ public class DroneController : MonoBehaviour
 
     }
 
-    private void SoundsForMovement()
-    {
-        if (currentStatus != status)
-        {
-            currentStatus = status;
-        }
-        else
-        {
-            return;
-        }
-        switch (currentStatus)
-        {
-            case "p":
-                /* movementSounds.clip = droneMove;
-                 movementSounds.Play();*/
-                movementSounds.pitch = Mathf.Lerp(movementSounds.pitch, 1.2f, .5f * Time.deltaTime);
-                break;
-            default:
-                /*  movementSounds.clip = droneIdle;
-                  movementSounds.Play();*/
-                movementSounds.pitch = Mathf.Lerp(movementSounds.pitch, 1, .5f * Time.deltaTime);
-                break;
-        }
-
-    }
     private void Look()
     {
         xRotation += Input.GetAxis("Mouse X") * droneSensitivity;
