@@ -474,4 +474,13 @@ public class charController : MonoBehaviour, IDamage {
         screenRed.alpha = 1 - (health / 100);
     }
     #endregion
+
+    #region Fabio Edit
+
+    public int[] GetWeaponsAmmunition()
+    {
+        return new int[] { weaponController.GetTotalCurrentAmmunition(), weaponController.GetTotalMaximumAmmunition()};
+    }
+
+    #endregion
 }

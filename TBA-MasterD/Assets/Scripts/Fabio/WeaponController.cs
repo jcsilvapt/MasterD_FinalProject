@@ -190,6 +190,7 @@ public class WeaponController : MonoBehaviour {
     /// </summary>
     /// <returns></returns>
     public Vector2 GetCurrentWeaponAmmo() {
+
         return currentWeaponEquipped.GetWeaponBullets();
     }
 
@@ -204,6 +205,30 @@ public class WeaponController : MonoBehaviour {
     public Weapon[] GetPlayerWeapons()
     {
         return weaponsPossessed;
+    }
+
+    public int GetTotalMaximumAmmunition()
+    {
+        int totalMaximumAmmunition = 0;
+
+        foreach(Weapon weapon in weaponsPossessed)
+        {
+            totalMaximumAmmunition += weapon.GetMaximumAmmunition();
+        }
+
+        return totalMaximumAmmunition;
+    }
+
+    public int GetTotalCurrentAmmunition()
+    {
+        int totalCurrentAmmunition = 0;
+
+        foreach (Weapon weapon in weaponsPossessed)
+        {
+            totalCurrentAmmunition += weapon.GetCurrentAmmunition();
+        }
+
+        return totalCurrentAmmunition;
     }
 
     #endregion

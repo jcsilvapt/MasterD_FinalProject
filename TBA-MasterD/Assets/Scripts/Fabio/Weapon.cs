@@ -390,6 +390,16 @@ public class Weapon : MonoBehaviour {
         currentBullets = maxBulletsAllowed;
     }
 
+    public int GetMaximumAmmunition()
+    {
+        return maxBulletsAllowed;
+    }
+
+    public int GetCurrentAmmunition()
+    {
+        return currentBullets;
+    }
+
     #endregion
 
     #endregion

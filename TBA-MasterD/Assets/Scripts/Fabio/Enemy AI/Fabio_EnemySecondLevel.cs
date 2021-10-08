@@ -222,8 +222,14 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
     private void PackDropper()
     {
         float health = target.GetComponent<charController>().GetHealth();
-        int currentBullets = (int)target.GetComponent<charController>().GetCurrentWeaponBullets().y;
-        int currentMaximumBullets = (int)target.GetComponent<charController>().GetCurrentWeaponBullets().x;
+
+        #region Fabio Edit
+
+        int currentBullets = target.GetComponent<charController>().GetWeaponsAmmunition()[0];
+        int currentMaximumBullets = target.GetComponent<charController>().GetWeaponsAmmunition()[1];
+
+        #endregion
+
         if (currentBullets <= currentMaximumBullets / 2 && health <= 50)
         {
             Instantiate(healthPack, healthSpawner.transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
