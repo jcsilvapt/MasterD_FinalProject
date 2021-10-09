@@ -88,7 +88,7 @@ public class Escape_Car : MonoBehaviour
         yield return new WaitForSeconds(4);
         thankYouScreen.SetActive(false);
         anim.SetTrigger("hasEscaped");
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(19);
         thankYouScreen.SetActive(false);
         credits.SetActive(true);
     }
