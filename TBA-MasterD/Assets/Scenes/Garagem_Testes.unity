@@ -11082,7 +11082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &134309680
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39824,7 +39824,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &878286442
 AudioSource:
   m_ObjectHideFlags: 0
@@ -56081,7 +56081,7 @@ MonoBehaviour:
   endMusic: {fileID: 878286442}
   endScreen: {fileID: 272160207}
   thankYouScreen: {fileID: 1750001066}
-  credits: {fileID: 1256885081}
+  credits: {fileID: 134309679}
 --- !u!65 &1256885083
 BoxCollider:
   m_ObjectHideFlags: 0

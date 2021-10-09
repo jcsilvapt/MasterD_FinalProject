@@ -1334,7 +1334,7 @@ PrefabInstance:
     - target: {fileID: 6495582547090681316, guid: 347820279a23b974a90813703a6a27a5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.13
+      value: -17.876
       objectReference: {fileID: 0}
     - target: {fileID: 6495582547090681316, guid: 347820279a23b974a90813703a6a27a5,
         type: 3}
@@ -4671,6 +4671,155 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184405676}
   m_CullTransparentMesh: 0
+--- !u!1001 &188259534
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1345466003}
+    m_Modifications:
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Name
+      value: Tutorial - Drone (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.673
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.618
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 54.825
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: modalText
+      value: 'Look, that''s a Console, while using the drone you can shoot it to
+        activate ''something''.
+
+        You can also use the interaction Key when
+        you''r not using the drone.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: targetTag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: isMultiple
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: modalTitle
+      value: tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: ignoreTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 2.3566422
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
+--- !u!4 &188259535 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+    type: 3}
+  m_PrefabInstance: {fileID: 188259534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &190194651 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3343925893741176958, guid: ccad0883752089440834f4bee3eb8dd6,
@@ -8975,6 +9124,135 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1817632988}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &379837132
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1345466003}
+    m_Modifications:
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Name
+      value: Tutorial - Drone (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.855
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 65.783
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: modalText
+      value: Use 'Mouse1' To shoot and the scrollwheel to change the weapon.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: isMultiple
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: modalTitle
+      value: tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: ignoreTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
 --- !u!1 &381719479 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2272165782777524662, guid: 0a40359775ae8c14dafbca3fc7d8328a,
@@ -12398,6 +12676,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1918151641362770122, guid: 0a532913b7539cb4fb93eb7289e8e172,
     type: 3}
   m_PrefabInstance: {fileID: 128317414}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &529391027 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+    type: 3}
+  m_PrefabInstance: {fileID: 379837132}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &532625544 stripped
 Transform:
@@ -16639,10 +16923,7 @@ PrefabInstance:
     - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: modalText
-      value: 'You can shoot vents and active some stuff with the drone.
-
-        Use
-        ''Mouse1'' to Shoot.'
+      value: Use the Jump button to rise the drone altitude
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -26778,6 +27059,151 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 773362613}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1041438139
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1345466003}
+    m_Modifications:
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Name
+      value: Tutorial - Drone (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 57.692
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: modalText
+      value: Use the crouch button to lower the drone altitude
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: targetTag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: isMultiple
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: modalTitle
+      value: tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: ignoreTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.6479897
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3.2380228
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 2.3566422
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.2582233
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.69598866
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.47167897
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067199, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
+--- !u!4 &1041438140 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+    type: 3}
+  m_PrefabInstance: {fileID: 1041438139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1041524777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34481,6 +34907,9 @@ Transform:
   - {fileID: 41216300}
   - {fileID: 1948019606}
   - {fileID: 1770965820}
+  - {fileID: 1041438140}
+  - {fileID: 188259535}
+  - {fileID: 529391027}
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -35273,6 +35702,7 @@ MonoBehaviour:
   initialColor: {r: 1, g: 0, b: 0, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   currentColor: {r: 0, g: 0, b: 0, a: 0}
+  doorToSecondLevel: {fileID: 0}
   currentTarget: {fileID: 0}
   liveShootingActive: 0
   intensitivitySpeed: 0.5
@@ -47112,7 +47542,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891847279}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4464ea51de82dac42ae704538a937bdb, type: 3}
   m_Name: 

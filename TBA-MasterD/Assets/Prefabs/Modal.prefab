@@ -242,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modalTitle: 
   modalText: 
+  targetTag: 0
   ignoreTrigger: 0
   isMultiple: 0
   cg: {fileID: 2462472103853417593}

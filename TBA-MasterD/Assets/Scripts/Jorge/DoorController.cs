@@ -79,7 +79,7 @@ public class DoorController : MonoBehaviour {
             if (!isDoorOpen) {
                 if (tagsAllowed.Contains(other.gameObject.tag)) {
                     if (interactable) {
-                        if (Input.GetKey(KeyCode.E)) {
+                        if (Input.GetKey(KeyMapper.inputKey.Interaction)) {
                             isDoorOpen = true;
                             //DoorSound();
                             inside.Add(other.gameObject);

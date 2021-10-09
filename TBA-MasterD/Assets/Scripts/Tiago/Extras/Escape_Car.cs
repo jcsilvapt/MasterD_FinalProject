@@ -41,6 +41,7 @@ public class Escape_Car : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            other.transform.parent.parent.GetComponent<charController>().EnableInteractionUI(true);
             if (Input.GetKeyDown(KeyMapper.inputKey.Interaction))
             {
                 StartCoroutine(ThankYouScreen());

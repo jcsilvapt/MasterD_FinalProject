@@ -21,6 +21,7 @@ TagManager:
   - Manager
   - SceneController
   - PlayerParent
+  - DoorToSecondLevel
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,8 @@ public class LiveShootingRangeController : MonoBehaviour {
     [SerializeField] Color defaultColor = Color.white;
     [SerializeField] Color currentColor;
 
+    [SerializeField] DoorController doorToSecondLevel;
+
 
     public LiveShootingTarget currentTarget;
     private List<Light> lights = new List<Light>();
@@ -91,6 +93,10 @@ public class LiveShootingRangeController : MonoBehaviour {
         glassDoor.LockMode(false);
         //mainDoor.LockMode(false);
         roomCompleted = true;
+        doorToSecondLevel = GameObject.FindGameObjectWithTag("DoorToSecondLevel").GetComponent<DoorController>();
+        if(doorToSecondLevel != null) {
+            doorToSecondLevel.LockMode(false);
+        }
     }
 
 
