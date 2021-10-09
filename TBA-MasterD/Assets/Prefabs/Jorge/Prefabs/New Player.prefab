@@ -1520,7 +1520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2076039594507607857
 Transform:
   m_ObjectHideFlags: 0
@@ -2763,8 +2763,6 @@ MonoBehaviour:
   droneCamera: {fileID: 2556190739473909807}
   movementSpeed: 5
   movementSounds: {fileID: 1730070252}
-  droneIdle: {fileID: 8300000, guid: a2093a524d6d4bf4d96f89fa8a91b742, type: 3}
-  droneMove: {fileID: 8300000, guid: a10b703da3001b14eb8460dae14ed3ba, type: 3}
   droneSensitivity: 2
   rotationLimitMinY: -30
   rotationLimitMaxY: 30
@@ -2795,8 +2793,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 9156450690726523832, guid: 4f7eed251ee6a404892e2d40de1058e2,
     type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: a2093a524d6d4bf4d96f89fa8a91b742, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
