@@ -63,9 +63,11 @@ public class CraneController : MonoBehaviour, IDamage {
     }
 
     private void OnTriggerExit(Collider other) {
-        if(allowedTagsToInteract.Contains(other.tag)) {
-            player.EnableInteractionUI(false);
-            player = null;
+        if (!isActive) {
+            if (allowedTagsToInteract.Contains(other.tag)) {
+                player.EnableInteractionUI(false);
+                player = null;
+            }
         }
     }
 

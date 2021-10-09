@@ -142,12 +142,11 @@ public class PauseMenuManager : MonoBehaviour
 
     IEnumerator FadeIn(CanvasGroup cg)
     {
-
         while (cg.alpha < 1)
         {
             if (!isFading)
             {
-                cg.alpha += Time.deltaTime * 3f;
+                cg.alpha += Time.unscaledDeltaTime * 3f;
             }
             yield return null;
         }
@@ -163,7 +162,7 @@ public class PauseMenuManager : MonoBehaviour
         isFading = true;
         while (cg.alpha > 0)
         {
-            cg.alpha -= Time.deltaTime * 15f;
+            cg.alpha -= Time.unscaledDeltaTime * 5f;
             yield return null;
         }
         cg.interactable = false;

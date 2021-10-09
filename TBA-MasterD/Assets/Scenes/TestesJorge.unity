@@ -627,7 +627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesInSceneFabio: []
   enemiesInSceneTiago: []
-  playerProfile: {fileID: 0}
+  playerProfile: {fileID: 11400000, guid: 48e9f34f260a71a4fad2cabd18b687e6, type: 2}
   cpoint: {fileID: 0}
 --- !u!4 &867233506
 Transform:
@@ -784,6 +784,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 287115115, guid: 461c5995c8c1274419c0b28587ce9c96, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_RootOrder
@@ -11653,12 +11657,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5415784362122449817, guid: 3142eb715d2e0b24ea6e77c92715db24,
-        type: 3}
-      propertyPath: mixer
-      value: 
-      objectReference: {fileID: 24100000, guid: 4f7eed251ee6a404892e2d40de1058e2,
-        type: 2}
     - target: {fileID: 5415784362122449822, guid: 3142eb715d2e0b24ea6e77c92715db24,
         type: 3}
       propertyPath: m_RootOrder

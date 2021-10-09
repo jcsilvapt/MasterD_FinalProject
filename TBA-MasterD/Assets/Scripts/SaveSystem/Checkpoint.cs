@@ -18,21 +18,21 @@ public class Checkpoint : MonoBehaviour {
     [SerializeField] bool isActivated = false;
 
     private void OnTriggerEnter(Collider other) {
-        if(isMultiple) {
+        if (isMultiple) {
             // TODO
         } else {
-            if(!isActivated) {
+            if (!isActivated) {
                 if (other.CompareTag("Player")) {
-                    if(enemiesInScene.Count > 0) { // Confirms if the scene has enemies and perform accordingly
+                    if (enemiesInScene.Count > 0) { // Confirms if the scene has enemies and perform accordingly
                         SaveSystemManager.Save(this, enemiesInScene);
                     } else {
                         SaveSystemManager.Save(this);
                     }
+                    other.transform.parent.parent.GetComponent<charController>().lastCheckpoint = this;
+                    isActivated = true;
                 }
-                isActivated = true;
             }
         }
-        other.transform.parent.parent.GetComponent<charController>().lastCheckpoint = this;
     }
 
     public void LoadLastCheckPoint() {
