@@ -14,6 +14,8 @@ public class CraneController : MonoBehaviour, IDamage {
 
     [SerializeField] KeyCode keyToInteract;
 
+    [SerializeField] Modal modalObjective;
+
     private charController player = null;
     private bool hasBeenInteracted = false;
 
@@ -40,6 +42,9 @@ public class CraneController : MonoBehaviour, IDamage {
         foreach (GameObject g in movingParts) {
             Animator b = g.GetComponent<Animator>();
             b.enabled = true;
+        }
+        if(modalObjective != null) {
+            modalObjective.ShowModal();
         }
         isActive = true;
     }
