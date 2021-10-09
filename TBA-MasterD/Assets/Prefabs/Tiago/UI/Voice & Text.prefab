@@ -143,8 +143,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 5, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.3907074, y: 0.53306013, z: 1}
+  m_Center: {x: -0.3046463, y: 0.041475844, z: 0}
 --- !u!114 &6495582547090681307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +157,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c46372b0d6a29469010a16858fd537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subsToWrite: 
+  subsToWrite: Okay, now you have to choose if you want to sneak by without being
+    seen, which will be a hard way because guards are patrolling and your path has
+    been blocked in several places, or, if you want to charge head-on and survive
+    to escape, if so you must be tactical and use everything to your advantage. Good
+    Luck.
+  audioToBePlayed: {fileID: 8300000, guid: a097cbbd1c77f694789a8b8c3764da65, type: 3}
+  isImportant: 0
   subtitles: {fileID: 6495582547133297486}
   text: {fileID: 6495582547133297480}
 --- !u!1 &6495582547133297480
@@ -177,7 +183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6495582547133297487
 RectTransform:
   m_ObjectHideFlags: 0
@@ -194,7 +200,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -894, y: -422}
+  m_AnchoredPosition: {x: -894, y: -364}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6495582547133297485
@@ -251,15 +257,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56
-  m_fontSizeBase: 56
+  m_fontSize: 43
+  m_fontSizeBase: 43
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -287,7 +293,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -1793.562, w: -83.46261}
+  m_margin: {x: 84.65433, y: 0, z: -1719.4897, w: -83.46261}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

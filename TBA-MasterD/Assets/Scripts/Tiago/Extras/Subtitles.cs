@@ -24,7 +24,7 @@ public class Subtitles : MonoBehaviour {
     private bool hasBeenActive = false;
 
     private void Awake() {
-        Writer(subtitles, subsToWrite, 0.05f); //text variable used on inspector, the text to be written, time it takes per letter
+        Writer(subtitles, subsToWrite, 0.06f); //text variable used on inspector, the text to be written, time it takes per letter
     }
 
     public void Writer(TextMeshProUGUI subs, string ToWrite, float timerLetter) {

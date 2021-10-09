@@ -34,8 +34,6 @@ public class DroneController : MonoBehaviour
 
     //Drone Sounds
     [SerializeField] AudioSource movementSounds;
-    [SerializeField] AudioClip droneIdle;
-    [SerializeField] AudioClip droneMove;
     #endregion
 
     #region Look Variables
@@ -73,10 +71,8 @@ public class DroneController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         //Set Shoot Timer
-        shootTimer = 0;
-
-        movementSounds.clip = droneIdle;
-        movementSounds.Play();
+        shootTimer = 0;              
+ 
     }
 
     private void Update()

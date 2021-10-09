@@ -29,16 +29,14 @@ public class Escape_Car : MonoBehaviour
     //end screen
     [SerializeField] GameObject endScreen;
     [SerializeField] GameObject thankYouScreen;
+    [SerializeField] GameObject credits;
     void Start()
     {
         anim = GetComponent<Animator>();
         audioS = GetComponent<AudioSource>();
         gm = GameObject.FindGameObjectWithTag("Manager").GetComponent<Garage_Manager>();
     }
-    private void Update()
-    {
-       
-    }
+    
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -88,7 +86,10 @@ public class Escape_Car : MonoBehaviour
         audioS.PlayOneShot(thankYou);
         yield return new WaitForSeconds(4);
         thankYouScreen.SetActive(false);
-        anim.SetTrigger("hasEscaped");        
+        anim.SetTrigger("hasEscaped");
+        yield return new WaitForSeconds(5);
+        thankYouScreen.SetActive(false);
+        credits.SetActive(true);
     }
 
     public void TiresSmoke()

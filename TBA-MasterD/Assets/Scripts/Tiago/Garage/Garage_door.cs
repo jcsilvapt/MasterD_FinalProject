@@ -7,6 +7,8 @@ public class Garage_door : MonoBehaviour
     private Animator anim;
     [SerializeField] Garage_Manager gm;
     [SerializeField] GameObject stealthObjects;
+    [SerializeField] GameObject stealthVoice;
+    [SerializeField] GameObject AttackVoice;
 
     void Start()
     {
@@ -20,8 +22,12 @@ public class Garage_door : MonoBehaviour
             if (gm.isStealth == false)
             {
                 stealthObjects.SetActive(true);
+                AttackVoice.SetActive(true);               
             }
-           
+            else
+            {
+                stealthVoice.SetActive(true);               
+            }            
             anim.SetBool("isOpen",true);
         }
     }
