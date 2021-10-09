@@ -7,7 +7,7 @@ public class ElevatorController : MonoBehaviour
     #region References
 
     //Animator Reference
-    private Animator animator;
+    [SerializeField] Animator animator;
 
     //Signs GameObjects References
     [SerializeField] private GameObject signAvailable;
@@ -36,6 +36,7 @@ public class ElevatorController : MonoBehaviour
 
         animator.SetBool("Open", isAvailable);
         animator.SetBool("Close", !isAvailable);
+        Debug.Log(isAvailable);
     }
 
     public void ElevatorDoorsOpen()

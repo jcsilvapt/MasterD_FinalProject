@@ -63,6 +63,9 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if(!isSecondLevelActive) {
+            return;
+        }
         if (canClose)
         {
             if (other.tag == "Player")
