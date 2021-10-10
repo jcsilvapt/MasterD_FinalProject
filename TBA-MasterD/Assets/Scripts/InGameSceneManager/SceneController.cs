@@ -22,7 +22,21 @@ public class SceneController : MonoBehaviour {
     /// <summary>
     /// Method that get's a object and activates them with a certain delay.
     /// </summary>
-    private void UpdateSceneObjects(string SceneName) {
+    private void UpdateSceneObjects(SceneSwitcher sceneSwitcher, List<GameObject> gameObjectList) {
+
+        foreach (GameObject objecto in Object.FindObjectsOfType(typeof(GameObject))) {
+            if (objecto.CompareTag("Elevator")) {
+                sceneSwitcher.SetObjectToMove(objecto.GetComponent<Transform>());
+            }
+        }
+
+        if (sceneSwitcher.GetTypeOfSwitch()) {
+            StartCoroutine(DisableAllObjectsAsync(gameObjectList, sceneSwitcher));
+        } else {
+            StartCoroutine(EnableAllObjectsAsync(gameObjectList, sceneSwitcher));
+        }
+
+        /*
         List<GameObject> sceneObjects = new List<GameObject>();
         foreach (GameObject obj in Object.FindObjectsOfType(typeof(GameObject))) {
             if(obj.scene.name.CompareTo(SceneName) == 0 && obj.GetComponent<SceneSwitcher>() != null) {
@@ -43,16 +57,16 @@ public class SceneController : MonoBehaviour {
                 }
 
             }
-        }
+        }*/
     }
 
     /// <summary>
     /// Method that loads the object of a scene
     /// </summary>
     /// <param name="SceneName">Scene name to load objects</param>
-    public static void AsyncEnable(string SceneName) {
+    public static void AsyncEnable(SceneSwitcher sceneSwitcher, List<GameObject> gameObjectList) {
         if(ins != null) {
-            ins.UpdateSceneObjects(SceneName);
+            ins.UpdateSceneObjects(sceneSwitcher, gameObjectList);
         }
     }
 

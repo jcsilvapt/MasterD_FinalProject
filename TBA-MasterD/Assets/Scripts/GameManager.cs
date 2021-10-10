@@ -227,9 +227,9 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public static void ForceAsyncLoad(string sceneName) {
+    public static void ForceAsyncLoad(int sceneIndex) {
         if (ins != null) {
-            ins._changeScene(sceneName);
+            ins._changeScene(sceneIndex);
         }
     }
 
@@ -275,7 +275,8 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Lista para recomeçar: " + l_aSources.Length);
         if (l_aSources != null && l_aSources.Length > 0) {
             for (int i = 0; i < l_aSources.Length; i++) {
-                l_aSources[i].Play();
+                if(l_aSources[i].time > 0)
+                    l_aSources[i].Play();
             }
         }
 
@@ -300,17 +301,17 @@ public class GameManager : MonoBehaviour {
 
     private void _SetPauseGame() {
         if (!isGamePaused) {
+            Time.timeScale = 0;
             PauseAllAudioSources();
             TogglePauseMenu(true);
             ToggleCursorVisibility(true);
-            Time.timeScale = 0;
             isGamePaused = true;
             Debug.Log("Game Manager: Game Paused");
         } else {
             ToggleCursorVisibility(false);
             TogglePauseMenu(false);
-            Time.timeScale = 1;
             UnPauseAllAudioSources();
+            Time.timeScale = 1;
             isGamePaused = false;
             Debug.Log("Game Manager: Game Unpaused");
         }
@@ -342,9 +343,9 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    private void _changeScene(string sceneName) {
+    private void _changeScene(int sceneIndex) {
         ToggleCursorVisibility(false);
-        StartCoroutine(LoadAsync(sceneName));
+        StartCoroutine(LoadAsync(sceneIndex));
     }
 
     #endregion
@@ -385,12 +386,17 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     /// <param name="sceneName"></param>
     /// <returns></returns>
-    IEnumerator LoadAsync(string sceneName) {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+    IEnumerator LoadAsync(int sceneIndex) {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
 
-        while (!operation.isDone) {
-            yield return null;
-        }
+         while (!operation.isDone) {
+             yield return null;
+         }
+
+         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneIndex));
+
+         Debug.Log("Scene Additive Load Completed");
+
     }
 
     #endregion

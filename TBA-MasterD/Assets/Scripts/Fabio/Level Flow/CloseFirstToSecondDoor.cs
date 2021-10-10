@@ -15,6 +15,7 @@ public class CloseFirstToSecondDoor : MonoBehaviour
             //
             //}
             secondLevelManager.LockDoorFirstToSecondLevel();
+            secondLevelManager.SetNormalAudio();
         }
 
         Destroy(gameObject);

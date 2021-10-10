@@ -61,6 +61,10 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
         objectToBeMoved = ObjectTransform;
     }
 
+    public Transform GetObjectToMove() {
+        return objectToBeMoved;
+    }
+
     public void ToogleTypeOfSwitch() {
         isToDisable = !isToDisable;
         Debug.Log("On the next trigger enter is to Disable Objects? " + isToDisable);
@@ -70,11 +74,11 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!isLoaded) {
+         if (!isLoaded) {
             if (other.CompareTag("Player")) {
                 player = other.gameObject;
                 isToExecute = true;
-                SceneController.AsyncEnable(sceneName);
+                SceneController.AsyncEnable(this, gameObjectList);
                 if (!isToReload) isLoaded = true;
             }
         }

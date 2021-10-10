@@ -62,7 +62,7 @@ public class SecondLevelManager : MonoBehaviour
             player.SetActive(true);
         }
 
-        normalMusic.SetActive(true);
+        normalMusic.SetActive(false);
         actionMusic.SetActive(false);
         easterEggMusic.SetActive(false);
     }
