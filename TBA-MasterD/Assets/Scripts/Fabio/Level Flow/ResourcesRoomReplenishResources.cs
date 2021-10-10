@@ -41,7 +41,6 @@ public class ResourcesRoomReplenishResources : MonoBehaviour
             player.ReplenishHealth();
             player.ReplenishBullets();
             player.EnableInteractionUI(false);
-            showUI = false;
         }
     }
 
