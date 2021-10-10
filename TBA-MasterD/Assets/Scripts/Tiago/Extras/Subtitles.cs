@@ -26,6 +26,8 @@ public class Subtitles : MonoBehaviour {
     private bool isActive = false;
     private bool hasBeenActive = false;
 
+    private bool dontUseSubs = true;
+
     private void Awake() {
         Writer(subtitles, subsToWrite, 0.06f); //text variable used on inspector, the text to be written, time it takes per letter
     }
@@ -47,7 +49,7 @@ public class Subtitles : MonoBehaviour {
         if (!hasBeenActive) {
             if (other.CompareTag("Player")) {
                 if (subsToWrite.Length > 0 && subsToWrite != null) {
-                    text.SetActive(true);
+                    //text.SetActive(true);
                     isActive = true;
                 }
                 hasBeenActive = !hasBeenActive;
@@ -59,62 +61,55 @@ public class Subtitles : MonoBehaviour {
                 }
             }
         }
+
     }
 
     private void StartWriting() {
-        if (subtitles != null) {
-            timer -= Time.deltaTime;
-            while (timer <= 0f) //while para evitar que seja afetado por frames
-            {
-                timer += timePerLetter;
-                letterIndex++;
-                subtitles.text = subsToWrite.Substring(0, letterIndex);
+        if (!dontUseSubs) {
+            if (subtitles != null) {
+                timer -= Time.deltaTime;
+                while (timer <= 0f) //while para evitar que seja afetado por frames
+                {
+                    timer += timePerLetter;
+                    letterIndex++;
+                    subtitles.text = subsToWrite.Substring(0, letterIndex);
 
-                if (letterIndex >= subsToWrite.Length) {
-                    subtitles = null;
-                    StartCoroutine(TimeToDeleteSubtitles());
-                    return;
+                    if (letterIndex >= subsToWrite.Length) {
+                        subtitles = null;
+                        StartCoroutine(TimeToDeleteSubtitles());
+                        return;
+                    }
                 }
             }
         }
     }
 
-    private IEnumerator TimeToDeleteSubtitles()
-    {
+    private IEnumerator TimeToDeleteSubtitles() {
         yield return new WaitForSeconds(2);
         isActive = false;
         text.SetActive(false);
     }
 
-    public void SetAudioAndSubtitles(AudioClip voiceLine, string subtitles, List<AudioSource> soundSources)
-    {
+    public void SetAudioAndSubtitles(AudioClip voiceLine, string subtitles, List<AudioSource> soundSources) {
         audioToBePlayed = voiceLine;
         subsToWrite = subtitles;
 
-        if(soundSources != null)
-        {
-            if (soundSources.Count <= 0)
-            {
+        if (soundSources != null) {
+            if (soundSources.Count <= 0) {
                 AudioQueueable queue = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<AudioQueueable>();
 
-                if (isImportant)
-                {
+                if (isImportant) {
                     queue.SetImportantAudio(audioToBePlayed);
-                }
-                else
-                {
+                } else {
                     queue.SetAudioToQueue(audioToBePlayed);
                 }
-            }
-            else
-            {
-                foreach (AudioSource source in soundSources)
-                {
+            } else {
+                foreach (AudioSource source in soundSources) {
                     source.PlayOneShot(audioToBePlayed);
                 }
             }
         }
-        
+
         isActive = true;
         text.SetActive(true);
     }

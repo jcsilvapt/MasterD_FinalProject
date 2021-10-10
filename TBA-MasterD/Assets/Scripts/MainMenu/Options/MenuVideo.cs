@@ -141,8 +141,9 @@ public class MenuVideo : MonoBehaviour {
     }
 
     public void btnApplyChanges() {
-        // Call GameManager and apply the settings
-        // GameManager.Set....
+
+        GameManager.SetFullScreen(isFullScreen);
+        GameManager.SetQuality(currentQualitySettingId);
 
         // Reset all the runtime variables so the apply button disapears
         ResetRuntimeVariables();

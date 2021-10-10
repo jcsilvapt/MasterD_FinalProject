@@ -164,6 +164,18 @@ public class GameManager : MonoBehaviour {
         return -1;
     }
 
+    public static void SetQuality(int qualityIndex) {
+        if (ins != null) {
+            QualitySettings.SetQualityLevel(qualityIndex);
+        }
+    }
+
+    public static void SetFullScreen(bool fullScreen) {
+        if(ins != null) {
+            Screen.fullScreen = fullScreen;
+        }
+    }
+
     public static void QuitGame() {
         if (ins != null) {
             Application.Quit();
