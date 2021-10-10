@@ -12,6 +12,11 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
     //Array of AI Manager References
     [SerializeField] private Fabio_AIManager[] aiManagers;
 
+    //SubtitleSystem
+    private Subtitles subtitleSystem;
+    [SerializeField] private AudioClip voiceLine;
+    [SerializeField] private string subtitles;
+
     #endregion
 
     #region Control Variables
@@ -26,6 +31,8 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
 
     private void Start()
     {
+        subtitleSystem = GetComponent<Subtitles>();
+
         isSecondLevelActive = true;
     }
 
@@ -73,6 +80,7 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
                 other.transform.parent.parent.GetComponent<charController>().StopMovement();
                 elevator.CloseElevatorDoor();
                 isSecondLevelActive = false;
+                subtitleSystem.SetAudioAndSubtitles(voiceLine, subtitles, null);
             }
         }
     }

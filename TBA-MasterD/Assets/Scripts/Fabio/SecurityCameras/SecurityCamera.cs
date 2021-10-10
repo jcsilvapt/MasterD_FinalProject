@@ -21,6 +21,10 @@ public class SecurityCamera : MonoBehaviour
     //Associated Door
     [SerializeField] private DoorController door;
 
+    private Subtitles subtitleSystem;
+    [SerializeField] private AudioClip[] audioClips;
+    [SerializeField] private string[] subtitles;
+
     #endregion
 
     #region Movement Variables
@@ -37,6 +41,8 @@ public class SecurityCamera : MonoBehaviour
 
     private void Start()
     {
+        subtitleSystem = GetComponent<Subtitles>();
+
         cameraGlass = transform.parent;
 
         isActive = true;
@@ -61,6 +67,9 @@ public class SecurityCamera : MonoBehaviour
 
         DeactivateLight();
         secondLevelManager.OpenDoor(door);
+
+        int random = SetRandomVoiceLineAndSubtitles();
+        subtitleSystem.SetAudioAndSubtitles(DefineAudioClip(random), " ", null);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -77,5 +86,20 @@ public class SecurityCamera : MonoBehaviour
         GetComponent<MeshCollider>().enabled = false;
 
         isActive = false;
+    }
+
+    private int SetRandomVoiceLineAndSubtitles()
+    {
+        return Random.Range(0, audioClips.Length);
+    }
+
+    private AudioClip DefineAudioClip(int random)
+    {
+        return audioClips[random];
+    }
+
+    private string DefineSubtitles(int random)
+    {
+        return subtitles[random];
     }
 }

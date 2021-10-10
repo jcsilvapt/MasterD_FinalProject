@@ -12,6 +12,11 @@ public class SlideDoorOpen : MonoBehaviour
     //List Holding Enemies
     [SerializeField] private List<Fabio_EnemySecondLevel> enemiesList;
 
+    //Subtitle System
+    private Subtitles subtitleSystem;
+    [SerializeField] private AudioClip voiceLine;
+    [SerializeField] private string subtitles;
+
     #endregion
 
     #region Control Variables
@@ -23,6 +28,7 @@ public class SlideDoorOpen : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        subtitleSystem = GetComponent<Subtitles>();
 
         isActive = true;
     }
@@ -49,6 +55,8 @@ public class SlideDoorOpen : MonoBehaviour
 
     private void OpenSlideDoor()
     {
+        subtitleSystem.SetAudioAndSubtitles(voiceLine, subtitles, null);
+
         animator.SetBool("Open", true);
         animator.SetBool("side", true);
     }

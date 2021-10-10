@@ -39,6 +39,12 @@ public class DoorManager : MonoBehaviour, IDamage {
     [Header("Developer Settings")]
     private charController player;
 
+    [Header("Subtitles Reference")]
+    private Subtitles subtitleSystem;
+    [SerializeField] private AudioClip voiceLine;
+    [SerializeField] private string subtitle;
+    [SerializeField] private List<AudioSource> audioSources;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<charController>();
@@ -46,6 +52,8 @@ public class DoorManager : MonoBehaviour, IDamage {
         canInteract = false;
         alreadyInteracted = false;
         showUI = false;
+
+        TryGetComponent(out subtitleSystem);
     }
 
     private void Update()
@@ -96,6 +104,12 @@ public class DoorManager : MonoBehaviour, IDamage {
             if (!isOnlyManuallyInteractive)
             {
                 DoorInteraction();
+
+                if(subtitleSystem != null)
+                {
+                    subtitleSystem.SetAudioAndSubtitles(voiceLine, subtitle, audioSources);
+                }
+
                 alreadyInteracted = true;
             }
             else
@@ -105,6 +119,12 @@ public class DoorManager : MonoBehaviour, IDamage {
                     if (isInteracting)
                     {
                         DoorInteraction();
+
+                        if (subtitleSystem != null)
+                        {
+                            subtitleSystem.SetAudioAndSubtitles(voiceLine, subtitle, audioSources);
+                        }
+
                         alreadyInteracted = true;
                     }
                 }

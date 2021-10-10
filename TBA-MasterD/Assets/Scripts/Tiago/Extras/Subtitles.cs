@@ -14,6 +14,9 @@ public class Subtitles : MonoBehaviour {
     [SerializeField] AudioClip audioToBePlayed;
     [SerializeField] bool isImportant = false;
 
+    [Header("AudioSource")]
+    [SerializeField] private List<AudioSource> audioSources;
+
     [Header("DEVELOPER TOOLS")]
     [SerializeField] TextMeshProUGUI subtitles;
     [SerializeField] GameObject text;
@@ -57,10 +60,6 @@ public class Subtitles : MonoBehaviour {
             }
         }
     }
-    private void OnTriggerExit(Collider other) {
-        isActive = false;
-        text.SetActive(false);
-    }
 
     private void StartWriting() {
         if (subtitles != null) {
@@ -73,9 +72,50 @@ public class Subtitles : MonoBehaviour {
 
                 if (letterIndex >= subsToWrite.Length) {
                     subtitles = null;
+                    StartCoroutine(TimeToDeleteSubtitles());
                     return;
                 }
             }
         }
+    }
+
+    private IEnumerator TimeToDeleteSubtitles()
+    {
+        yield return new WaitForSeconds(2);
+        isActive = false;
+        text.SetActive(false);
+    }
+
+    public void SetAudioAndSubtitles(AudioClip voiceLine, string subtitles, List<AudioSource> soundSources)
+    {
+        audioToBePlayed = voiceLine;
+        subsToWrite = subtitles;
+
+        if(soundSources != null)
+        {
+            if (soundSources.Count <= 0)
+            {
+                AudioQueueable queue = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<AudioQueueable>();
+
+                if (isImportant)
+                {
+                    queue.SetImportantAudio(audioToBePlayed);
+                }
+                else
+                {
+                    queue.SetAudioToQueue(audioToBePlayed);
+                }
+            }
+            else
+            {
+                foreach (AudioSource source in soundSources)
+                {
+                    source.PlayOneShot(audioToBePlayed);
+                }
+            }
+        }
+        
+        isActive = true;
+        text.SetActive(true);
     }
 }
