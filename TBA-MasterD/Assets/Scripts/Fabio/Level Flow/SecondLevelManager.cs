@@ -26,6 +26,20 @@ public class SecondLevelManager : MonoBehaviour
 
     #endregion
 
+    #region Sound Sources
+
+    [SerializeField] private GameObject normalMusic;
+    [SerializeField] private GameObject actionMusic;
+    [SerializeField] private GameObject easterEggMusic;
+
+    #endregion
+
+    #region AI Managers
+
+    [SerializeField] private Fabio_AIManager[] aiManagers;
+
+    #endregion
+
     #endregion
 
     private void Awake()
@@ -46,7 +60,11 @@ public class SecondLevelManager : MonoBehaviour
 
         if (!player.activeSelf) {
             player.SetActive(true);
-        } 
+        }
+
+        normalMusic.SetActive(true);
+        actionMusic.SetActive(false);
+        easterEggMusic.SetActive(false);
     }
 
     public void OpenDoor(DoorController door)
@@ -80,4 +98,55 @@ public class SecondLevelManager : MonoBehaviour
 
     #endregion
 
+    #region Sounds
+
+    public void SetNormalAudio()
+    {
+        foreach (Fabio_AIManager aiManager in aiManagers)
+        {
+            if (aiManager.GetIsAIManagerWorking())
+            {
+                return;
+            }
+        }
+
+        actionMusic.SetActive(false);
+        easterEggMusic.SetActive(false);
+        normalMusic.SetActive(true);
+    }
+
+    public void SetActionAudio()
+    {
+        normalMusic.SetActive(false);
+        easterEggMusic.SetActive(false);
+        actionMusic.SetActive(true);
+    }
+
+    public void SetEasterEggAudio()
+    {
+        normalMusic.SetActive(false);
+        actionMusic.SetActive(false);
+        easterEggMusic.SetActive(true);
+    }
+
+    public void SetAudioToPlay()
+    {
+        foreach (Fabio_AIManager aiManager in aiManagers)
+        {
+            if (aiManager.GetIsAIManagerWorking())
+            {
+                normalMusic.SetActive(false);
+                easterEggMusic.SetActive(false);
+                actionMusic.SetActive(true);
+
+                return;
+            }
+        }
+
+        actionMusic.SetActive(false);
+        easterEggMusic.SetActive(false);
+        normalMusic.SetActive(true);
+    }
+
+    #endregion
 }

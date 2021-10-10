@@ -6,6 +6,9 @@ public class Fabio_AIManager : MonoBehaviour
 {
     #region References
 
+    //Level Manager Reference
+    [SerializeField] private SecondLevelManager levelManager;
+
     //Second Level AI Array Reference
     [SerializeField] private Fabio_EnemySecondLevel[] enemies;
 
@@ -304,6 +307,8 @@ public class Fabio_AIManager : MonoBehaviour
         BecomeAware();
 
         isAIManagerWorking = true;
+
+        levelManager.SetActionAudio();
     }
 
     public void BecomeAware()
@@ -370,8 +375,15 @@ public class Fabio_AIManager : MonoBehaviour
 
             isAIManagerWorking = false;
 
+            levelManager.SetNormalAudio();
+
             return;
         }
+    }
+
+    public bool GetIsAIManagerActive()
+    {
+        return activeAIManager;
     }
 
     public bool GetIsAIManagerWorking()
