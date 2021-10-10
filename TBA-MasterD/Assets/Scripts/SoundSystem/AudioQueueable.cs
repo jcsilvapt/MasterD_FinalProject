@@ -25,92 +25,63 @@ public class AudioQueueable : MonoBehaviour {
     private float timePerSentence = 5f;
 
     private void Start() {
-       // earPieceSource = GetComponent<AudioSource>();
+        // earPieceSource = GetComponent<AudioSource>();
     }
 
     private void Update() {
-
-        if(isPlayingImportantSound) {
-            if(!earPieceSource.isPlaying) {
-                earPieceSource.Stop();
-                earPieceSource.clip = null;
-                if (audioqueue.Count > 0) {
-                    isRestartVoice = true;
-                    currentPlaying = audioRestart[Random.Range(0, audioRestart.Count)];
-                    earPieceSource.clip = currentPlaying;
-                    earPieceSource.Play();
-                }
-                isPlayingImportantSound = false;
-
-
-                while(timeElapsed <= timePerSentence) {
-                    timeElapsed += Time.deltaTime;
-                }
-
-                timeElapsed = 0;
-
-            }
-        } else {
-            if(isRestartVoice) {
-                if(!earPieceSource.isPlaying) {
-                    isRestartVoice = false;
+        if (!GameManager.GetPause()) {
+            if (isPlayingImportantSound) {
+                if (!earPieceSource.isPlaying) {
                     earPieceSource.Stop();
-                    currentPlaying = null;
                     earPieceSource.clip = null;
+                    if (audioqueue.Count > 0) {
+                        isRestartVoice = true;
+                        currentPlaying = audioRestart[Random.Range(0, audioRestart.Count)];
+                        earPieceSource.clip = currentPlaying;
+                        earPieceSource.Play();
+                    }
+                    isPlayingImportantSound = false;
+
 
                     while (timeElapsed <= timePerSentence) {
                         timeElapsed += Time.deltaTime;
                     }
 
                     timeElapsed = 0;
+
                 }
             } else {
-                if(!isPlaying && audioqueue.Count > 0) {
-                    currentPlaying = audioqueue[0];
-                    earPieceSource.clip = currentPlaying;
-                    earPieceSource.Play();
-                    isPlaying = true;
-                } else {
-                    if(!earPieceSource.isPlaying && audioqueue.Count > 0) {
+                if (isRestartVoice) {
+                    if (!earPieceSource.isPlaying) {
+                        isRestartVoice = false;
                         earPieceSource.Stop();
-                        earPieceSource.clip = null;
                         currentPlaying = null;
-                        audioqueue.RemoveAt(0);
-                        isPlaying = false;
+                        earPieceSource.clip = null;
+
+                        while (timeElapsed <= timePerSentence) {
+                            timeElapsed += Time.deltaTime;
+                        }
+
+                        timeElapsed = 0;
+                    }
+                } else {
+                    if (!isPlaying && audioqueue.Count > 0) {
+                        currentPlaying = audioqueue[0];
+                        earPieceSource.clip = currentPlaying;
+                        earPieceSource.Play();
+                        isPlaying = true;
+                    } else {
+                        if (!earPieceSource.isPlaying && audioqueue.Count > 0) {
+                            earPieceSource.Stop();
+                            earPieceSource.clip = null;
+                            currentPlaying = null;
+                            audioqueue.RemoveAt(0);
+                            isPlaying = false;
+                        }
                     }
                 }
             }
         }
-
-
-
-        /*
-        if (!isPlayingImportantSound) {
-            if (!isPlaying) {
-                if(isRestartVoice) {
-
-                }
-                if (audioqueue.Count > 0) {
-                    currentPlaying = audioqueue[0];
-                    aSource.clip = currentPlaying;
-                    aSource.Play();
-                    isPlaying = true;
-                }
-            }
-
-            if (!aSource.isPlaying && isPlaying && !isPlayingImportantSound) {
-                aSource.Stop();
-                aSource.clip = null;
-                audioqueue.RemoveAt(0);
-                isPlaying = false;
-            }
-        } else {
-            if(!aSource.isPlaying) {
-                aSource.Stop();
-                aSource.clip = null;
-                isPlayingImportantSound = false;
-            }
-        }*/
     }
 
     public void SetAudioToQueue(AudioClip clip) {

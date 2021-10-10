@@ -43,6 +43,11 @@ public class Garage_Manager : MonoBehaviour
             isStealth = false;
         }
     }
+
+    public void GoToMainMenu() {
+        GameManager.ChangeScene(0, false);
+    }
+
     #region Barrier Rotation
     public void RotateBarrier()
     {

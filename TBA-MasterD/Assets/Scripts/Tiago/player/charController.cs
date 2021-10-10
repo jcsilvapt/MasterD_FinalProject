@@ -323,6 +323,7 @@ public class charController : MonoBehaviour, IDamage {
     public void StartMovement()
     {
         canMove = true;
+        weaponController.ResumeWeapons();
     }
 
     public void StopMovement()
@@ -331,6 +332,7 @@ public class charController : MonoBehaviour, IDamage {
         rb.velocity = Vector3.zero;
         bodyAnim.SetBool("isWalking", false);
         steps.mute = true;
+        weaponController.StopWeapons();
     }
 
     #endregion

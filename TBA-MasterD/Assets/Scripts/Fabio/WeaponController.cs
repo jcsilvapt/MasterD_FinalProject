@@ -49,6 +49,8 @@ public class WeaponController : MonoBehaviour {
     [SerializeField] bool AKOn;
     [SerializeField] bool PistolOn;
 
+    private bool execute = true;
+
     #endregion
 
 
@@ -79,16 +81,16 @@ public class WeaponController : MonoBehaviour {
 
 
     private void Update() {
+        if (execute) {
+            if (!GameManager.GetPause()) {
 
-        if (!GameManager.GetPause())
-        {
+                if (currentWeaponEquipped == null) return;
 
-            if (currentWeaponEquipped == null) return;
+                currentWeaponEquipped.WeaponUpdate();
 
-            currentWeaponEquipped.WeaponUpdate();
+                ChangeCurrentWeapon(Input.GetAxis("Mouse ScrollWheel"));
 
-            ChangeCurrentWeapon(Input.GetAxis("Mouse ScrollWheel"));
-
+            }
         }
     }
 
@@ -156,6 +158,14 @@ public class WeaponController : MonoBehaviour {
      */
 
     #region JORGE
+
+    public void StopWeapons() {
+        execute = false;
+    }
+
+    public void ResumeWeapons() {
+        execute = true;
+    }
 
     /// <summary>
     /// Function that will enable the weapon display and controls

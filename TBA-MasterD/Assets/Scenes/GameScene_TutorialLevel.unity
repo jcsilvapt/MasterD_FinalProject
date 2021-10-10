@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 51b74d7bad397457d883c5940f7664d8, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -289,10 +289,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345466003}
     m_Modifications:
+    - target: {fileID: 2462472102410014570, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_Name
       value: Tutorial - Drone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -407,10 +417,30 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2462472103388792709, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595121, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103853417599, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103971011409, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
@@ -4191,10 +4221,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345466003}
     m_Modifications:
+    - target: {fileID: 2462472102410014570, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_Name
       value: Objective - Fitness (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -4291,10 +4331,30 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.35434628
       objectReference: {fileID: 0}
+    - target: {fileID: 2462472103388792709, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595121, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103853417599, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103971011409, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
@@ -4679,10 +4739,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345466003}
     m_Modifications:
+    - target: {fileID: 2462472102410014570, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_Name
       value: Tutorial - Drone (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -4746,7 +4816,7 @@ PrefabInstance:
         activate ''something''.
 
         You can also use the interaction Key when
-        you''r not using the drone.'
+        you''re not using the drone.'
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067198, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -4808,10 +4878,30 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2462472103388792709, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595121, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103853417599, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103971011409, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
@@ -5180,6 +5270,9 @@ MonoBehaviour:
   cc: {fileID: 0}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
+  voiceLine: {fileID: 0}
+  subtitle: 
+  audioSources: []
 --- !u!4 &210765550 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4902910200722361673, guid: f4b89333be8ba8c47a84b8d4c0e31552,
@@ -9137,10 +9230,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345466003}
     m_Modifications:
+    - target: {fileID: 2462472102410014570, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_Name
       value: Tutorial - Drone (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -9252,10 +9355,30 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2462472103388792709, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595121, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103853417599, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103971011409, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
@@ -16866,10 +16989,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345466003}
     m_Modifications:
+    - target: {fileID: 2462472102410014570, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_Name
       value: Tutorial - Drone (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -16986,10 +17119,30 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2462472103388792709, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595121, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103853417599, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103971011409, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
@@ -20863,10 +21016,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345466003}
     m_Modifications:
+    - target: {fileID: 2462472102410014570, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_Name
       value: Tutorial - Drone
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -20974,10 +21137,30 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2462472103388792709, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595121, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103853417599, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103971011409, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
@@ -25852,10 +26035,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345466003}
     m_Modifications:
+    - target: {fileID: 2462472102410014570, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_Name
       value: Tutorial - Drone
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -25952,10 +26145,30 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 1.6824751
       objectReference: {fileID: 0}
+    - target: {fileID: 2462472103388792709, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595121, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103853417599, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103971011409, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
@@ -26211,10 +26424,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345466003}
     m_Modifications:
+    - target: {fileID: 2462472102410014570, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_Name
       value: Objective - Fitness (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -26311,10 +26534,30 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.35434628
       objectReference: {fileID: 0}
+    - target: {fileID: 2462472103388792709, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595121, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103853417599, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103971011409, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
@@ -27072,10 +27315,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345466003}
     m_Modifications:
+    - target: {fileID: 2462472102410014570, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_Name
       value: Tutorial - Drone (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -27197,10 +27450,30 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2462472103388792709, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595121, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103853417599, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103971011409, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
@@ -32856,10 +33129,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345466003}
     m_Modifications:
+    - target: {fileID: 2462472102410014570, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_Name
       value: Objective - Fitness
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -32951,10 +33234,30 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 1.3684827
       objectReference: {fileID: 0}
+    - target: {fileID: 2462472103388792709, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595121, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103853417599, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103971011409, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
@@ -33420,10 +33723,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345466003}
     m_Modifications:
+    - target: {fileID: 2462472102410014570, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_Name
       value: Tutorial - Inputs (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -33521,10 +33834,30 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.98258567
       objectReference: {fileID: 0}
+    - target: {fileID: 2462472103388792709, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595121, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103853417599, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103971011409, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f6945f3a7b381d40b1b543fbad7b027, type: 3}
@@ -40962,6 +41295,9 @@ MonoBehaviour:
   cc: {fileID: 1588105345}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
+  voiceLine: {fileID: 0}
+  subtitle: 
+  audioSources: []
 --- !u!64 &1588105344
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -47553,7 +47889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4464ea51de82dac42ae704538a937bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: TestesFabio
+  sceneToLoad: Scenes/TestesFabio
 --- !u!1001 &1891986844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50819,6 +51155,9 @@ MonoBehaviour:
   cc: {fileID: 0}
   hasAIManagerAssociated: 0
   aiManager: {fileID: 0}
+  voiceLine: {fileID: 0}
+  subtitle: 
+  audioSources: []
 --- !u!65 &2001988391
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -55078,6 +55417,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345466003}
     m_Modifications:
+    - target: {fileID: 2462472102410014570, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472102410014580, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_fontSize
@@ -55103,6 +55447,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tutorial - Inputs
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472102434067196, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462472102434067197, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
@@ -55182,6 +55531,16 @@ PrefabInstance:
       propertyPath: ignoreTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2462472103388792709, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103780595121, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2462472103780595122, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -55191,6 +55550,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Alpha
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103853417599, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462472103971011409, guid: 3f6945f3a7b381d40b1b543fbad7b027,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2462472103971011411, guid: 3f6945f3a7b381d40b1b543fbad7b027,
         type: 3}

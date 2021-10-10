@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] bool displayCursor = false;
     [SerializeField] bool continuous = false;
+    [SerializeField] int sceneToBeLoaded = -1;
 
     #endregion
 
@@ -246,20 +247,52 @@ public class GameManager : MonoBehaviour {
         return false;
     }
 
+    public static int GetSelectedIndexScene() {
+        if(ins != null) {
+            return ins.sceneToBeLoaded;
+        }
+        return -1;
+    }
+
     #endregion
 
     #region Logic
+
+    private void PauseAllAudioSources() {
+        AudioSource[] l_aSources = GameObject.FindObjectsOfType<AudioSource>();
+        Debug.Log("Lista para Parar: " + l_aSources.Length);
+
+        if (l_aSources != null && l_aSources.Length > 0) {
+            for (int i = 0; i < l_aSources.Length; i++) {
+                l_aSources[i].Pause();
+            }
+        }
+
+    }
+
+    private void UnPauseAllAudioSources() {
+        AudioSource[] l_aSources = GameObject.FindObjectsOfType<AudioSource>();
+        Debug.Log("Lista para recomeçar: " + l_aSources.Length);
+        if (l_aSources != null && l_aSources.Length > 0) {
+            for (int i = 0; i < l_aSources.Length; i++) {
+                l_aSources[i].Play();
+            }
+        }
+
+    }
 
     private void _SetPlayerDeath(bool isDead)
     {
         if (isDead)
         {
+            
             ToggleDeathMenu(isDead);
             ToggleCursorVisibility(true);
             Time.timeScale = 0;
         }
         else
         {
+            
             Time.timeScale = 1;
             ToggleDeathMenu(isDead);
         }
@@ -267,6 +300,7 @@ public class GameManager : MonoBehaviour {
 
     private void _SetPauseGame() {
         if (!isGamePaused) {
+            PauseAllAudioSources();
             TogglePauseMenu(true);
             ToggleCursorVisibility(true);
             Time.timeScale = 0;
@@ -276,6 +310,7 @@ public class GameManager : MonoBehaviour {
             ToggleCursorVisibility(false);
             TogglePauseMenu(false);
             Time.timeScale = 1;
+            UnPauseAllAudioSources();
             isGamePaused = false;
             Debug.Log("Game Manager: Game Unpaused");
         }

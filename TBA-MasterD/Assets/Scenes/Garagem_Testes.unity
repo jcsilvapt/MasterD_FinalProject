@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.008914995, g: 0.013135022, b: 0.02026581, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -30758,6 +30758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23efc095ce15d1b40a61082a6940c11e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneIndex: 3
   player: {fileID: 0}
   objectsInScene:
   - {fileID: 880850434}
@@ -38471,6 +38472,7 @@ GameObject:
   - component: {fileID: 832753686}
   - component: {fileID: 832753689}
   - component: {fileID: 832753688}
+  - component: {fileID: 832753690}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -38654,6 +38656,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &832753690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832753684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4af3f0ce07b43c4dbaab81781d6e3fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &835948295 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6495582547090681318, guid: 347820279a23b974a90813703a6a27a5,
@@ -56169,7 +56183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10731d1e48964ce42ad18a44d0fe8b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 775688984}
+  player: {fileID: 0}
   endCamera: {fileID: 1016942287}
   gm: {fileID: 1283704602}
   frontLights: {fileID: 1266370434}

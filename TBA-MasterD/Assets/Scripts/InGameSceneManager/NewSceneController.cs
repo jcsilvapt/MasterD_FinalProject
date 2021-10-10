@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NewSceneController : MonoBehaviour {
 
+    [SerializeField] int sceneIndex;
+
     [Header("DEVELOPER SETTINGS")]
     [SerializeField] GameObject player;
 
@@ -11,7 +13,7 @@ public class NewSceneController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        if (!GameManager.IsContinuous()) {
+        if (!GameManager.IsContinuous() && GameManager.GetSelectedIndexScene() == sceneIndex) {
             ActivateAllObjectsInScene();
         }
     }

@@ -49,7 +49,7 @@ public class ShootingCraneController : MonoBehaviour {
         isUIActive = false;
         player.StartMovement();
         pCam.StartMouseMovement();
-        GameManager.SetCursorVisibility(true); // <--------------------- CONFIRMAR ISTO (JORGE)
+        GameManager.SetCursorVisibility(false); // <--------------------- CONFIRMAR ISTO (JORGE)
     }
 
     private void Update() {

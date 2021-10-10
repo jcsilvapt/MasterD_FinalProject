@@ -46518,7 +46518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &909009034
 Transform:
   m_ObjectHideFlags: 0
@@ -53053,6 +53053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23efc095ce15d1b40a61082a6940c11e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneIndex: 2
   player: {fileID: 0}
   objectsInScene:
   - {fileID: 1987991373}
@@ -53078,6 +53079,7 @@ MonoBehaviour:
   - {fileID: 1632638379}
   - {fileID: 965565676}
   - {fileID: 909009033}
+  - {fileID: 816550827}
 --- !u!1 &1016804180
 GameObject:
   m_ObjectHideFlags: 0
@@ -54562,7 +54564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1047203264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58247,7 +58249,7 @@ PrefabInstance:
     - target: {fileID: 835278916309313080, guid: 5a198f2dd6d9304448f6588af505e7bd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.304
+      value: -14.985
       objectReference: {fileID: 0}
     - target: {fileID: 835278916309313080, guid: 5a198f2dd6d9304448f6588af505e7bd,
         type: 3}
@@ -58298,6 +58300,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Checkpoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 835278916309313082, guid: 5a198f2dd6d9304448f6588af505e7bd,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 835278916309313082, guid: 5a198f2dd6d9304448f6588af505e7bd,
         type: 3}
@@ -93713,7 +93720,7 @@ PrefabInstance:
     - target: {fileID: 6982558913518626469, guid: b8a57d4beffbabd46b7b1ed331f4c37d,
         type: 3}
       propertyPath: gameObjectList.Array.size
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 6982558913518626469, guid: b8a57d4beffbabd46b7b1ed331f4c37d,
         type: 3}
@@ -93829,7 +93836,7 @@ PrefabInstance:
         type: 3}
       propertyPath: gameObjectList.Array.data[22]
       value: 
-      objectReference: {fileID: 2017384804}
+      objectReference: {fileID: 816550827}
     - target: {fileID: 6982558913518626469, guid: b8a57d4beffbabd46b7b1ed331f4c37d,
         type: 3}
       propertyPath: gameObjectList.Array.data[23]
@@ -103610,6 +103617,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1301191485}
     m_Modifications:
+    - target: {fileID: 131989753674782372, guid: 24dcbcfeea875d14b9376948181d24d0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dd86c61ec2c627b459bba69a95abc309, type: 2}
     - target: {fileID: 273062716222206589, guid: 24dcbcfeea875d14b9376948181d24d0,
         type: 3}
       propertyPath: m_LocalPosition.x

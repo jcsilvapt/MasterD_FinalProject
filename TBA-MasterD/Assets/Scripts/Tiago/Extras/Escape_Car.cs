@@ -35,13 +35,15 @@ public class Escape_Car : MonoBehaviour
         anim = GetComponent<Animator>();
         audioS = GetComponent<AudioSource>();
         gm = GameObject.FindGameObjectWithTag("Manager").GetComponent<Garage_Manager>();
+        
     }
     
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            other.transform.parent.parent.GetComponent<charController>().EnableInteractionUI(true);
+            player = other.transform.parent.parent.gameObject;
+            player.GetComponent<charController>().EnableInteractionUI(true);
             if (Input.GetKeyDown(KeyMapper.inputKey.Interaction))
             {
                 StartCoroutine(ThankYouScreen());
@@ -88,7 +90,7 @@ public class Escape_Car : MonoBehaviour
         yield return new WaitForSeconds(4);
         thankYouScreen.SetActive(false);
         anim.SetTrigger("hasEscaped");
-        yield return new WaitForSeconds(21);
+        yield return new WaitForSeconds(19);
         thankYouScreen.SetActive(false);
         credits.SetActive(true);
     }

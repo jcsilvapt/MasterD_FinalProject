@@ -60,6 +60,9 @@ public class Weapon : MonoBehaviour {
 
     [SerializeField] Camera cam;
 
+    [Header("Audio Settings")]
+    [SerializeField] AudioClip shootSound;
+    [SerializeField] AudioClip noAmmo;
     [SerializeField] AudioSource audioShoot; // by tiago for shooting <--------------------------------------------------------------------------
     [SerializeField] AudioSource audioReload; // by tiago for shooting <--------------------------------------------------------------------------
 
@@ -314,6 +317,7 @@ public class Weapon : MonoBehaviour {
         }
         isReloading = false;
         weaponStatus.text = "" + bulletsInClip + "/" + currentBullets;
+        weaponStatus.color = new Color(255, 255, 255);
     }
 
 
@@ -334,9 +338,15 @@ public class Weapon : MonoBehaviour {
 
     private bool HasBulletsInClip() {
         if (bulletsInClip <= 0) {
-            armsAnimator.SetBool("isShooting", false);           
+            armsAnimator.SetBool("isShooting", false);
+            if (!audioShoot.isPlaying) {
+                audioShoot.clip = noAmmo;
+                audioShoot.Play();
+            }
+            weaponStatus.color = new Color(255, 0, 0);
             return false;
         }
+        audioShoot.clip = shootSound;
         return true;
     }
 
@@ -379,10 +389,8 @@ public class Weapon : MonoBehaviour {
 
     #region Fabio Edit
 
-    public void ReplenishBullets()
-    {
-        if (isWeaponActive)
-        {
+    public void ReplenishBullets() {
+        if (isWeaponActive) {
             Reload();
         }
 
@@ -390,13 +398,11 @@ public class Weapon : MonoBehaviour {
         currentBullets = maxBulletsAllowed;
     }
 
-    public int GetMaximumAmmunition()
-    {
+    public int GetMaximumAmmunition() {
         return maxBulletsAllowed;
     }
 
-    public int GetCurrentAmmunition()
-    {
+    public int GetCurrentAmmunition() {
         return currentBullets;
     }
 
