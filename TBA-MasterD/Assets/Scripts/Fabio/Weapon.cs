@@ -385,6 +385,7 @@ public class Weapon : MonoBehaviour {
         } else {
             currentBullets += amount;
         }
+        weaponStatus.text = "" + bulletsInClip + "/" + currentBullets;
     }
 
     #region Fabio Edit

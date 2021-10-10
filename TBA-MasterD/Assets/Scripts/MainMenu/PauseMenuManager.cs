@@ -115,6 +115,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void btnRestartCheckpoint()
     {
+        GameManager.SetPause();
         SaveSystemManager.Load();
     }
 

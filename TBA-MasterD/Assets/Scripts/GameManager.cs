@@ -336,6 +336,8 @@ public class GameManager : MonoBehaviour {
     private void _changeScene(int sceneIndex, bool loadGameData) {
         if(sceneIndex == 1) {
             continuous = true;
+        } else {
+            continuous = false;
         }
         ToggleCursorVisibility(false);
         loadCanvas.SetActive(true);
