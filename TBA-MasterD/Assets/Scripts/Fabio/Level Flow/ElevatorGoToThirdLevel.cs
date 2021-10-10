@@ -6,6 +6,9 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
 {
     #region References
 
+    //Second Level Manager
+    [SerializeField] private SecondLevelManager levelManager;
+
     //Elevator Controller Reference
     [SerializeField] private ElevatorController elevator;
 
@@ -77,6 +80,7 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
         {
             if (other.tag == "Player")
             {
+                levelManager.SetElevatorAudio();
                 other.transform.parent.parent.GetComponent<charController>().StopMovement();
                 elevator.CloseElevatorDoor();
                 isSecondLevelActive = false;

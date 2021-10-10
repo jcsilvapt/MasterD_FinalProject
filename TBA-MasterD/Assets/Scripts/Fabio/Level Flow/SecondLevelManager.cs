@@ -31,6 +31,7 @@ public class SecondLevelManager : MonoBehaviour
     [SerializeField] private GameObject normalMusic;
     [SerializeField] private GameObject actionMusic;
     [SerializeField] private GameObject easterEggMusic;
+    [SerializeField] private GameObject elevatorMusic;
 
     #endregion
 
@@ -65,6 +66,7 @@ public class SecondLevelManager : MonoBehaviour
         normalMusic.SetActive(false);
         actionMusic.SetActive(false);
         easterEggMusic.SetActive(false);
+        elevatorMusic.SetActive(false);
     }
 
     public void OpenDoor(DoorController door)
@@ -112,6 +114,7 @@ public class SecondLevelManager : MonoBehaviour
 
         actionMusic.SetActive(false);
         easterEggMusic.SetActive(false);
+        elevatorMusic.SetActive(false);
         normalMusic.SetActive(true);
     }
 
@@ -119,6 +122,7 @@ public class SecondLevelManager : MonoBehaviour
     {
         normalMusic.SetActive(false);
         easterEggMusic.SetActive(false);
+        elevatorMusic.SetActive(false);
         actionMusic.SetActive(true);
     }
 
@@ -126,7 +130,16 @@ public class SecondLevelManager : MonoBehaviour
     {
         normalMusic.SetActive(false);
         actionMusic.SetActive(false);
+        elevatorMusic.SetActive(false);
         easterEggMusic.SetActive(true);
+    }
+
+    public void SetElevatorAudio()
+    {
+        normalMusic.SetActive(false);
+        actionMusic.SetActive(false);
+        easterEggMusic.SetActive(false);
+        elevatorMusic.SetActive(true);
     }
 
     public void SetAudioToPlay()
@@ -137,6 +150,7 @@ public class SecondLevelManager : MonoBehaviour
             {
                 normalMusic.SetActive(false);
                 easterEggMusic.SetActive(false);
+                elevatorMusic.SetActive(false);
                 actionMusic.SetActive(true);
 
                 return;
@@ -145,6 +159,7 @@ public class SecondLevelManager : MonoBehaviour
 
         actionMusic.SetActive(false);
         easterEggMusic.SetActive(false);
+        elevatorMusic.SetActive(false);
         normalMusic.SetActive(true);
     }
 

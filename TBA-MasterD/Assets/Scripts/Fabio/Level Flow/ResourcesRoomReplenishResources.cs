@@ -42,7 +42,6 @@ public class ResourcesRoomReplenishResources : MonoBehaviour
             player.ReplenishBullets();
             player.EnableInteractionUI(false);
             showUI = false;
-            alreadyInteracted = true;
         }
     }
 
