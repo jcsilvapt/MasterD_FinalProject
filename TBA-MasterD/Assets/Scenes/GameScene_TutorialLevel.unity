@@ -5273,6 +5273,11 @@ MonoBehaviour:
   voiceLine: {fileID: 0}
   subtitle: 
   audioSources: []
+  durationBetweenMaterialChanges: 1.5
+  materials:
+  - {fileID: 2100000, guid: 662be30b26387d54b864baa588fa0889, type: 2}
+  - {fileID: 2100000, guid: 944e1401633a54a4ca2029b894dea39e, type: 2}
+  - {fileID: 2100000, guid: 8b89f0d226862f442acc5f43114d80e1, type: 2}
 --- !u!4 &210765550 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4902910200722361673, guid: f4b89333be8ba8c47a84b8d4c0e31552,
@@ -41253,6 +41258,11 @@ MonoBehaviour:
   voiceLine: {fileID: 0}
   subtitle: 
   audioSources: []
+  durationBetweenMaterialChanges: 1.5
+  materials:
+  - {fileID: 2100000, guid: 662be30b26387d54b864baa588fa0889, type: 2}
+  - {fileID: 2100000, guid: 944e1401633a54a4ca2029b894dea39e, type: 2}
+  - {fileID: 2100000, guid: 8b89f0d226862f442acc5f43114d80e1, type: 2}
 --- !u!64 &1588105344
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -44379,9 +44389,14 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7ce37d0b1cd019940a15bbcccd01b61d, type: 2}
     - target: {fileID: -7511558181221131132, guid: 0de42e59a39fde64b96799ecc122424e,
         type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 662be30b26387d54b864baa588fa0889, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 0de42e59a39fde64b96799ecc122424e,
+        type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 4b60ca17740a40b458bfd3652bcc6f27, type: 2}
+      objectReference: {fileID: 2100000, guid: 662be30b26387d54b864baa588fa0889, type: 2}
     - target: {fileID: 919132149155446097, guid: 0de42e59a39fde64b96799ecc122424e,
         type: 3}
       propertyPath: m_Name
@@ -51113,6 +51128,8 @@ MonoBehaviour:
   voiceLine: {fileID: 0}
   subtitle: 
   audioSources: []
+  durationBetweenMaterialChanges: 0
+  materials: []
 --- !u!65 &2001988391
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -4477,7 +4477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &82179392
 Transform:
   m_ObjectHideFlags: 0
@@ -5940,7 +5940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 109
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &102806461
 Transform:
   m_ObjectHideFlags: 0
@@ -6241,7 +6241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &114648648
 Transform:
   m_ObjectHideFlags: 0
@@ -9532,7 +9532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &159585148
 Transform:
   m_ObjectHideFlags: 0
@@ -11518,6 +11518,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 75cad13afa117f849aa9bf5485432731, type: 3}
     - target: {fileID: 751596447187869159, guid: 66c8c42ccfc04e248b05f61ae4cc1aa7,
         type: 3}
+      propertyPath: materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 751596447187869159, guid: 66c8c42ccfc04e248b05f61ae4cc1aa7,
+        type: 3}
       propertyPath: toBeUnlocked.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -11531,6 +11536,11 @@ PrefabInstance:
       propertyPath: toBeUnlocked.Array.data[1]
       value: 
       objectReference: {fileID: 542006683}
+    - target: {fileID: 751596447187869159, guid: 66c8c42ccfc04e248b05f61ae4cc1aa7,
+        type: 3}
+      propertyPath: durationBetweenMaterialChanges
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 751596448747112696, guid: 66c8c42ccfc04e248b05f61ae4cc1aa7,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -11540,6 +11550,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ElevatorControlRoomControlMachineElevator
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985280870036687368, guid: 66c8c42ccfc04e248b05f61ae4cc1aa7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5648804919875342514, guid: 66c8c42ccfc04e248b05f61ae4cc1aa7,
         type: 3}
@@ -11611,6 +11626,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6786848746152520669, guid: 66c8c42ccfc04e248b05f61ae4cc1aa7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 662be30b26387d54b864baa588fa0889, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66c8c42ccfc04e248b05f61ae4cc1aa7, type: 3}
 --- !u!4 &184991185 stripped
@@ -12419,6 +12439,11 @@ PrefabInstance:
       propertyPath: toBeUnlocked.Array.data[0]
       value: 
       objectReference: {fileID: 1071191601}
+    - target: {fileID: 751596447187869159, guid: 66c8c42ccfc04e248b05f61ae4cc1aa7,
+        type: 3}
+      propertyPath: durationBetweenMaterialChanges
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 751596448747112696, guid: 66c8c42ccfc04e248b05f61ae4cc1aa7,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -12428,6 +12453,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ElevatorControlRoomControlMachineDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985280870036687368, guid: 66c8c42ccfc04e248b05f61ae4cc1aa7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5648804919875342514, guid: 66c8c42ccfc04e248b05f61ae4cc1aa7,
         type: 3}
@@ -19645,7 +19675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &361872213
 Transform:
   m_ObjectHideFlags: 0
@@ -21231,7 +21261,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &386087014
 Transform:
   m_ObjectHideFlags: 0
@@ -21693,7 +21723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &396630503
 Transform:
   m_ObjectHideFlags: 0
@@ -22643,7 +22673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &412210231
 Transform:
   m_ObjectHideFlags: 0
@@ -26314,7 +26344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &478013681
 Transform:
   m_ObjectHideFlags: 0
@@ -37395,7 +37425,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cab96d29e34a76c478ee73a78f2315d0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cab96d29e34a76c478ee73a78f2315d0,
         type: 3}
@@ -39035,7 +39065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &751705510
 Transform:
   m_ObjectHideFlags: 0
@@ -39729,7 +39759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &770940803
 Transform:
   m_ObjectHideFlags: 0
@@ -43308,7 +43338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &816550828
 Transform:
   m_ObjectHideFlags: 0
@@ -46714,7 +46744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &909009034
 Transform:
   m_ObjectHideFlags: 0
@@ -47138,7 +47168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &914727163
 Transform:
   m_ObjectHideFlags: 0
@@ -51009,7 +51039,7 @@ PrefabInstance:
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.329
+      value: -16.7
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607857, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
@@ -51074,7 +51104,7 @@ PrefabInstance:
     - target: {fileID: 2076039594507607859, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 461c5995c8c1274419c0b28587ce9c96, type: 3}
@@ -53074,7 +53104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1004737789
 Transform:
   m_ObjectHideFlags: 0
@@ -54066,7 +54096,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1030384117
 Transform:
   m_ObjectHideFlags: 0
@@ -80802,7 +80832,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1632638380
 Transform:
   m_ObjectHideFlags: 0
@@ -87097,6 +87127,11 @@ MonoBehaviour:
   voiceLine: {fileID: 8300000, guid: 3e78f985acfb567429e7515cba900cdd, type: 3}
   subtitle: "You\u2019ve unlocked a door, I wonder which one\u2026 "
   audioSources: []
+  durationBetweenMaterialChanges: 1.5
+  materials:
+  - {fileID: 2100000, guid: 662be30b26387d54b864baa588fa0889, type: 2}
+  - {fileID: 2100000, guid: 944e1401633a54a4ca2029b894dea39e, type: 2}
+  - {fileID: 2100000, guid: 8b89f0d226862f442acc5f43114d80e1, type: 2}
 --- !u!65 &1783633959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -93501,7 +93536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1896132158
 Transform:
   m_ObjectHideFlags: 0
@@ -97386,7 +97421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1971499094
 Transform:
   m_ObjectHideFlags: 0
@@ -98149,7 +98184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1987991374
 Transform:
   m_ObjectHideFlags: 0
@@ -99296,7 +99331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2017384805
 Transform:
   m_ObjectHideFlags: 0
@@ -99470,7 +99505,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2025367491
 Transform:
   m_ObjectHideFlags: 0

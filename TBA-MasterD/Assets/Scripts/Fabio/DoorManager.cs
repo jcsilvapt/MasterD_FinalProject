@@ -45,6 +45,13 @@ public class DoorManager : MonoBehaviour, IDamage {
     [SerializeField] private string subtitle;
     [SerializeField] private List<AudioSource> audioSources;
 
+    [Header("Change Material Settings")]
+    private Renderer meshRenderer;
+    [SerializeField] private float durationBetweenMaterialChanges;
+    private float timerBetweenMaterialChanges;
+    [SerializeField] private Material[] materials;
+    private Material[] rendererMaterials;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<charController>();
@@ -54,10 +61,20 @@ public class DoorManager : MonoBehaviour, IDamage {
         showUI = false;
 
         TryGetComponent(out subtitleSystem);
+
+        meshRenderer = GetComponent<Renderer>();
+        timerBetweenMaterialChanges = durationBetweenMaterialChanges;
+
+        rendererMaterials = meshRenderer.materials;
     }
 
     private void Update()
     {
+        if (alreadyInteracted)
+        {
+            return;
+        }
+
         if (!alreadyInteracted && player != null)
         {
             if (showUI)
@@ -72,6 +89,22 @@ public class DoorManager : MonoBehaviour, IDamage {
             TakeDamage();
             isInteracting = false;
             showUI = false;
+        }
+
+        timerBetweenMaterialChanges -= Time.deltaTime;
+
+        if (timerBetweenMaterialChanges <= 0 && !alreadyInteracted)
+        {
+            if (meshRenderer.sharedMaterials[2].name == "eye1 (Instance)" || meshRenderer.sharedMaterials[2].name == "eye1")
+            {
+                SetRendererMaterials(materials[1]);
+            }
+            else if (meshRenderer.sharedMaterials[2].name == "DoorLocked")
+            {
+                SetRendererMaterials(materials[0]);
+            }
+
+            timerBetweenMaterialChanges = durationBetweenMaterialChanges;
         }
     }
 
@@ -104,8 +137,9 @@ public class DoorManager : MonoBehaviour, IDamage {
             if (!isOnlyManuallyInteractive)
             {
                 DoorInteraction();
+                SetRendererMaterials(materials[2]);
 
-                if(subtitleSystem != null)
+                if (subtitleSystem != null)
                 {
                     subtitleSystem.SetAudioAndSubtitles(voiceLine, subtitle, audioSources);
                 }
@@ -119,6 +153,7 @@ public class DoorManager : MonoBehaviour, IDamage {
                     if (isInteracting)
                     {
                         DoorInteraction();
+                        SetRendererMaterials(materials[2]);
 
                         if (subtitleSystem != null)
                         {
@@ -170,5 +205,11 @@ public class DoorManager : MonoBehaviour, IDamage {
                 door.CloseDoor();
             }
         }
+    }
+
+    private void SetRendererMaterials(Material toBeChanged)
+    {
+        rendererMaterials[2] = toBeChanged;
+        meshRenderer.materials = rendererMaterials;
     }
 }
