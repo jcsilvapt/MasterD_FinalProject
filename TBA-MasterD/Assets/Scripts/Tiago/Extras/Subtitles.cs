@@ -45,25 +45,6 @@ public class Subtitles : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (!hasBeenActive) {
-            if (other.CompareTag("Player")) {
-                if (subsToWrite.Length > 0 && subsToWrite != null) {
-                    //text.SetActive(true);
-                    isActive = true;
-                }
-                hasBeenActive = !hasBeenActive;
-                AudioQueueable queue = other.transform.parent.parent.GetComponent<AudioQueueable>();
-                if (isImportant) {
-                    queue.SetImportantAudio(audioToBePlayed);
-                } else {
-                    queue.SetAudioToQueue(audioToBePlayed);
-                }
-            }
-        }
-
-    }
-
     private void StartWriting() {
         if (!dontUseSubs) {
             if (subtitles != null) {
@@ -88,6 +69,36 @@ public class Subtitles : MonoBehaviour {
         yield return new WaitForSeconds(2);
         isActive = false;
         text.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider other) {
+
+        if(!hasBeenActive) {
+            if(other.CompareTag("Player") || other.CompareTag("PlayerParent")) {
+
+                SetAudioAndSubtitles(audioToBePlayed, subsToWrite, audioSources);
+
+                hasBeenActive = !hasBeenActive;
+            }
+        }
+
+        /*
+        if (!hasBeenActive) {
+            if (other.CompareTag("Player")) {
+                if (subsToWrite.Length > 0 && subsToWrite != null) {
+                    //text.SetActive(true);
+                    isActive = true;
+                }
+                hasBeenActive = !hasBeenActive;
+                AudioQueueable queue = other.transform.parent.parent.GetComponent<AudioQueueable>();
+                if (isImportant) {
+                    queue.SetImportantAudio(audioToBePlayed);
+                } else {
+                    queue.SetAudioToQueue(audioToBePlayed);
+                }
+            }
+        }
+        */
     }
 
     public void SetAudioAndSubtitles(AudioClip voiceLine, string subtitles, List<AudioSource> soundSources) {

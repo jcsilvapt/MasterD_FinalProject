@@ -7,10 +7,9 @@ public class TemporaryElevatorScript : MonoBehaviour {
     [SerializeField] float timeToOpenDoor;
 
     [SerializeField] Modal modal;
-    [SerializeField] AudioSource aSource;
 
-    [SerializeField] AudioClip elevatorSound;
-    [SerializeField] AudioClip elevatorDoors;
+    [SerializeField] AudioSource leftDoor;
+    [SerializeField] AudioSource rightDoor;
 
 
     [Header("Developer")]
@@ -20,20 +19,15 @@ public class TemporaryElevatorScript : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         animator = GetComponent<Animator>();
-        aSource = GetComponent<AudioSource>();
-        aSource.clip = elevatorSound;
-        aSource.Play();
         StartCoroutine(OpenDoorDelay(timeToOpenDoor));
     }
 
     IEnumerator OpenDoorDelay(float time) {
-        yield return new WaitForSeconds(time / 2);
-        aSource.Stop();
         yield return new WaitForSeconds(time);
-        aSource.clip = elevatorDoors;
-        aSource.Play();
+        leftDoor.Play();
+        rightDoor.Play();
         animator.SetBool("Open", true);
         animator.SetBool("Close", false);
-        modal.ShowModal();
+        //modal.ShowModal();
     }
 }

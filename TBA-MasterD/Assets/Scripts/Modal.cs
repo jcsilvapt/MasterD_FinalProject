@@ -85,7 +85,7 @@ public class Modal : MonoBehaviour {
     #region COROUTINES
     IEnumerator FadeIn() {
         while (cg.alpha < 1) {
-            cg.alpha += Time.deltaTime * 3f;
+            cg.alpha += Time.unscaledDeltaTime * 3f;
             yield return null;
         }
         isActivated = true;
@@ -93,7 +93,7 @@ public class Modal : MonoBehaviour {
 
     IEnumerator FadeOut() {
         while (cg.alpha > 0) {
-            cg.alpha -= Time.deltaTime * 15f;
+            cg.alpha -= Time.unscaledDeltaTime * 15f;
             yield return null;
         }
     }
