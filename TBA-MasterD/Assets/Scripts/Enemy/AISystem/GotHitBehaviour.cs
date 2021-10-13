@@ -165,7 +165,7 @@ public class GotHitBehaviour : AIBehaviour
     private void ReactToHitDistanceShort()
     {
         //If the Distance is Greater than the Short Distance, return.
-        if (distance > 10)
+        if (distance > 15)
         {
             return;
         }
@@ -177,7 +177,7 @@ public class GotHitBehaviour : AIBehaviour
     private void ReactToHitDistanceMedium()
     {
         //If the Distance is Lesser than the Short Distance and Greater than the Medium Distance, return.
-        if (distance <= 10 || distance > 20)
+        if (distance <= 15 || distance > 20)
         {
             return;
         }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3487419427480454663}
   - component: {fileID: 561286292399966626}
   - component: {fileID: 2319038941121690984}
+  - component: {fileID: 1275413180395406625}
   m_Layer: 0
   m_Name: wall_pipe
   m_TagString: Untagged
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &1275413180395406625
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4264378682387504317}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7151148079429848000, guid: 415499a19350d0943a6480745ebf39c1, type: 3}

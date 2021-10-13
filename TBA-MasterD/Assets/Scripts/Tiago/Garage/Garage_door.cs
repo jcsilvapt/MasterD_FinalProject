@@ -6,7 +6,7 @@ public class Garage_door : MonoBehaviour
 {
     private Animator anim;
     [SerializeField] Garage_Manager gm;
-    [SerializeField] GameObject stealthObjects;
+    public GameObject stealthObjects;
     [SerializeField] GameObject stealthVoice;
     [SerializeField] GameObject AttackVoice;
 

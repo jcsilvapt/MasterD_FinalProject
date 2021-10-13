@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 664389079254782635}
   - component: {fileID: 3376737721399748193}
   - component: {fileID: 4207156350385023801}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: street_lamp
   m_TagString: NotHideable
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5180263733002881354}
   - component: {fileID: 5648439203302507064}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
