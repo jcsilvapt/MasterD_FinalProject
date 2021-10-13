@@ -37,11 +37,12 @@ public class Garage_Manager : MonoBehaviour
             stealthMusic.SetActive(false);
             actionMusic.SetActive(true);
         }
-
+        
         if (player.GetHealth() < mapBeginnerHealth)
         {
             isStealth = false;
         }
+       
     }
 
     public void GoToMainMenu() {
