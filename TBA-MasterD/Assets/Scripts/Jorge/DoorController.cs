@@ -180,5 +180,13 @@ public class DoorController : MonoBehaviour {
         isAlwaysOpen = true;
     }
 
+    public void SetAlwaysOpenSlideDoor() {
+
+        anim.SetBool("Open", true);
+        anim.SetBool("side", true);
+
+        isAlwaysOpen = true;
+
+    }
     #endregion
 }

@@ -80,7 +80,6 @@ public class LiveShootingRangeController : MonoBehaviour {
                 EnableRoom();
             }
         } else {
-            // TODO: Melhorar este sistema...
         }
     }
 
@@ -91,6 +90,7 @@ public class LiveShootingRangeController : MonoBehaviour {
         liveShootingActive = false;
         swapLightColor = true;
         glassDoor.LockMode(false);
+        glassDoor.SetAlwaysOpenSlideDoor();
         //mainDoor.LockMode(false);
         roomCompleted = true;
         doorToSecondLevel = GameObject.FindGameObjectWithTag("DoorToSecondLevel").GetComponent<DoorController>();

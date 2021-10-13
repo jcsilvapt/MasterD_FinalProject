@@ -18,6 +18,7 @@ public class ItemGiver : MonoBehaviour {
             if(Input.GetKeyDown(KeyMapper.inputKey.Interaction)) {
                 player.SetDroneControl(true);
                 player.EnableInteractionUI(false);
+                modal.ShowModal();
                 Item.SetActive(false);
                 isUsed = true;
             }

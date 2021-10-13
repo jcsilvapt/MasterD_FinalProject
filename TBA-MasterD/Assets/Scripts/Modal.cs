@@ -25,6 +25,8 @@ public class Modal : MonoBehaviour {
     [SerializeField] TMP_Text tmpTitle;
     [SerializeField] TMP_Text tmpText;
     [SerializeField] bool isActivated = false;
+    [SerializeField] string temp = "";
+    [SerializeField] bool fadingOccurring = false;
 
     private void Start() {
         tmpTitle.text = modalTitle;
@@ -39,7 +41,7 @@ public class Modal : MonoBehaviour {
 
     #region TRIGGER
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerStay(Collider other) {
         if (!ignoreTrigger) {
             if (targetTag == TargetTag.PLAYER) {
                 if (other.CompareTag("Player") || other.CompareTag("PlayerParent")) {
@@ -71,30 +73,36 @@ public class Modal : MonoBehaviour {
 
     public void HideModal() {
         if (isMultiple) {
-            StartCoroutine(FadeOut());
             isActivated = false;
-            if(ignoreTrigger) {
+            if (ignoreTrigger) {
                 ignoreTrigger = false;
             }
-        } else {
-            StartCoroutine(FadeOut());
         }
+        StartCoroutine(FadeOut());
     }
     #endregion
 
     #region COROUTINES
     IEnumerator FadeIn() {
-        while (cg.alpha < 1) {
-            cg.alpha += Time.unscaledDeltaTime * 3f;
-            yield return null;
+        if (!fadingOccurring) {
+            fadingOccurring = true;
+            while (cg.alpha < 1) {
+                cg.alpha += Time.unscaledDeltaTime * 3f;
+                yield return null;
+            }
+            isActivated = true;
+            fadingOccurring = false;
         }
-        isActivated = true;
     }
 
     IEnumerator FadeOut() {
-        while (cg.alpha > 0) {
-            cg.alpha -= Time.unscaledDeltaTime * 15f;
-            yield return null;
+        if (!fadingOccurring) {
+            fadingOccurring = true;
+            while (cg.alpha > 0) {
+                cg.alpha -= Time.unscaledDeltaTime * 15f;
+                yield return null;
+            }
+            fadingOccurring = false;
         }
     }
     #endregion
