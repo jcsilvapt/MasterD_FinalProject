@@ -2572,7 +2572,7 @@ MonoBehaviour:
   droneSensitivity: 2
   rotationLimitMinY: -80
   rotationLimitMaxY: 80
-  timeBetweenShots: 2
+  timeBetweenShots: 1
   dartShootSound: {fileID: 8300000, guid: 2cfc8973843af7048b77750d75c47193, type: 3}
   dartSound: {fileID: 1730070256}
 --- !u!135 &9002616319807921673
