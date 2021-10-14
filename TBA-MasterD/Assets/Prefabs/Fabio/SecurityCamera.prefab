@@ -336,8 +336,8 @@ MonoBehaviour:
   - 'Be careful! '
   - "Damn it! You\u2019ve been spotted! "
   - "They\u2019re onto you! Survive! "
-  minimumRotationValue: -31
-  maximumRotationValue: -83
+  minimumRotationValue: -39
+  maximumRotationValue: -79
   rotationSpeed: 1
 --- !u!114 &4693418956725372962
 MonoBehaviour:

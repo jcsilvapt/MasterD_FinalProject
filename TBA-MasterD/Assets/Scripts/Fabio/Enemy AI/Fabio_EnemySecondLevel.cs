@@ -249,7 +249,7 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
         #endregion
 
     #region Ragdoll
-        private void SetKinematic(bool value)
+    private void SetKinematic(bool value)
     {
         Rigidbody[] bodyParts = GetComponentsInChildren<Rigidbody>();
         foreach (Rigidbody rb in bodyParts)
@@ -263,6 +263,8 @@ public class Fabio_EnemySecondLevel : MonoBehaviour, Fabio_AIStateMachine, IDama
             col.enabled = !value;
         }
         GetComponent<Collider>().enabled = true;
+
+        Physics.IgnoreLayerCollision(12, 9);
     }
 
     #endregion

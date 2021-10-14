@@ -46,6 +46,7 @@ public class DoorManager : MonoBehaviour, IDamage {
     [SerializeField] private List<AudioSource> audioSources;
 
     [Header("Change Material Settings")]
+    [SerializeField] private bool hasMaterialChanges;
     private Renderer meshRenderer;
     [SerializeField] private float durationBetweenMaterialChanges;
     private float timerBetweenMaterialChanges;
@@ -62,10 +63,12 @@ public class DoorManager : MonoBehaviour, IDamage {
 
         TryGetComponent(out subtitleSystem);
 
-        meshRenderer = GetComponent<Renderer>();
-        timerBetweenMaterialChanges = durationBetweenMaterialChanges;
+        if (hasMaterialChanges) { 
+            meshRenderer = GetComponent<Renderer>();
+            timerBetweenMaterialChanges = durationBetweenMaterialChanges;
 
-        rendererMaterials = meshRenderer.materials;
+            rendererMaterials = meshRenderer.materials;
+        }
     }
 
     private void Update()
@@ -91,20 +94,22 @@ public class DoorManager : MonoBehaviour, IDamage {
             showUI = false;
         }
 
-        timerBetweenMaterialChanges -= Time.deltaTime;
+        if (hasMaterialChanges) { 
+            timerBetweenMaterialChanges -= Time.deltaTime;
 
-        if (timerBetweenMaterialChanges <= 0 && !alreadyInteracted)
-        {
-            if (meshRenderer.sharedMaterials[2].name == "eye1 (Instance)" || meshRenderer.sharedMaterials[2].name == "eye1")
+            if (timerBetweenMaterialChanges <= 0 && !alreadyInteracted)
             {
-                SetRendererMaterials(materials[1]);
-            }
-            else if (meshRenderer.sharedMaterials[2].name == "DoorLocked")
-            {
-                SetRendererMaterials(materials[0]);
-            }
+                if (meshRenderer.sharedMaterials[2].name == "eye1 (Instance)" || meshRenderer.sharedMaterials[2].name == "eye1")
+                {
+                    SetRendererMaterials(materials[1]);
+                }
+                else if (meshRenderer.sharedMaterials[2].name == "DoorLocked")
+                {
+                    SetRendererMaterials(materials[0]);
+                }
 
-            timerBetweenMaterialChanges = durationBetweenMaterialChanges;
+                timerBetweenMaterialChanges = durationBetweenMaterialChanges;
+            }
         }
     }
 
@@ -137,7 +142,11 @@ public class DoorManager : MonoBehaviour, IDamage {
             if (!isOnlyManuallyInteractive)
             {
                 DoorInteraction();
-                SetRendererMaterials(materials[2]);
+
+                if (hasMaterialChanges)
+                {
+                    SetRendererMaterials(materials[2]);
+                }
 
                 if (subtitleSystem != null)
                 {
@@ -153,7 +162,11 @@ public class DoorManager : MonoBehaviour, IDamage {
                     if (isInteracting)
                     {
                         DoorInteraction();
-                        SetRendererMaterials(materials[2]);
+
+                        if (hasMaterialChanges)
+                        {
+                            SetRendererMaterials(materials[2]);
+                        }
 
                         if (subtitleSystem != null)
                         {

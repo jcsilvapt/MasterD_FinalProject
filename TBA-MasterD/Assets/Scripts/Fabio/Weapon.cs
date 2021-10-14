@@ -397,6 +397,7 @@ public class Weapon : MonoBehaviour {
 
         bulletsInClip = clipSize;
         currentBullets = maxBulletsAllowed;
+        weaponStatus.text = "" + bulletsInClip + "/" + currentBullets;
     }
 
     public int GetMaximumAmmunition() {

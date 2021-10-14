@@ -5699,6 +5699,7 @@ MonoBehaviour:
   voiceLine: {fileID: 0}
   subtitle: 
   audioSources: []
+  hasMaterialChanges: 0
   durationBetweenMaterialChanges: 1.5
   materials:
   - {fileID: 2100000, guid: 662be30b26387d54b864baa588fa0889, type: 2}
@@ -7166,7 +7167,7 @@ PrefabInstance:
     - target: {fileID: 2076039594507607858, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
       propertyPath: hasWeapon
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607858, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
@@ -32788,7 +32789,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 6ce175ca5a85b804380840ffb31c2128, type: 2}
+      objectReference: {fileID: 2100000, guid: 662be30b26387d54b864baa588fa0889, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1a94c1d6f6637d439fe53a85e4d9bc6, type: 3}
 --- !u!1 &1029608614 stripped
@@ -38225,6 +38226,12 @@ MonoBehaviour:
   isActive: 0
   keyToInteract: 101
   modalObjective: {fileID: 0}
+  hasMaterialChanges: 1
+  durationBetweenMaterialChanges: 1.5
+  materials:
+  - {fileID: 2100000, guid: 662be30b26387d54b864baa588fa0889, type: 2}
+  - {fileID: 2100000, guid: 944e1401633a54a4ca2029b894dea39e, type: 2}
+  - {fileID: 2100000, guid: 8b89f0d226862f442acc5f43114d80e1, type: 2}
 --- !u!1001 &1195201490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48304,6 +48311,7 @@ MonoBehaviour:
   voiceLine: {fileID: 0}
   subtitle: 
   audioSources: []
+  hasMaterialChanges: 1
   durationBetweenMaterialChanges: 1.5
   materials:
   - {fileID: 2100000, guid: 662be30b26387d54b864baa588fa0889, type: 2}
@@ -48345,6 +48353,9 @@ MonoBehaviour:
   isActive: 0
   keyToInteract: 0
   modalObjective: {fileID: 0}
+  hasMaterialChanges: 0
+  durationBetweenMaterialChanges: 0
+  materials: []
 --- !u!65 &1588105346
 BoxCollider:
   m_ObjectHideFlags: 0
