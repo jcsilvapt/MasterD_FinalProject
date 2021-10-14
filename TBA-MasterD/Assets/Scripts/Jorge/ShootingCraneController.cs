@@ -49,26 +49,31 @@ public class ShootingCraneController : MonoBehaviour {
         isUIActive = false;
         player.StartMovement();
         pCam.StartMouseMovement();
+        player.UnlockPause();
         GameManager.SetCursorVisibility(false); // <--------------------- CONFIRMAR ISTO (JORGE)
     }
 
     private void Update() {
         if (hasPlayer) {
-            if (!isUIActive) {
-                if (Input.GetKeyDown(KeyMapper.inputKey.Interaction)) {
-                    player.StopMovement();
-                    pCam.StopMouseMovement();
-                    _UI.SetActive(true);
-                    isUIActive = true;
-                    GameManager.SetCursorVisibility(true);
-                }
-            } else {
-                if (Input.GetKeyDown(KeyMapper.inputKey.Interaction)) {
-                    player.StartMovement();
-                    pCam.StartMouseMovement();
-                    _UI.SetActive(false);
-                    isUIActive = false;
-                    GameManager.SetCursorVisibility(false);
+            if (!GameManager.GetPause()) {
+                if (!isUIActive) {
+                    if (Input.GetKeyDown(KeyMapper.inputKey.Interaction)) {
+                        player.LockPause();
+                        player.StopMovement();
+                        pCam.StopMouseMovement();
+                        _UI.SetActive(true);
+                        isUIActive = true;
+                        GameManager.SetCursorVisibility(true);
+                    }
+                } else {
+                    if (Input.GetKeyDown(KeyMapper.inputKey.Interaction)) {
+                        player.StartMovement();
+                        pCam.StartMouseMovement();
+                        _UI.SetActive(false);
+                        isUIActive = false;
+                        GameManager.SetCursorVisibility(false);
+                        player.UnlockPause();
+                    }
                 }
             }
         }
@@ -80,7 +85,7 @@ public class ShootingCraneController : MonoBehaviour {
     }
 
     private void OnTriggerStay(Collider other) {
-        if (other.transform.tag == "Player") {
+        if (other.CompareTag("Player") || other.CompareTag("PlayerParent")) {
             player = other.transform.parent.parent.GetComponent<charController>();
             pCam = other.transform.parent.parent.GetComponentInChildren<cameraRotation>();
             _UIText.SetActive(true);
@@ -94,6 +99,7 @@ public class ShootingCraneController : MonoBehaviour {
         isUIActive = false;
         hasPlayer = false;
         player.StartMovement();
+        player.UnlockPause();
         player = null;
         pCam.StartMouseMovement();
         pCam = null;

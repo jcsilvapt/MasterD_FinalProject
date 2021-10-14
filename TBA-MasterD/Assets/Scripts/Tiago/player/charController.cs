@@ -75,6 +75,7 @@ public class charController : MonoBehaviour, IDamage {
     [SerializeField] bool isGrounded;
     [SerializeField] bool isDroneActive;
     public Checkpoint lastCheckpoint;
+    [SerializeField] bool lockPause = false;
 
     [Header("Sound Effects")]
     [SerializeField] AudioSource steps;
@@ -135,7 +136,7 @@ public class charController : MonoBehaviour, IDamage {
         if (!GameManager.GetPause())
         {
             
-            if (Input.GetKeyDown(KeyMapper.inputKey.Escape))
+            if (Input.GetKeyDown(KeyMapper.inputKey.Escape) && !lockPause)
             {
                 GameManager.SetPause();
             }
@@ -429,6 +430,14 @@ public class charController : MonoBehaviour, IDamage {
     /// <returns></returns>
     public Vector2 GetCurrentWeaponBullets() {
         return weaponController.GetCurrentWeaponAmmo();
+    }
+
+    public void LockPause() {
+        lockPause = true;
+    }
+
+    public void UnlockPause() {
+        lockPause = false;
     }
 
     #region
