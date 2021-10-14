@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class CheckPointStealthChecker : MonoBehaviour
 {
-
-    
+    Garage_Manager gm;
+    private void Start()
+    {
+        
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player" || other.gameObject.tag == "PlayerParent")
+        if (other.gameObject)
         {
-            PlayerPrefs.GetInt("Stealh");
-            return;
+            gm = GameObject.FindGameObjectWithTag("Manager").GetComponent<Garage_Manager>();
+            gm.StealthOrNot();
         }
+        
     }
 }
+
 
 

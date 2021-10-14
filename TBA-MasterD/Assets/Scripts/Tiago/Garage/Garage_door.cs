@@ -19,6 +19,7 @@ public class Garage_door : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            gm.StealthOrNot();
             if (gm.isStealth == false)
             {
                 stealthObjects.SetActive(true);

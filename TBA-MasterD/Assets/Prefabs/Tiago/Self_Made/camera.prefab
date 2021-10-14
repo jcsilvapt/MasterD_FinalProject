@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2412631452687296826}
   - component: {fileID: 1645142156736947871}
   - component: {fileID: 3544420157579563605}
+  - component: {fileID: 3523489925093611722}
   m_Layer: 0
   m_Name: camera
   m_TagString: Untagged
@@ -80,6 +81,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3523489925093611722
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3040126744094585728}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.001496768, y: 0.0015724753, z: 0.0022075674}
+  m_Center: {x: -0.00000003055792, y: -0.00051134883, z: -0.000036958718}
 --- !u!1 &8159159169043761813
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +106,7 @@ GameObject:
   - component: {fileID: 5148645691767324987}
   - component: {fileID: 6647401459230516829}
   - component: {fileID: 2806264816444968659}
+  - component: {fileID: 458268799171607169}
   m_Layer: 0
   m_Name: camera
   m_TagString: Untagged
@@ -181,3 +196,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &458268799171607169
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159159169043761813}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0015029549, y: 0.0058042454, z: 0.0022773293}
+  m_Center: {x: -0.000043710475, y: -0.0027906084, z: -0.00035116135}

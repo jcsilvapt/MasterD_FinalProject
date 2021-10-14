@@ -42,8 +42,7 @@ public class Escape_Car : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            player = other.transform.parent.parent.gameObject;
-            player.GetComponent<charController>().EnableInteractionUI(true);
+            player = other.transform.parent.parent.gameObject;          
             if (Input.GetKeyDown(KeyMapper.inputKey.Interaction))
             {
                 StartCoroutine(ThankYouScreen());
@@ -52,7 +51,17 @@ public class Escape_Car : MonoBehaviour
                     gm.EndingEnemies();
                 }
             }
-        }
+        }        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        player = other.transform.parent.parent.gameObject;
+        player.GetComponent<charController>().EnableInteractionUI(true);
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        player = other.transform.parent.parent.gameObject;
+        player.GetComponent<charController>().EnableInteractionUI(false);
     }
 
     public void EngineTurnOnSound()

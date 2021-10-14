@@ -377,6 +377,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
             col.enabled = !value;
         }
         GetComponent<Collider>().enabled = true;
+        Physics.IgnoreLayerCollision(12, 9);
     }
 
     #endregion
