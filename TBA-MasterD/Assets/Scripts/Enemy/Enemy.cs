@@ -300,7 +300,7 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
             animator.enabled = false;
             GetComponent<Collider>().enabled = false;
             GetComponent<Rigidbody>().isKinematic = true;
-            this.gameObject.layer = 13;
+            gameObject.layer = 13;
             redLight.SetActive(false);
             DisableAgent();
             PackDropper();
@@ -375,9 +375,10 @@ public class Enemy : MonoBehaviour, AIStateMachine, IDamage
         foreach (Collider col in bodyColisions)
         {
             col.enabled = !value;
+            col.gameObject.layer = 13;
         }
-        GetComponent<Collider>().enabled = true;
-        Physics.IgnoreLayerCollision(12, 9);
+        GetComponent<Collider>().enabled = value;
+        Physics.IgnoreLayerCollision(13, 9);
     }
 
     #endregion

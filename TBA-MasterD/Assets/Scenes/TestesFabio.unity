@@ -23621,7 +23621,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 621493735}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &427721081
+--- !u!114 &427721079
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23630,9 +23630,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 427721078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa5cf226d80ffc428ce40303108a6ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c13719b165bcdf45b1cd0ebc4850740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneSwitcher: {fileID: 0}
 --- !u!1001 &428940445
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51150,6 +51151,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076039594507607859, guid: 461c5995c8c1274419c0b28587ce9c96,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2076039594507607859, guid: 461c5995c8c1274419c0b28587ce9c96,
         type: 3}
@@ -101866,7 +101872,7 @@ MonoBehaviour:
   audioSources: []
   subtitles: {fileID: 2032932744}
   text: {fileID: 2032932742}
-  doesNotActivateViaTrigger: 0
+  doesNotActivateViaTrigger: 1
 --- !u!1001 &2072837410
 PrefabInstance:
   m_ObjectHideFlags: 0
