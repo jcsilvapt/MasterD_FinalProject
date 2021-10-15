@@ -272,7 +272,6 @@ public class GameManager : MonoBehaviour {
 
     private void PauseAllAudioSources() {
         AudioSource[] l_aSources = GameObject.FindObjectsOfType<AudioSource>();
-        Debug.Log("Lista para Parar: " + l_aSources.Length);
 
         if (l_aSources != null && l_aSources.Length > 0) {
             for (int i = 0; i < l_aSources.Length; i++) {
@@ -284,7 +283,6 @@ public class GameManager : MonoBehaviour {
 
     private void UnPauseAllAudioSources() {
         AudioSource[] l_aSources = GameObject.FindObjectsOfType<AudioSource>();
-        Debug.Log("Lista para recomeçar: " + l_aSources.Length);
         if (l_aSources != null && l_aSources.Length > 0) {
             for (int i = 0; i < l_aSources.Length; i++) {
                 if(l_aSources[i].time > 0)
@@ -318,14 +316,12 @@ public class GameManager : MonoBehaviour {
             TogglePauseMenu(true);
             ToggleCursorVisibility(true);
             isGamePaused = true;
-            Debug.Log("Game Manager: Game Paused");
         } else {
             ToggleCursorVisibility(false);
             TogglePauseMenu(false);
             UnPauseAllAudioSources();
             Time.timeScale = 1;
             isGamePaused = false;
-            Debug.Log("Game Manager: Game Unpaused");
         }
     }
 

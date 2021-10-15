@@ -24,7 +24,7 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
 
     #region Control Variables
 
-    private bool canClose;
+    [SerializeField] private bool canClose;
 
     private int howManyAIManagersAreWorking;
 
@@ -76,8 +76,14 @@ public class ElevatorGoToThirdLevel : MonoBehaviour
         if(!isSecondLevelActive) {
             return;
         }
-        if (canClose)
+
+        if (!canClose)
         {
+            return;
+        }
+
+        if (canClose)
+        {   
             if (other.tag == "Player")
             {
                 levelManager.SetElevatorAudio();

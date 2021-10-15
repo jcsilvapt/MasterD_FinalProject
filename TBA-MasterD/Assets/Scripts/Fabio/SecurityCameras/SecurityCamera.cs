@@ -76,8 +76,16 @@ public class SecurityCamera : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            EnemyDetected();
+            RaycastHit hit;
+            if(Physics.Raycast(transform.position, (other.transform.position - transform.position), out hit)){
+                if (hit.transform.CompareTag("PlayerParent"))
+                {
+                    EnemyDetected();
+                }
+            }
+            Debug.Log(hit.transform.tag);
         }
+
     }
 
     public void DeactivateLight()

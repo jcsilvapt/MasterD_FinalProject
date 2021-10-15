@@ -28,6 +28,9 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
     [SerializeField] NewSceneController nController;
     [SerializeField] GameObject player;
 
+    [Header("Second Level Dependencies")]
+    [SerializeField] bool hasAIManagerDependency;
+    [SerializeField] private Fabio_AIManager[] aiManagers;
 
     private void Start() {
         //GameManager.ChangeScene(sceneName, false, true);
@@ -74,12 +77,39 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
     }
 
     private void OnTriggerEnter(Collider other) {
-         if (!isLoaded) {
-            if (other.CompareTag("Player")) {
-                player = other.gameObject;
-                isToExecute = true;
-                SceneController.AsyncEnable(this, gameObjectList);
-                if (!isToReload) isLoaded = true;
+        if (!isLoaded)
+        {
+            if (other.CompareTag("Player"))
+            {
+                if (!hasAIManagerDependency)
+                {
+                    player = other.gameObject;
+                    isToExecute = true;
+                    SceneController.AsyncEnable(this, gameObjectList);
+                    if (!isToReload) isLoaded = true;
+                }
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (!isLoaded)
+        {
+            if (other.CompareTag("Player"))
+            {
+                if (hasAIManagerDependency)
+                {
+                    if (AnyAIManagersActive() > 0)
+                    {
+                        return;
+                    }
+
+                    player = other.gameObject;
+                    isToExecute = true;
+                    SceneController.AsyncEnable(this, gameObjectList);
+                    if (!isToReload) isLoaded = true;
+                }
             }
         }
     }
@@ -90,4 +120,28 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
         objectToBeMoved.rotation = Quaternion.Euler(rotToBeMoved);
     }
 
+    #region Fabio Edit
+
+    public void SetAIManagersArray()
+    {
+        aiManagers = (Fabio_AIManager[]) FindObjectsOfType(typeof(Fabio_AIManager));
+    }
+
+    public int AnyAIManagersActive()
+    {
+        int howManyAIManagersAreWorking = 0;
+
+        foreach (Fabio_AIManager manager in aiManagers)
+        {
+            if (manager.GetIsAIManagerWorking())
+            {
+                howManyAIManagersAreWorking++;
+                break;
+            }
+        }
+
+        return howManyAIManagersAreWorking;
+    }
+
+    #endregion
 }

@@ -131,3 +131,7 @@ MonoBehaviour:
   rotToBeMoved: {x: 0, y: 0, z: 0}
   isToExecute: 0
   isLoaded: 0
+  nController: {fileID: 0}
+  player: {fileID: 0}
+  hasAIManagerDependency: 0
+  aiManagers: []

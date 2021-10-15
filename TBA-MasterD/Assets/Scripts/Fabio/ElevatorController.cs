@@ -36,7 +36,6 @@ public class ElevatorController : MonoBehaviour
 
         animator.SetBool("Open", isAvailable);
         animator.SetBool("Close", !isAvailable);
-        Debug.Log(isAvailable);
     }
 
     public void ElevatorDoorsOpen()

@@ -34965,6 +34965,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6982558913518626469, guid: b8a57d4beffbabd46b7b1ed331f4c37d,
         type: 3}
+      propertyPath: hasAIManagerDependency
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982558913518626469, guid: b8a57d4beffbabd46b7b1ed331f4c37d,
+        type: 3}
       propertyPath: gameObjectList.Array.size
       value: 18
       objectReference: {fileID: 0}

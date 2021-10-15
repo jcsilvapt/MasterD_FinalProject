@@ -61,7 +61,6 @@ public class SaveSystemManager : MonoBehaviour {
                 }
             }
         }
-        Debug.Log("Saving Game...");
     }
 
     /// <summary>

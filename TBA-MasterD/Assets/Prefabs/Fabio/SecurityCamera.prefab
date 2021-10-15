@@ -336,8 +336,8 @@ MonoBehaviour:
   - 'Be careful! '
   - "Damn it! You\u2019ve been spotted! "
   - "They\u2019re onto you! Survive! "
-  minimumRotationValue: -39
-  maximumRotationValue: -79
+  minimumRotationValue: -23
+  maximumRotationValue: -81
   rotationSpeed: 1
 --- !u!114 &4693418956725372962
 MonoBehaviour:
@@ -357,6 +357,7 @@ MonoBehaviour:
   audioSources: []
   subtitles: {fileID: 1746732209514677950}
   text: {fileID: 730895043670885236}
+  doesNotActivateViaTrigger: 0
 --- !u!1 &7137774787168425982
 GameObject:
   m_ObjectHideFlags: 0

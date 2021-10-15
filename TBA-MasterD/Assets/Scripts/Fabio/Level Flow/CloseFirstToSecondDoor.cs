@@ -6,9 +6,15 @@ public class CloseFirstToSecondDoor : MonoBehaviour
 {
     [SerializeField] private SecondLevelManager secondLevelManager;
 
+    #region 
+
+    private bool hasBeenActivated;
+
+    #endregion
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && !hasBeenActivated)
         {
             //VERIFICA SE JÁ PASSOU NA OUTRA SALA!
             //if(other.GetComponent<charController>()){
@@ -16,8 +22,7 @@ public class CloseFirstToSecondDoor : MonoBehaviour
             //}
             secondLevelManager.LockDoorFirstToSecondLevel();
             secondLevelManager.SetNormalAudio();
+            hasBeenActivated = true;
         }
-
-        Destroy(gameObject);
     }
 }

@@ -25,6 +25,7 @@ public class Subtitles : MonoBehaviour {
     private float timer;
     private bool isActive = false;
     private bool hasBeenActive = false;
+    [SerializeField] private bool doesNotActivateViaTrigger;
 
     private bool dontUseSubs = true;
 
@@ -40,6 +41,11 @@ public class Subtitles : MonoBehaviour {
     }
 
     private void Update() {
+        if (!doesNotActivateViaTrigger)
+        {
+            return;
+        }
+
         if (isActive == true) {
             StartWriting();
         }
@@ -73,7 +79,12 @@ public class Subtitles : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
 
-        if(!hasBeenActive) {
+        if (doesNotActivateViaTrigger)
+        {
+            return;
+        }
+
+        if (!hasBeenActive) {
             if(other.CompareTag("Player") || other.CompareTag("PlayerParent")) {
 
                 SetAudioAndSubtitles(audioToBePlayed, subsToWrite, audioSources);
