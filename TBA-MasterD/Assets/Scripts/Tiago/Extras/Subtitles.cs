@@ -116,19 +116,24 @@ public class Subtitles : MonoBehaviour {
         audioToBePlayed = voiceLine;
         subsToWrite = subtitles;
 
-        if (soundSources != null) {
-            if (soundSources.Count <= 0) {
-                AudioQueueable queue = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<AudioQueueable>();
+        if (soundSources != null && soundSources.Count > 0)
+        {
+            foreach (AudioSource source in soundSources)
+            {
+                source.PlayOneShot(audioToBePlayed);
+            }
+        }
+        else
+        {
+            AudioQueueable queue = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<AudioQueueable>();
 
-                if (isImportant) {
-                    queue.SetImportantAudio(audioToBePlayed);
-                } else {
-                    queue.SetAudioToQueue(audioToBePlayed);
-                }
-            } else {
-                foreach (AudioSource source in soundSources) {
-                    source.PlayOneShot(audioToBePlayed);
-                }
+            if (isImportant)
+            {
+                queue.SetImportantAudio(audioToBePlayed);
+            }
+            else
+            {
+                queue.SetAudioToQueue(audioToBePlayed);
             }
         }
 
