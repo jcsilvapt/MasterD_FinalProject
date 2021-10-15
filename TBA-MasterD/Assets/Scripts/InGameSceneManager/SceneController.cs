@@ -35,29 +35,6 @@ public class SceneController : MonoBehaviour {
         } else {
             StartCoroutine(EnableAllObjectsAsync(gameObjectList, sceneSwitcher));
         }
-
-        /*
-        List<GameObject> sceneObjects = new List<GameObject>();
-        foreach (GameObject obj in Object.FindObjectsOfType(typeof(GameObject))) {
-            if(obj.scene.name.CompareTo(SceneName) == 0 && obj.GetComponent<SceneSwitcher>() != null) {
-                SceneSwitcher s = obj.GetComponent<SceneSwitcher>();
-                if (s.GetIsToMoveObject()) {
-                    foreach (GameObject objecto in Object.FindObjectsOfType(typeof(GameObject))) {
-                        if(objecto.CompareTag("Elevator")) {
-                            s.SetObjectToMove(objecto.GetComponent<Transform>());
-                        }
-                    }
-                }
-                if(s.GetTypeOfSwitch()) { // If is to Disable
-                    StartCoroutine(DisableAllObjectsAsync(s.GetObjects(), s));
-                    return;
-                } else { // Is to Enable
-                    StartCoroutine(EnableAllObjectsAsync(s.GetObjects(), s));
-                    return;
-                }
-
-            }
-        }*/
     }
 
     /// <summary>

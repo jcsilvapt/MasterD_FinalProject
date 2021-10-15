@@ -21,7 +21,9 @@ public class charController : MonoBehaviour, IDamage {
 
     [Header("Player Health Effect")]
     [SerializeField] Material healthEmission;
+    [SerializeField] Material bodyEmission;
     [SerializeField] GameObject armsMesh;
+    [SerializeField] GameObject bodyMesh;
     private float healthC;
     private Color healthColor;
 
@@ -51,6 +53,7 @@ public class charController : MonoBehaviour, IDamage {
     public bool canUseDrone = false;
     [SerializeField] private Transform droneSpawn;
     [SerializeField] private Transform drone;
+    [SerializeField] GameObject playerDroneBody;
 
 
     [Header("Player Settings: Animators and GameObjects")]
@@ -112,6 +115,9 @@ public class charController : MonoBehaviour, IDamage {
         physicalBodyMesh2.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
 
         healthEmission = armsMesh.GetComponent<SkinnedMeshRenderer>().material;
+        bodyEmission = bodyMesh.GetComponent<SkinnedMeshRenderer>().material;
+
+        playerDroneBody.SetActive(false);
 
         canMove = true;
         isAlive = true;
@@ -357,6 +363,8 @@ public class charController : MonoBehaviour, IDamage {
                     weaponController.DisableCurrentWeapon();
                 }
 
+                playerDroneBody.SetActive(true);
+
             } else {
                 fpsCam.gameObject.SetActive(true);
 
@@ -370,6 +378,8 @@ public class charController : MonoBehaviour, IDamage {
                 if (weaponController.HasWeapon()) {
                     weaponController.EnableWeapon();
                 }
+
+                playerDroneBody.SetActive(false);
             }
         }
     }

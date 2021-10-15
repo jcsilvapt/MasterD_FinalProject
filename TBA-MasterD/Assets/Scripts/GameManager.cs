@@ -94,10 +94,8 @@ public class GameManager : MonoBehaviour {
 
     #region Public References 
 
-    public static void SetPlayerDeath(bool isDead)
-    {
-        if (ins != null)
-        {
+    public static void SetPlayerDeath(bool isDead) {
+        if (ins != null) {
             ins._SetPlayerDeath(isDead);
         }
     }
@@ -171,7 +169,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public static void SetFullScreen(bool fullScreen) {
-        if(ins != null) {
+        if (ins != null) {
             Screen.fullScreen = fullScreen;
         }
     }
@@ -246,21 +244,21 @@ public class GameManager : MonoBehaviour {
     }
 
     public static int GetCurrentSceneIndex() {
-        if(ins != null) {
+        if (ins != null) {
             return SceneManager.GetActiveScene().buildIndex;
         }
         return 0;
     }
 
     public static bool IsContinuous() {
-        if(ins != null) {
+        if (ins != null) {
             return ins.continuous;
         }
         return false;
     }
 
     public static int GetSelectedIndexScene() {
-        if(ins != null) {
+        if (ins != null) {
             return ins.sceneToBeLoaded;
         }
         return -1;
@@ -272,7 +270,6 @@ public class GameManager : MonoBehaviour {
 
     private void PauseAllAudioSources() {
         AudioSource[] l_aSources = GameObject.FindObjectsOfType<AudioSource>();
-
         if (l_aSources != null && l_aSources.Length > 0) {
             for (int i = 0; i < l_aSources.Length; i++) {
                 l_aSources[i].Pause();
@@ -285,25 +282,21 @@ public class GameManager : MonoBehaviour {
         AudioSource[] l_aSources = GameObject.FindObjectsOfType<AudioSource>();
         if (l_aSources != null && l_aSources.Length > 0) {
             for (int i = 0; i < l_aSources.Length; i++) {
-                if(l_aSources[i].time > 0)
+                if (l_aSources[i].time > 0)
                     l_aSources[i].Play();
             }
         }
 
     }
 
-    private void _SetPlayerDeath(bool isDead)
-    {
-        if (isDead)
-        {
-            
+    private void _SetPlayerDeath(bool isDead) {
+        if (isDead) {
+
             ToggleDeathMenu(isDead);
             ToggleCursorVisibility(true);
             Time.timeScale = 0;
-        }
-        else
-        {
-            
+        } else {
+
             Time.timeScale = 1;
             ToggleDeathMenu(isDead);
         }
@@ -331,18 +324,16 @@ public class GameManager : MonoBehaviour {
         Cursor.visible = this.showCursor ? true : false;
     }
 
-    private void TogglePauseMenu(bool activate)
-    {
+    private void TogglePauseMenu(bool activate) {
         pauseMenu.SetActive(activate);
     }
 
-    private void ToggleDeathMenu(bool activate)
-    {
+    private void ToggleDeathMenu(bool activate) {
         deathMenu.SetActive(activate);
     }
 
     private void _changeScene(int sceneIndex, bool loadGameData) {
-        if(sceneIndex == 1) {
+        if (sceneIndex == 1) {
             continuous = true;
         } else {
             continuous = false;
@@ -382,13 +373,13 @@ public class GameManager : MonoBehaviour {
 
         loadSlider.value = 0;
         loadCanvas.SetActive(false);
-
-        if(!continuous && sceneIndex > 1) {
+        if (!continuous && sceneIndex > 1) {
             GameObject.FindGameObjectWithTag("SceneController").GetComponent<NewSceneController>().COMECA();
         }
 
-        if (loadGameData)
+        if (loadGameData) {
             SaveSystemManager.LoadData();
+        }
     }
 
     /// <summary>
@@ -399,13 +390,13 @@ public class GameManager : MonoBehaviour {
     IEnumerator LoadAsync(int sceneIndex) {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
 
-         while (!operation.isDone) {
-             yield return null;
-         }
+        while (!operation.isDone) {
+            yield return null;
+        }
 
-         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneIndex));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneIndex));
 
-         Debug.Log("Scene Additive Load Completed");
+        Debug.Log("Scene Additive Load Completed");
 
     }
 

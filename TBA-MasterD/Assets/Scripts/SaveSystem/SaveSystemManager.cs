@@ -142,7 +142,6 @@ public class SaveSystemManager : MonoBehaviour {
 
     public static int GetCurrentSaveScene() {
         if (ins != null) {
-            Debug.Log(ins.playerProfile.currentScene);
             return ins.playerProfile.currentScene;
         }
         return -1;
