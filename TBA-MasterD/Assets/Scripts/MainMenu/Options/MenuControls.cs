@@ -61,10 +61,12 @@ public class MenuControls : MonoBehaviour {
 
     public void ChangeMouseSensitivity(GameObject slider) {
         KeyMapper.inputKey.MouseSensitivity = slider.GetComponent<Slider>().value;
+        SaveSystemManager.SavePlayerSettings();
     }
 
     public void InvertLook(GameObject toogle) {
         KeyMapper.inputKey.InvertMouse = toogle.GetComponent<Toggle>().isOn;
+        SaveSystemManager.SavePlayerSettings();
     }
 
     public void ChangeKey(GameObject clicked) {
@@ -110,6 +112,11 @@ public class MenuControls : MonoBehaviour {
                 break;
 
         }
+
+        SaveSystemManager.SavePlayerSettings();
+
     }
+
+
 
 }

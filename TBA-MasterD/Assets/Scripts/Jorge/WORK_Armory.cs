@@ -22,6 +22,8 @@ public class WORK_Armory : MonoBehaviour {
                     if (Input.GetKeyDown(KeyMapper.inputKey.Interaction)) {
                         player.EnableWeapon();
                         hasBeenUsed = true;
+                        player.EnableInteractionUI(false);
+                        showHint = false;
                     }
                 }
             }

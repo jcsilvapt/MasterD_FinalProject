@@ -127,7 +127,6 @@ public class charController : MonoBehaviour, IDamage
     void Update()
     {
         // TESTING SAVE SYSTEM
-
         if (!isAlive)
         {
             return;
@@ -307,7 +306,7 @@ public class charController : MonoBehaviour, IDamage
         //salta
         if (isCrouched == false && isGrounded == true) //pode-se alterar, criado por questoes de testes(saltar enquanto crouch)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyMapper.inputKey.Jump))
             {
                 rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
             }

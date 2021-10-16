@@ -31,6 +31,7 @@ public class SaveSystemManager : MonoBehaviour {
     private void GetInitialData() {
         if (HasSavedData()) {
             playerProfile = saveSystem.Load(playerProfile);
+            LoadGameSettings();
         }
     }
 
@@ -38,7 +39,7 @@ public class SaveSystemManager : MonoBehaviour {
     /// Method that Saves the current Game State
     /// </summary>
     /// <param name="objectsToBeSaved">Usual is the List of the enemies on the scene</param>
-    private void SaveGame(Checkpoint checkpoint = null, List <GameObject> objectsToBeSaved = null) {
+    private void SaveGame(Checkpoint checkpoint = null, List<GameObject> objectsToBeSaved = null) {
 
         GameObject player = GameObject.FindGameObjectWithTag("PlayerParent");
         charController charPlayer = player.GetComponent<charController>();
@@ -98,6 +99,45 @@ public class SaveSystemManager : MonoBehaviour {
         return null;
     }
 
+    private void LoadGameSettings() {
+        // Set Input Settings
+        KeyMapper.inputKey.WalkFoward = playerProfile.walkFoward;
+        KeyMapper.inputKey.WalkBackwards = playerProfile.walkBackwards;
+        KeyMapper.inputKey.WalkLeft = playerProfile.walkLeft;
+        KeyMapper.inputKey.WalkRight = playerProfile.walkRight;
+        KeyMapper.inputKey.Crouch = playerProfile.crouch;
+        KeyMapper.inputKey.Jump = playerProfile.jump;
+        KeyMapper.inputKey.Sprint = playerProfile.sprint;
+        KeyMapper.inputKey.DroneActivation = playerProfile.droneActivation;
+        KeyMapper.inputKey.DroneMoveUp = playerProfile.droneMoveUp;
+        KeyMapper.inputKey.DroneMoveDown = playerProfile.droneMoveDown;
+        KeyMapper.inputKey.Interaction = playerProfile.interaction;
+        KeyMapper.inputKey.Escape = playerProfile.escape;
+
+        KeyMapper.inputKey.MouseSensitivity = playerProfile.mouseSensitivity;
+        KeyMapper.inputKey.InvertMouse = playerProfile.invertMouse;
+    }
+
+    private void SaveGameSettings() {
+        playerProfile.walkFoward = KeyMapper.inputKey.WalkFoward;
+        playerProfile.walkBackwards = KeyMapper.inputKey.WalkBackwards;
+        playerProfile.walkLeft = KeyMapper.inputKey.WalkLeft;
+        playerProfile.walkRight = KeyMapper.inputKey.WalkRight;
+        playerProfile.crouch = KeyMapper.inputKey.Crouch;
+        playerProfile.jump = KeyMapper.inputKey.Jump;
+        playerProfile.sprint = KeyMapper.inputKey.Sprint;
+        playerProfile.droneActivation = KeyMapper.inputKey.DroneActivation;
+        playerProfile.droneMoveUp = KeyMapper.inputKey.DroneMoveUp;
+        playerProfile.droneMoveDown = KeyMapper.inputKey.DroneMoveDown;
+        playerProfile.interaction = KeyMapper.inputKey.Interaction;
+        playerProfile.escape = KeyMapper.inputKey.Escape;
+
+        playerProfile.mouseSensitivity = KeyMapper.inputKey.MouseSensitivity;
+        playerProfile.invertMouse = KeyMapper.inputKey.InvertMouse;
+
+        saveSystem.Save(playerProfile);
+    }
+
     private void LoadGame() {
         GameManager.ChangeScene(playerProfile.currentScene, true);
         if (cpoint != null) {
@@ -106,7 +146,7 @@ public class SaveSystemManager : MonoBehaviour {
         }
     }
 
-    public static void Save(Checkpoint checkpoint = null, List < GameObject> objectsToBeSaved = null) {
+    public static void Save(Checkpoint checkpoint = null, List<GameObject> objectsToBeSaved = null) {
         if (ins != null) {
             ins.SaveGame(checkpoint, objectsToBeSaved);
         }
@@ -145,5 +185,11 @@ public class SaveSystemManager : MonoBehaviour {
             return ins.playerProfile.currentScene;
         }
         return -1;
+    }
+
+    public static void SavePlayerSettings() {
+        if(ins != null) {
+            ins.SaveGameSettings();
+        }
     }
 }

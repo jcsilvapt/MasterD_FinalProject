@@ -41,14 +41,14 @@ public class Subtitles : MonoBehaviour {
     }
 
     private void Update() {
-        if (!doesNotActivateViaTrigger)
-        {
+        if (!doesNotActivateViaTrigger) {
             return;
         }
-
+        /*
         if (isActive == true) {
             StartWriting();
         }
+        */
     }
 
     private void StartWriting() {
@@ -79,65 +79,84 @@ public class Subtitles : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
 
-        if (doesNotActivateViaTrigger)
-        {
+        if (doesNotActivateViaTrigger) {
             return;
         }
 
         if (!hasBeenActive) {
-            if(other.CompareTag("Player") || other.CompareTag("PlayerParent")) {
+            if (other.CompareTag("Player") || other.CompareTag("PlayerParent")) {
 
                 SetAudioAndSubtitles(audioToBePlayed, subsToWrite, audioSources);
 
                 hasBeenActive = !hasBeenActive;
             }
         }
-
-        /*
-        if (!hasBeenActive) {
-            if (other.CompareTag("Player")) {
-                if (subsToWrite.Length > 0 && subsToWrite != null) {
-                    //text.SetActive(true);
-                    isActive = true;
-                }
-                hasBeenActive = !hasBeenActive;
-                AudioQueueable queue = other.transform.parent.parent.GetComponent<AudioQueueable>();
-                if (isImportant) {
-                    queue.SetImportantAudio(audioToBePlayed);
-                } else {
-                    queue.SetAudioToQueue(audioToBePlayed);
-                }
-            }
-        }
-        */
     }
 
     public void SetAudioAndSubtitles(AudioClip voiceLine, string subtitles, List<AudioSource> soundSources) {
         audioToBePlayed = voiceLine;
         subsToWrite = subtitles;
 
-        if (soundSources != null && soundSources.Count > 0)
-        {
-            foreach (AudioSource source in soundSources)
-            {
-                source.PlayOneShot(audioToBePlayed);
+        if (soundSources != null && soundSources.Count > 0) {
+            foreach (AudioSource source in soundSources) {
+                source.clip = audioToBePlayed;
+                source.Play();
             }
-        }
-        else
-        {
+        } else {
             AudioQueueable queue = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<AudioQueueable>();
 
-            if (isImportant)
-            {
+            if (isImportant) {
                 queue.SetImportantAudio(audioToBePlayed);
-            }
-            else
-            {
+            } else {
                 queue.SetAudioToQueue(audioToBePlayed);
             }
         }
 
         isActive = true;
         text.SetActive(true);
+        if (subtitles != null && subtitles.Length > 0) {
+            StartCoroutine(StartWritting());
+        }
     }
+
+    public void PlayAudio() {
+        if (audioSources != null && audioSources.Count > 0) {
+            foreach (AudioSource source in audioSources) {
+                source.clip = audioToBePlayed;
+                source.Play();
+            }
+        } else {
+            AudioQueueable queue = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<AudioQueueable>();
+
+            if (isImportant) {
+                queue.SetImportantAudio(audioToBePlayed);
+            } else {
+                queue.SetAudioToQueue(audioToBePlayed);
+            }
+        }
+
+        isActive = true;
+        text.SetActive(true);
+        if (subsToWrite != null && subsToWrite.Length > 0) {
+            StartCoroutine(StartWritting());
+        }
+    }
+
+    IEnumerator StartWritting() {
+
+        bool hasFinished = false;
+        int index = 0;
+        while (!hasFinished) {
+            index++;
+            subtitles.text = subsToWrite.Substring(0, index);
+
+            yield return new WaitForSeconds(0.04f);
+
+            if (index >= subsToWrite.Length) {
+                hasFinished = true;
+                StartCoroutine(TimeToDeleteSubtitles());
+            }
+        }
+    }
+
 }

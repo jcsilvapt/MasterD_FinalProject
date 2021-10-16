@@ -145,6 +145,10 @@ public class DoorController : MonoBehaviour {
         lockDoor = value;
     }
 
+    public bool IsLocked() {
+        return lockDoor;
+    }
+
     private void ChangeDoorStatusSign() {
         for (int i = 0; i < openSign.Count; i++) {
             openSign[i].SetActive(!lockDoor);

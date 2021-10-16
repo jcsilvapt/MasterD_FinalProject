@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ShootingCraneController : MonoBehaviour {
 
@@ -50,7 +51,16 @@ public class ShootingCraneController : MonoBehaviour {
         player.StartMovement();
         pCam.StartMouseMovement();
         player.UnlockPause();
-        GameManager.SetCursorVisibility(false); // <--------------------- CONFIRMAR ISTO (JORGE)
+        GameManager.SetCursorVisibility(false);
+    }
+
+    public void CloseDistance() {
+        _UI.SetActive(false);
+        isUIActive = false;
+        player.StartMovement();
+        pCam.StartMouseMovement();
+        player.UnlockPause();
+        GameManager.SetCursorVisibility(false);
     }
 
     private void Update() {
@@ -88,6 +98,7 @@ public class ShootingCraneController : MonoBehaviour {
         if (other.CompareTag("Player") || other.CompareTag("PlayerParent")) {
             player = other.transform.parent.parent.GetComponent<charController>();
             pCam = other.transform.parent.parent.GetComponentInChildren<cameraRotation>();
+            _UIText.GetComponent<TMP_Text>().text = "Press '" + KeyMapper.inputKey.Interaction.ToString() + "' to edit target distance";
             _UIText.SetActive(true);
             hasPlayer = true;
         }

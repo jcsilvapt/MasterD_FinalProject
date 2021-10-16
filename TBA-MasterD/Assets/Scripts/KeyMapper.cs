@@ -68,18 +68,6 @@ public class KeyMapper : MonoBehaviour {
         set { sprint = value; }
     }
 
-    [SerializeField] KeyCode save;
-    public KeyCode Save {
-        get { return save; }
-        set { save = value; }
-    }
-
-    [SerializeField] KeyCode load;
-    public KeyCode Load {
-        get { return load; }
-        set { save = value; }
-    }
-
     [Header("Drone")]
     [SerializeField] KeyCode droneActivation;
     public KeyCode DroneActivation {

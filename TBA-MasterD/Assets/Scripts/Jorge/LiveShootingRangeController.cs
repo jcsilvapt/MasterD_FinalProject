@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LiveShootingRangeController : MonoBehaviour {
 
+    [Header("Targets")]
     [SerializeField] LiveShootingTarget[] targets;
     [SerializeField] GameObject[] lightsObjects;
     [SerializeField] DoorController mainDoor;
@@ -15,21 +16,29 @@ public class LiveShootingRangeController : MonoBehaviour {
 
     [SerializeField] DoorController doorToSecondLevel;
 
+    [Header("Audio Settings")]
+    [SerializeField] Subtitles initialSound;
+    [SerializeField] GameObject warningSound;
+    [SerializeField] GameObject earPieceSound;
 
+
+    [Header("Developer")]
     public LiveShootingTarget currentTarget;
     private List<Light> lights = new List<Light>();
+    [SerializeField] bool playedFirstAudio = false;
+    [SerializeField] bool playedSecondAudio = false;
 
-    private bool isPlayer = false;
-    private int targetsCount = 0;
+    public bool isPlayer = false;
+    public int targetsCount = 0;
 
     public bool liveShootingActive = false;
 
-    private bool roomCompleted = false;
+    public bool roomCompleted = false;
 
     public float intensitivitySpeed = 0.5f;
-    private bool enableLights;
-    private bool swapLightColor;
-    private float currentIntensitivity = 0.0f;
+    public bool enableLights;
+    public bool swapLightColor;
+    public float currentIntensitivity = 0.0f;
 
     private void Start() {
 
@@ -44,7 +53,8 @@ public class LiveShootingRangeController : MonoBehaviour {
         // Turn off all the lights at the beginning
         ToggleLights(false);
 
-        currentColor = initialColor;
+        warningSound.SetActive(false);
+        earPieceSound.SetActive(false);
     }
 
     private bool HasNextTarget() {
@@ -80,6 +90,12 @@ public class LiveShootingRangeController : MonoBehaviour {
                 EnableRoom();
             }
         } else {
+            if(!mainDoor.IsLocked() && roomCompleted) {
+                warningSound.SetActive(true);
+                earPieceSound.SetActive(true);
+                mainDoor.LockMode(false);
+                mainDoor.SetAlwaysOpen();
+            }
         }
     }
 
@@ -93,7 +109,12 @@ public class LiveShootingRangeController : MonoBehaviour {
         glassDoor.SetAlwaysOpenSlideDoor();
         //mainDoor.LockMode(false);
         roomCompleted = true;
-        doorToSecondLevel = GameObject.FindGameObjectWithTag("DoorToSecondLevel").GetComponent<DoorController>();
+        try {
+        doorToSecondLevel = GameObject.FindGameObjectWithTag("DoorToSecondLevel").GetComponent<DoorController>();   
+
+        } catch {
+            Debug.LogError("No Door to second Level");
+        }
         if(doorToSecondLevel != null) {
             doorToSecondLevel.LockMode(false);
         }
@@ -114,7 +135,7 @@ public class LiveShootingRangeController : MonoBehaviour {
                 currentIntensitivity += Time.deltaTime * intensitivitySpeed;
             }
         }
-        if (currentIntensitivity >= 0.8f) {
+        if (currentIntensitivity >= 0.9f) {
             enableLights = false;
         }
     }
@@ -128,19 +149,19 @@ public class LiveShootingRangeController : MonoBehaviour {
         
     }
 
-    private void OnTriggerStay(Collider other) {
-        if (other.transform.name == "Player" || other.transform.tag == "Player" && !roomCompleted) {
-            isPlayer = true;
-            mainDoor.CloseDoor();
-            mainDoor.LockMode(true);
-        }
-    }
-
-    private void OnTriggerExit(Collider other) {
-        if (isPlayer && !roomCompleted) {
-            enableLights = true;
-            SetNextTarget();
-            liveShootingActive = true;
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Player") || other.CompareTag("PlayerParent")) {
+            if (!roomCompleted) {
+                mainDoor.CloseDoor();
+                mainDoor.LockMode(true);
+                if (!playedFirstAudio) {
+                    initialSound.PlayAudio();
+                    playedFirstAudio = true;
+                }
+                enableLights = true;
+                SetNextTarget();
+                liveShootingActive = true;
+            }
         }
     }
 }
