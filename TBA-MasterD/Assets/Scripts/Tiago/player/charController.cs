@@ -36,8 +36,8 @@ public class charController : MonoBehaviour, IDamage
     [SerializeField] bool enableStairsWalk = false;
     [SerializeField] GameObject stepHigh;
     [SerializeField] GameObject stepLow;
-    //[SerializeField] float stepHeight;
-    [SerializeField] float stepJumpHeight;
+    [SerializeField] float stepSmooth = 0.1f;
+
 
     [Header("Player Settings: Crouch")]
     [SerializeField] Transform character;
@@ -313,41 +313,42 @@ public class charController : MonoBehaviour, IDamage
             }
         }
     }
-    void StepClimb()
-    {// uses two raycasts to measure height of objects in front and determine is the character can climb stairs up with a tiny jump or not
-
+    void StepClimb() //not in use but working
+    {        
         RaycastHit hitLower;
+        RaycastHit hitLower45;
+        RaycastHit hitLower90;
+
         if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.1f))
         {
             RaycastHit hitHigher;
-            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(Vector3.forward), out hitHigher, 0.2f)) // so é chamado caso o primeiro atinga algo
+            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(Vector3.forward), out hitHigher, 0.2f)) // so é chamado caso o primeiro atinga algo, esta negado ao inicio porque queremos que ele nao atinga nada
             {
-                rb.position -= new Vector3(0f, -stepJumpHeight, 0f); //quanto maior os stepsmooth, mais a personagem salta
+                rb.position -= new Vector3(0f, -stepSmooth, 0f); //quanto maior o stepSmooth maior o salto, valores baixos pois esta a ser feito em cada update
             }
         }
 
-        RaycastHit hitLower45;
-        if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitLower45, 0.1f))
+
+        else if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(2f, 0, 1), out hitLower45, 0.1f))
         {
             RaycastHit hitHigher45;
-            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitHigher45, 0.2f))
+            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(2f, 0, 1), out hitHigher45, 0.2f))
             {
-                rb.position -= new Vector3(0f, -stepJumpHeight, 0f);
+                rb.position -= new Vector3(0f, -stepSmooth, 0f);
             }
         }
 
-        RaycastHit hitLower90;
-        if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitLower90, 0.1f))
+
+        else if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(-2f, 0, 1), out hitLower90, 0.1f))
         {
             RaycastHit hitHigher90;
-            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitHigher90, 0.2f))
+            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(-2f, 0, 1), out hitHigher90, 0.2f))
             {
-                rb.position -= new Vector3(0f, -stepJumpHeight, 0f);
+                rb.position -= new Vector3(0f, -stepSmooth, 0f);
             }
         }
 
-
-    } // subir degraus, not in use but working 
+    }
 
     #region isGrounded
     private void OnCollisionStay(Collision collision)
