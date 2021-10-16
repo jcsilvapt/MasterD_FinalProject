@@ -484,7 +484,7 @@ RectTransform:
   m_GameObject: {fileID: 1024403039}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 483728908}
   m_RootOrder: 0
@@ -492,7 +492,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1024403042
 CanvasRenderer:
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 7234046254c5b5f409a547686a4ece89, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1672,7 +1672,6 @@ MonoBehaviour:
   cam: {fileID: 0}
   canMove: 0
   healthEmission: {fileID: 2100000, guid: c6e280c540857a74cb4358caaff2d088, type: 2}
-  bodyEmission: {fileID: 2100000, guid: c6e280c540857a74cb4358caaff2d088, type: 2}
   armsMesh: {fileID: 4517143046679991597}
   bodyMesh: {fileID: 4517143047047681762}
   weaponController: {fileID: 3598675406924485959}
@@ -1680,7 +1679,7 @@ MonoBehaviour:
   enableStairsWalk: 0
   stepHigh: {fileID: 0}
   stepLow: {fileID: 0}
-  stepJumpHeight: 0
+  stepSmooth: 0.1
   character: {fileID: 543450653089987098}
   minDistanceToStandUp: 0.6
   characterCrouchHeight: 0.7
