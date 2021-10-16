@@ -375,10 +375,15 @@ public class GameManager : MonoBehaviour {
         loadCanvas.SetActive(false);
         if (!continuous && sceneIndex > 1) {
             GameObject.FindGameObjectWithTag("SceneController").GetComponent<NewSceneController>().COMECA();
+        } else {
+            
         }
 
         if (loadGameData) {
             SaveSystemManager.LoadData();
+        } else {
+            GameObject player = GameObject.FindGameObjectWithTag("PlayerParent");
+            player.transform.position = new Vector3(0, 0, -12.5f);
         }
     }
 

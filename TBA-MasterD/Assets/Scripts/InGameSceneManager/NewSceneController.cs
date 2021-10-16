@@ -31,4 +31,12 @@ public class NewSceneController : MonoBehaviour {
     public void COMECA() {
         ActivateAllObjectsInScene();
     }
+
+    public void ActivateMap() {
+        foreach (GameObject b in objectsInScene) {
+            if (b.name != "Player" && !b.CompareTag("Player") && !b.CompareTag("PlayerParent")) {
+                b.SetActive(true);
+            }
+        }
+    }
 }

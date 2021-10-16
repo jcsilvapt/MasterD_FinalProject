@@ -13,9 +13,17 @@ public class Checkpoint : MonoBehaviour {
     [Tooltip("Set true if you wish to make this checkpoint recurrent")]
     [SerializeField] bool isMultiple = false;
 
+    [Header("UI")]
+    [SerializeField] CanvasGroup saving;
+
     [Header("Developer Settings")]
     [Tooltip("Display the status of the current checkpoint, is ignored if isMultiple is true")]
     [SerializeField] bool isActivated = false;
+
+
+    private void Start() {
+        saving.alpha = 0;
+    }
 
     private void OnTriggerEnter(Collider other) {
         if (isMultiple) {
@@ -30,6 +38,7 @@ public class Checkpoint : MonoBehaviour {
                     }
                     other.transform.parent.parent.GetComponent<charController>().lastCheckpoint = this;
                     isActivated = true;
+                    StartCoroutine(ShowSavingHint());
                 }
             }
         }
@@ -49,5 +58,19 @@ public class Checkpoint : MonoBehaviour {
 
     public int GetCurrentSceneIndex() {
         return sceneIndex;
+    }
+
+    IEnumerator ShowSavingHint() {
+
+        while (saving.alpha < 1) {
+            saving.alpha += Time.deltaTime * 3f;
+            yield return null;
+        }
+
+        while (saving.alpha > 0) {
+            saving.alpha -= Time.deltaTime * 3f;
+            yield return null;
+        }
+        yield return null;
     }
 }

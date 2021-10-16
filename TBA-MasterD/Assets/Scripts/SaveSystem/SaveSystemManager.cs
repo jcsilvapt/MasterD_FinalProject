@@ -31,8 +31,12 @@ public class SaveSystemManager : MonoBehaviour {
     private void GetInitialData() {
         if (HasSavedData()) {
             playerProfile = saveSystem.Load(playerProfile);
-            LoadGameSettings();
+
         }
+    }
+
+    private void Start() {
+        LoadGameSettings();
     }
 
     /// <summary>
@@ -188,7 +192,7 @@ public class SaveSystemManager : MonoBehaviour {
     }
 
     public static void SavePlayerSettings() {
-        if(ins != null) {
+        if (ins != null) {
             ins.SaveGameSettings();
         }
     }

@@ -6,6 +6,13 @@ using TMPro;
 
 public class MainMenuManager : MonoBehaviour {
 
+    [Header("UI - Main")]
+    [SerializeField] GameObject Menu;
+    [SerializeField] GameObject Loading;
+    [SerializeField] GameObject Credits;
+    [SerializeField] Camera mainCamera;
+    [SerializeField] Camera secondaryCamera;
+
     [Header("UI - Navigation Main")]
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject playMenu;
@@ -26,8 +33,12 @@ public class MainMenuManager : MonoBehaviour {
 
     [Header("Developer")]
     [SerializeField] GameObject devCurrentPanelSelected;
+    [SerializeField] GameObject devCurrentMainPanelSelected;
     [SerializeField] string devCurrentResolutionSelected;
     [SerializeField] string devCurrentDisplayModeSelected;
+    [SerializeField] bool isCredits = false;
+
+    public List<GameObject> initial = new List<GameObject>();
 
     public List<GameObject> menus = new List<GameObject>();
 
@@ -40,16 +51,21 @@ public class MainMenuManager : MonoBehaviour {
 
         saveInfoPanel.SetActive(false);
 
+        initial.Add(Menu);
+        initial.Add(Loading);
+
         menus.Add(mainMenu);
         menus.Add(playMenu);
         menus.Add(optionsMenu);
         menus.Add(videoPanel);
         menus.Add(audioPanel);
         menus.Add(controlsPanel);
+        menus.Add(creditsMenu);
 
         SetAllAlphasToZero();
 
         devCurrentPanelSelected = mainMenu;
+        devCurrentMainPanelSelected = Menu; 
 
         btnContinue.interactable = false;
 
@@ -77,6 +93,17 @@ public class MainMenuManager : MonoBehaviour {
         mainMenu.GetComponent<CanvasGroup>().alpha = 1;
         mainMenu.GetComponent<CanvasGroup>().interactable = true;
         mainMenu.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        foreach(GameObject a in initial) {
+            a.SetActive(true);
+            a.GetComponent<CanvasGroup>().alpha = 0;
+            a.GetComponent<CanvasGroup>().interactable = false;
+            a.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
+
+        Menu.GetComponent<CanvasGroup>().alpha = 1;
+        Menu.GetComponent<CanvasGroup>().interactable = true;
+        Menu.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
 
@@ -92,9 +119,13 @@ public class MainMenuManager : MonoBehaviour {
                 break;
             case "credits":
                 devCurrentPanelSelected = creditsMenu;
+                SetCreditsPanel(true);
                 break;
             case "menu":
                 devCurrentPanelSelected = mainMenu;
+                if(isCredits) {
+                    SetCreditsPanel(false);
+                }
                 break;
             case "options_video":
                 devCurrentPanelSelected = videoPanel;
@@ -152,6 +183,10 @@ public class MainMenuManager : MonoBehaviour {
         GameManager.ChangeScene(SaveSystemManager.GetCurrentSaveScene(), true);
     }
 
+    private void SetCreditsPanel(bool value) {
+        StartCoroutine(CreditsLoad(Menu, Credits, mainCamera, secondaryCamera, value));
+    }
+
     public void btnCancel() {
         saveInfoPanel.SetActive(false);
     }
@@ -188,6 +223,26 @@ public class MainMenuManager : MonoBehaviour {
         isFading = false;
         yield return null;
     }
+
+    IEnumerator CreditsLoad(GameObject Menu, GameObject Credits, Camera mainCamera, Camera secondaryCamera, bool turnCreditsOn) {
+        CanvasGroup cgCredits = Credits.GetComponent<CanvasGroup>();
+        while(cgCredits.alpha < 1) {
+            cgCredits.alpha += Time.deltaTime * 3f;
+            yield return null;
+        }
+
+        isCredits = turnCreditsOn;
+
+        mainCamera.enabled = !turnCreditsOn;
+        secondaryCamera.enabled = turnCreditsOn;
+
+        while(cgCredits.alpha > 0) {
+            cgCredits.alpha -= Time.deltaTime * 1f;
+            yield return null;
+        }
+        yield return null;
+    }
+
     #endregion
 }
 

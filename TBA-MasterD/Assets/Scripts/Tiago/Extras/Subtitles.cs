@@ -113,8 +113,8 @@ public class Subtitles : MonoBehaviour {
         }
 
         isActive = true;
-        text.SetActive(true);
         if (subtitles != null && subtitles.Length > 0) {
+            text.SetActive(true);
             StartCoroutine(StartWritting());
         }
     }
@@ -136,8 +136,8 @@ public class Subtitles : MonoBehaviour {
         }
 
         isActive = true;
-        text.SetActive(true);
         if (subsToWrite != null && subsToWrite.Length > 0) {
+            text.SetActive(true);
             StartCoroutine(StartWritting());
         }
     }
