@@ -357,7 +357,7 @@ MonoBehaviour:
   audioSources: []
   subtitles: {fileID: 1746732209514677950}
   text: {fileID: 730895043670885236}
-  doesNotActivateViaTrigger: 0
+  doesNotActivateViaTrigger: 1
 --- !u!1 &7137774787168425982
 GameObject:
   m_ObjectHideFlags: 0
