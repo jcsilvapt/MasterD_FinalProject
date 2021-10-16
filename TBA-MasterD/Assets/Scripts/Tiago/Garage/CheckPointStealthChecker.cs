@@ -5,10 +5,6 @@ using UnityEngine;
 public class CheckPointStealthChecker : MonoBehaviour
 {
     Garage_Manager gm;
-    private void Start()
-    {
-        
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject)
