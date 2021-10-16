@@ -96,10 +96,10 @@ public class Escape_Car : MonoBehaviour
         endCamera.SetActive(true);        
         thankYouScreen.SetActive(true);
         audioS.PlayOneShot(thankYou);
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(4f); //Estava 4
         thankYouScreen.SetActive(false);
         anim.SetTrigger("hasEscaped");
-        yield return new WaitForSeconds(19);
+        yield return new WaitForSeconds(17f); //Estava 17
         thankYouScreen.SetActive(false);
         credits.SetActive(true);
     }
