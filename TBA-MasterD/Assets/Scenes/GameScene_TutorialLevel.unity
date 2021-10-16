@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.008847926, g: 0.012993389, b: 0.020162366, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5995,7 +5995,7 @@ MonoBehaviour:
   voiceLine: {fileID: 0}
   subtitle: 
   audioSources: []
-  hasMaterialChanges: 0
+  hasMaterialChanges: 1
   durationBetweenMaterialChanges: 1.5
   materials:
   - {fileID: 2100000, guid: 662be30b26387d54b864baa588fa0889, type: 2}
@@ -24388,10 +24388,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 905917774}
     m_Modifications:
+    - target: {fileID: 37066510313606145, guid: 1e672c660e7d9d545ac5ce418446f55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 109
+      objectReference: {fileID: 0}
     - target: {fileID: 3782344742107856181, guid: 1e672c660e7d9d545ac5ce418446f55c,
         type: 3}
       propertyPath: m_Name
       value: Vent_Exit_Mesh (Entrance From Drone Room)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782344742107856181, guid: 1e672c660e7d9d545ac5ce418446f55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 109
       objectReference: {fileID: 0}
     - target: {fileID: 4554905229163227023, guid: 1e672c660e7d9d545ac5ce418446f55c,
         type: 3}
@@ -24467,6 +24477,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 905917774}
     m_Modifications:
+    - target: {fileID: 37066510313606145, guid: 1e672c660e7d9d545ac5ce418446f55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 109
+      objectReference: {fileID: 0}
     - target: {fileID: 3782344742107856181, guid: 1e672c660e7d9d545ac5ce418446f55c,
         type: 3}
       propertyPath: m_Name
@@ -24476,6 +24491,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782344742107856181, guid: 1e672c660e7d9d545ac5ce418446f55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 109
       objectReference: {fileID: 0}
     - target: {fileID: 4554905229163227023, guid: 1e672c660e7d9d545ac5ce418446f55c,
         type: 3}
@@ -45698,10 +45718,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 905917774}
     m_Modifications:
+    - target: {fileID: 37066510313606145, guid: 1e672c660e7d9d545ac5ce418446f55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 109
+      objectReference: {fileID: 0}
     - target: {fileID: 3782344742107856181, guid: 1e672c660e7d9d545ac5ce418446f55c,
         type: 3}
       propertyPath: m_Name
       value: Vent_Exit_Mesh ( View to PIT room ) (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782344742107856181, guid: 1e672c660e7d9d545ac5ce418446f55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 109
       objectReference: {fileID: 0}
     - target: {fileID: 4554905229163227023, guid: 1e672c660e7d9d545ac5ce418446f55c,
         type: 3}
@@ -51112,10 +51142,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 905917774}
     m_Modifications:
+    - target: {fileID: 37066510313606145, guid: 1e672c660e7d9d545ac5ce418446f55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 109
+      objectReference: {fileID: 0}
     - target: {fileID: 3782344742107856181, guid: 1e672c660e7d9d545ac5ce418446f55c,
         type: 3}
       propertyPath: m_Name
       value: Vent_Exit_Mesh ( View to PIT room )
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782344742107856181, guid: 1e672c660e7d9d545ac5ce418446f55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 109
       objectReference: {fileID: 0}
     - target: {fileID: 4554905229163227023, guid: 1e672c660e7d9d545ac5ce418446f55c,
         type: 3}
@@ -52143,10 +52183,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 905917774}
     m_Modifications:
+    - target: {fileID: 37066510313606145, guid: 1e672c660e7d9d545ac5ce418446f55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 109
+      objectReference: {fileID: 0}
     - target: {fileID: 3782344742107856181, guid: 1e672c660e7d9d545ac5ce418446f55c,
         type: 3}
       propertyPath: m_Name
       value: Vent_Exit_Mesh ( View to PIT room ) (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3782344742107856181, guid: 1e672c660e7d9d545ac5ce418446f55c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 109
       objectReference: {fileID: 0}
     - target: {fileID: 4554905229163227023, guid: 1e672c660e7d9d545ac5ce418446f55c,
         type: 3}
