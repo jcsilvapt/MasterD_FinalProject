@@ -234,7 +234,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
+  m_fontSize: 60
   m_fontSizeBase: 120
   m_fontWeight: 400
   m_enableAutoSizing: 0
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 2
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -484,7 +484,7 @@ RectTransform:
   m_GameObject: {fileID: 1024403039}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 483728908}
   m_RootOrder: 0
@@ -1675,7 +1675,7 @@ MonoBehaviour:
   armsMesh: {fileID: 4517143046679991597}
   bodyMesh: {fileID: 4517143047047681762}
   weaponController: {fileID: 3598675406924485959}
-  hasWeapon: 1
+  hasWeapon: 0
   enableStairsWalk: 0
   stepHigh: {fileID: 0}
   stepLow: {fileID: 0}
@@ -1685,7 +1685,7 @@ MonoBehaviour:
   characterCrouchHeight: 0.7
   cameraCrouchHeight: 1
   cameraCrouchLerpSpeed: 0.2
-  canUseDrone: 1
+  canUseDrone: 0
   droneSpawn: {fileID: 8120164854828861779}
   drone: {fileID: 2070918077443889220}
   playerDroneBody: {fileID: 919132147930096865}
