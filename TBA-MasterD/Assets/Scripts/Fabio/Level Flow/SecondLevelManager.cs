@@ -54,10 +54,15 @@ public class SecondLevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        normalMusic.SetActive(false);
+        actionMusic.SetActive(false);
+        easterEggMusic.SetActive(false);
+        elevatorMusic.SetActive(false);
     }
 
     private void Start() {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = GameObject.FindGameObjectWithTag("PlayerParent");
 
         if (!player.activeSelf) {
             player.SetActive(true);
