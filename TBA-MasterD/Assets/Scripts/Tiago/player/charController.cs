@@ -277,7 +277,8 @@ public class charController : MonoBehaviour, IDamage
             rb.velocity = new Vector3(rb.velocity.x + (movePos.x * 0.1f), rb.velocity.y, rb.velocity.z + (movePos.z * 0.1f));
         }
     }
-    void CheckStateForSounds() //uses audioMixer SnapShots to switch between all three states of movemente, walking, running and crouching by switching their weight from 0 to 1 for most value  
+    void CheckStateForSounds() //uses audioMixer SnapShots to switch between all three states of movement, walking,
+                               //running and crouching by switching their weight from 0 to 1 for most value  
     {
         if (isCrouched)
         {
@@ -321,13 +322,11 @@ public class charController : MonoBehaviour, IDamage
         if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.1f))
         {
             RaycastHit hitHigher;
-            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(Vector3.forward), out hitHigher, 0.2f)) // so é chamado caso o primeiro atinga algo, esta negado ao inicio porque queremos que ele nao atinga nada
+            if (!Physics.Raycast(stepHigh.transform.position, transform.TransformDirection(Vector3.forward), out hitHigher, 0.2f)) 
             {
-                rb.position -= new Vector3(0f, -stepSmooth, 0f); //quanto maior o stepSmooth maior o salto, valores baixos pois esta a ser feito em cada update
+                rb.position -= new Vector3(0f, -stepSmooth, 0f); //the bigger the stepsmooth value the bigger the jump
             }
         }
-
-
         else if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(2f, 0, 1), out hitLower45, 0.1f))
         {
             RaycastHit hitHigher45;
@@ -336,8 +335,6 @@ public class charController : MonoBehaviour, IDamage
                 rb.position -= new Vector3(0f, -stepSmooth, 0f);
             }
         }
-
-
         else if (Physics.Raycast(stepLow.transform.position, transform.TransformDirection(-2f, 0, 1), out hitLower90, 0.1f))
         {
             RaycastHit hitHigher90;
