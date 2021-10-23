@@ -81,7 +81,6 @@ public class SaveSystemManager : MonoBehaviour {
         //player.transform.rotation = playerProfile.currentRotation;
         charPlayer.canUseDrone = playerProfile.hasDrone;
         charPlayer.hasWeapon = playerProfile.hasWeapon;
-        Debug.Log("Loading Game...");
     }
 
     private List<GameObject> UpdateEnemiesInScene(List<GameObject> objectsToBeLoaded) {

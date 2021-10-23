@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     #region VIDEO SETTINGS
-
+    [Header("Video Settings")]
     [SerializeField] List<string> displayModes = new List<string>() { "Fullscreen", "Window" };
     [SerializeField] List<string> resolutions = new List<string>();
     [SerializeField] List<string> quality = new List<string>() { "Very Low", "Low", "Medium", "High", "Very High", "Ultra" };
@@ -49,8 +49,7 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     #region DEVELOPER SETTINGS
-
-    [SerializeField] bool displayCursor = false;
+    [Header("Developer Settings")]
     [SerializeField] bool continuous = false;
     [SerializeField] int sceneToBeLoaded = -1;
 
@@ -89,6 +88,13 @@ public class GameManager : MonoBehaviour {
         // Get all availables Screen Resolutions
         foreach (Resolution r in Screen.resolutions) {
             resolutions.Add(r.ToString());
+        }
+    }
+
+    private void Update() {
+        if(isGamePaused) {
+            showCursor = true;
+            ToggleCursorVisibility(true);
         }
     }
 
@@ -373,6 +379,7 @@ public class GameManager : MonoBehaviour {
 
         loadSlider.value = 0;
         loadCanvas.SetActive(false);
+
         if (!continuous && sceneIndex > 1) {
             GameObject.FindGameObjectWithTag("SceneController").GetComponent<NewSceneController>().COMECA();
         } else {
@@ -383,7 +390,8 @@ public class GameManager : MonoBehaviour {
             SaveSystemManager.LoadData();
         } else {
             GameObject player = GameObject.FindGameObjectWithTag("PlayerParent");
-            player.transform.position = new Vector3(0, 0, -12.5f);
+            if(player != null)
+                player.transform.position = new Vector3(0, 0, -12.5f);
         }
     }
 
@@ -399,9 +407,7 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneIndex));
-
-        Debug.Log("Scene Additive Load Completed");
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneIndex));
 
     }
 

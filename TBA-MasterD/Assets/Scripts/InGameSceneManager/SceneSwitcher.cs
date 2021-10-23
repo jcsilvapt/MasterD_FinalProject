@@ -70,7 +70,6 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
 
     public void ToogleTypeOfSwitch() {
         isToDisable = !isToDisable;
-        Debug.Log("On the next trigger enter is to Disable Objects? " + isToDisable);
     }
     public void ToogleExecute() {
         isToExecute = false;
@@ -79,7 +78,7 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
     private void OnTriggerEnter(Collider other) {
         if (!isLoaded)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") || other.CompareTag("PlayerParent"))
             {
                 if (!hasAIManagerDependency)
                 {
@@ -96,7 +95,7 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
     {
         if (!isLoaded)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") || other.CompareTag("PlayerParent"))
             {
                 if (hasAIManagerDependency)
                 {
