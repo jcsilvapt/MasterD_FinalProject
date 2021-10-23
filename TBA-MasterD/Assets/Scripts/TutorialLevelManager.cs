@@ -13,7 +13,6 @@ public class TutorialLevelManager : MonoBehaviour {
 
     private void Awake() {
         ins = this;
-
     }
 
     public void TriggerAction() {

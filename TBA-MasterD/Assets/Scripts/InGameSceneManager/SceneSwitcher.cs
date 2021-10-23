@@ -71,6 +71,7 @@ public class SceneSwitcher : MonoBehaviour, ISceneControl {
     public void ToogleTypeOfSwitch() {
         isToDisable = !isToDisable;
     }
+
     public void ToogleExecute() {
         isToExecute = false;
     }

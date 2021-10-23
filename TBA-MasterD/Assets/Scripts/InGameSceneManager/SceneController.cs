@@ -58,7 +58,7 @@ public class SceneController : MonoBehaviour {
         if (objectsToActivate.Count > 0) {
             foreach (GameObject b in objectsToActivate) {
                 b.SetActive(true);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.25f);
             }
         }
         s.ToogleTypeOfSwitch();
