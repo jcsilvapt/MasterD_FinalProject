@@ -14,6 +14,7 @@ public class Checkpoint : MonoBehaviour {
     [SerializeField] bool isMultiple = false;
 
     [Header("UI")]
+    [SerializeField] bool isToShow = true;
     [SerializeField] CanvasGroup saving;
 
     [Header("Developer Settings")]
@@ -38,7 +39,8 @@ public class Checkpoint : MonoBehaviour {
                     }
                     other.transform.parent.parent.GetComponent<charController>().lastCheckpoint = this;
                     isActivated = true;
-                    StartCoroutine(ShowSavingHint());
+                    if(isToShow)
+                        StartCoroutine(ShowSavingHint());
                 }
             }
         }

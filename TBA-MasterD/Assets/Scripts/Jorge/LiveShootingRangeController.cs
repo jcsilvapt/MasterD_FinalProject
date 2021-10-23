@@ -151,7 +151,7 @@ public class LiveShootingRangeController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player") || other.CompareTag("PlayerParent")) {
-            if (!roomCompleted) {
+            if (!roomCompleted && !liveShootingActive) {
                 mainDoor.CloseDoor();
                 mainDoor.LockMode(true);
                 if (!playedFirstAudio) {

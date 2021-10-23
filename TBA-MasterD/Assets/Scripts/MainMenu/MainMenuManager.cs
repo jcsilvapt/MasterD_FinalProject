@@ -118,6 +118,7 @@ public class MainMenuManager : MonoBehaviour {
                 devCurrentPanelSelected = optionsMenu;
                 break;
             case "credits":
+                if(!creditsFading) 
                 devCurrentPanelSelected = creditsMenu;
                 SetCreditsPanel(true);
                 break;
@@ -182,9 +183,10 @@ public class MainMenuManager : MonoBehaviour {
     public void btnContinueGame() {
         GameManager.ChangeScene(SaveSystemManager.GetCurrentSaveScene(), true);
     }
-
+    public bool creditsFading = false;
     private void SetCreditsPanel(bool value) {
-        StartCoroutine(CreditsLoad(Menu, Credits, mainCamera, secondaryCamera, value));
+        if(!creditsFading)
+            StartCoroutine(CreditsLoad(Menu, Credits, mainCamera, secondaryCamera, value));
     }
 
     public void btnCancel() {
@@ -226,6 +228,7 @@ public class MainMenuManager : MonoBehaviour {
 
     IEnumerator CreditsLoad(GameObject Menu, GameObject Credits, Camera mainCamera, Camera secondaryCamera, bool turnCreditsOn) {
         CanvasGroup cgCredits = Credits.GetComponent<CanvasGroup>();
+        creditsFading = true;
         while(cgCredits.alpha < 1) {
             cgCredits.alpha += Time.deltaTime * 3f;
             yield return null;
@@ -240,6 +243,7 @@ public class MainMenuManager : MonoBehaviour {
             cgCredits.alpha -= Time.deltaTime * 1f;
             yield return null;
         }
+        creditsFading = false;
         yield return null;
     }
 

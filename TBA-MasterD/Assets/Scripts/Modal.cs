@@ -41,7 +41,7 @@ public class Modal : MonoBehaviour {
 
     #region TRIGGER
 
-    private void OnTriggerStay(Collider other) {
+    private void OnTriggerEnter(Collider other) {
         if (!ignoreTrigger) {
             if (targetTag == TargetTag.PLAYER) {
                 if (other.CompareTag("Player") || other.CompareTag("PlayerParent")) {
@@ -93,6 +93,11 @@ public class Modal : MonoBehaviour {
             isActivated = true;
             fadingOccurring = false;
         }
+
+        yield return new WaitForSeconds(5f);
+
+        StartCoroutine(FadeOut());
+
     }
 
     IEnumerator FadeOut() {

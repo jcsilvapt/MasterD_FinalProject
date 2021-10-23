@@ -304,10 +304,10 @@ public class GameManager : MonoBehaviour {
 
     private void _SetPauseGame() {
         if (!isGamePaused) {
-            Time.timeScale = 0;
             PauseAllAudioSources();
             TogglePauseMenu(true);
             ToggleCursorVisibility(true);
+            Time.timeScale = 0;
             isGamePaused = true;
         } else {
             ToggleCursorVisibility(false);

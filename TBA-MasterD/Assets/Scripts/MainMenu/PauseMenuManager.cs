@@ -122,7 +122,7 @@ public class PauseMenuManager : MonoBehaviour
     public void btnQuit()
     {
         quitPanel.SetActive(false);
-        pauseMenu.SetActive(false);
+        //pauseMenu.SetActive(false);
         GameManager.SetPause();
         GameManager.ChangeScene(0, false);
     }
