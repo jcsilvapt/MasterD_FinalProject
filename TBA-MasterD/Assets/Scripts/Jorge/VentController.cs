@@ -15,6 +15,7 @@ public class VentController : MonoBehaviour, IDamage {
         if (!hasBeenDestroyed) {
             unbrokenVent.SetActive(false);
             brokenVent.SetActive(true);
+            brokenVent.GetComponent<AudioSource>().Play();
             SetDelayToDestroy(brokenVent);
             hasBeenDestroyed = !hasBeenDestroyed;
         }

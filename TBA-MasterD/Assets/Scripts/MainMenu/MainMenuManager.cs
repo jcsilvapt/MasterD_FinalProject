@@ -37,6 +37,7 @@ public class MainMenuManager : MonoBehaviour {
     [SerializeField] string devCurrentResolutionSelected;
     [SerializeField] string devCurrentDisplayModeSelected;
     [SerializeField] bool isCredits = false;
+    [SerializeField] bool isCreditsFading = false;
 
     public List<GameObject> initial = new List<GameObject>();
 
@@ -65,17 +66,17 @@ public class MainMenuManager : MonoBehaviour {
         SetAllAlphasToZero();
 
         devCurrentPanelSelected = mainMenu;
-        devCurrentMainPanelSelected = Menu; 
+        devCurrentMainPanelSelected = Menu;
 
         btnContinue.interactable = false;
 
     }
 
     private void Update() {
-        
+
         if (hasSave) return;
 
-        if(SaveSystemManager.HasSavedData()) {
+        if (SaveSystemManager.HasSavedData()) {
             hasSave = true;
             btnContinue.interactable = true;
         }
@@ -94,7 +95,7 @@ public class MainMenuManager : MonoBehaviour {
         mainMenu.GetComponent<CanvasGroup>().interactable = true;
         mainMenu.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        foreach(GameObject a in initial) {
+        foreach (GameObject a in initial) {
             a.SetActive(true);
             a.GetComponent<CanvasGroup>().alpha = 0;
             a.GetComponent<CanvasGroup>().interactable = false;
@@ -110,6 +111,7 @@ public class MainMenuManager : MonoBehaviour {
     public void btn_swapMenu(string menu) {
         FadeEffect(devCurrentPanelSelected, FadeType.OUT);
 
+
         switch (menu) {
             case "play":
                 devCurrentPanelSelected = playMenu;
@@ -118,15 +120,10 @@ public class MainMenuManager : MonoBehaviour {
                 devCurrentPanelSelected = optionsMenu;
                 break;
             case "credits":
-                if(!creditsFading) 
                 devCurrentPanelSelected = creditsMenu;
-                SetCreditsPanel(true);
                 break;
             case "menu":
                 devCurrentPanelSelected = mainMenu;
-                if(isCredits) {
-                    SetCreditsPanel(false);
-                }
                 break;
             case "options_video":
                 devCurrentPanelSelected = videoPanel;
@@ -140,6 +137,7 @@ public class MainMenuManager : MonoBehaviour {
         }
 
         FadeEffect(devCurrentPanelSelected, FadeType.IN);
+
     }
 
     /// <summary>
@@ -183,10 +181,10 @@ public class MainMenuManager : MonoBehaviour {
     public void btnContinueGame() {
         GameManager.ChangeScene(SaveSystemManager.GetCurrentSaveScene(), true);
     }
-    public bool creditsFading = false;
-    private void SetCreditsPanel(bool value) {
-        if(!creditsFading)
-            StartCoroutine(CreditsLoad(Menu, Credits, mainCamera, secondaryCamera, value));
+
+    public void btnSetCreditsPanel() {
+        if(!isCreditsFading)
+            StartCoroutine(CreditsLoad(Menu, Credits, mainCamera, secondaryCamera));
     }
 
     public void btnCancel() {
@@ -226,24 +224,32 @@ public class MainMenuManager : MonoBehaviour {
         yield return null;
     }
 
-    IEnumerator CreditsLoad(GameObject Menu, GameObject Credits, Camera mainCamera, Camera secondaryCamera, bool turnCreditsOn) {
+    IEnumerator CreditsLoad(GameObject Menu, GameObject Credits, Camera mainCamera, Camera secondaryCamera) {
         CanvasGroup cgCredits = Credits.GetComponent<CanvasGroup>();
-        creditsFading = true;
-        while(cgCredits.alpha < 1) {
+        CanvasGroup cgMenu = Menu.GetComponent<CanvasGroup>();
+
+        isCreditsFading = true;
+        cgCredits.blocksRaycasts = true;
+        while (cgCredits.alpha < 1) {
             cgCredits.alpha += Time.deltaTime * 3f;
             yield return null;
         }
 
-        isCredits = turnCreditsOn;
+        btn_swapMenu(isCredits ? "menu" : "credits");
 
-        mainCamera.enabled = !turnCreditsOn;
-        secondaryCamera.enabled = turnCreditsOn;
 
-        while(cgCredits.alpha > 0) {
+        mainCamera.enabled = isCredits;
+        secondaryCamera.enabled = !isCredits;
+        
+        isCredits = !isCredits;
+
+
+        while (cgCredits.alpha > 0) {
             cgCredits.alpha -= Time.deltaTime * 1f;
             yield return null;
         }
-        creditsFading = false;
+        isCreditsFading = false;
+        cgCredits.blocksRaycasts = false;
         yield return null;
     }
 
